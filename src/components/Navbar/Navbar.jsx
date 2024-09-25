@@ -67,6 +67,7 @@ export default function Navbar() {
         <MenuItem onClick={handleCloseMenu}>My Account</MenuItem>
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>
       </Menu>
+      aloalo
     </S.Container>
   );
 }
