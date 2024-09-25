@@ -1,0 +1,153 @@
+@import url("https://fonts.cdnfonts.com/css/sf-pro-display");
+
+/* Global styles -------------------- */
+* {
+  box-sizing: border-box;
+  font-family: "SF Pro Display", sans-serif;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+
+  /* Scrollbar ---------------------- */
+  ::-webkit-scrollbar {
+    width: var(--s-2);
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--white);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--light-gray-2);
+    border-radius: var(--br-md);
+  }
+}
+
+:root {
+  /* Colors ------------------------ */
+  --blue: #236192;
+  --green-fresh: #00ccdd;
+  --white: #ffffff;
+  --black: #000000;
+  --black-opacity: #00000088;
+  --red: #e74533;
+  --pink: #f4a7ba;
+  --yellow: #f2ba1d;
+  --green: #71984a;
+  --orange: #df6a2e;
+  --light-gray: #e0dcdc88;
+  --light-gray-1: #f7f7f7;
+  --light-gray-2: #bfbfbf;
+  --light-gray-3: #dcd9d9ea;
+  --blue-gray: #6c737f;
+  --ice-blue: #edf2f8;
+  --dark-gray: #6e6565;
+  --dark-gray-1: #c7c9cc;
+  --dark-brown: #66665d;
+  --gray: #bfbfbf;
+  --gray-2: #e2e2e3;
+  --navy: #182233;
+  --navy-2: #2a4371;
+  --green: #00ADB5;
+
+  /* Font sizes -------------------- */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.5rem;
+  --fs-3xl: 1.875rem;
+  --fs-4xl: 2.25rem;
+  --fs-5xl: 3rem;
+  --fs-6xl: 4rem;
+
+  /* Font weights ------------------- */
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Spacing ------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-7: 1.75rem;
+  --s-8: 2rem;
+  --s-9: 2.25rem;
+  --s-10: 2.5rem;
+  --s-11: 2.75rem;
+  --s-12: 3rem;
+  --s-13: 3.25rem;
+  --s-14: 3.5rem;
+  --s-15: 3.75rem;
+  --s-16: 4rem;
+  --s-17: 4.25rem;
+  --s-18: 4.5rem;
+  --s-19: 4.75rem;
+  --s-20: 5rem;
+  --s-21: 5.25rem;
+  --s-22: 5.5rem;
+  --s-23: 5.75rem;
+  --s-24: 6rem;
+  --s-25: 6.25rem;
+  --s-26: 6.5rem;
+  --s-27: 6.75rem;
+  --s-28: 7rem;
+  --s-29: 7.25rem;
+  --s-30: 7.5rem;
+  --s-31: 7.75rem;
+  --s-32: 8rem;
+  --s-33: 8.25rem;
+  --s-34: 8.5rem;
+  --s-35: 8.75rem;
+  --s-36: 9rem;
+  --s-37: 9.25rem;
+  --s-38: 9.5rem;
+  --s-39: 9.75rem;
+  --s-40: 10rem;
+
+  /* Border radius ------------------ */
+  --br-sm: 0.2rem;
+  --br-md: 0.4rem;
+  --br-lg: 0.8rem;
+  --br-xl: 1.6rem;
+  --br-2xl: 3.2rem;
+
+  /* Shadows ------------------------ */
+  --shadow-1: rgba(100, 100, 111, 0.3) 0px 10px 40px 5px;
+  --shadow-2: rgba(11, 11, 11, 0.3) 0px 5px 5px 5px;
+  --shadow-3: rgba(11, 11, 11, 0.4) 0px 5px 0px 0px;
+  --shadow-4: rgba(11, 11, 11, 0.3) 0px 5px 5px 2px;
+  --shadow-6: rgba(5, 20, 27, 0.83) 5px 5px 5px 5px;
+
+  /* Text shadows ------------------ */
+  --text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
+    0px 18px 23px rgba(0, 0, 0, 0.1);
+  /* Loader ------------------------ */
+  --hue: 223;
+  --bg: hsl(var(--hue), 10%, 90%);
+  --fg: hsl(var(--hue), 10%, 10%);
+  --primary: hsl(var(--hue), 90%, 55%);
+  --trans-dur: 0.3s;
+}
+
+/* Quick fix react-big-calendar */
+.rbc-month-view {
+  border-radius: var(--br-md);
+  overflow: hidden;
+}
+.rbc-time-view {
+  border-radius: var(--br-md);
+  overflow: hidden;
+}
+.rbc-btn-group {
+  border-radius: var(--br-md) !important;
+}
+.rbc-event-content {
+  font-size: var(--fs-sm);
+  padding: var(--s-1);
+}

@@ -1,0 +1,31 @@
+import styled from "styled-components";
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--s-10);
+`;
+
+export const TitleContainer = styled.div`
+display: flex;
+margin-bottom: var(--s-5);
+`;
+
+export const Title = styled.div`
+flex: 1;
+background-color: var(--green);
+padding: var(--s-3) var(--s-4);
+font-size: var(--fs-lg);
+color: var(--white);
+font-weight: var(--fw-semibold);
+`;
+
+export const Divider = styled.div`
+flex: 11;
+border-bottom: 4px solid var(--green);
+`;
+
+export const ListBlog = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
