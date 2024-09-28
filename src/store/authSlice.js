@@ -58,7 +58,7 @@ const authSlice = createSlice({
       state.errorMessage = "";
       state.isSuccess = false;
     });
-    builder.addCase(signUp.fulfilled, (state, action) => {
+    builder.addCase(signUp.fulfilled, (state) => {
       state.isLoading = false;
       state.isSuccess = true;  
     });
@@ -66,6 +66,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.errorMessage = action.payload;
+      
     });
 
     //Login

@@ -1,3 +1,4 @@
+import { Formik } from "formik";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -7,12 +8,6 @@ export const Container = styled.div`
   /* align-items: center; */
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: var(--s-5);
-`;
 
 export const FormGroup = styled.div`
   display: flex;
@@ -101,4 +96,10 @@ export const BtnLoginGoogle = styled.button`
   &:hover {
     background-color: var(--light-gray-2);
   }
+`;
+
+export const ErrorMessageStyled = styled.div`
+  color: red; // Màu thông báo lỗi
+  font-size: var(--fs-lg); // Kích thước chữ
+  margin-top: 5px; // Khoảng cách phía trên
 `;

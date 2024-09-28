@@ -3,38 +3,28 @@ import * as S from "./RegisterForm.styled";
 import { signUp } from "../../../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { registerAccount } from "../../../../services/userService";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 
 export default function RegisterForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [dob, setDob] = useState("");
-  const [gender, setGender] = useState("");
-  const [address, setAddress] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isLoading, isSuccess } = useSelector((state) => state.auth);
 
-  const { isLoading, isSuccess } = useSelector(
-    (state) => state.auth
-  );
 
-  const formattedDob = dob? new Date(dob).toISOString().split('T')[0]: "";
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Full Name is required").max(255),
+    email: Yup.string().email("Invalid email").required("Email is required").max(255),
+    password: Yup.string().required("Password is required").min(8, "Password must be at least 8 characters"),
+    phone: Yup.string().required("Phone Number is required").matches(/^[0-9]+$/, "Phone Number must be digits").min(10).max(15),
+    dob: Yup.date().required("Date of Birth is required").nullable(),
+    gender: Yup.string().required("Gender is required").oneOf(['male', 'female', 'other']),
+    address: Yup.string().required("Address is required").max(255),
+  });
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-      phone: phone,
-      dob: formattedDob,
-      gender: gender,
-      address: address,
-    };
-
-    dispatch(signUp(user));
+  const handleRegister = (values) => {
+    dispatch(signUp(values));
   };
 
   useEffect(() => {
@@ -45,90 +35,74 @@ export default function RegisterForm() {
 
   return (
     <S.Container>
-      <S.Form onSubmit={handleRegister}>
-        <S.FormGroup>
-          <S.Label>Full Name</S.Label>
-          <S.Input
-            placeholder="Enter your Fullname"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-
-            }}
-          />
-        </S.FormGroup>
-        <S.FormGroup>
-          <S.Label>Email</S.Label>
-          <S.Input
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-
-            }}
-          />
-        </S.FormGroup>
-        <S.FormGroup>
-          <S.Label>Password</S.Label>
-          <S.Input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-
-            }}
-          />
-        </S.FormGroup>
-        {/* <S.FormGroup>
-          <S.Label>Confirm Password</S.Label>
-          <S.Input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-          />
-        </S.FormGroup> */}
-        <S.FormGroup>
-          <S.Label>Phone Number</S.Label>
-          <S.Input
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </S.FormGroup>
-        <S.FormGroup>
-          <S.Label>Your Birthday</S.Label>
-          <S.Input
-            type="date"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-          />
-        </S.FormGroup>
-        <S.FormGroup>
-          <S.Label>Gender</S.Label>
-          <S.Select value={gender} onChange={(e) => setGender(e.target.value)}>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </S.Select>
-        </S.FormGroup>
-        <S.FormGroup>
-          <S.Label>Address</S.Label>
-          <S.Input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </S.FormGroup>
-        <S.BtnLogin>{isLoading ? "Registering..." : "Register"}</S.BtnLogin>
-      </S.Form>
-
-      {/* <S.BtnGroup>
-        
-        <S.BlankSpace>OR</S.BlankSpace>
-        <S.BtnLoginFace>Login With FaceBook</S.BtnLoginFace>
-        <S.BtnLoginGoogle>Login With Google</S.BtnLoginGoogle>
-      </S.BtnGroup> */}
+      <Formik
+        initialValues={{
+          name: '',
+          email: '',
+          password: '',
+          phone: '',
+          dob: '',
+          gender: '',
+          address: '',
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleRegister}
+      >
+        {({ isSubmitting }) => (
+          <Form 
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            marginBottom: "var(--s-5)",
+          }}>
+            <S.FormGroup>
+              <S.Label>Full Name</S.Label>
+              <Field name="name" placeholder="Enter your Fullname" as={S.Input} />
+              <ErrorMessage name="name" component={S.ErrorMessageStyled} />
+            </S.FormGroup>
+            <S.FormGroup>
+              <S.Label>Email</S.Label>
+              <Field name="email" placeholder="Enter your email" as={S.Input} />
+              <ErrorMessage name="email" component={S.ErrorMessageStyled} />
+            </S.FormGroup>
+            <S.FormGroup>
+              <S.Label>Password</S.Label>
+              <Field name="password" type="password" placeholder="Enter your password" as={S.Input} />
+              <ErrorMessage name="password" component={S.ErrorMessageStyled} />
+            </S.FormGroup>
+            <S.FormGroup>
+              <S.Label>Phone Number</S.Label>
+              <Field name="phone" type="text" as={S.Input} />
+              <ErrorMessage name="phone" component={S.ErrorMessageStyled} />
+            </S.FormGroup>
+            <S.FormGroup>
+              <S.Label>Your Birthday</S.Label>
+              <Field name="dob" type="date" as={S.Input} />
+              <ErrorMessage name="dob" component={S.ErrorMessageStyled} />
+            </S.FormGroup>
+            <S.FormGroup>
+              <S.Label>Gender</S.Label>
+              <Field name="gender" as={S.Select}>
+                <option value="">Select Gender</option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+                <option value="other">other</option>
+              </Field>
+              <ErrorMessage name="gender" component={S.ErrorMessageStyled} />
+            </S.FormGroup>
+            <S.FormGroup>
+              <S.Label>Address</S.Label>
+              <Field name="address" as={S.Input} />
+              <ErrorMessage name="address" component={S.ErrorMessageStyled} />
+            </S.FormGroup>
+            <S.BtnLogin type="submit" disabled={isSubmitting}>
+              {isLoading ? "Registering..." : "Register"}
+            </S.BtnLogin>
+          </Form>
+        )}
+      </Formik>
     </S.Container>
   );
-}
+};
