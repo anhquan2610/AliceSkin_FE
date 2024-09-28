@@ -8,7 +8,6 @@ margin-bottom: var(--s-3);
 box-shadow: var(--shadow-1);
   padding: var(--s-4);
   border-radius: var(--br-xl);
-  border: 2px solid var(--green);
   overflow: hidden;
 `;
 

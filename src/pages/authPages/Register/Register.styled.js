@@ -15,7 +15,7 @@ export const ContainerMiddle = styled.div`
   flex: 8;
   flex-direction: column;
   align-items: center;
-  padding: var(--s-5) var(--s-15);
+  padding: var(--s-5) 0;
 `;
 
 export const ContainerRight = styled.div`

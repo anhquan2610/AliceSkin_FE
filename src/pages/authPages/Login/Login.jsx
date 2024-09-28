@@ -1,5 +1,5 @@
 import * as S from "./Login.styled";
-import LoginForm from "./loginForm/LoginForm";
+import LoginForm from "./LoginForm/LoginForm";
 import Login from "../../../assets/images/Login.png";
 
 export default function LoginPage() {

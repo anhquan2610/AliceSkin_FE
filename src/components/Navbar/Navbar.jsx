@@ -5,14 +5,16 @@ import { Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "../../services/userService";
+import { logout } from "../../store/authSlice";
+
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
-    logOut(dispatch, navigate);
+    dispatch  (logout());
+    navigate("/login");
   };
   const handlUserClick = (e) => {
     setAnchorEl(e.currentTarget);
@@ -67,7 +69,6 @@ export default function Navbar() {
         <MenuItem onClick={handleCloseMenu}>My Account</MenuItem>
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>
       </Menu>
-      aloalo12312321
     </S.Container>
   );
 }

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const Container = styled.form`
+export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   /* align-items: center; */
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -16,7 +17,7 @@ export const Form = styled.div`
 export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 49%;
   margin-bottom: var(--s-5);
 `;
 
