@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import Product from "../../../../assets/images/Product.png";
 import TypeProduct from "../../../../components/TypeProduct/TypeProduct";
 import * as S from "./ItemProduct.styled";
 
+
 export default function ItemProduct() {
+
+ 
   return (
     <S.Container>
       <S.ContainerImage>

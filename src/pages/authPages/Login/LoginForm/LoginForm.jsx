@@ -1,23 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginForm.styled.js";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginApi } from "../../../../services/userService.js";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn } from "../../../../store/authSlice.js";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { isLoading, token } = useSelector((state) => state.auth);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const newUser = {
-      email: email,
-      password: password,
-    };
-    loginApi(newUser, dispatch, navigate);
+    const credentials = { email, password };
+    dispatch(signIn(credentials));
   };
+  
+  useEffect(() => {
+    if (token) {
+      navigate("/home");
+    }
+  }, [token, navigate]);
 
   return (
     <S.Container>
@@ -44,7 +49,10 @@ export default function LoginForm() {
         <Link to="/forgotpassword">
           <S.ForgotPassword>Forgot password?</S.ForgotPassword>
         </Link>
-        <S.BtnLogin type="submit">Login</S.BtnLogin>
+        <S.BtnLogin type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
+        </S.BtnLogin>
+       
       </S.ContainerForm>
       <S.BlankSpace />
       <S.ContainerBottom>

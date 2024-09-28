@@ -1,83 +1,98 @@
 //Thực hiện việc login, logout, register, update thông tin user
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { instanceAxios } from "../axios/customAxios";
+
+const initialState = {
+  user: null,
+  token: null,
+  isLoading: false,
+  isError: false,
+  errorMessage: "",
+  isSuccess: false,
+};
+//Sign Up User
+export const signUp = createAsyncThunk(
+  "signUpUser",
+  async (user, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.post("/api/register", user);
+      return response.data; 
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//Sign In User
+export const signIn = createAsyncThunk(
+  "signInUser",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.post("/api/login", credentials);
+
+      localStorage.setItem("token", response.data?.access_token);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    login: {
-      currentUser: null, //Login thành công -> trả ra thông tin của tk user
-      isFetching: false, //Loading
-      error: false,
-    },
-    register:{
-      isFetching: false,
-      error: false,
-      success: false,
-    },
-    logout:{
-      isFetching: false,
-      error: false,
-    }
-  },
+  initialState,
+
   reducers: {
-    loginStart: (state) => {
-      state.login.isFetching = true;
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      localStorage.removeItem("token");
     },
-    loginSuccess: (state, action) => {
-      state.login.isFetching = false;
-      state.login.currentUser = action.payload;
-      state.login.error = false;
-     
-    },
-    loginFaild: (state) => {
-      state.login.isFetching = false;
-      state.login.error = true;
-    },
-    //Register...................
-    registerStart: (state) => {
-      state.register.isFetching = true;
-    },
-    registerSuccess: (state) => {
-      state.register.isFetching = false;
-      state.register.error = false;
-      state.register.success = true;
-     
-    },
-    registerFaild: (state) => {
-      state.register.isFetching = false;
-      state.register.error = true;
-      state.register.success = false;
-    },
+  },
+  extraReducers: (builder) => {
+    //Register
+    builder.addCase(signUp.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.errorMessage = "";
+      state.isSuccess = false;
+    });
+    builder.addCase(signUp.fulfilled, (state) => {
+      state.isLoading = false;
+      state.isSuccess = true;  
+    });
+    builder.addCase(signUp.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = action.payload;
+      
+    });
 
-  //Logout...................
-  logoutSuccess: (state, action) => {
-    state.logout.isFetching = false;
-    state.logout.currentUser = null;
-    state.logout.error = false;
-   
-  },
-  logoutFaild: (state) => {
-    state.logout.isFetching = false;
-    state.logout.error = true;
-  },
-  logoutStart: (state) => {
-    state.logout.isFetching = true;
+    //Login
+    builder.addCase(signIn.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.errorMessage = "";
+    });
 
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.access_token;
+
+
+      
+    });
+
+    builder.addCase(signIn.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = action.payload;
+    });
   },
-}
 });
 
-export const { 
-    loginStart, 
-    loginSuccess, 
-    loginFaild,
-    registerStart,
-    registerSuccess,
-    registerFaild ,
-    logoutStart,
-    logoutSuccess,
-    logoutFaild
-} = authSlice.actions;
+export const { logout } = authSlice.actions;
 
-export default authSlice.reducer;
+export default authSlice;
