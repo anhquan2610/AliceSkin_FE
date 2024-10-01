@@ -4,8 +4,8 @@ import * as S from "./ItemBlog.styled";
 import ItemList from "../../../../assets/images/itemList.png";
 
 
-export default function ItemBlog() {
-
+export default function ItemBlog({blog}) {
+    
     
     return (
         <S.Container>
@@ -16,8 +16,8 @@ export default function ItemBlog() {
                 <S.Type>
                     <TypeBlog />
                 </S.Type>
-                <S.Title>Top 10 Sunscreens in 2024</S.Title>
-                <S.Description>Distinguishing Mineral Sunscreens from Chemical Sunscreens</S.Description>
+                <S.Title>{blog.title}</S.Title>
+                <S.Description>{blog.content}</S.Description>
                 <S.Infor>
                     <InfoBlog />
                 </S.Infor>

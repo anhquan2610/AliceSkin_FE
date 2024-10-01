@@ -21,10 +21,12 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
+import blogSlice from "./blogSlice";
 
 export const store = configureStore({
 
   reducer:{
     [authSlice.name]: authSlice.reducer,
+    [blogSlice.name]: blogSlice.reducer,
   }
 });

@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 display: flex;
 flex-direction: row;
-margin-bottom: var(--s-20);
+margin-bottom: var(--s-8);
 
 `;
 
@@ -16,9 +16,9 @@ width: 100%;
 
 export const BoxTitle = styled.div`
 position: absolute;
-margin-top: var(--s-2);
+/* margin-top: var(--s-); */
 bottom: 0;
-margin-bottom:var(--s-15);
+margin-bottom:var(--s-5);
 margin-left: var(--s-10);
 padding: var(--s-5) ;
 z-index: 1;
@@ -39,4 +39,12 @@ export const Title = styled.div`
 font-size: var(--fs-2xl);
 font-weight: var(--fw-semibold);
 
+`;
+
+export const Content = styled.div`
+font-size: var(--fs-md);
+display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
