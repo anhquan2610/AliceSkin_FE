@@ -1,23 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginForm.styled.js";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../../../store/authSlice.js";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { isLoading, token } = useSelector((state) => state.auth);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const credentials = { email, password };
-    dispatch(signIn(credentials));
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required").min(8, "Password must be at least 8 characters"),
+  });
+
+
+  const handleLogin = (values) => {
+    dispatch(signIn(values)); 
   };
-  
+
   useEffect(() => {
     if (token) {
       navigate("/home");
@@ -33,27 +37,46 @@ export default function LoginForm() {
           Request account
         </Link>
       </S.Subtitle>
-      <S.ContainerForm onSubmit={handleLogin}>
-        <S.Label>Email</S.Label>
-        <S.Input
-          type="email"
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <S.Label>Password</S.Label>
-        <S.Input
-          type="password"
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Link to="/forgotpassword">
-          <S.ForgotPassword>Forgot password?</S.ForgotPassword>
-        </Link>
-        <S.BtnLogin type="submit" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Login"}
-        </S.BtnLogin>
-       
-      </S.ContainerForm>
+
+
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validationSchema={validationSchema}
+        onSubmit={handleLogin} 
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <S.ContainerForm>
+              <S.Label>Email</S.Label>
+              <Field
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                as={S.Input} 
+              />
+              <ErrorMessage name="email" component={S.ErrorMessageStyled} /> 
+
+              <S.Label>Password</S.Label>
+              <Field
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                as={S.Input} 
+              />
+              <ErrorMessage name="password" component={S.ErrorMessageStyled} /> 
+
+              <Link to="/forgotpassword">
+                <S.ForgotPassword>Forgot password?</S.ForgotPassword>
+              </Link>
+
+              <S.BtnLogin type="submit" disabled={isSubmitting || isLoading}>
+                {isLoading ? "Logging in..." : "Login"}
+              </S.BtnLogin>
+            </S.ContainerForm>
+          </Form>
+        )}
+      </Formik>
+
       <S.BlankSpace />
       <S.ContainerBottom>
         <S.BtnLoginFacebook>Login with Facebook</S.BtnLoginFacebook>

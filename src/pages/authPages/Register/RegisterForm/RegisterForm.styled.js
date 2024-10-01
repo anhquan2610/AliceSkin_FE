@@ -99,7 +99,7 @@ export const BtnLoginGoogle = styled.button`
 `;
 
 export const ErrorMessageStyled = styled.div`
-  color: red; // Màu thông báo lỗi
-  font-size: var(--fs-lg); // Kích thước chữ
-  margin-top: 5px; // Khoảng cách phía trên
+  color: red; 
+  font-size: var(--fs-sm); 
+  margin-top: var(--s-2); 
 `;
