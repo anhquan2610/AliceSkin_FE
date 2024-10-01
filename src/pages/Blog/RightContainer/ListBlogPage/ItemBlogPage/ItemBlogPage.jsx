@@ -1,23 +1,16 @@
 import * as S from "./ItemBlogPage.styled";
-import List from "../../../../../assets/images/list.png";
 import InfoUser from "../../../../../components/infoBlog/infoUser/infoUser";
 import DateOfBlog from "../../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 
-export default function ItemBlogPage() {
+export default function ItemBlogPage({blog}) {
   return (
     <S.Container>
       <S.ContainerImage>
-        <S.ImgBlog src={List} />
+        <S.ImgBlog src={blog.thumbnail} />
       </S.ContainerImage>
       <S.ContainerContent>
-        <S.Title>
-          A UX Case Study Creating a Studious Environment for Students
-        </S.Title>
-        <S.Description>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident.
-        </S.Description>
+        <S.Title>{blog.title}</S.Title>
+        <S.Description>{blog.content}</S.Description>
         <S.AuthorBlog>
           <S.Author>
             <InfoUser />

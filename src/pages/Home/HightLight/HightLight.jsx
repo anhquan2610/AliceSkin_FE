@@ -5,6 +5,7 @@ import InfoBlog from "../../../components/infoBlog/infoBlog";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllBlog } from "../../../store/blogSlice";
+import InfoUser from "../../../components/infoBlog/infoUser/infoUser";
 
 export default function HightLight() {
   const dispatch = useDispatch();
@@ -14,33 +15,29 @@ export default function HightLight() {
     dispatch(getAllBlog());
   }, [dispatch]);
 
-  // Lấy blog đầu tiên, kiểm tra mảng blogs có trống không
+  
   const blog = blogs.length > 0 ? blogs[0] : null;
 
-  // Kiểm tra trạng thái loading
+  
   if (isLoading) {
-    return <p>Loading...</p>; // Hiển thị thông báo khi đang tải
+    return <p>Loading</p>; 
   }
-
-  // Kiểm tra lỗi
   if (error) {
-    return <p>Error: {error.message}</p>; // Hiển thị thông báo lỗi
+    return <p>Error: {error.message}</p>;
   }
-
-  // Kiểm tra xem có blog nào không
   if (!blog) {
-    return <p>No blogs available.</p>; // Thông báo nếu không có blog nào
+    return <p>No blogs available.</p>; 
   }
 
   return (
     <S.Container>
-      <S.Image src={HightLight1} />
+      <S.Image src={blog.thumbnail}></S.Image>
       <S.BoxTitle>
         <S.CongigBox>
           <TypeBlog />
           <S.Title>{blog.title}</S.Title> {/* Hiển thị title của blog đầu tiên */}
           <S.Content>{blog.content}</S.Content> {/* Hiển thị title của blog đầu tiên */}
-          <InfoBlog />
+          <InfoUser userId = {blog.user_id} />
         </S.CongigBox>
       </S.BoxTitle>
     </S.Container>

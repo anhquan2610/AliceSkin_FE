@@ -5,8 +5,6 @@ import ItemList from "../../../../assets/images/itemList.png";
 
 
 export default function ItemBlog({blog}) {
-    
-    
     return (
         <S.Container>
             <S.ImageContainer>

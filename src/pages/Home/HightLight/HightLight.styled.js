@@ -12,6 +12,9 @@ export const Image = styled.img`
 position: relative;
 height: auto;
 width: 100%;
+object-fit: cover;
+aspect-ratio: 2/1;
+border-radius: var(--br-md);
 `;
 
 export const BoxTitle = styled.div`
