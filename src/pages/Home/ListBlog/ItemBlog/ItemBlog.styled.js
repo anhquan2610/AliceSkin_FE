@@ -9,7 +9,11 @@ export const Container = styled.div`
   padding: var(--s-4);
   border-radius: var(--br-xl);
   overflow: hidden;
-
+  &:hover {
+    cursor: pointer;
+    box-shadow: var(--shadow-2);
+    transform: scale(1.05); 
+  }
 `;
 
 export const ImageContainer = styled.div`

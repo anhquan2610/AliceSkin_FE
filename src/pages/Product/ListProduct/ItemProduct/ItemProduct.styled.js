@@ -4,11 +4,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 29%;
-  gap: var(--s-4);
   box-shadow: var(--shadow-1);
   padding: var(--s-4);
   border-radius: var(--br-xl);
-  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+    box-shadow: var(--shadow-2);
+    transform: scale(1.05); 
+  }
 `;
 
 export const ContainerImage = styled.div`
