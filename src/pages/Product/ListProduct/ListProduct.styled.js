@@ -33,5 +33,5 @@ flex-direction: row;
 flex-wrap: wrap;
 width: 100%;
 justify-content: space-between;
-row-gap: var(--s-5);
+row-gap: var(--s-10);
 `;

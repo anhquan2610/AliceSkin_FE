@@ -4,11 +4,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 29%;
-  gap: var(--s-4);
   box-shadow: var(--shadow-1);
   padding: var(--s-4);
   border-radius: var(--br-xl);
-  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+    box-shadow: var(--shadow-2);
+    transform: scale(1.05); 
+  }
 `;
 
 export const ContainerImage = styled.div`
@@ -18,7 +21,7 @@ export const ContainerImage = styled.div`
 export const ImgProduct = styled.img`
   width: 100%;
   height: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: var(--br-lg);
 `;

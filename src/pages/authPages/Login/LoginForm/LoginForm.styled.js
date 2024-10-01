@@ -15,7 +15,7 @@ export const Subtitle = styled.div`
   font-size: var(--fs-xl);
 `;
 
-export const ContainerForm = styled.form`
+export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
@@ -94,4 +94,10 @@ export const BtnLoginGoogle = styled.button`
     box-shadow: var(--shadow-6);
     border: none;
   }
+`;
+
+export const ErrorMessageStyled = styled.div`
+  color: red; 
+  font-size: var(--fs-sm); 
+   
 `;

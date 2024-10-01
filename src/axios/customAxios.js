@@ -5,6 +5,9 @@ const BASE_URL= "http://127.0.0.1:8000";
 //Custom axios instance
 export const instanceAxios = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 
@@ -20,10 +23,4 @@ instanceAxios.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-// instanceAxios.interceptors.response.use(function (response) {
-//   console.log("response", response);
-//   return response;
-// }, function (error) {
-//   return Promise.reject(error);
-// });
 

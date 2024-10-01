@@ -39,6 +39,24 @@ export const signIn = createAsyncThunk(
   }
 );
 
+//Get User by Id
+// export const getUserById = createAsyncThunk('user/getbyid', async (userId) => {
+//     const response = await instanceAxios.get(`/api/users/${userId}`);
+//     return response.data;
+// });
+export const getUserById = createAsyncThunk(
+  "auth/getUserById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get(`/api/users/${id}`);
+      return response.data; 
+    } catch (error) {
+      return rejectWithValue(error.response.data); 
+    }
+  }
+);
+
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -80,9 +98,6 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.access_token;
-
-
-      
     });
 
     builder.addCase(signIn.rejected, (state, action) => {
@@ -90,6 +105,22 @@ const authSlice = createSlice({
       state.isError = true;
       state.errorMessage = action.payload;
     });
+
+    //Get User by Id
+    builder.addCase(getUserById.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(getUserById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const user = action.payload;
+        state.authors[user.id] = user; //save infor user by id
+    });
+
+    builder.addCase(getUserById.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
   },
 });
 

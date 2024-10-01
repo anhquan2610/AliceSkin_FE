@@ -1,16 +1,15 @@
-import { useEffect } from "react";
-import Product from "../../../../assets/images/Product.png";
+
 import TypeProduct from "../../../../components/TypeProduct/TypeProduct";
 import * as S from "./ItemProduct.styled";
 
 
-export default function ItemProduct() {
+export default function ItemProduct({product}) {
 
  
   return (
     <S.Container>
       <S.ContainerImage>
-        <S.ImgProduct src={Product} />
+        <S.ImgProduct src={product.images} />
       </S.ContainerImage>
       <S.ContentContainer>
         <S.HashtagProduct>
@@ -36,11 +35,11 @@ export default function ItemProduct() {
           </S.RateStar>
           <S.RateNumber>12 Reviews</S.RateNumber>
         </S.ReviewContainer>
-        <S.ProductName>THE PLANT BASE</S.ProductName>
+        <S.ProductName>{product.name}</S.ProductName>
         <S.Description>
-          DescriptionDescriptionDescriptionDescriptionDescripDescripDescripDescripDescriptiontionDescription
+          {product.description}
         </S.Description>
-        <S.PriceProduct>Price $</S.PriceProduct>
+        <S.PriceProduct>{product.price}$</S.PriceProduct>
       </S.ContentContainer>
     </S.Container>
   );
