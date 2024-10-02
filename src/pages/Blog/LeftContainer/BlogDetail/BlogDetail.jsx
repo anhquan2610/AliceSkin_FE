@@ -3,7 +3,6 @@ import DateOfBlog from "../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 import InfoUser from "../../../../components/infoBlog/infoUser/infoUser";
 import TypeBlog from "../../../../components/typeBlog/typeBlog";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import itemList from "../../../../assets/images/itemList.png";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
