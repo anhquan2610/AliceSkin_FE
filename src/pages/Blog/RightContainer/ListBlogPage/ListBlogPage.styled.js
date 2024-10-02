@@ -29,3 +29,12 @@ export const ListBlog = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const ShowMoreButton = styled.button`
+color: var(--black);
+margin-top: var(--s-5);
+padding: var(--s-2) var(--s-10);
+cursor: pointer;
+font-size: var(--fs-md);
+
+`;

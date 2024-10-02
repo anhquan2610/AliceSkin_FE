@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
 
 const initialState = {
-  user: null,
+  user: '' ,
   token: null,
   isLoading: false,
   isError: false,
@@ -40,15 +40,11 @@ export const signIn = createAsyncThunk(
 );
 
 //Get User by Id
-// export const getUserById = createAsyncThunk('user/getbyid', async (userId) => {
-//     const response = await instanceAxios.get(`/api/users/${userId}`);
-//     return response.data;
-// });
 export const getUserById = createAsyncThunk(
   "auth/getUserById",
-  async (id, { rejectWithValue }) => {
+  async (userId, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.get(`/api/users/${id}`);
+      const response = await instanceAxios.get(`/api/users/${userId}`);
       return response.data; 
     } catch (error) {
       return rejectWithValue(error.response.data); 
@@ -113,8 +109,7 @@ const authSlice = createSlice({
 
     builder.addCase(getUserById.fulfilled, (state, action) => {
         state.isLoading = false;
-        const user = action.payload;
-        state.authors[user.id] = user; //save infor user by id
+        state.user = action.payload.user;
     });
 
     builder.addCase(getUserById.rejected, (state, action) => {

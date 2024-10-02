@@ -9,6 +9,7 @@ export const Container = styled.div`
   padding: var(--s-4);
   border-radius: var(--br-xl);
   overflow: hidden;
+  
   &:hover {
     cursor: pointer;
     box-shadow: var(--shadow-2);
@@ -29,6 +30,9 @@ export const ImgBlog = styled.img`
 
 export const ContainerContent = styled.div`
   flex: 7;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 `;
 
 export const Title = styled.div`

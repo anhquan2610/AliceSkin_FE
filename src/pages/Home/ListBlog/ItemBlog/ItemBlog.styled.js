@@ -59,4 +59,10 @@ font-size: var(--fs-xs);
   overflow: hidden;
 `;
 
-export const Infor = styled.div``;
+export const Infor = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+`;
+
