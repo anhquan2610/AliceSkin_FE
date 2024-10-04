@@ -44,7 +44,7 @@ export const Title = styled.div`
   font-weight: var(--fw-semibold);
   margin: var(--s-2) 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
@@ -54,7 +54,7 @@ font-size: var(--fs-xs);
   width: 100%;
   margin-bottom: var(--s-1);
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;

@@ -23,7 +23,7 @@ border-radius: 50%;
 `;
 
 export const RightContainer = styled.div`
-width: 100%;
+width: auto;
 display: 10;
 display: flex;
 flex-direction: column;
@@ -52,6 +52,7 @@ export const ReviewDate = styled.div`
 font-size: var(--fs-sm);
 font-style: italic;
 color: var(--dark-gray);
+margin-left: var(--s-8);
 `;
 
 export const EmailReviewer = styled.div`

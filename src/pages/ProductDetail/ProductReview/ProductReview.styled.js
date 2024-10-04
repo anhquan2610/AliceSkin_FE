@@ -9,6 +9,9 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
+border-bottom: 5px solid var(--green);
+
+
 `;
 
 export const TitleContainer = styled.div`
@@ -19,9 +22,13 @@ align-items:  baseline;
 `;
 
 export const Title = styled.div`
-font-size: var(--fs-4xl);
+font-size: var(--fs-3xl);
 font-weight: var(--fw-semibold);
 margin-right: var(--s-3);
+border: 1px solid var(--green);
+background-color: var(--green);
+color: var(--white);
+padding: var(--s-2);
 `;
 
 export const Filter = styled.div`
@@ -29,7 +36,7 @@ export const Filter = styled.div`
 `;
 
 export const TotalReview = styled.div`
-font-size: var(--fs-xl);
+font-size: var(--fs-lg);
 `;
 
 export const Description = styled.div``;
