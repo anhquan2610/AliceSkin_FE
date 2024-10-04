@@ -1,3 +1,4 @@
+//Blog detail 
 import * as S from "./BlogDetail.styled";
 import DateOfBlog from "../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 import InfoUser from "../../../../components/infoBlog/infoUser/infoUser";
