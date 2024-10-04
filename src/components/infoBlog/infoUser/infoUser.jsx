@@ -6,7 +6,7 @@ import { getUserById } from '../../../store/authSlice';
 
 export default function InfoUser({userId}) {
     const dispatch = useDispatch();
-    const users = useSelector((state) => state.auth);
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
         if(userId) {
@@ -17,7 +17,7 @@ export default function InfoUser({userId}) {
     return (
         <S.Container1>
             <S.Image src={ImageUser} />
-            <S.Name>{users.name}</S.Name>
+            <S.Name>{user.name}</S.Name>
             
         </S.Container1>
     );

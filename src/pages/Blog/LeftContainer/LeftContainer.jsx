@@ -5,7 +5,7 @@ import * as S from "./LeftContainer.styled";
 export default function LeftContainer() {
     return (
         <S.Container>
-            <BlogDetail />
+            <BlogDetail  />
             <Comment />
         </S.Container>
     )

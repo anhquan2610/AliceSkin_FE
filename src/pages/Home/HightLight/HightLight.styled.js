@@ -19,7 +19,6 @@ border-radius: var(--br-md);
 
 export const BoxTitle = styled.div`
 position: absolute;
-/* margin-top: var(--s-); */
 bottom: 0;
 margin-bottom:var(--s-5);
 margin-left: var(--s-10);
@@ -32,10 +31,17 @@ font-size: var(--fs-sm);
 width: 30%;
 `;
 
-export const CongigBox = styled.div`
+export const CongfigBox = styled.div`
 display: flex;
 flex-direction: column;
 gap: var(--s-2);
+`;
+
+export const AuthorContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
 `;
 
 export const Title = styled.div`

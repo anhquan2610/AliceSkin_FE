@@ -5,7 +5,7 @@ import * as S from "./RightContainer.styled";
 export default function RightContainer() {
     return (
        <S.Container>
-        <ListBlogPage />
+        <ListBlogPage  />
         <ListCategory />
        </S.Container>
     )

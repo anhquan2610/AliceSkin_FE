@@ -1,12 +1,12 @@
 import * as S from "./dateOfBlog.styled";
 
 
-export default function dateOfBlog() {
-
+export default function dateOfBlog({date}) {
+  const formatDate = new Date(date).toLocaleDateString();
 
   return (
     <S.Container>
-      <S.DateContainer>12/12/2021</S.DateContainer>
+      <S.DateContainer>{formatDate}</S.DateContainer>
     </S.Container>
   );
 }

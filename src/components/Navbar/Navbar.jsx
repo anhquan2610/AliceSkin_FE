@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/authSlice";
 
 
-export default function Navbar() {
+export default function Navbar({blogs}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ export default function Navbar() {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
   return (
     <S.Container>
       <S.Group>
@@ -35,7 +36,7 @@ export default function Navbar() {
         <S.StyledLink to="/home">
           <S.NavItem>Home</S.NavItem>
         </S.StyledLink>
-        <S.StyledLink to="/blog">
+        <S.StyledLink to="/blog/1">
           <S.NavItem>Blog</S.NavItem>
         </S.StyledLink>
         <S.StyledLink to="/product">

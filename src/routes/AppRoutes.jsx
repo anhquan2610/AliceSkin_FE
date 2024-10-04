@@ -8,6 +8,7 @@ import ResetPassword from "../pages/authPages/ForgotPassword/ResetPassword/Reset
 import Blog from "../pages/Blog/Blog";
 import Product from "../pages/Product/Product";
 
+
 export default function AppRoutes() {
   return(
     <Routes>
@@ -17,7 +18,7 @@ export default function AppRoutes() {
       <Route path="/home" element={<HomePage />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/resetpassword" element={<ResetPassword />} />
-      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:id" element={<Blog />} />
       <Route path="/product" element={<Product />} />
     </Routes>
   )
