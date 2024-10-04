@@ -3,11 +3,13 @@ import TypeProduct from "../../../../components/TypeProduct/TypeProduct";
 import * as S from "./ItemProduct.styled";
 
 
-export default function ItemProduct({product}) {
-
+export default function ItemProduct({product, navigate}) {
+  const handleClick = () => {
+    navigate(`/product/${product.product_id}`);
+  };
  
   return (
-    <S.Container>
+    <S.Container onClick={handleClick}>
       <S.ContainerImage>
         <S.ImgProduct src={product.images} />
       </S.ContainerImage>

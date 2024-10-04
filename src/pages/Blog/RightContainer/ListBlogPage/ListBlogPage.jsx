@@ -22,7 +22,7 @@ export default function ListBlogPage() {
 
 
   const limitedBlogs = blogs
-    .filter((blog) => blog.blog_id !== currentBlogId) // Lọc ra blog không trùng ID
+    .filter((blog) => blog.blog_id !== currentBlogId) 
     .slice(0, visibleBlogs);
 
   return (

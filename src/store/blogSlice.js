@@ -8,18 +8,13 @@ const initialState = {
   selectedBlog: '',
 };
 
-//Information Blog
+// Get Information Blog
 export const getAllBlog = createAsyncThunk("getAllBlog", async () => {
   const response = await instanceAxios.get("/api/blogs");
   return response.data;
 });
 
 //Get Blog by ID
-// export const getBlogById = createAsyncThunk("getBlogById", async (blogId) => {
-//   const response = await instanceAxios.get(`/api/blogs/2`);
-//   return response.data;
-// });
-
 export const getBlogById = createAsyncThunk(
     "getBlogById",
     async (blog_id, { rejectWithValue }) => {
