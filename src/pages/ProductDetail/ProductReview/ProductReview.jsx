@@ -21,7 +21,7 @@ export default function ProductReview() {
           <S.Title>Review Of Product</S.Title>
           <S.TotalReview>(Tổng cộng: 20 Reviews)</S.TotalReview>
         </S.TitleContainer>
-        <S.Filter>Filter</S.Filter>
+        <S.Filter>Filte</S.Filter>
       </S.TopContainer>
       <S.ReviewContainer>
         <S.ReviewItemContainer>
