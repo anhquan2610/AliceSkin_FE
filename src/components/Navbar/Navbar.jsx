@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/authSlice";
 
 
-export default function Navbar({blogs}) {
+export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();

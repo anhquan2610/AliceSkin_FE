@@ -1,28 +1,9 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import authSlice from "./authSlice";
-// authSlice
-
-// export const store = configureStore({
-//   reducer: {
-//   auth: authSlice,
-//   },
-// });
-
-// import { configureStore } from "@reduxjs/toolkit";
-
-// import authSlice from "./authSlice";
-
-
-// export const store = configureStore({
-//   reducer: {
-//     auth: authSlice,
-//   },
-// });
-
+// Code to create a store using Redux Toolkit
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
 import blogSlice from "./blogSlice";
 import productSlice from "./productSlice";
+import shippingSlice from "./shippingSlice";
 
 export const store = configureStore({
 
@@ -30,5 +11,6 @@ export const store = configureStore({
     [authSlice.name]: authSlice.reducer,
     [blogSlice.name]: blogSlice.reducer,
     [productSlice.name]: productSlice.reducer,
+    [shippingSlice.name]: shippingSlice.reducer,
   }
 });
