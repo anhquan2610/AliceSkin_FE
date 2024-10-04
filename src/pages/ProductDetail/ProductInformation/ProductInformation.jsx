@@ -33,7 +33,10 @@ export default function ProductInformation() {
   return (
     <S.Container>
       <S.TopContainer>
-        <S.NameProduct>{}</S.NameProduct>
+        <S.NameProduct>
+          Sản Phẩm:
+          <span style={{ fontWeight: "normal", marginLeft:'var(--s-3)' }}>{selectProduct.name}</span>
+        </S.NameProduct>
       </S.TopContainer>
       <S.BottomContainer>
         <S.LeftContainer>
