@@ -3,6 +3,7 @@ import { instanceAxios } from "../axios/customAxios";
 
 const initialState = {
   products: [],
+  reviews: [],
   isLoading: false,
   error: null,
   selectedProduct: "",
@@ -20,6 +21,19 @@ export const getProductById = createAsyncThunk(
   async (product_id, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.get(`/api/products/${product_id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//Ger Review by Product ID
+export const getReviewByProductId = createAsyncThunk(
+  "product/getReviewByProductId",
+  async (product_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get(`/api/reviews/product/${product_id}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -55,6 +69,19 @@ const productSlice = createSlice({
       state.selectedProduct = action.payload;
     });
     builder.addCase(getProductById.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+
+    //Get review by product ID
+    builder.addCase(getReviewByProductId.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getReviewByProductId.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.reviews = action.payload;
+    });
+    builder.addCase(getReviewByProductId.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error;
     });

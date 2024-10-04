@@ -1,13 +1,11 @@
-
 import TypeProduct from "../../../../components/TypeProduct/TypeProduct";
 import * as S from "./ItemProduct.styled";
 
-
-export default function ItemProduct({product, navigate}) {
+export default function ItemProduct({ product, navigate }) {
   const handleClick = () => {
     navigate(`/product/${product.product_id}`);
   };
- 
+
   return (
     <S.Container onClick={handleClick}>
       <S.ContainerImage>
@@ -20,27 +18,25 @@ export default function ItemProduct({product, navigate}) {
         <S.ReviewContainer>
           <S.RateStar>
             <S.Star>
-              <i className="bi bi-star"></i>
+              <i className="bi bi-star-fill"></i>
             </S.Star>
             <S.Star>
-              <i className="bi bi-star"></i>
+              <i className="bi bi-star-fill"></i>
             </S.Star>
             <S.Star>
-              <i className="bi bi-star"></i>
+              <i className="bi bi-star-fill"></i>
             </S.Star>
             <S.Star>
-              <i className="bi bi-star"></i>
+              <i className="bi bi-star-fill"></i>
             </S.Star>
             <S.Star>
-              <i className="bi bi-star"></i>
+              <i className="bi bi-star-fill"></i>
             </S.Star>
           </S.RateStar>
           <S.RateNumber>12 Reviews</S.RateNumber>
         </S.ReviewContainer>
         <S.ProductName>{product.name}</S.ProductName>
-        <S.Description>
-          {product.description}
-        </S.Description>
+        <S.Description>{product.description}</S.Description>
         <S.PriceProduct>{product.price}$</S.PriceProduct>
       </S.ContentContainer>
     </S.Container>

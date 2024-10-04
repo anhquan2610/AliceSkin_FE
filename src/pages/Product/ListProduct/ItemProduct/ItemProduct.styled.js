@@ -56,13 +56,9 @@ export const RateStar = styled.div`
 
 export const Star = styled.div`
   font-size: var(--fs-md);
-  cursor: pointer;
-  color: var(--black);
+  color: var(--yellow);
   transition: color 0.2s;
-  &:hover,
-  &:hover ~ & {
-    color: gold;
-  }
+  
 `;
 
 export const RateNumber = styled.div`

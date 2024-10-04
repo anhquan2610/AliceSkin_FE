@@ -9,7 +9,7 @@ const initialState = {
 
 //Get All Shipping
 export const getAllShipping = createAsyncThunk("shipping/getAll", async () => {
-  const response = await instanceAxios.get("/api/admin/shippings");
+  const response = await instanceAxios.get("/api/shippings");
   return response.data;
 });
 
