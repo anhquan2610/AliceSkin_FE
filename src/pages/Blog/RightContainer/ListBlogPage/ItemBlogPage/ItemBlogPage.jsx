@@ -2,12 +2,12 @@ import * as S from "./ItemBlogPage.styled";
 import InfoUser from "../../../../../components/infoBlog/infoUser/infoUser";
 import DateOfBlog from "../../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 
-export default function ItemBlogPage({blog, navigate}) {
+export default function ItemBlogPage({ blog, navigate }) {
   const handleClick = () => {
     navigate(`/blog/${blog.blog_id}`); // Adjust the URL as needed
   };
   return (
-    <S.Container onClick={handleClick} >
+    <S.Container onClick={handleClick}>
       <S.ContainerImage>
         <S.ImgBlog src={blog.thumbnail} />
       </S.ContainerImage>

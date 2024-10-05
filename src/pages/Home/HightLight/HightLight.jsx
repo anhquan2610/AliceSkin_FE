@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { getAllBlog } from "../../../store/blogSlice";
 import InfoUser from "../../../components/infoBlog/infoUser/infoUser";
 import DateOfBlog from "../../../components/infoBlog/dateOfBlog/dateOfBlog";
-  
+
 
 export default function HightLight() {
   const dispatch = useDispatch();
