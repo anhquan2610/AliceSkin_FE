@@ -1,5 +1,4 @@
 import * as S from "./infoUser.styled";
-import ImageUser from "../../../assets/images/AvaUser.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserById } from "../../../store/authSlice";
@@ -10,6 +9,7 @@ export default function InfoUser({ userId }) {
 
   useEffect(() => {
     if (userId) {
+      
       dispatch(getUserById(userId));
     }
   }, [dispatch, userId]);

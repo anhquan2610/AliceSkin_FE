@@ -1,4 +1,4 @@
-//Blog detail 
+//Blog detail
 import * as S from "./BlogDetail.styled";
 import DateOfBlog from "../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 import InfoUser from "../../../../components/infoBlog/infoUser/infoUser";
@@ -16,6 +16,7 @@ export default function BlogDetail() {
   const selectBlog = useSelector((state) => state.blog.selectedBlog);
 
   useEffect(() => {
+    console.log("blog_id", blogId);
     dispatch(getBlogById(blogId));
   }, [dispatch, blogId]);
 
@@ -46,9 +47,7 @@ export default function BlogDetail() {
           <S.Img src={selectBlog.thumbnail} />
         </S.ImageBlog>
         <S.ContentBlog>
-          <S.Content>
-            {selectBlog.content}
-          </S.Content>
+          <S.Content>{selectBlog.content}</S.Content>
         </S.ContentBlog>
       </S.ContentContainer>
     </S.Container>

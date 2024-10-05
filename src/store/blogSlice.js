@@ -14,7 +14,7 @@ export const getAllBlog = createAsyncThunk("getAllBlog", async () => {
   return response.data;
 });
 
-//Get Blog by ID
+// Get Blog by ID
 export const getBlogById = createAsyncThunk(
     "getBlogById",
     async (blog_id, { rejectWithValue }) => {
@@ -26,6 +26,8 @@ export const getBlogById = createAsyncThunk(
       }
     }
   );
+
+
 
 const blogSlice = createSlice({
   name: "blog",
