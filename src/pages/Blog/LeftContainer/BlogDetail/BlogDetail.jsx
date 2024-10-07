@@ -16,7 +16,6 @@ export default function BlogDetail() {
   const selectBlog = useSelector((state) => state.blog.selectedBlog);
 
   useEffect(() => {
-    console.log("blog_id", blogId);
     dispatch(getBlogById(blogId));
   }, [dispatch, blogId]);
 
@@ -32,9 +31,11 @@ export default function BlogDetail() {
       </S.AuthorBlog>
       <S.TitleBlog>{selectBlog.title}</S.TitleBlog>
       <S.ContainerType>
-        <S.HastagType>
-          <TypeBlog />
-        </S.HastagType>
+        <S.ContainerHashtags>
+          {selectBlog.hashtags?.map((hashtag, index) => (
+            <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
+          ))}
+        </S.ContainerHashtags>
         <S.LikeGroup>
           <S.HeartIcon>
             <i className="bi bi-heart"></i>

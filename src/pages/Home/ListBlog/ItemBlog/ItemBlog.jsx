@@ -15,9 +15,11 @@ export default function ItemBlog({ blog, navigate }) {
         <S.Image src={blog.thumbnail}></S.Image>
       </S.ImageContainer>
       <S.ContentContainer>
-        <S.Type>
-          <TypeBlog />
-        </S.Type>
+        <S.ContainerHashtags>
+          {blog.hashtags.map((hashtag, index) => (
+            <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
+          ))}
+        </S.ContainerHashtags>
         <S.Title>{blog.title}</S.Title>
         <S.Description>{blog.content}</S.Description>
         <S.Infor>

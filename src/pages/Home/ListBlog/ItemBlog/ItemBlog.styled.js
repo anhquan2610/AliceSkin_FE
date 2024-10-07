@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
- display: flex;
+  display: flex;
   flex-direction: column;
   width: 24%;
   gap: var(--s-4);
@@ -12,12 +12,12 @@ export const Container = styled.div`
   &:hover {
     cursor: pointer;
     box-shadow: var(--shadow-2);
-    transform: scale(1.05); 
+    transform: scale(1.05);
   }
 `;
 
 export const ImageContainer = styled.div`
-    flex: 3;
+  flex: 3;
 `;
 
 export const Image = styled.img`
@@ -35,8 +35,18 @@ export const ContentContainer = styled.div`
   gap: var(--s-2);
 `;
 
-export const Type = styled.div`
+export const ContainerHashtags = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: var(--s-1);
+`;
 
+export const Hashtag = styled.div`
+  color: var(--white);
+  padding: var(--s-2);
+  background-color: var(--green-fresh);
+  border-radius: var(--br-md);
+  font-size: var(--fs-sm);
 `;
 
 export const Title = styled.div`
@@ -50,7 +60,7 @@ export const Title = styled.div`
 `;
 
 export const Description = styled.div`
-font-size: var(--fs-xs);
+  font-size: var(--fs-xs);
   width: 100%;
   margin-bottom: var(--s-1);
   display: -webkit-box;
@@ -60,9 +70,8 @@ font-size: var(--fs-xs);
 `;
 
 export const Infor = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
-

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./ListBlogPage.styled";
 import { useEffect, useState } from "react"; // Thêm useState
-import { getAllBlog, getBlogById } from "../../../../store/blogSlice";
+import { getAllBlog } from "../../../../store/blogSlice";
 import ItemBlogPage from "./ItemBlogPage/ItemBlogPage";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ListBlogPage() {
   const dispatch = useDispatch();

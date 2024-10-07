@@ -31,6 +31,20 @@ font-size: var(--fs-sm);
 width: 30%;
 `;
 
+export const ContainerHashtags = styled.div`
+display: flex;
+flex-direction: row;
+gap: var(--s-1) ;
+`;
+
+export const Hashtag = styled.div`
+color: var(--white);
+padding: var(--s-2);
+background-color: var(--green-fresh);
+border-radius: var(--br-md);
+font-size: var(--fs-sm);
+`;
+
 export const CongfigBox = styled.div`
 display: flex;
 flex-direction: column;
