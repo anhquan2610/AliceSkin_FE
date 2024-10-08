@@ -30,7 +30,6 @@ export const signIn = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.post("/api/login", credentials);
-
       localStorage.setItem("token", response.data?.access_token);
       return response.data;
     } catch (error) {
@@ -84,6 +83,39 @@ export const getUserById = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//fetch user by token
+export const fetchUserByToken = createAsyncThunk(
+  'user/fetchById',
+  async () => {
+    const token = localStorage.getItem('token');
+    const response = await instanceAxios.get('/api/user', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  }
+);
+
+//Change Password
+export const changePassword = createAsyncThunk(
+  'auth/changePassword',
+  async (passwordData, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token'); 
+      const response = await instanceAxios.post('/api/change-password', passwordData, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+      return response.data; 
+    } catch (error) {
+      // Trả về lỗi nếu có
+      return rejectWithValue(error.response.data || 'An error occurred while changing the password');
     }
   }
 );
@@ -183,8 +215,37 @@ const authSlice = createSlice({
     builder.addCase(getUserById.rejected, (state, action) => {
       state.isLoading = false;
     });
+    
+    //fetch user by token
+    builder.addCase(fetchUserByToken.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUserByToken.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    });
+    builder.addCase(fetchUserByToken.rejected, (state) => {
+      state.isLoading = false;
+    });
+
+    //Change Password
+    builder.addCase(changePassword.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(changePassword.fulfilled, (state) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+    });
+    builder.addCase(changePassword.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = action.payload;
+    });
+
   },
 });
+
 
 export const { logout } = authSlice.actions;
 

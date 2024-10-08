@@ -3,23 +3,21 @@ import * as S from "./LoginForm.styled.js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../../../store/authSlice.js";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, token } = useSelector((state) => state.auth);
 
-
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
-
   const handleLogin = (values) => {
-    dispatch(signIn(values)); 
+    dispatch(signIn(values));
   };
 
   useEffect(() => {
@@ -38,11 +36,10 @@ export default function LoginForm() {
         </Link>
       </S.Subtitle>
 
-
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={handleLogin} 
+        onSubmit={handleLogin}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -52,18 +49,18 @@ export default function LoginForm() {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
-                as={S.Input} 
+                as={S.Input}
               />
-              <ErrorMessage name="email" component={S.ErrorMessageStyled} /> 
+              <ErrorMessage name="email" component={S.ErrorMessageStyled} />
 
               <S.Label>Password</S.Label>
               <Field
                 name="password"
                 type="password"
                 placeholder="Enter your password"
-                as={S.Input} 
+                as={S.Input}
               />
-              <ErrorMessage name="password" component={S.ErrorMessageStyled} /> 
+              <ErrorMessage name="password" component={S.ErrorMessageStyled} />
 
               <Link to="/forgotpassword">
                 <S.ForgotPassword>Forgot password?</S.ForgotPassword>
