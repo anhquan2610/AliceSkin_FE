@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { getAllBlog } from "../../../store/blogSlice";
 import DateOfBlog from "../../../components/infoBlog/dateOfBlog/dateOfBlog";
 import { useNavigate } from "react-router-dom";
-import Avatar from "../../../assets/images/AvaUser.png";
 
 export default function HightLight() {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ export default function HightLight() {
           <S.AuthorContainer>
             <S.AuthorGroup>
               <S.AvatarContainer>
-                <S.Avatar src={Avatar}></S.Avatar>
+                <S.Avatar src={blog.user?.image}></S.Avatar>
               </S.AvatarContainer>
               <S.AuthorName>{blog.user?.name}</S.AuthorName>
             </S.AuthorGroup>

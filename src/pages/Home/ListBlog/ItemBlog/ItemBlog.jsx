@@ -23,7 +23,7 @@ export default function ItemBlog({ blog, navigate }) {
         <S.Infor>
           <S.AuthorGroup>
             <S.AvatarContainer>
-              <S.Avatar src={Avatar} />
+              <S.Avatar src={blog.user?.image} />
             </S.AvatarContainer>
             <S.AuthorName>{blog.user?.name}</S.AuthorName>
           </S.AuthorGroup>
