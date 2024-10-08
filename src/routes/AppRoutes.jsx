@@ -9,6 +9,8 @@ import Blog from "../pages/Blog/Blog";
 import Product from "../pages/Product/Product";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import { DefaultLayout } from "../layout/DefaultLayout";
+import InformationUser from "../pages/InformationUser/InformationUser";
+ 
 
 export default function AppRoutes() {
   return (
@@ -23,6 +25,7 @@ export default function AppRoutes() {
         <Route path="blog/:id" element={<Blog />} />
         <Route path="product" element={<Product />} />
         <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="infor-user/" element={<InformationUser />} />
       </Route>
     </Routes>
   );

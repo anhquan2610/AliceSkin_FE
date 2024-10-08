@@ -16,7 +16,6 @@ export default function ResetPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted");
     dispatch(
       resetPassword({
         email,
