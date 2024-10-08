@@ -17,7 +17,7 @@ export default function ItemBlogPage({ blog, navigate }) {
         <S.AuthorBlog>
           <S.AuthorContainer>
             <S.AvatarContainer>
-              <S.Avatar src={Avatar} />
+              <S.Avatar src={blog.user?.image} />
             </S.AvatarContainer>
             <S.AuthorName>{blog.user?.name}</S.AuthorName>
           </S.AuthorContainer>

@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBlogById } from "../../../../store/blogSlice";
-import Avatar from "../../../../assets/images/AvaUser.png";
 
 export default function BlogDetail() {
   const { id: blogId } = useParams();
@@ -23,7 +22,7 @@ export default function BlogDetail() {
       <S.AuthorBlog>
         <S.AuthorContainer>
           <S.AvatarContainer>
-            <S.Avatar src={Avatar} />
+            <S.Avatar src={selectBlog.user?.image} />
           </S.AvatarContainer>
           <S.AuthorName>{selectBlog.user?.name}</S.AuthorName>
         </S.AuthorContainer>
