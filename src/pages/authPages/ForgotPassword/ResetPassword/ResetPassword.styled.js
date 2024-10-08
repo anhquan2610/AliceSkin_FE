@@ -32,7 +32,7 @@ export const Description = styled.div`
   margin-bottom: var(--s-4);
 `;
 
-export const ContainerForm = styled.div`
+export const ContainerForm = styled.form`
   background-color: var(--light-gray-2);
   display: flex;
   flex-direction: column;

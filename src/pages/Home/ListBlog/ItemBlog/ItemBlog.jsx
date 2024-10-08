@@ -1,8 +1,6 @@
-import TypeBlog from "../../../../components/typeBlog/typeBlog";
-import InfoBlog from "../../../../components/infoBlog/infoBlog";
 import * as S from "./ItemBlog.styled";
-import InfoUser from "../../../../components/infoBlog/infoUser/infoUser";
 import DateOfBlog from "../../../../components/infoBlog/dateOfBlog/dateOfBlog";
+import Avatar from "../../../../assets/images/AvaUser.png";
 
 export default function ItemBlog({ blog, navigate }) {
   const handleClick = () => {
@@ -23,7 +21,12 @@ export default function ItemBlog({ blog, navigate }) {
         <S.Title>{blog.title}</S.Title>
         <S.Description>{blog.content}</S.Description>
         <S.Infor>
-          <InfoUser />
+          <S.AuthorGroup>
+            <S.AvatarContainer>
+              <S.Avatar src={Avatar} />
+            </S.AvatarContainer>
+            <S.AuthorName>{blog.user?.name}</S.AuthorName>
+          </S.AuthorGroup>
           <DateOfBlog date={blog.created_at} />
         </S.Infor>
       </S.ContentContainer>

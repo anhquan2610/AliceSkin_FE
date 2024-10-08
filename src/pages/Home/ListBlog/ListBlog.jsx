@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ListBlog() {
   const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.blog);
+  const blogs = useSelector((state) => state.blog.blogs);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function ListBlog() {
         <S.Filter>Filter</S.Filter>
       </S.TopContainer>
       <S.ListItem>
-        {blogs.blogs.map((blog, index) => (
+        {blogs.map((blog, index) => (
           <ItemBlog
             key={`${blog.blog_id}-${index}`}
             blog={blog}

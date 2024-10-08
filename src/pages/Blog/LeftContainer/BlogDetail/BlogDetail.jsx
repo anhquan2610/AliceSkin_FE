@@ -1,13 +1,12 @@
 //Blog detail
 import * as S from "./BlogDetail.styled";
 import DateOfBlog from "../../../../components/infoBlog/dateOfBlog/dateOfBlog";
-import InfoUser from "../../../../components/infoBlog/infoUser/infoUser";
-import TypeBlog from "../../../../components/typeBlog/typeBlog";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBlogById } from "../../../../store/blogSlice";
+import Avatar from "../../../../assets/images/AvaUser.png";
 
 export default function BlogDetail() {
   const { id: blogId } = useParams();
@@ -22,9 +21,12 @@ export default function BlogDetail() {
   return (
     <S.Container>
       <S.AuthorBlog>
-        <S.Author>
-          <InfoUser userId={selectBlog.user_id} />
-        </S.Author>
+        <S.AuthorContainer>
+          <S.AvatarContainer>
+            <S.Avatar src={Avatar} />
+          </S.AvatarContainer>
+          <S.AuthorName>{selectBlog.user?.name}</S.AuthorName>
+        </S.AuthorContainer>
         <S.Date>
           Posted on <DateOfBlog date={selectBlog.created_at} />
         </S.Date>

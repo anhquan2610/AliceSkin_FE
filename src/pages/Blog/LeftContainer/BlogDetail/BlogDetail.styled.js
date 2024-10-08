@@ -13,8 +13,26 @@ export const AuthorBlog = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+export const AuthorContainer = styled.div`
+display: flex;
+flex-direction: row;
+gap: var(--s-1);
+align-items: center;
+`;
 
-export const Author = styled(Name)`
+export const AvatarContainer = styled.div``;
+
+export const Avatar = styled.img`
+border-radius: 50%;
+aspect-ratio: 1/1;
+width: 50px;
+height: 100%;
+overflow: hidden;
+object-fit: cover;
+border: 2px solid var(--gray);
+`;
+
+export const AuthorName = styled(Name)`
   color: var(--green);
   font-size: var(--fs-xl);
 `;

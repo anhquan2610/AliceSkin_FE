@@ -1,12 +1,10 @@
 import * as S from "./HightLight.styled";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllBlog } from "../../../store/blogSlice";
-import InfoUser from "../../../components/infoBlog/infoUser/infoUser";
 import DateOfBlog from "../../../components/infoBlog/dateOfBlog/dateOfBlog";
 import { useNavigate } from "react-router-dom";
-import TypeBlog from "../../../components/typeBlog/typeBlog";
+import Avatar from "../../../assets/images/AvaUser.png";
 
 export default function HightLight() {
   const dispatch = useDispatch();
@@ -21,7 +19,7 @@ export default function HightLight() {
     navigate(`/blog/${blog.blog_id}`);
   };
 
-  const blog = blogs.length > 0 ? blogs[0] : null;
+  const blog = blogs[Math.floor(Math.random() * blogs.length)];
 
   if (isLoading) {
     return <p>Loading</p>;
@@ -46,7 +44,12 @@ export default function HightLight() {
           <S.Title>{blog.title}</S.Title>
           <S.Content>{blog.content}</S.Content>
           <S.AuthorContainer>
-            <InfoUser userId={blog.user_id} />
+            <S.AuthorGroup>
+              <S.AvatarContainer>
+                <S.Avatar src={Avatar}></S.Avatar>
+              </S.AvatarContainer>
+              <S.AuthorName>{blog.user?.name}</S.AuthorName>
+            </S.AuthorGroup>
             <DateOfBlog date={blog.created_at} />
           </S.AuthorContainer>
         </S.CongfigBox>

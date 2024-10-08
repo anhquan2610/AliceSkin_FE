@@ -9,6 +9,7 @@ export default function InfoUser({ userId }) {
 
   useEffect(() => {
     if (userId) {
+      console.log("userId", userId);
       dispatch(getUserById(userId));
     }
   }, [dispatch, userId]);

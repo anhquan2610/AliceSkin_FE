@@ -75,3 +75,28 @@ export const Infor = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const AuthorGroup = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: var(--s-1);
+`;
+
+export const AuthorName = styled.div`
+font-size: var(--fs-md);
+font-weight: var(--fw-semibold);
+
+`;
+
+export const AvatarContainer = styled.div``;
+
+export const Avatar = styled.img`
+border-radius: 50%;
+aspect-ratio: 1/1;
+width: 40px;
+height: 100%;
+overflow: hidden;
+object-fit: cover;
+border: 2px solid var(--gray);
+`;

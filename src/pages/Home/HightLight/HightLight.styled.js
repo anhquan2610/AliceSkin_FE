@@ -58,6 +58,30 @@ justify-content: space-between;
 align-items: center;
 `;
 
+export const AuthorGroup = styled.div`
+display: flex;
+flex-direction: row;
+gap: var(--s-1);
+align-items: center;
+`;
+
+export const AuthorName = styled.div`
+font-size: var(--fs-md);
+font-weight: var(--fw-semibold);
+`;
+
+export const AvatarContainer = styled.div``;
+
+export const Avatar = styled.img`
+border-radius: 50%;
+aspect-ratio: 1/1;
+width: 50px;
+height: 100%;
+overflow: hidden;
+object-fit: cover;
+border: 2px solid var(--gray);
+`;
+
 export const Title = styled.div`
 font-size: var(--fs-2xl);
 font-weight: var(--fw-semibold);

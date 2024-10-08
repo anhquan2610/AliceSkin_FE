@@ -1,5 +1,5 @@
 import * as S from "./ItemBlogPage.styled";
-import InfoUser from "../../../../../components/infoBlog/infoUser/infoUser";
+import Avatar from "../../../../../assets/images/AvaUser.png";
 import DateOfBlog from "../../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 
 export default function ItemBlogPage({ blog, navigate }) {
@@ -15,9 +15,12 @@ export default function ItemBlogPage({ blog, navigate }) {
         <S.Title>{blog.title}</S.Title>
         <S.Description>{blog.content}</S.Description>
         <S.AuthorBlog>
-          <S.Author>
-            <InfoUser userId={blog.user_id} />
-          </S.Author>
+          <S.AuthorContainer>
+            <S.AvatarContainer>
+              <S.Avatar src={Avatar} />
+            </S.AvatarContainer>
+            <S.AuthorName>{blog.user?.name}</S.AuthorName>
+          </S.AuthorContainer>
           <S.Date>
             <DateOfBlog date={blog.created_at} />
           </S.Date>
