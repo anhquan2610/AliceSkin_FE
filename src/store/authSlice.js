@@ -114,8 +114,25 @@ export const changePassword = createAsyncThunk(
       });
       return response.data; 
     } catch (error) {
-      // Trả về lỗi nếu có
       return rejectWithValue(error.response.data || 'An error occurred while changing the password');
+    }
+  }
+);
+
+//Update User
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async ({ id, userData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await instanceAxios.put(`/api/user/update/${id}`, userData, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+      return response.data; 
+    } catch (error) {
+      return rejectWithValue(error.response.data || 'An error occurred while updating user information');
     }
   }
 );
@@ -243,6 +260,20 @@ const authSlice = createSlice({
       state.errorMessage = action.payload;
     });
 
+    //Update User
+    builder.addCase(updateUser.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.user = { ...state.user, ...action.payload };
+    });
+    builder.addCase(updateUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.errorMessage = action.payload;
+    });
   },
 });
 
