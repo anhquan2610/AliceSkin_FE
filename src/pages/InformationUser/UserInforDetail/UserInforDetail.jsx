@@ -36,10 +36,10 @@ export default function UserInforDetail() {
           <S.Label>Phone :</S.Label>
           <S.Input disabled>{user.phone}</S.Input>
         </S.Group>
-        {/* <S.Group>
+        <S.Group>
           <S.Label>Address</S.Label>
           <S.Input disabled>{user.address}</S.Input>
-        </S.Group> */}
+        </S.Group>
         <S.Group>
           <S.Label>Dob :</S.Label>
           <S.Input disabled>{user.dob}</S.Input>
