@@ -62,9 +62,32 @@ export const AuthorBlog = styled.div`
   justify-content: space-between;
 `;
 
-export const Author = styled.div`
-  font-size: var(--fs-xs);
+export const AuthorContainer = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: var(--s-1);
 `;
+
+export const AvatarContainer = styled.div``;
+
+export const Avatar = styled.img`
+border-radius: 50%;
+aspect-ratio: 1;
+width: 40px;
+height: auto;
+overflow: hidden;
+object-fit: cover;
+border: 2px solid var(--gray);
+`;
+
+export const AuthorName = styled.div`
+  
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+`;
+
+
 
 export const Date = styled(DateContainer)`
   font-size: var(--fs-xs);

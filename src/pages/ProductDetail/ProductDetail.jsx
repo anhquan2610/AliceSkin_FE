@@ -7,11 +7,9 @@ import Footer from "../../components/Footer/Footer";
 export default function ProductDetail() {
   return (
     <>
-      <Navbar />
       <S.Container>
         <ProductInformation />
         <ProductReview />
-        <Footer />
       </S.Container>
     </>
   );

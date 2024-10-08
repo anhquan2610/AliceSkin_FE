@@ -3,6 +3,7 @@ import { instanceAxios } from "../axios/customAxios";
 
 const initialState = {
   blogs: [],
+  hashtags: [],
   isLoading: false,
   error: null,
   selectedBlog: '',
@@ -26,6 +27,12 @@ export const getBlogById = createAsyncThunk(
       }
     }
   );
+
+  // Get All Hashtags
+  export const getAllHashtags = createAsyncThunk("getAllHashtags", async () => {
+    const response = await instanceAxios.get("/api/hashtags");
+    return response.data;
+  });
 
 
 
@@ -56,6 +63,20 @@ const blogSlice = createSlice({
       state.selectedBlog = action.payload; //save information blog
     });
     builder.addCase(getBlogById.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+
+    //Get all hashtags
+    //Get information blog
+    builder.addCase(getAllHashtags.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllHashtags.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.blogs = action.payload;
+    });
+    builder.addCase(getAllHashtags.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error;
     });

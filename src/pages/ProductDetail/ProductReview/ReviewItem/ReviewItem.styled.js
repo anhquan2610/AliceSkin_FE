@@ -52,7 +52,7 @@ export const ReviewDate = styled.div`
 font-size: var(--fs-sm);
 font-style: italic;
 color: var(--dark-gray);
-margin-left: var(--s-8);
+margin-left: var(--s-10);
 `;
 
 export const EmailReviewer = styled.div`

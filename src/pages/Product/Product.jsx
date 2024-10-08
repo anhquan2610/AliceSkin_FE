@@ -7,7 +7,6 @@ import Filter from "./Filter/Filter";
 export default function Product() {
   return (
     <S.Container>
-      <Navbar />
       <S.ContainerOutlet>
         <S.TitleContainer>
           <S.Title>All Of Product</S.Title>
@@ -20,7 +19,6 @@ export default function Product() {
             <ListProduct />
           </S.RightContainer>
         </S.ProductContainer>
-        <Footer />
       </S.ContainerOutlet>
     </S.Container>
   );

@@ -24,7 +24,7 @@ export default function ReviewItem({ review }) {
         <S.InforeviewContainer>
           <S.Reviewer>{review.user?.name}</S.Reviewer>
           <S.ReviewDate>
-            {new Date(review.created_at).toLocaleDateString("en-GB")}
+            {new Date(review.created_at).toLocaleString("en-GB")}
           </S.ReviewDate>
         </S.InforeviewContainer>
         <S.EmailReviewer>{review.user?.email}</S.EmailReviewer>

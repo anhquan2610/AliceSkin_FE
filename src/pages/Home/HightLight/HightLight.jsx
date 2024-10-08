@@ -1,21 +1,25 @@
 import * as S from "./HightLight.styled";
-import TypeBlog from "../../../components/typeBlog/typeBlog";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllBlog } from "../../../store/blogSlice";
-import InfoUser from "../../../components/infoBlog/infoUser/infoUser";
 import DateOfBlog from "../../../components/infoBlog/dateOfBlog/dateOfBlog";
-
+import { useNavigate } from "react-router-dom";
+import Avatar from "../../../assets/images/AvaUser.png";
 
 export default function HightLight() {
   const dispatch = useDispatch();
   const { blogs, isLoading, error } = useSelector((state) => state.blog);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllBlog());
   }, [dispatch]);
 
-  const blog = blogs.length > 0 ? blogs[0] : null;
+  const handleBlogClick = () => {
+    navigate(`/blog/${blog.blog_id}`);
+  };
+
+  const blog = blogs[Math.floor(Math.random() * blogs.length)];
 
   if (isLoading) {
     return <p>Loading</p>;
@@ -28,15 +32,24 @@ export default function HightLight() {
   }
 
   return (
-    <S.Container>
+    <S.Container onClick={handleBlogClick}>
       <S.Image src={blog.thumbnail}></S.Image>
       <S.BoxTitle>
         <S.CongfigBox>
-          <TypeBlog />
+          <S.ContainerHashtags>
+            {blog.hashtags.map((hashtag, index) => (
+              <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
+            ))}
+          </S.ContainerHashtags>
           <S.Title>{blog.title}</S.Title>
           <S.Content>{blog.content}</S.Content>
           <S.AuthorContainer>
-            <InfoUser userId={blog.user_id} />
+            <S.AuthorGroup>
+              <S.AvatarContainer>
+                <S.Avatar src={Avatar}></S.Avatar>
+              </S.AvatarContainer>
+              <S.AuthorName>{blog.user?.name}</S.AuthorName>
+            </S.AuthorGroup>
             <DateOfBlog date={blog.created_at} />
           </S.AuthorContainer>
         </S.CongfigBox>

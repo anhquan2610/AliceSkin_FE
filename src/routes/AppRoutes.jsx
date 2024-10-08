@@ -8,6 +8,7 @@ import ResetPassword from "../pages/authPages/ForgotPassword/ResetPassword/Reset
 import Blog from "../pages/Blog/Blog";
 import Product from "../pages/Product/Product";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
+import { DefaultLayout } from "../layout/DefaultLayout";
 
 export default function AppRoutes() {
   return (
@@ -15,12 +16,14 @@ export default function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/home" element={<HomePage />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/resetpassword" element={<ResetPassword />} />
-      <Route path="/blog/:id" element={<Blog />} />
-      <Route path="/product" element={<Product />} />
-      <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/password/reset" element={<ResetPassword />} />
+      <Route path="/" element={<DefaultLayout />}>
+        <Route path="home" element={<HomePage />} />
+        <Route path="blog/:id" element={<Blog />} />
+        <Route path="product" element={<Product />} />
+        <Route path="product/:id" element={<ProductDetail />} />
+      </Route>
     </Routes>
   );
 }
