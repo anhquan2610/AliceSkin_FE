@@ -4,6 +4,7 @@ import { instanceAxios } from "../axios/customAxios";
 const initialState = {
   products: [],
   reviews: [],
+  totalReviews: 0,
   isLoading: false,
   error: null,
   selectedProduct: "",
@@ -54,6 +55,19 @@ export const addReview = createAsyncThunk(
     }
   }
 )
+
+//Get Total Review by Product ID
+export const getTotalReviewByProductId = createAsyncThunk(
+  "product/getTotalReviewByProductId",
+  async (product_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get(`/api/reviews/product/${product_id}/count`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const productSlice = createSlice({
   name: "product",
@@ -111,6 +125,19 @@ const productSlice = createSlice({
     builder.addCase(addReview.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error;
+    });
+
+    //Get total review by product ID
+    builder.addCase(getTotalReviewByProductId.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getTotalReviewByProductId.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.totalReviews = action.payload.total_reviews;
+    });
+    builder.addCase(getTotalReviewByProductId.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload.message;
     });
   },
 });

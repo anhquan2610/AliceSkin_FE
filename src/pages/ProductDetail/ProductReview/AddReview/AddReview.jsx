@@ -11,16 +11,15 @@ export default function AddReview() {
   const dispatch = useDispatch();
   const { isLoading, isError } = useSelector((state) => state.product);
   const { id: product_id } = useParams();
-  const user = useSelector((state) => state.auth.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const reviewData = { content, rate };
 
-    dispatch(addReview({ product_id, reviewData })).then(() => {
-      setContent("");
-      setRate(1);
-    });
+    dispatch(addReview({ product_id, reviewData }));
+
+    setContent("");
+    setRate(1);
   };
 
   const handleStarClick = (starValue) => {
@@ -31,7 +30,6 @@ export default function AddReview() {
     <S.Container onSubmit={handleSubmit}>
       <S.LeftContainer>
         <S.InputContainer>
-          <img src={user.image} />
           <S.InputReview
             value={content}
             onChange={(e) => setContent(e.target.value)}

@@ -9,18 +9,7 @@ export default function ReviewItem({ review }) {
         </S.ImageContainer>
       </S.LeftContainer>
       <S.RightContainer>
-        <S.RateNumber>
-          Rating: {review.rate}
-          <span
-            style={{
-              color: "var(--yellow)",
-              marginLeft: "var(--s-1)",
-              alignContent: "center",
-            }}
-          >
-            <i className="bi bi-star-fill"></i>
-          </span>
-        </S.RateNumber>
+        <S.RateNumber>Rating: {renderStars(review.rate)}</S.RateNumber>
         <S.InforeviewContainer>
           <S.Reviewer>{review.user?.name}</S.Reviewer>
           <S.ReviewDate>
@@ -33,3 +22,20 @@ export default function ReviewItem({ review }) {
     </S.Container>
   );
 }
+
+const renderStars = (rate) => {
+  return (
+    <span>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <i
+          key={star}
+          className={`bi bi-star${star <= rate ? "-fill" : ""}`}
+          style={{
+            color: star <= rate ? "var(--yellow)" : "var(--gray)",
+            marginRight: "var(--s-1)",
+          }}
+        ></i>
+      ))}
+    </span>
+  );
+};
