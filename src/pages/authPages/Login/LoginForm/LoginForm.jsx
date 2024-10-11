@@ -13,11 +13,22 @@ export default function LoginForm() {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password is too short - should be 8 chars minimum."),
   });
 
-  const handleLogin = (values) => {
-    dispatch(signIn(values));
+  const handleLogin = (values, { setSubmitting }) => {
+    dispatch(signIn(values))
+      .then((result) => {
+        console.log(result); // Xử lý thành công
+      })
+      .catch((error) => {
+        console.error("Login failed:", error); // Xử lý lỗi
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
   };
 
   useEffect(() => {

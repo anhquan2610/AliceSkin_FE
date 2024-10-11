@@ -9,12 +9,12 @@ export default function UpdateInformation() {
   const user = useSelector((state) => state.auth.user);
 
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    phone: user?.phone || "",
-    dob: user?.dob || "",
-    gender: user?.gender || "",
-    image: user?.image || "",
-    address: user?.address || "",
+    name: user.name || "",
+    phone: user.phone || "",
+    dob: user.dob || "",
+    gender: user.gender || "",
+    image: user.image || "",
+    address: user.address || "",
   });
 
   const handleChange = (e) => {

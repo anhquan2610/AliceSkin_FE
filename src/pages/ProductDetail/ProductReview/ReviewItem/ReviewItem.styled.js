@@ -18,7 +18,7 @@ aspect-ratio: 1/1;
 width: 50px;
 height: auto;
 object-fit: cover;
-overflow: visible;
+overflow: hidden;
 border-radius: 50%;
 `;
 

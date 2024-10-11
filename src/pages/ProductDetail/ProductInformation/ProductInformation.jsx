@@ -35,7 +35,9 @@ export default function ProductInformation() {
       <S.TopContainer>
         <S.NameProduct>
           Sản Phẩm:
-          <span style={{ fontWeight: "normal", marginLeft:'var(--s-3)' }}>{selectProduct.name}</span>
+          <span style={{ fontWeight: "normal", marginLeft: "var(--s-3)" }}>
+            {selectProduct.name}
+          </span>
         </S.NameProduct>
       </S.TopContainer>
       <S.BottomContainer>
@@ -50,13 +52,21 @@ export default function ProductInformation() {
             Capacity: {selectProduct.volume}
           </S.CapacityProduct>
           <S.StatusProduct>Status: {selectProduct.status}</S.StatusProduct>
+          <S.QuantityProduct>
+            Quantity: {selectProduct.quantity}
+          </S.QuantityProduct>
           <S.ButtonContainer>
             <S.BtnCount>
               <S.BtnDecrement onClick={handleDecrement} disabled={count <= 0}>
                 -
               </S.BtnDecrement>
               <S.Count>{count}</S.Count>
-              <S.BtnInCrement onClick={handleIncrement}>+</S.BtnInCrement>
+              <S.BtnInCrement
+                onClick={handleIncrement}
+                disabled={count >= selectProduct.quantity}
+              >
+                +
+              </S.BtnInCrement>
             </S.BtnCount>
             <S.BtnBuy>Buy</S.BtnBuy>
             <S.BtnAddToCart>
