@@ -54,8 +54,9 @@ font-size: var(--fs-lg);
 
 export const StatusProduct = styled.div`
 font-size: var(--fs-lg);
-
 `;
+
+export const QuantityProduct = styled.div``;
 
 export const ButtonContainer = styled.div`
 display: flex;
@@ -63,6 +64,7 @@ flex-direction: row;
 gap: var(--s-10);
 align-items: center;
 margin: var(--s-5) 0;
+justify-content: space-between;
 `;
 
 export const BtnCount = styled.div`
@@ -85,6 +87,7 @@ cursor: pointer;
 
 export const Count = styled.div`
 font-size: var(--fs-lg);
+padding: 0 var(--s-1);
 `;
 
 export const BtnInCrement = styled.button`

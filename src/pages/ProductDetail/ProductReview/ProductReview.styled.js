@@ -44,8 +44,10 @@ export const Description = styled.div``;
 export const ReviewContainer = styled.div`
 padding: var(--s-5) 0;
 display: flex;
-;
+
 `;
+
+export const AddReviewContainer = styled.div``;
 
 export const ReviewItemContainer = styled.div`
 flex: 6;

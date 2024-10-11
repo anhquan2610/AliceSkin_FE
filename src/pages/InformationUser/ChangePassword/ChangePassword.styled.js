@@ -10,10 +10,10 @@ export const ContainerHeader = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
   background-color: var(--green);
-  flex: 3;
+  flex: 2;
   color: var(--white);
   padding: var(--s-3) var(--s-2);
   text-align: center;
@@ -21,7 +21,7 @@ export const Title = styled.div`
 
 export const Divider = styled.div`
   border-bottom: 4px solid var(--green);
-  flex: 9;
+  flex: 10;
 `;
 
 export const ContainerContent = styled.form`

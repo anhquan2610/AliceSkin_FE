@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
+export const BigContainer = styled.div`
+padding: var(--s-5) var(--s-30);
+`;
+
 export const Container = styled.div`
 display: flex;
 flex-direction: column;
 flex-wrap: nowrap;
 border: 3px solid var(--gray);
-padding: var(--s-5) ;
+padding: var(--s-5);
 `;
 
 export const ContainerTop = styled.div`
