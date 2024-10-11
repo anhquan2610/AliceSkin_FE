@@ -5,16 +5,14 @@ import { fetchUserByToken } from "../../../store/authSlice";
 
 export default function UserInforDetail() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user); 
-  const loading = useSelector((state) => state.auth.isLoading); 
+  const user = useSelector((state) => state.auth.user);
+  const loading = useSelector((state) => state.auth.isLoading);
 
   useEffect(() => {
     dispatch(fetchUserByToken());
   }, [dispatch]);
 
-
-  if (loading) return <div>Loading...</div>;
-
+  if (loading) return <S.LoadingSpinner />;
 
   if (!user) return <div>No user data available</div>;
   return (
@@ -38,7 +36,7 @@ export default function UserInforDetail() {
         </S.Group>
         <S.Group>
           <S.Label>Address</S.Label>
-          <S.Input disabled>{user.address}</S.Input>
+          <S.Input disabled>{user.address || "No address available"}</S.Input>
         </S.Group>
         <S.Group>
           <S.Label>Dob :</S.Label>

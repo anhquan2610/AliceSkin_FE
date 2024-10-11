@@ -54,6 +54,7 @@ padding: var(--s-2);
 border-radius: var(--br-md);
 background-color: var(--light-gray-3);
 color: var(--black);
+font-size: var(--fs-md);
 `;
 
 export const Select = styled.select`

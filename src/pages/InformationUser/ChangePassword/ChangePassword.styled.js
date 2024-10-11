@@ -47,7 +47,8 @@ export const Label = styled.div`
 export const Input = styled.input`
   border: 2px solid var(--gray);
   width: 100%;
-  padding: var(--s-3);
+  font-size: var(--fs-md);
+  padding: var(--s-2);
   border-radius: var(--br-md);
   background-color: var(--light-gray-3);
   color: var(--black);

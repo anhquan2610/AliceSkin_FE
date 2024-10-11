@@ -3,15 +3,17 @@ import { instanceAxios } from "../axios/customAxios";
 
 const initialState = {
   blogs: [],
+  blogsUser: [],
   hashtags: [],
   isLoading: false,
   error: null,
   selectedBlog: '',
+  isSuccess: false,
 };
 
-// Get Information Blog
+// Get All  Blog
 export const getAllBlog = createAsyncThunk("getAllBlog", async () => {
-  const response = await instanceAxios.get("/api/blogs");
+  const response = await instanceAxios.get("/api/blogs/published");
   return response.data;
 });
 
@@ -33,6 +35,32 @@ export const getBlogById = createAsyncThunk(
     const response = await instanceAxios.get("/api/hashtags");
     return response.data;
   });
+
+  //Create Blog
+  export const createBlog = createAsyncThunk(
+    "createBlog",
+    async (blogData, { rejectWithValue }) => {
+      try {
+        const response = await instanceAxios.post("/api/blogs", blogData);
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  //GetUserBlog
+  export const GetUserBlog = createAsyncThunk(
+    "GetUserBlog", 
+    async (_, {rejectWithValue}) => {
+      try {
+        const response = await instanceAxios.get("/api/my-blogs");
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
 
 
 
@@ -68,7 +96,6 @@ const blogSlice = createSlice({
     });
 
     //Get all hashtags
-    //Get information blog
     builder.addCase(getAllHashtags.pending, (state) => {
       state.isLoading = true;
     });
@@ -79,6 +106,33 @@ const blogSlice = createSlice({
     builder.addCase(getAllHashtags.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error;
+    });
+
+    //Create blog
+    builder.addCase(createBlog.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createBlog.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.blogs.push(action.payload);
+    });
+    builder.addCase(createBlog.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+
+    //Get user blog
+    builder.addCase(GetUserBlog.pending, (state) => {
+      state.isLoading = true;
+    }); 
+    builder.addCase(GetUserBlog.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.blogsUser = action.payload;
+    });
+    builder.addCase(GetUserBlog.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload.message;
     });
   },
 });
