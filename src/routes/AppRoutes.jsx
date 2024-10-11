@@ -10,7 +10,7 @@ import Product from "../pages/Product/Product";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import { DefaultLayout } from "../layout/DefaultLayout";
 import InformationUser from "../pages/InformationUser/InformationUser";
- 
+import CreateBlog from "../pages/CreateBlog/CreateBlog";
 
 export default function AppRoutes() {
   return (
@@ -26,6 +26,7 @@ export default function AppRoutes() {
         <Route path="product" element={<Product />} />
         <Route path="product/:id" element={<ProductDetail />} />
         <Route path="infor-user/" element={<InformationUser />} />
+        <Route path="AddBlog/" element={<CreateBlog />} />
       </Route>
     </Routes>
   );

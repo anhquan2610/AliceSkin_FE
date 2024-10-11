@@ -21,7 +21,7 @@ export default function HightLight() {
   const blog = blogs[Math.floor(Math.random() * blogs.length)];
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <S.LoadingSpinner />;
   }
   if (error) {
     return <p>Error: {error.message}</p>;
