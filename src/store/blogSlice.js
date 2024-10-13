@@ -7,8 +7,9 @@ const initialState = {
   hashtags: [],
   isLoading: false,
   error: null,
-  selectedBlog: '',
+  selectedBlog: "",
   isSuccess: false,
+  message: "",
 };
 
 // Get All  Blog
@@ -44,7 +45,7 @@ export const getBlogById = createAsyncThunk(
         const response = await instanceAxios.post("/api/blogs", blogData);
         return response.data;
       } catch (error) {
-        return rejectWithValue(error.response.data);
+        return rejectWithValue(error.response.data.message);
       }
     }
   );
@@ -67,7 +68,14 @@ export const getBlogById = createAsyncThunk(
 const blogSlice = createSlice({
   name: "blog",
   initialState,
-  reducers: {},
+  reducers: {
+    resetBlogState (state) {
+      state.isLoading = false;
+      state.error = null;
+      state.message = "";
+      state.isSuccess = false;
+    }
+  },
   extraReducers: (builder) => {
     //Get information blog
     builder.addCase(getAllBlog.pending, (state) => {
@@ -111,15 +119,19 @@ const blogSlice = createSlice({
     //Create blog
     builder.addCase(createBlog.pending, (state) => {
       state.isLoading = true;
+      
     });
     builder.addCase(createBlog.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.blogs.push(action.payload);
+      state.message = "Create blog successfully";
     });
     builder.addCase(createBlog.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error;
+      state.isSuccess = false;
+      state.message = action.payload;
+      state.error = action.payload.message;
     });
 
     //Get user blog
@@ -137,4 +149,6 @@ const blogSlice = createSlice({
   },
 });
 
+
+export const { resetBlogState } = blogSlice.actions;
 export default blogSlice;

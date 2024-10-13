@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
+// Keyframe cho hiệu ứng mở (từ phải ra)
 const slideInRight = keyframes`
   from {
     transform: translateX(100%);
@@ -11,6 +12,7 @@ const slideInRight = keyframes`
   }
 `;
 
+// Keyframe cho hiệu ứng đóng (từ trái vào)
 const slideOutLeft = keyframes`
   from {
     transform: translateX(0);
@@ -25,25 +27,28 @@ const slideOutLeft = keyframes`
 // Container cho Popup, định vị góc trên phải
 export const PopupContainer = styled.div`
   position: fixed;
-  top: var(--s-3);
-  right: var(--s-2);
+  top: 20px;
+  right: 20px;
   background: var(--green);
   color: var(--white);
-  padding: var(--s-3);
-  border-radius: var(--br-md);
-  box-shadow: var(--shadow-2);
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   display: flex;
-  flex-direction: column;
-  gap: var(--s-3);
+  align-items: center;
+  justify-content: space-between;
   width: 300px;
-  max-width: 90%; 
-  animation: ${(props) => (props.isClosing ? slideOutLeft : slideInRight)} 1s forwards;
-  ${(props) => props.isClosing && `opacity: 0;`}
-  
+  animation: ${(props) => (props.isClosing ? slideOutLeft : slideInRight)} 0.5s forwards;
 
-  word-wrap: break-word; 
+  // Chỉ khi dùng animation slideOutLeft (khi đóng), ta sẽ làm cho container này biến mất hẳn sau khi kết thúc animation
+  ${(props) => props.isClosing && `opacity: 0;`}
 `;
 
-
-
+// Nút đóng
+export const CloseButton = styled.button`
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+`;

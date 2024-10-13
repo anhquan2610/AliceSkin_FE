@@ -2,30 +2,47 @@ import * as S from "./CreateBlog.styled";
 import YoungMan from "../../assets/images/young man with laptop on chair.png";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createBlog } from "../../store/blogSlice";
+import { createBlog, resetBlogState } from "../../store/blogSlice";
 import { useNavigate } from "react-router-dom";
+import Popup from "../../components/Popup/Popup";
 
 export default function CreateBlog() {
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [hasTags, setHasTags] = useState("");
   const [content, setContent] = useState("");
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const dispatch = useDispatch();
-  const { isLoading, isSuccess } = useSelector((state) => state.blog);
+  const { isLoading, isSuccess, message } = useSelector((state) => state.blog);
   const navigate = useNavigate();
 
-  // Điều hướng khi tạo blog thành công
+  useEffect(() => {
+    dispatch(resetBlogState());
+  }, [dispatch]);
+
   useEffect(() => {
     if (isSuccess) {
-      navigate("/infor-user"); // Điều hướng về trang thông tin người dùng
+      setIsPopupOpen(true);
+      const timer = setTimeout(() => {
+        navigate("/user-info");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    } else if (message) {
+      setIsPopupOpen(true);
+    } else {
+      setIsPopupOpen(false);
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, message, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const blogData = { title, thumbnail, hasTags, content };
-    dispatch(createBlog(blogData));
+    dispatch(createBlog(blogData)); // Gửi yêu cầu tạo blog
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
   };
 
   return (
@@ -92,6 +109,11 @@ export default function CreateBlog() {
           {isLoading ? "Creating..." : "Create Blog"}
         </S.BtnSubmit>
       </S.ButtonContainer>
+
+      {/* Popup thông báo khi tạo thành công */}
+      <Popup isOpen={isPopupOpen} duration={3000} onClose={handlePopupClose}>
+        {message}
+      </Popup>
     </S.Container>
   );
 }

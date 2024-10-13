@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import * as S from "./Popup.styled"; // Styled-components cho Popup
+import * as S from "./Popup.styled";
 
-const Popup = ({ isOpen, children, duration = 3000 }) => {
+const Popup = ({ isOpen, children, duration = 3000, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
-      // Reset trạng thái đóng khi mở lại Popup
       setIsClosing(false);
       const timer = setTimeout(() => {
         handleClose();
@@ -15,6 +14,17 @@ const Popup = ({ isOpen, children, duration = 3000 }) => {
       return () => clearTimeout(timer);
     }
   }, [isOpen, duration]);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      if (onClose) {
+        onClose();
+      }
+    }, 1000); 
+  };
+
+  if (!isOpen && !isClosing) return null; 
 
   return <S.PopupContainer isClosing={isClosing}>{children}</S.PopupContainer>;
 };

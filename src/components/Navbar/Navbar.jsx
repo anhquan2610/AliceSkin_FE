@@ -66,7 +66,7 @@ export default function Navbar() {
           horizontal: "right",
         }}
       >
-        <S.StyledLink to="/infor-user">
+        <S.StyledLink to="/user-info">
           <MenuItem onClick={handleCloseMenu}>My Account</MenuItem>
         </S.StyledLink>
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>
