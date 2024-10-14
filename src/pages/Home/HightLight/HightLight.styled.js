@@ -114,3 +114,20 @@ export const LoadingSpinner = styled.div`
   animation: ${spin} 0.5s linear infinite;
   margin: 0 auto;
   `;
+
+export const LikeContainer = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: var(--s-1) ;
+justify-content: flex-end;
+`;
+
+export const IconLike = styled.div`
+font-size: var(--fs-xl);
+color: var(--blue);
+`;
+
+export const CountLike = styled.div`
+font-size: var(--fs-xl);
+`;

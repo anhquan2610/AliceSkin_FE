@@ -51,6 +51,12 @@ export default function HightLight() {
             </S.AuthorGroup>
             <DateOfBlog date={blog.created_at} />
           </S.AuthorContainer>
+          <S.LikeContainer>
+          <S.IconLike>
+            <i className="bi bi-hand-thumbs-up-fill"></i>
+          </S.IconLike>
+          <S.CountLike>{blog.like}</S.CountLike>
+        </S.LikeContainer>
         </S.CongfigBox>
       </S.BoxTitle>
     </S.Container>

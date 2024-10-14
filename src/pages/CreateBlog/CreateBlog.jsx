@@ -9,7 +9,7 @@ import Popup from "../../components/Popup/Popup";
 export default function CreateBlog() {
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState("");
-  const [hasTags, setHasTags] = useState("");
+  const [hashtags, setHashTags] = useState("");
   const [content, setContent] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const dispatch = useDispatch();
@@ -26,11 +26,11 @@ export default function CreateBlog() {
     } else if (message) {
       setIsPopupOpen(true);
     }
-  }, [isSuccess, message, navigate]);
+  }, [isSuccess, message]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blogData = { title, thumbnail, hasTags, content };
+    const blogData = { title, thumbnail, hashtags, content };
     dispatch(createBlog(blogData));
   };
 
@@ -74,8 +74,8 @@ export default function CreateBlog() {
             <S.Input
               type="text"
               placeholder="HasTags"
-              value={hasTags}
-              onChange={(e) => setHasTags(e.target.value.split(","))}
+              value={hashtags}
+              onChange={(e) => setHashTags(e.target.value.split(","))}
             />
           </S.Group>
         </S.LeftTopContainer>

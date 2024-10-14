@@ -29,6 +29,12 @@ export default function ItemBlog({ blog, navigate }) {
           </S.AuthorGroup>
           <DateOfBlog date={blog.created_at} />
         </S.Infor>
+        <S.LikeContainer>
+          <S.IconLike>
+            <i className="bi bi-hand-thumbs-up-fill"></i>
+          </S.IconLike>
+          <S.CountLike>{blog.like}</S.CountLike>
+        </S.LikeContainer>
       </S.ContentContainer>
     </S.Container>
   );

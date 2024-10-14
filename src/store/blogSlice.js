@@ -8,7 +8,7 @@ const initialState = {
   comments: [],
   isLoading: false,
   error: null,
-  selectedBlog: "",
+  selectedBlog: {},
   isSuccess: false,
   message: "",
 };
@@ -70,6 +70,32 @@ export const getBlogById = createAsyncThunk(
     async (blog_id, { rejectWithValue }) => {
       try {
         const response = await instanceAxios.get(`/api/comments/blogs/${blog_id}`);
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  //Like for blog
+  export const likeByBlogId = createAsyncThunk(
+    "blog/likeByBlogId",
+    async (blog_id, { rejectWithValue }) => {
+      try {
+        const response = await instanceAxios.post(`/api/blogs/like/${blog_id}`);
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  //Update Blog By User
+  export const updateBlogByUser = createAsyncThunk(
+    "blog/updateBlogByUser",
+    async ({ blog_id, blogData }, { rejectWithValue }) => {
+      try {
+        const response = await instanceAxios.put(`/api/blogs/${blog_id}`, blogData);
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);
@@ -173,6 +199,37 @@ const blogSlice = createSlice({
     builder.addCase(getCommentByBlogId.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+    });
+
+    //Like for blog
+    builder.addCase(likeByBlogId.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(likeByBlogId.fulfilled, (state, action) => {
+      state.isLoading = false;
+      if(state.selectedBlog && state.selectedBlog.blog_id === action.payload.blog_id) {
+        state.selectedBlog.like = action.payload.like;
+      }
+    }); 
+    builder.addCase(likeByBlogId.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+
+    //Update Blog By User
+    builder.addCase(updateBlogByUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateBlogByUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.message = "Blog updated successfully";
+      state.selectedBlog = action.payload;
+    });
+    builder.addCase(updateBlogByUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload.message;
+      state.error = action.payload; 
     });
   },
 });

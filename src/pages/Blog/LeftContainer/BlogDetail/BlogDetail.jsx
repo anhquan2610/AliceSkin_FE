@@ -5,13 +5,17 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getBlogById } from "../../../../store/blogSlice";
+import { getBlogById, likeByBlogId } from "../../../../store/blogSlice";
 
 export default function BlogDetail() {
   const { id: blogId } = useParams();
   const dispatch = useDispatch();
 
   const selectBlog = useSelector((state) => state.blog.selectedBlog);
+
+  const handleLike = () => {
+    dispatch(likeByBlogId(blogId));
+  };
 
   useEffect(() => {
     dispatch(getBlogById(blogId));
@@ -38,7 +42,7 @@ export default function BlogDetail() {
           ))}
         </S.ContainerHashtags>
         <S.LikeGroup>
-          <S.HeartIcon>
+          <S.HeartIcon onClick={handleLike}>
             <i className="bi bi-heart"></i>
           </S.HeartIcon>
           <S.HeartCount>{selectBlog.like}</S.HeartCount>
