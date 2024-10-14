@@ -7,7 +7,7 @@ import ChangePassword from "./ChangePassword/ChangePassword";
 import MyBlog from "./MyBlog/MyBlog";
 
 export default function InformationUser() {
-  const [currentLayout, setCurrentLayout] = useState("form"); // Layout mặc định
+  const [currentLayout, setCurrentLayout] = useState("form"); 
 
   const switchToForm = () => setCurrentLayout("form");
   const switchToUpdate = () => setCurrentLayout("update");

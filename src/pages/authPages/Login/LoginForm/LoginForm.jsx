@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginForm.styled.js";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../../../store/authSlice.js";
+import { resetAuthState, signIn } from "../../../../store/authSlice.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Popup from "../../../../components/Popup/Popup.jsx";
@@ -23,13 +23,9 @@ export default function LoginForm() {
   });
 
   const handleLogin = (values, { setSubmitting }) => {
-    dispatch(signIn(values))
-      .then((result) => {
-        console.log(result);
-      })
-      .finally(() => {
-        setSubmitting(false);
-      });
+    dispatch(signIn(values)).finally(() => {
+      setSubmitting(false);
+    });
   };
 
   useEffect(() => {

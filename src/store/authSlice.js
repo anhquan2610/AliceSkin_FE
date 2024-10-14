@@ -20,7 +20,7 @@ export const signUp = createAsyncThunk(
       const response = await instanceAxios.post("/api/register", user);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -171,6 +171,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.errorMessage = action.payload;
+      state.message = action.payload;
     });
 
     //Login
@@ -204,11 +205,13 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
       state.errorMessage = action.payload;
+      state.message = action.payload.message;
     });
     builder.addCase(forgotPassword.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.errorMessage = action.payload;
+      state.message = action.payload.message;
     });
 
     //Reset Password

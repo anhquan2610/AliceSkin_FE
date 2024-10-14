@@ -7,7 +7,7 @@ import { GetUserBlog } from "../../../store/blogSlice";
 
 export default function MyBlog() {
   const dispatch = useDispatch();
-  const { blogsUser, isLoading } = useSelector((state) => state.blog);
+  const { blogsUser, isLoading, message } = useSelector((state) => state.blog);
 
   useEffect(() => {
     dispatch(GetUserBlog());
@@ -30,9 +30,11 @@ export default function MyBlog() {
       </S.SearchContainer>
       <S.ItemBlogContainer>
         {isLoading && <S.LoadingSpinner />}
-        {blogsUser.map((blog) => (
-          <MyBlogItem key={blog.blog_id} blog={blog} />
-        ))}
+        {!isLoading && blogsUser && blogsUser.length > 0 ? (
+          blogsUser.map((blog) => <MyBlogItem key={blog.blog_id} blog={blog} />)
+        ) : (
+          <S.Message>{message}</S.Message>
+        )}
       </S.ItemBlogContainer>
     </S.Container>
   );

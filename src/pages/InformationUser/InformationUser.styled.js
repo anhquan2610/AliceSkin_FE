@@ -19,7 +19,9 @@ export const Middle = styled.div`
   display: flex;
 `;
 
-export const NavButton = styled.button`
+export const NavButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['isSelected'].includes(prop),
+})`
   background-color: var(--white);
   color: ${(props) => (props.isSelected ? "var(--green)" : "var(--black)")};
   padding: var(--s-3) var(--s-3);

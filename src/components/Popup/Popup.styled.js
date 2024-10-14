@@ -39,10 +39,10 @@ export const PopupContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 300px;
-  animation: ${(props) => (props.isClosing ? slideOutLeft : slideInRight)} 0.5s forwards;
+  animation: ${(props) => (props['data-is-closing'] ? slideOutLeft : slideInRight)} 0.5s forwards;
 
   // Chỉ khi dùng animation slideOutLeft (khi đóng), ta sẽ làm cho container này biến mất hẳn sau khi kết thúc animation
-  ${(props) => props.isClosing && `opacity: 0;`}
+  /* ${(props) => props.closing && `opacity: 0;`} */
 `;
 
 // Nút đóng
