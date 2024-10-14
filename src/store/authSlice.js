@@ -257,14 +257,17 @@ const authSlice = createSlice({
       state.isLoading = true;
       state.isError = false;
     });
-    builder.addCase(changePassword.fulfilled, (state) => {
+    builder.addCase(changePassword.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
+      state.message = action.payload.message;
     });
     builder.addCase(changePassword.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
+      state.isSuccess = false;
       state.errorMessage = action.payload;
+      state.message = action.payload.message;
     });
 
     //Update User

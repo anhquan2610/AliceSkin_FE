@@ -24,15 +24,14 @@ export const Divider = styled.div`
   flex: 10;
 `;
 
-export const ContainerContent = styled.form`
+export const ContainerContent = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   padding: var(--s-5) var(--s-40);
+  width: 100%;
 `;
 
 export const Group = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--s-1);
@@ -46,7 +45,6 @@ export const Label = styled.div`
 
 export const Input = styled.input`
   border: 2px solid var(--gray);
-  width: 100%;
   font-size: var(--fs-md);
   padding: var(--s-2);
   border-radius: var(--br-md);
@@ -84,4 +82,10 @@ export const ButtonSave = styled.button`
     color: var(--green);
     border: 1px solid var(--green);
   }
+`;
+
+export const ErrorMessageStyled = styled.div`
+  color: red; 
+  font-size: var(--fs-sm); 
+  margin-top: var(--s-2); 
 `;
