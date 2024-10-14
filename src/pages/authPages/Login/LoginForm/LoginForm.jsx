@@ -1,15 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginForm.styled.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../../../store/authSlice.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Popup from "../../../../components/Popup/Popup.jsx";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, token } = useSelector((state) => state.auth);
+  const { isLoading, token, message, isSuccess, isError } = useSelector(
+    (state) => state.auth
+  );
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -21,10 +25,7 @@ export default function LoginForm() {
   const handleLogin = (values, { setSubmitting }) => {
     dispatch(signIn(values))
       .then((result) => {
-        console.log(result); // Xử lý thành công
-      })
-      .catch((error) => {
-        console.error("Login failed:", error); // Xử lý lỗi
+        console.log(result);
       })
       .finally(() => {
         setSubmitting(false);
@@ -32,10 +33,21 @@ export default function LoginForm() {
   };
 
   useEffect(() => {
+    if (isError) {
+      setIsPopupOpen(true);
+    }
+  }, [isError]);
+
+  useEffect(() => {
     if (token) {
       navigate("/home");
     }
   }, [token, navigate]);
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+    dispatch(resetAuthState());
+  };
 
   return (
     <S.Container>
@@ -80,6 +92,9 @@ export default function LoginForm() {
               <S.BtnLogin type="submit" disabled={isSubmitting || isLoading}>
                 {isLoading ? "Logging in..." : "Login"}
               </S.BtnLogin>
+              <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
+                {message}
+              </Popup>
             </S.ContainerForm>
           </Form>
         )}

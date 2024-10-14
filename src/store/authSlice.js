@@ -182,6 +182,7 @@ const authSlice = createSlice({
 
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.isLoading = false;
+      state.isSuccess = true;
       state.user = action.payload.user;
       state.token = action.payload.access_token;
     });
@@ -190,6 +191,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.errorMessage = action.payload;
+      state.message = action.payload.message;
     });
 
     //Forgot Password
