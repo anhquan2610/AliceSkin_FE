@@ -26,23 +26,21 @@ export default function CreateBlog() {
       const timer = setTimeout(() => {
         navigate("/user-info");
       }, 3000);
-
       return () => clearTimeout(timer);
     } else if (message) {
       setIsPopupOpen(true);
-    } else {
-      setIsPopupOpen(false);
     }
   }, [isSuccess, message, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const blogData = { title, thumbnail, hasTags, content };
-    dispatch(createBlog(blogData)); // Gửi yêu cầu tạo blog
+    dispatch(createBlog(blogData));
   };
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);
+    dispatch(resetBlogState());
   };
 
   return (
@@ -110,8 +108,8 @@ export default function CreateBlog() {
         </S.BtnSubmit>
       </S.ButtonContainer>
 
-      {/* Popup thông báo khi tạo thành công */}
-      <Popup isOpen={isPopupOpen} duration={3000} onClose={handlePopupClose}>
+      {/* Popup thông báo */}
+      <Popup isOpen={isPopupOpen}   duration={3000} onClose={handlePopupClose}>
         {message}
       </Popup>
     </S.Container>

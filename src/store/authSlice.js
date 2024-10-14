@@ -10,6 +10,7 @@ const initialState = {
   isError: false,
   errorMessage: "",
   isSuccess: false,
+  message: "",
 };
 //Sign Up User
 export const signUp = createAsyncThunk(
@@ -132,7 +133,7 @@ export const updateUser = createAsyncThunk(
       });
       return response.data; 
     } catch (error) {
-      return rejectWithValue(error.response.data || 'An error occurred while updating user information');
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -147,6 +148,12 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem("token");
     },
+    resetAuthState: (state) => { 
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.message = "";
+      state.isError = false;
+    } 
   },
   extraReducers: (builder) => {
     //Register
@@ -269,6 +276,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
       state.user = { ...state.user, ...action.payload };
+      state.message = action.payload.message;
     });
     builder.addCase(updateUser.rejected, (state, action) => {
       state.isLoading = false;
@@ -278,6 +286,6 @@ const authSlice = createSlice({
 });
 
 
-export const { logout } = authSlice.actions;
+export const { logout, resetAuthState } = authSlice.actions;
 
 export default authSlice;

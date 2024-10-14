@@ -12,9 +12,17 @@ export default function UserInforDetail() {
     dispatch(fetchUserByToken());
   }, [dispatch]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const year = date.getUTCFullYear();
+
+    return `${day}-${month}-${year} `;
+  };
+
   if (loading) return <S.LoadingSpinner />;
 
-  if (!user) return <div>No user data available</div>;
   return (
     <S.Container>
       <S.HeaderContainer>
@@ -46,6 +54,9 @@ export default function UserInforDetail() {
           <S.Label>Gender :</S.Label>
           <S.Input disabled>{user.gender}</S.Input>
         </S.Group>
+        <S.InforUpdate>
+          Last Update : {formatDate(user.updated_at)}
+        </S.InforUpdate>
       </S.ContentContainer>
     </S.Container>
   );

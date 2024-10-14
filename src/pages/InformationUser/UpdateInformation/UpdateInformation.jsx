@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./UpdateInformation.styled";
-import { useState } from "react";
-import { updateUser } from "../../../store/authSlice";
+import { useEffect, useState } from "react";
+import { resetAuthState, updateUser } from "../../../store/authSlice";
+import Popup from "../../../components/Popup/Popup";
 
 export default function UpdateInformation() {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.auth.isLoading);
   const user = useSelector((state) => state.auth.user);
+  const { message, isLoading, isSuccess } = useSelector((state) => state.auth);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     name: user.name || "",
@@ -28,6 +30,34 @@ export default function UpdateInformation() {
     e.preventDefault();
     dispatch(updateUser({ id: user.id, userData: formData }));
   };
+
+  useEffect(() => {
+    dispatch(resetAuthState());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsPopupOpen(true);
+    }
+  }, [isSuccess]);
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+    window.location.reload();
+    dispatch(resetAuthState());
+  };
+
+  const isFormChanged = () => {
+    return (
+      formData.name !== user.name ||
+      formData.phone !== user.phone ||
+      formData.dob !== user.dob ||
+      formData.gender !== user.gender ||
+      formData.image !== user.image ||
+      formData.address !== user.address
+    );
+  };
+
   return (
     <S.Container>
       <S.HeaderContainer>
@@ -93,10 +123,13 @@ export default function UpdateInformation() {
             onChange={handleChange}
           />
         </S.Group>
-        <S.ButtonSave type="submit" disabled={loading}>
-          {loading ? "Updating..." : "Update User"}
+        <S.ButtonSave type="submit" disabled={!isFormChanged()}>
+          {isLoading ? "Updating..." : "Update User"}
         </S.ButtonSave>
       </S.ContentContainer>
+      <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
+        {message}
+      </Popup>
     </S.Container>
   );
 }
