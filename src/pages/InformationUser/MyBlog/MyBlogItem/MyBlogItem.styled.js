@@ -25,6 +25,20 @@ export const MiddleContainer = styled.div`
 flex: 8;
 `;
 
+export const IconEdit = styled.div`
+justify-content: flex-end;
+display: flex;
+font-size: var(--fs-xl);
+color: var(--gray);
+cursor: pointer;
+&:hover {
+    color: var(--green);
+}
+&.disabled { 
+    display: none;
+  }
+`;
+
 export const TitleBlog = styled.div`
 font-size: var(--fs-md);
   font-weight: var(--fw-semibold);

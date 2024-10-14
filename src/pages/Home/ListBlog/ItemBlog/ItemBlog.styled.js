@@ -100,3 +100,20 @@ overflow: hidden;
 object-fit: cover;
 border: 2px solid var(--gray);
 `;
+
+export const LikeContainer = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: var(--s-1) ;
+justify-content: flex-end;
+`;
+
+export const IconLike = styled.div`
+font-size: var(--fs-xl);
+color: var(--blue);
+`;
+
+export const CountLike = styled.div`
+font-size: var(--fs-xl);
+`;
