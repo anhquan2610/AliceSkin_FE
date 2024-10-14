@@ -36,15 +36,16 @@ export default function UpdateInformation() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && message) {
       setIsPopupOpen(true);
     }
-  }, [isSuccess]);
+  }, [isSuccess, message]);
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);
-    window.location.reload();
     dispatch(resetAuthState());
+    // Reload lại trang sau khi Popup đóng
+    window.location.reload();
   };
 
   const isFormChanged = () => {

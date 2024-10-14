@@ -79,6 +79,12 @@ flex-direction: column;
 gap: var(--s-3);
 `;
 
+export const Message = styled.div`
+display: flex;
+justify-content: center;
+color: var(--gray);
+`;
+
 const spin = keyframes`
   0% {
     transform: rotate(0deg);
