@@ -23,10 +23,6 @@ export default function CreateBlog() {
   useEffect(() => {
     if (isSuccess) {
       setIsPopupOpen(true);
-      const timer = setTimeout(() => {
-        navigate("/user-info");
-      }, 3000);
-      return () => clearTimeout(timer);
     } else if (message) {
       setIsPopupOpen(true);
     }
@@ -41,6 +37,9 @@ export default function CreateBlog() {
   const handlePopupClose = () => {
     setIsPopupOpen(false);
     dispatch(resetBlogState());
+    if (isSuccess) {
+      navigate("/user-info");
+    }
   };
 
   return (
@@ -109,7 +108,7 @@ export default function CreateBlog() {
       </S.ButtonContainer>
 
       {/* Popup thông báo */}
-      <Popup isOpen={isPopupOpen}   duration={3000} onClose={handlePopupClose}>
+      <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
         {message}
       </Popup>
     </S.Container>
