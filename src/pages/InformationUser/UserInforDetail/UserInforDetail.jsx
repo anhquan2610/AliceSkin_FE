@@ -32,30 +32,30 @@ export default function UserInforDetail() {
       <S.ContentContainer>
         <S.Group>
           <S.Label>Name :</S.Label>
-          <S.Input disabled>{user.name}</S.Input>
+          <S.Input disabled>{user?.name}</S.Input>
         </S.Group>
         <S.Group>
           <S.Label>Email :</S.Label>
-          <S.Input disabled>{user.email}</S.Input>
+          <S.Input disabled>{user?.email}</S.Input>
         </S.Group>
         <S.Group>
           <S.Label>Phone :</S.Label>
-          <S.Input disabled>{user.phone}</S.Input>
+          <S.Input disabled>{user?.phone}</S.Input>
         </S.Group>
         <S.Group>
           <S.Label>Address</S.Label>
-          <S.Input disabled>{user.address || "No address available"}</S.Input>
+          <S.Input disabled>{user?.address || "No address available"}</S.Input>
         </S.Group>
         <S.Group>
           <S.Label>Dob :</S.Label>
-          <S.Input disabled>{user.dob}</S.Input>
+          <S.Input disabled>{user?.dob}</S.Input>
         </S.Group>
         <S.Group>
           <S.Label>Gender :</S.Label>
-          <S.Input disabled>{user.gender}</S.Input>
+          <S.Input disabled>{user?.gender}</S.Input>
         </S.Group>
         <S.InforUpdate>
-          Last Update : {formatDate(user.updated_at)}
+          Last Update : {formatDate(user?.updated_at)}
         </S.InforUpdate>
       </S.ContentContainer>
     </S.Container>
