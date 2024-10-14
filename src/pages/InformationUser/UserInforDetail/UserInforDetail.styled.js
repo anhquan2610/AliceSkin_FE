@@ -72,3 +72,9 @@ export const LoadingSpinner = styled.div`
   animation: ${spin} 0.5s linear infinite;
   margin: 0 auto;
   `;
+
+export const InforUpdate = styled.div`
+font-size: var(--fs-sm);
+font-style: italic;
+color: var(--dảk-brown);
+`;

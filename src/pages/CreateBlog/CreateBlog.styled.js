@@ -108,6 +108,7 @@ export const ButtonContainer = styled.div`
 display: flex;
 justify-content: center;
 margin-top: var(--s-10);
+
 `;
 
 export const BtnSubmit = styled.button`

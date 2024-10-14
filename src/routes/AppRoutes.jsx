@@ -25,7 +25,7 @@ export default function AppRoutes() {
         <Route path="blog/:id" element={<Blog />} />
         <Route path="product" element={<Product />} />
         <Route path="product/:id" element={<ProductDetail />} />
-        <Route path="infor-user/" element={<InformationUser />} />
+        <Route path="user-info/" element={<InformationUser />} />
         <Route path="AddBlog/" element={<CreateBlog />} />
       </Route>
     </Routes>

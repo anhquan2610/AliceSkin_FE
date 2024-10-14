@@ -98,4 +98,14 @@ export const ButtonSave = styled.button`
     color: var(--green);
     border: 1px solid var(--green);
   }
+  &:disabled {
+    background-color: var(--gray); 
+    color: var(--black); 
+    cursor: not-allowed; 
+    opacity: 0.6; 
+    
+    &::before {
+      display: none; 
+    }
+  }
 `
