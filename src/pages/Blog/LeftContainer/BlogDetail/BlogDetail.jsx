@@ -41,7 +41,7 @@ export default function BlogDetail() {
           <S.HeartIcon>
             <i className="bi bi-heart"></i>
           </S.HeartIcon>
-          <S.HeartCount>10</S.HeartCount>
+          <S.HeartCount>{selectBlog.like}</S.HeartCount>
         </S.LikeGroup>
       </S.ContainerType>
       <S.ContentContainer>

@@ -23,7 +23,7 @@ export default function ForgotPassword() {
     if (isSuccess || isError) {
       setIsPopupOpen(true);
     }
-  });
+  }, [isSuccess, isError]);
 
   const handleCancel = () => {
     navigate("/login");
@@ -57,7 +57,6 @@ export default function ForgotPassword() {
           <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
             {message}
           </Popup>
-          
         </S.ContainerForm>
       </S.ContainerMiddle>
       <S.ContainerRight />

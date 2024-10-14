@@ -29,7 +29,7 @@ export const getProductById = createAsyncThunk(
   }
 );
 
-//Ger Review by Product ID
+//Get Review by Product ID
 export const getReviewByProductId = createAsyncThunk(
   "product/getReviewByProductId",
   async (product_id, { rejectWithValue }) => {

@@ -5,6 +5,7 @@ const initialState = {
   blogs: [],
   blogsUser: [],
   hashtags: [],
+  comments: [],
   isLoading: false,
   error: null,
   selectedBlog: "",
@@ -56,6 +57,19 @@ export const getBlogById = createAsyncThunk(
     async (_, {rejectWithValue}) => {
       try {
         const response = await instanceAxios.get("/api/my-blogs");
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  //Get Commnet by Blog ID
+  export const getCommentByBlogId = createAsyncThunk(
+    "blog/getCommentByBlogId",
+    async (blog_id, { rejectWithValue }) => {
+      try {
+        const response = await instanceAxios.get(`/api/comments/blogs/${blog_id}`);
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);
@@ -134,7 +148,7 @@ const blogSlice = createSlice({
       state.error = action.payload.message;
     });
 
-    //Get user blog
+    //Get blog  user
     builder.addCase(GetUserBlog.pending, (state) => {
       state.isLoading = true;
     }); 
@@ -146,6 +160,19 @@ const blogSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload.message;
       state.message = action.payload.message; 
+    });
+
+    //Get comment by blog ID
+    builder.addCase(getCommentByBlogId.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCommentByBlogId.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.comments = action.payload;
+    });
+    builder.addCase(getCommentByBlogId.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     });
   },
 });
