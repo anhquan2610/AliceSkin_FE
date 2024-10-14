@@ -221,14 +221,16 @@ const authSlice = createSlice({
       state.errorMessage = "";
       state.isSuccess = false;
     });
-    builder.addCase(resetPassword.fulfilled, (state) => {
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
+      state.message = action.payload.message;
     });
     builder.addCase(resetPassword.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.errorMessage = action.payload;
+      state.message = action.payload.message;
     });
 
     //Get User by Id

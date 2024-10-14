@@ -32,7 +32,7 @@ export const Description = styled.div`
   margin-bottom: var(--s-4);
 `;
 
-export const ContainerForm = styled.form`
+export const ContainerForm = styled.div`
   background-color: var(--light-gray-2);
   display: flex;
   flex-direction: column;
@@ -85,4 +85,10 @@ export const BtnCancel = styled.button`
   font-size: var(--fs-md);
   cursor: pointer;
   box-shadow: var(--shadow-4);
+`;
+
+export const ErrorMessageStyled = styled.div`
+  color: red; 
+  font-size: var(--fs-sm); 
+  margin-top: var(--s-2); 
 `;

@@ -1,36 +1,64 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import * as S from "./ResetPassword.styled";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPassword } from "../../../../store/authSlice";
+import { resetAuthState, resetPassword } from "../../../../store/authSlice";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import Popup from "../../../../components/Popup/Popup";
+import { useEffect, useState } from "react";
 
 export default function ResetPassword() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  const { isLoading } = useSelector((state) => state.auth);
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Validation schema using Yup
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .required("New password is required"),
+    passwordConfirmation: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Password confirmation is required"),
+  });
+
+  const handleSubmit = (values, { setSubmitting }) => {
     dispatch(
       resetPassword({
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
+        email: values.email,
+        password: values.password,
+        password_confirmation: values.passwordConfirmation,
         token,
       })
-    ).then((result) => {
-      if (result.type === "auth/resetPassword/fulfilled") {
-        navigate("/login");
-      }
+    ).then(() => {
+      setSubmitting(false);
     });
   };
+
+  useEffect(() => {
+    if (isSuccess || isError) {
+      setIsPopupOpen(true);
+    }
+  }, [isSuccess, isError]);
+
   const handleCancel = () => {
     navigate("/forgotpassword");
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+    if (isSuccess) {
+      navigate("/login");
+    }
+    dispatch(resetAuthState());
   };
 
   return (
@@ -42,42 +70,73 @@ export default function ResetPassword() {
           Please enter your new password twice so we can verify that you typed
           it in correctly
         </S.Description>
-        <S.ContainerForm onSubmit={handleSubmit}>
-          <S.Group>
-            <S.Label>Email</S.Label>
-            <S.Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Enter Your Email"
-            />
-          </S.Group>
-          <S.Group>
-            <S.Label>New Password</S.Label>
-            <S.Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder="Enter Your New Password"
-              required
-              minLength="8"
-            />
-          </S.Group>
-          <S.Group>
-            <S.Label>Confirm Password</S.Label>
-            <S.Input
-              value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
-              type="password"
-              placeholder="Enter Your New Password Again"
-              required
-              minLength="8"
-            />
-          </S.Group>
-          <S.BtnUpdate type="submit">
-            {isLoading ? "Updating..." : "Update Password"}
-          </S.BtnUpdate>
-          <S.BtnCancel onClick={handleCancel}>Cancel</S.BtnCancel>
+        <S.ContainerForm>
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+              passwordConfirmation: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <S.Group>
+                  <S.Label>Email</S.Label>
+                  <Field
+                    name="email"
+                    type="email"
+                    as={S.Input}
+                    placeholder="Enter Your Email"
+                  />
+                  <ErrorMessage name="email" component={S.ErrorMessageStyled} />
+                </S.Group>
+
+                <S.Group>
+                  <S.Label>New Password</S.Label>
+                  <Field
+                    name="password"
+                    type="password"
+                    as={S.Input}
+                    placeholder="Enter Your New Password"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component={S.ErrorMessageStyled}
+                  />
+                </S.Group>
+
+                <S.Group>
+                  <S.Label>Confirm Password</S.Label>
+                  <Field
+                    name="passwordConfirmation"
+                    type="password"
+                    as={S.Input}
+                    placeholder="Enter Your New Password Again"
+                  />
+                  <ErrorMessage
+                    name="passwordConfirmation"
+                    component={S.ErrorMessageStyled}
+                  />
+                </S.Group>
+                <S.Group>
+                  <S.BtnUpdate
+                    type="submit"
+                    disabled={isSubmitting || isLoading}
+                  >
+                    {isLoading ? "Updating..." : "Update Password"}
+                  </S.BtnUpdate>
+                  <S.BtnCancel type="button" onClick={handleCancel}>
+                    Cancel
+                  </S.BtnCancel>
+                </S.Group>
+                <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
+                  {message}
+                </Popup>
+              </Form>
+            )}
+          </Formik>
         </S.ContainerForm>
       </S.ContainerMiddle>
       <S.ContainerRight />
