@@ -69,7 +69,20 @@ export const getBlogById = createAsyncThunk(
     "blog/getCommentByBlogId",
     async (blog_id, { rejectWithValue }) => {
       try {
-        const response = await instanceAxios.get(`/api/comments/blogs/${blog_id}`);
+        const response = await instanceAxios.get(`/api/comments/blog/${blog_id}`);
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  //Create Comment by Blog ID
+  export const addComment = createAsyncThunk(
+    "blog/addComment",
+    async ({ blog_id, commentData }, { rejectWithValue }) => {
+      try {
+        const response = await instanceAxios.post(`/api/comments/blog/${blog_id}`, commentData);
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);
@@ -117,7 +130,7 @@ const blogSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    //Get information blog
+    //Get information blog---------------------------------------------
     builder.addCase(getAllBlog.pending, (state) => {
       state.isLoading = true;
     });
@@ -130,7 +143,7 @@ const blogSlice = createSlice({
       state.error = action.error;
     });
 
-    //Get blog by ID
+    //Get blog by ID---------------------------------------------
     builder.addCase(getBlogById.pending, (state) => {
       state.isLoading = true;
     });
@@ -143,7 +156,7 @@ const blogSlice = createSlice({
       state.error = action.error;
     });
 
-    //Get all hashtags
+    //Get all hashtags---------------------------------------------
     builder.addCase(getAllHashtags.pending, (state) => {
       state.isLoading = true;
     });
@@ -156,7 +169,7 @@ const blogSlice = createSlice({
       state.error = action.error;
     });
 
-    //Create blog
+    //Create blog---------------------------------------------
     builder.addCase(createBlog.pending, (state) => {
       state.isLoading = true;
       
@@ -174,7 +187,7 @@ const blogSlice = createSlice({
       state.error = action.payload.message;
     });
 
-    //Get blog  user
+    //Get blog  user---------------------------------------------
     builder.addCase(GetUserBlog.pending, (state) => {
       state.isLoading = true;
     }); 
@@ -188,7 +201,7 @@ const blogSlice = createSlice({
       state.message = action.payload.message; 
     });
 
-    //Get comment by blog ID
+    //Get comment by blog ID---------------------------------------------
     builder.addCase(getCommentByBlogId.pending, (state) => {
       state.isLoading = true;
     });
@@ -201,7 +214,20 @@ const blogSlice = createSlice({
       state.error = action.payload;
     });
 
-    //Like for blog
+    //Create Comment by Blog ID---------------------------------------------
+    builder.addCase(addComment.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addComment.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.comments.push(action.payload);
+    });
+    builder.addCase(addComment.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+
+    //Like for blog---------------------------------------------
     builder.addCase(likeByBlogId.pending, (state) => {
       state.isLoading = true;
     });
@@ -216,7 +242,7 @@ const blogSlice = createSlice({
       state.error = action.payload;
     });
 
-    //Update Blog By User
+    //Update Blog By User---------------------------------------------
     builder.addCase(updateBlogByUser.pending, (state) => {
       state.isLoading = true;
     });

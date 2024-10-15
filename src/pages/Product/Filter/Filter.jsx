@@ -1,38 +1,29 @@
-import * as S from "./Filter.styled";
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormLabel,
+} from "@mui/material";
 
-export default function Filter() {
+export default function PriceFilter({ priceFilter, onPriceFilterChange }) {
   return (
-    <S.Container>
-        <S.Header>
-            <S.Title>Filter</S.Title>
-        </S.Header>
-        <S.FilterGroup>
-            <S.TypeFilter>Category</S.TypeFilter>
-                <S.Filter />
-                <S.Filter />
-                <S.Filter />
-                <S.Filter />
-                <S.Filter /> 
-        </S.FilterGroup>
-        <S.Divider />
-        <S.FilterGroup>
-            <S.TypeFilter>Category</S.TypeFilter>
-                <S.Filter />
-                <S.Filter />
-                <S.Filter />
-                <S.Filter />
-                <S.Filter /> 
-        </S.FilterGroup>
-        <S.Divider /> 
-        <S.FilterGroup>
-            <S.TypeFilter>Category</S.TypeFilter>
-                <S.Filter />
-                <S.Filter />
-                <S.Filter />
-                <S.Filter />
-                <S.Filter /> 
-        </S.FilterGroup>
-        <S.Divider />    
-    </S.Container>
-        )
+    <FormControl component="fieldset">
+      <FormLabel component="legend">Filter by Price: </FormLabel>
+      <RadioGroup value={priceFilter} onChange={onPriceFilterChange}>
+        <FormControlLabel value="none" control={<Radio />} label="None" />{" "}
+        <FormControlLabel value="0-50" control={<Radio />} label="0$ - 50$" />
+        <FormControlLabel
+          value="50-100"
+          control={<Radio />}
+          label="50$ - 100$"
+        />
+        <FormControlLabel
+          value="100-150"
+          control={<Radio />}
+          label="100$ - 150$"
+        />
+      </RadioGroup>
+    </FormControl>
+  );
 }

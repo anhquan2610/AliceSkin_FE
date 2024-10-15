@@ -22,8 +22,8 @@ export default function Comment() {
         <S.Divider></S.Divider>
       </S.TitleContainer>
       <S.CommentContainer>
-        {comments.map((comment) => (
-          <S.BoxComment key={comment.comment_id}>
+        {comments.map((comment, index) => (
+          <S.BoxComment key={comment.comment_id || index}>
             <CommentItem comment={comment} />
           </S.BoxComment>
         ))}

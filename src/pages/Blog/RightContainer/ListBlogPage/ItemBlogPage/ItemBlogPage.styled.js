@@ -38,11 +38,26 @@ export const ContainerContent = styled.div`
 export const Title = styled.div`
   font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
-  margin: var(--s-2) 0;
+  margin: var(--s-1) 0;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+`;
+
+export const ContainerHashtags = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: var(--s-1);
+`;
+
+export const Hashtag = styled.div`
+  color: var(--white);
+  padding: var(--s-1);
+  margin: var(--s-1) 0;
+  background-color: var(--green-fresh);
+  border-radius: var(--br-md);
+  font-size: var(--fs-xs);
 `;
 
 export const Description = styled.div`
