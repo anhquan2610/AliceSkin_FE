@@ -36,7 +36,8 @@ margin-bottom: var(--s-3);
 
 export const SearchInput = styled.input`
 border: 2px solid var(--gray);
-padding: var(--s-1) var(--s-1);
+padding: var(--s-1) var(--s-2);
+border-radius: var(--br-lg);
 `;
 
 export const BtnCreateBlog = styled.button`
@@ -103,3 +104,4 @@ export const LoadingSpinner = styled.div`
   animation: ${spin} 0.5s linear infinite;
   margin: 0 auto;
   `;
+

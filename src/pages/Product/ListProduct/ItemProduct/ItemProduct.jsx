@@ -13,31 +13,17 @@ export default function ItemProduct({ product, navigate }) {
       </S.ContainerImage>
       <S.ContentContainer>
         <S.HashtagProduct>
-          <TypeProduct />
+          <S.TypeProduct>{product.nature}</S.TypeProduct>
         </S.HashtagProduct>
         <S.ReviewContainer>
-          <S.RateStar>
-            {product.rating}
-            <S.Star>
-              <i className="bi bi-star-fill"></i>
-            </S.Star>
-            <S.Star>
-              <i className="bi bi-star-fill"></i>
-            </S.Star>
-            <S.Star>
-              <i className="bi bi-star-fill"></i>
-            </S.Star>
-            <S.Star>
-              <i className="bi bi-star-fill"></i>
-            </S.Star>
-            <S.Star>
-              <i className="bi bi-star-fill"></i>
-            </S.Star>
-          </S.RateStar>
+          <S.RateStar>Rating: {product.rating} / 5.0</S.RateStar>
         </S.ReviewContainer>
         <S.ProductName>{product.name}</S.ProductName>
         <S.Description>{product.description}</S.Description>
-        <S.PriceProduct>{product.price}$</S.PriceProduct>
+        <S.PriceProduct>
+          <S.Price>{product.price}$</S.Price>
+          <S.DiscountPrice>{product.discounted_price}$</S.DiscountPrice>
+        </S.PriceProduct>
       </S.ContentContainer>
     </S.Container>
   );

@@ -34,7 +34,7 @@ export default function ListBlogPage() {
           onChange={(e) => setSearch(e.target.value)}
         />
         <S.SearchIcon>
-          <i class="bi bi-search"></i>
+          <i className="bi bi-search"></i>
         </S.SearchIcon>
       </S.SearchContainer>
       <S.ListBlog>

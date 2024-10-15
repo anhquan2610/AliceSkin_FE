@@ -39,6 +39,14 @@ export const HashtagProduct = styled.div`
   gap: var(--s-2);
 `;
 
+export const TypeProduct = styled.div`
+font-size: var(--fs-sm);
+  color: var(--white);
+  background-color: var(--green);
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--br-sm);
+`;
+
 export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -47,17 +55,15 @@ export const ReviewContainer = styled.div`
 `;
 
 export const RateStar = styled.div`
-  direction: rtl;
-  unicode-bidi: bidi-override;
-  display: inline-block;
   flex-direction: row;
   display: flex;
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
 `;
 
 export const Star = styled.div`
   font-size: var(--fs-md);
   color: var(--yellow);
-  transition: color 0.2s;
   
 `;
 
@@ -71,7 +77,7 @@ export const ProductName = styled.div`
   font-weight: var(--fw-semibold);
   font-size: var(--fs-lg);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
@@ -86,5 +92,19 @@ export const Description = styled.div`
 `;
 
 export const PriceProduct = styled.div`
+display: flex;
+flex-direction: row;
+gap: var(--s-2);
+align-items: baseline;
+`;
+
+export const Price = styled.div`
+text-decoration: line-through;
+font-size: var(--fs-sm);
+
+`;
+
+export const DiscountPrice = styled.div`
 font-weight: var(--fw-semibold);
+color: var(--red);
 `;

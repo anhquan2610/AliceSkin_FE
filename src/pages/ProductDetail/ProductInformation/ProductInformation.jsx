@@ -47,7 +47,13 @@ export default function ProductInformation() {
           </S.ImageContainer>
         </S.LeftContainer>
         <S.RightContainer>
-          <S.PriceProduct>{selectProduct.price}$</S.PriceProduct>
+          <S.PriceProduct>
+            <S.Price>{selectProduct.price}$</S.Price>
+            <S.DiscountPrice>{selectProduct.discounted_price}$</S.DiscountPrice>
+            <S.DiscountDescription>
+              Discount {Math.round(selectProduct.discount)}%
+            </S.DiscountDescription>
+          </S.PriceProduct>
           <S.CapacityProduct>
             Capacity: {selectProduct.volume}
           </S.CapacityProduct>

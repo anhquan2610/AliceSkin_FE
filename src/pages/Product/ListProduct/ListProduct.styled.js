@@ -1,23 +1,45 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div``;
 
 export const HeaderContainer = styled.div`
 display: flex;
 flex-direction: row;
-justify-content: space-between;
 margin-bottom: var(--s-4);
 `;
 
 export const TotalProduct = styled.div`
 font-size: var(--fs-md);
 font-weight: var(--fw-semibold);
+flex: 4;
+`;
+
+export const SearchContainer = styled.div`
+margin-bottom: var(--s-3);
+display: flex;
+flex-direction: row;
+align-items: center;
+border-radius: var(--br-lg);
+border: 2px solid var(--gray);
+padding: var(--s-1) var(--s-2);
+flex: 4;
+`;
+
+export const SearchInput = styled.input`
+font-size: var(--fs-md);
+width: 100%;
+
+`;
+
+export const SearchIcon = styled.div`
+
 `;
 
 export const FilterContainer = styled.div`
 display: flex;
-flex-direction: row;
+justify-content: flex-end;
 gap: var(--s-2);
+flex: 4;
 `;
 
 export const TextFilter = styled.div`

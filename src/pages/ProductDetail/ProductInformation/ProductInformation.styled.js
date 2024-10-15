@@ -43,9 +43,30 @@ gap: var(--s-3);
 `;
 
 export const PriceProduct = styled.div`
-color: var(--red);
-font-size: var(--fs-2xl);
+display: flex;
+flex-direction: row;
+gap: var(--s-2);
+align-items: baseline;
+`;
+
+export const Price = styled.div`
+text-decoration: line-through;
+font-size: var(--fs-md);
+`;
+
+export const DiscountPrice = styled.div`
 font-weight: var(--fw-semibold);
+font-size: var(--fs-2xl);
+color: var(--red);
+`;
+
+export const DiscountDescription = styled.div`
+background-color: var(--light-gray-3);
+color: var(--);
+padding: var(--s-2) var(--s-2);
+color: var(--black);
+border-radius: var(--br-md);
+box-shadow: var(--shadow-3);
 `;
 
 export const CapacityProduct = styled.div`
