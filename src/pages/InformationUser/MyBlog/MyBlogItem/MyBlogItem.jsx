@@ -9,10 +9,14 @@ export default function MyBlogItem({ blog }) {
         <S.ImageBlog src={blog.thumbnail} />
       </S.LeftContainer>
       <S.MiddleContainer>
-        <div>{blog.blog_id}</div>
         <S.TitleBlog>{blog.title}</S.TitleBlog>
+        <S.HashtagBlog>
+          {blog.hashtags.map((hashtag, index) => (
+            <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
+          ))}
+        </S.HashtagBlog>
         <S.ContentBlog>{blog.content}</S.ContentBlog>
-        <S.HashtagBlog>{blog.hashtags}</S.HashtagBlog>
+
         <Link
           to={{
             pathname: `/UpdateBlog/${blog.blog_id}`,

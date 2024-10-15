@@ -8,7 +8,27 @@ export const Container = styled.div`
 
 export const TitleContainer = styled.div`
 display: flex;
-margin-bottom: var(--s-5);
+margin-bottom: var(--s-3);
+`;
+
+export const SearchContainer = styled.div`
+margin-bottom: var(--s-3);
+display: flex;
+flex-direction: row;
+align-items: center;
+border-radius: var(--br-lg);
+border: 2px solid var(--gray);
+padding: var(--s-1) var(--s-2);
+`;
+
+export const SearchInput = styled.input`
+font-size: var(--fs-md);
+width: 100%;
+
+`;
+
+export const SearchIcon = styled.div`
+
 `;
 
 export const Title = styled.div`

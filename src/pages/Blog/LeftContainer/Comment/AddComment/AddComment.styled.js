@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.form``;
 
 export const LabelComment = styled.div`
 border: 2px solid var(--gray);

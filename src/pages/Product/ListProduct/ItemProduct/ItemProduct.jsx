@@ -17,6 +17,7 @@ export default function ItemProduct({ product, navigate }) {
         </S.HashtagProduct>
         <S.ReviewContainer>
           <S.RateStar>
+            {product.rating}
             <S.Star>
               <i className="bi bi-star-fill"></i>
             </S.Star>
@@ -33,7 +34,6 @@ export default function ItemProduct({ product, navigate }) {
               <i className="bi bi-star-fill"></i>
             </S.Star>
           </S.RateStar>
-          <S.RateNumber>12 Reviews</S.RateNumber>
         </S.ReviewContainer>
         <S.ProductName>{product.name}</S.ProductName>
         <S.Description>{product.description}</S.Description>

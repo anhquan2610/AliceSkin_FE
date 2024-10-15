@@ -1,5 +1,5 @@
 import * as S from "./ItemBlogPage.styled";
-import Avatar from "../../../../../assets/images/AvaUser.png";
+
 import DateOfBlog from "../../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 
 export default function ItemBlogPage({ blog, navigate }) {
@@ -13,6 +13,11 @@ export default function ItemBlogPage({ blog, navigate }) {
       </S.ContainerImage>
       <S.ContainerContent>
         <S.Title>{blog.title}</S.Title>
+        <S.ContainerHashtags>
+          {blog.hashtags.map((hashtag, index) => (
+            <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
+          ))}
+        </S.ContainerHashtags>
         <S.Description>{blog.content}</S.Description>
         <S.AuthorBlog>
           <S.AuthorContainer>

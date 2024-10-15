@@ -42,7 +42,7 @@ cursor: pointer;
 export const TitleBlog = styled.div`
 font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
-  margin: var(--s-2) 0;
+  margin: var(--s-1) 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -59,7 +59,20 @@ export const ContentBlog = styled.div`
   overflow: hidden;
 `;
 
-export const HashtagBlog = styled.div``;
+export const HashtagBlog = styled.div`
+ display: flex;
+  flex-direction: row;
+  gap: var(--s-1);
+`;
+
+export const Hashtag = styled.div`
+  color: var(--white);
+  margin: var(--s-1) 0;
+  padding: var(--s-1);
+  background-color: var(--green-fresh);
+  border-radius: var(--br-md);
+  font-size: var(--fs-sm);
+`;
 
 export const RightContainer = styled.div`
 flex: 2;
