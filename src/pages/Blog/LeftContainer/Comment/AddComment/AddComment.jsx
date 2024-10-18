@@ -20,16 +20,16 @@ export default function AddComment() {
     <S.Container onSubmit={handleSubmit}>
       <S.LabelComment>
         <S.Text> Comment</S.Text>
-        <S.CommentInput
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Write content here"
-        />
-        <S.BtnContainer>
-        <S.BtnSend type="submit" disabled={isLoading || !content}>
-          {isLoading ? "Loading..." : "Send"}
-        </S.BtnSend>
-        </S.BtnContainer>
+        <S.ContentContainer>
+          <S.CommentInput
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Write content here"
+          />
+          <S.BtnSend type="submit" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Send"}
+          </S.BtnSend>
+        </S.ContentContainer>
       </S.LabelComment>
     </S.Container>
   );

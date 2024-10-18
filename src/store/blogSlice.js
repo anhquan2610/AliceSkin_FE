@@ -11,6 +11,9 @@ const initialState = {
   selectedBlog: {},
   isSuccess: false,
   message: "",
+  user:{
+    
+  }
 };
 
 // Get All  Blog
@@ -83,6 +86,32 @@ export const getBlogById = createAsyncThunk(
     async ({ blog_id, commentData }, { rejectWithValue }) => {
       try {
         const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, commentData);
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  //Update Commnet by User
+  export const updateCommentByUser = createAsyncThunk(
+    "blog/updateCommentByUser",
+    async ({ blog_id, comment_id, commentData }, { rejectWithValue }) => {
+      try {
+        const response = await instanceAxios.put(`/api/blogs/${blog_id}/comments/${comment_id}`, commentData);
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  //Delete Comment by User
+  export const deleteCommentByUser = createAsyncThunk(
+    "blog/deleteCommentByUser",
+    async ({ blog_id, comment_id }, { rejectWithValue }) => {
+      try {
+        const response = await instanceAxios.delete(`/api/blogs/${blog_id}/comments/${comment_id}`);
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);
@@ -225,6 +254,39 @@ const blogSlice = createSlice({
     builder.addCase(addComment.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+    });
+
+    //Update Comment by User---------------------------------------------
+    builder.addCase(updateCommentByUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateCommentByUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      const updatedComment = action.payload;
+      state.comments = state.comments.map((comment) =>
+        comment.comment_id === updatedComment.comment_id ? updatedComment : comment
+      );
+    });
+    builder.addCase(updateCommentByUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action
+      state.message = action.payload.message;
+    });
+
+    //Delete Comment By User---------------------------------------------
+    builder.addCase(deleteCommentByUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteCommentByUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.comments = state.comments.filter((comment) => comment.comment_id !== action.meta.arg.comment_id);
+    });
+    builder.addCase(deleteCommentByUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      state.message = action.payload.message;
     });
 
     //Like for blog---------------------------------------------

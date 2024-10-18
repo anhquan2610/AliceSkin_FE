@@ -95,9 +95,8 @@ const cartSlice = createSlice({
     });
     //Remove Item From Cart--------------------------------------
     builder.addCase(removeItemFromCart.fulfilled, (state, action) => {
-         if (!state.cart.items) return;
-      const itemId = action.meta.arg; // Lấy id của sản phẩm cần xóa
-      state.cart.items = state.cart.items.filter((item) => item.id !== itemId);
+      if (!state.cart.items) return;
+      state.cart.items = state.cart.items.filter((item) => item.id !== action.meta.arg.item.id);
 
     });
   },
