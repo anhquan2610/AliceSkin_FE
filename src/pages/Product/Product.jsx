@@ -1,4 +1,3 @@
-
 import * as S from "./Product.styled";
 import ListProduct from "./ListProduct/ListProduct";
 import Filter from "./Filter/Filter";
@@ -18,7 +17,10 @@ export default function Product() {
         </S.TitleContainer>
         <S.ProductContainer>
           <S.LeftContainer>
-            <Filter priceFilter={price} onPriceFilterChange={handlePriceChange} />
+            <Filter
+              priceFilter={price}
+              onPriceFilterChange={handlePriceChange}
+            />
           </S.LeftContainer>
           <S.RightContainer>
             <ListProduct priceFilter={price} />

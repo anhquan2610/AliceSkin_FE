@@ -25,9 +25,11 @@ export default function AddComment() {
           onChange={(e) => setContent(e.target.value)}
           placeholder="Write content here"
         />
-        <S.BtnSend type="submit" disabled={isLoading}>
+        <S.BtnContainer>
+        <S.BtnSend type="submit" disabled={isLoading || !content}>
           {isLoading ? "Loading..." : "Send"}
         </S.BtnSend>
+        </S.BtnContainer>
       </S.LabelComment>
     </S.Container>
   );

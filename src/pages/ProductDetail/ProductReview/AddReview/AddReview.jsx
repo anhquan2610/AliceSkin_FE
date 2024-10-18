@@ -9,7 +9,7 @@ export default function AddReview() {
   const [rate, setRate] = useState(1);
 
   const dispatch = useDispatch();
-  const { isLoading, isError } = useSelector((state) => state.product);
+  const { isLoading } = useSelector((state) => state.product);
   const { id: product_id } = useParams();
 
   const handleSubmit = (e) => {
@@ -62,7 +62,6 @@ export default function AddReview() {
         </S.RateAndBtnContainer>
       </S.LeftContainer>
       <S.RightContainer />
-      {isError && <p>{isError}</p>}
     </S.Container>
   );
 }

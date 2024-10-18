@@ -9,7 +9,7 @@ export default function ReviewItem({ review }) {
         </S.ImageContainer>
       </S.LeftContainer>
       <S.RightContainer>
-        <S.RateNumber>Rating: {renderStars(review.rate)}</S.RateNumber>
+        <S.RateNumber>{renderStars(review.rate)}</S.RateNumber>
         <S.InforeviewContainer>
           <S.Reviewer>{review.user?.name}</S.Reviewer>
           <S.ReviewDate>

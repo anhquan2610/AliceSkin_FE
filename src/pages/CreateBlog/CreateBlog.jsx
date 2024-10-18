@@ -3,41 +3,62 @@ import YoungMan from "../../assets/images/young man with laptop on chair.png";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createBlog, resetBlogState } from "../../store/blogSlice";
+import { uploadImage, resetImageState } from "../../store/imageSlice";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup/Popup";
 
 export default function CreateBlog() {
   const [title, setTitle] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
   const [hashtags, setHashTags] = useState("");
   const [content, setContent] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const dispatch = useDispatch();
-  const { isLoading, isSuccess, message } = useSelector((state) => state.blog);
+  const {
+    isLoading: isBlogLoading,
+    isSuccess: isBlogSuccess,
+    message: blogMessage,
+  } = useSelector((state) => state.blog);
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(resetBlogState());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isSuccess) {
+    if (isBlogSuccess) {
       setIsPopupOpen(true);
-    } else if (message) {
+    } else if (blogMessage) {
       setIsPopupOpen(true);
     }
-  }, [isSuccess, message]);
+  }, [isBlogSuccess, blogMessage]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blogData = { title, thumbnail, hashtags, content };
-    dispatch(createBlog(blogData));
+
+    if (thumbnail) {
+      dispatch(uploadImage(thumbnail))
+        .then((result) => {
+          if (uploadImage.fulfilled.match(result)) {
+            const blogData = {
+              title,
+              thumbnail: result.payload,
+              hashtags,
+              content,
+            };
+            dispatch(createBlog(blogData));
+          }
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+    } else {
+      const blogData = { title, hashtags, content };
+      dispatch(createBlog(blogData));
+    }
   };
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);
     dispatch(resetBlogState());
-    if (isSuccess) {
+    dispatch(resetImageState());
+    if (isBlogSuccess) {
       navigate("/user-info");
     }
   };
@@ -64,9 +85,9 @@ export default function CreateBlog() {
             <S.Label>Image :</S.Label>
             <S.Input
               placeholder="Content"
-              type="url"
-              value={thumbnail}
-              onChange={(e) => setThumbnail(e.target.value)}
+              type="file"
+              accept="image/*"
+              onChange={(e) => setThumbnail(e.target.files[0])}
             />
           </S.Group>
           <S.Group>
@@ -102,14 +123,14 @@ export default function CreateBlog() {
         </S.RightBottomContainer>
       </S.BottomContainer>
       <S.ButtonContainer>
-        <S.BtnSubmit type="submit" disabled={isLoading}>
-          {isLoading ? "Creating..." : "Create Blog"}
+        <S.BtnSubmit type="submit" disabled={isBlogLoading}>
+          {isBlogLoading ? "Creating..." : "Create Blog"}
         </S.BtnSubmit>
       </S.ButtonContainer>
 
       {/* Popup thông báo */}
       <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-        {message}
+        {blogMessage}
       </Popup>
     </S.Container>
   );

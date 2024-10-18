@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../../store/productSlice";
 import { getAllShipping } from "../../../store/shippingSlice";
+import { addItemToCart } from "../../../store/cartSlice";
 
 export default function ProductInformation() {
   const [count, setCount] = useState(0);
@@ -27,6 +28,14 @@ export default function ProductInformation() {
   const handleDecrement = () => {
     if (count > 0) {
       setCount(count - 1);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (count > 0) {
+      dispatch(addItemToCart({ productId, quantity: count }));
+    } else {
+      alert("Please select quantity");
     }
   };
 
@@ -75,7 +84,7 @@ export default function ProductInformation() {
               </S.BtnInCrement>
             </S.BtnCount>
             <S.BtnBuy>Buy</S.BtnBuy>
-            <S.BtnAddToCart>
+            <S.BtnAddToCart onClick={handleAddToCart}>
               Add to Cart <span></span>
               <i className="bi bi-cart"></i>
             </S.BtnAddToCart>

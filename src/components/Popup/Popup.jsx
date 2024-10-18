@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Popup.styled";
 
-const Popup = ({ isOpen, children, duration = 2000, onClose }) => {
+const Popup = ({ isOpen, children, duration = 1500, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
@@ -26,7 +26,9 @@ const Popup = ({ isOpen, children, duration = 2000, onClose }) => {
 
   if (!isOpen && !isClosing) return null;
 
-  return <S.PopupContainer data-is-closing={isClosing}>{children}</S.PopupContainer>;
+  return (
+    <S.PopupContainer data-is-closing={isClosing}>{children}</S.PopupContainer>
+  );
 };
 
 export default Popup;

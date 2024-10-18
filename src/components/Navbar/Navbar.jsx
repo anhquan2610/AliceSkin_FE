@@ -46,9 +46,11 @@ export default function Navbar() {
         <S.NavItem>Contact</S.NavItem>
       </S.NavList>
       <S.Group>
-        <S.ShoppingCart>
-          <i className="bi bi-bag" />
-        </S.ShoppingCart>
+        <S.StyledLink to="/Shopping_Cart">
+          <S.ShoppingCart>
+            <i className="bi bi-bag" />
+          </S.ShoppingCart>
+        </S.StyledLink>
         <S.Profile onClick={handlUserClick}>
           <i className="bi bi-person" />
         </S.Profile>
@@ -66,7 +68,7 @@ export default function Navbar() {
           horizontal: "right",
         }}
       >
-        <S.StyledLink to="/user-info">
+        <S.StyledLink to="/user_info">
           <MenuItem onClick={handleCloseMenu}>My Account</MenuItem>
         </S.StyledLink>
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>

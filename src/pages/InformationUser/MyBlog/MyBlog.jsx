@@ -21,7 +21,7 @@ export default function MyBlog() {
         <S.Divider />
       </S.HeaderContainer>
       <S.SearchContainer>
-        <Link to="/AddBlog" style={{ textDecoration: "none" }}>
+        <Link to="/Add_Blog" style={{ textDecoration: "none" }}>
           <S.BtnCreateBlog>
             <i className="bi bi-plus-lg"></i>
             Create Blog

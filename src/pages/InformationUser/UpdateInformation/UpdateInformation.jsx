@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as S from "./UpdateInformation.styled";
 import { useEffect, useState } from "react";
 import { resetAuthState, updateUser } from "../../../store/authSlice";
+import { uploadImage, resetImageState } from "../../../store/imageSlice";
 import Popup from "../../../components/Popup/Popup";
 
 export default function UpdateInformation() {
@@ -9,6 +10,7 @@ export default function UpdateInformation() {
   const user = useSelector((state) => state.auth.user);
   const { message, isLoading, isSuccess } = useSelector((state) => state.auth);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [thumbnailFile, setThumbnailFile] = useState(null);
 
   const [formData, setFormData] = useState({
     name: user.name || "",
@@ -26,9 +28,32 @@ export default function UpdateInformation() {
     });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setThumbnailFile(file);
+      setFormData({ ...formData, image: URL.createObjectURL(file) });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser({ id: user.id, userData: formData }));
+
+    if (thumbnailFile) {
+      dispatch(uploadImage(thumbnailFile))
+        .then((result) => {
+          if (uploadImage.fulfilled.match(result)) {
+            const imageUrl = result.payload;
+            const updatedUserData = { ...formData, image: imageUrl };
+            dispatch(updateUser({ id: user.id, userData: updatedUserData }));
+          }
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+    } else {
+      dispatch(updateUser({ id: user.id, userData: formData }));
+    }
   };
 
   useEffect(() => {
@@ -44,7 +69,6 @@ export default function UpdateInformation() {
   const handlePopupClose = () => {
     setIsPopupOpen(false);
     dispatch(resetAuthState());
-    // Reload lại trang sau khi Popup đóng
     window.location.reload();
   };
 
@@ -116,12 +140,17 @@ export default function UpdateInformation() {
           </S.Select>
         </S.Group>
         <S.Group>
+          <S.Label>Update Image:</S.Label>
+          <S.Input type="file" accept="image/*" onChange={handleFileChange} />
+        </S.Group>
+        <S.Group>
           <S.Label>Image URL:</S.Label>
           <S.Input
             type="text"
             name="image"
             value={formData.image}
             onChange={handleChange}
+            disabled
           />
         </S.Group>
         <S.ButtonSave type="submit" disabled={!isFormChanged()}>
