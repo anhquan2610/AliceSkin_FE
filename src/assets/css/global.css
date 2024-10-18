@@ -28,6 +28,7 @@
   --green-fresh: #00ccdd;
   --white: #ffffff;
   --black: #000000;
+  --black-2: #2d2d2d;
   --black-opacity: #00000088;
   --red: #e74533;
   --pink: #f4a7ba;
@@ -47,7 +48,7 @@
   --gray-2: #e2e2e3;
   --navy: #182233;
   --navy-2: #2a4371;
-  --green: #00ADB5;
+  --green: #00adb5;
 
   /* Font sizes -------------------- */
   --fs-xs: 0.75rem;

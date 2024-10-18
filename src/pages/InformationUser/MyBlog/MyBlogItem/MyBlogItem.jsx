@@ -19,7 +19,7 @@ export default function MyBlogItem({ blog }) {
 
         <Link
           to={{
-            pathname: `/UpdateBlog/${blog.blog_id}`,
+            pathname: `/Update_Blog/${blog.blog_id}`,
             state: { blog_id: blog.blog_id },
           }}
         >

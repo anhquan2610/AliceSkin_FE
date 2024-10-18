@@ -4,6 +4,8 @@ import authSlice from "./authSlice";
 import blogSlice from "./blogSlice";
 import productSlice from "./productSlice";
 import shippingSlice from "./shippingSlice";
+import imageSlice from "./imageSlice";
+import cartSlice from "./cartSlice";
 
 export const store = configureStore({
 
@@ -12,5 +14,7 @@ export const store = configureStore({
     [blogSlice.name]: blogSlice.reducer,
     [productSlice.name]: productSlice.reducer,
     [shippingSlice.name]: shippingSlice.reducer,
+    [imageSlice.name]: imageSlice.reducer,
+    [cartSlice.name]: cartSlice.reducer,
   }
 });

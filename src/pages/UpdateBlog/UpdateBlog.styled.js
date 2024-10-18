@@ -4,7 +4,7 @@ export const Container = styled.form`
 display: flex;
 padding: var(--s-5) var(--s-30);
 flex-direction: column;
-height: 130vh;
+height: 180vh;
 `;
 
 export const TopContainer = styled.div`
@@ -154,3 +154,9 @@ background-color: var(--green);
   }
 `;
 
+export const ImagePreview = styled.img`
+aspect-ratio: 16/9;
+width: 100%;
+object-fit: cover;
+height: 100%;
+`;

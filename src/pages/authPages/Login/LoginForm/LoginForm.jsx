@@ -81,7 +81,7 @@ export default function LoginForm() {
               />
               <ErrorMessage name="password" component={S.ErrorMessageStyled} />
 
-              <Link to="/forgotpassword">
+              <Link to="/forgot_password">
                 <S.ForgotPassword>Forgot password?</S.ForgotPassword>
               </Link>
 

@@ -12,6 +12,7 @@ import { DefaultLayout } from "../layout/DefaultLayout";
 import InformationUser from "../pages/InformationUser/InformationUser";
 import CreateBlog from "../pages/CreateBlog/CreateBlog";
 import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
+import Cart from "../pages/Cart/Cart";
 
 export default function AppRoutes() {
   return (
@@ -19,16 +20,17 @@ export default function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/forgotpassword" element={<ForgotPassword />} />
+      <Route path="/forgot_password" element={<ForgotPassword />} />
       <Route path="/password/reset" element={<ResetPassword />} />
       <Route path="/" element={<DefaultLayout />}>
         <Route path="home" element={<HomePage />} />
         <Route path="blog/:id" element={<Blog />} />
         <Route path="product" element={<Product />} />
         <Route path="product/:id" element={<ProductDetail />} />
-        <Route path="user-info" element={<InformationUser />} />
-        <Route path="AddBlog" element={<CreateBlog />} />
-        <Route path="UpdateBlog/:id" element={<UpdateBlog />} />
+        <Route path="user_info" element={<InformationUser />} />
+        <Route path="Add_Blog" element={<CreateBlog />} />
+        <Route path="Update_Blog/:id" element={<UpdateBlog />} />
+        <Route path="Shopping_Cart" element={<Cart />} />
       </Route>
     </Routes>
   );

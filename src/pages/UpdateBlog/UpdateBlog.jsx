@@ -6,6 +6,7 @@ import {
   updateBlogByUser,
   resetBlogState,
 } from "../../store/blogSlice";
+import { uploadImage, resetImageState } from "../../store/imageSlice";
 import * as S from "./UpdateBlog.styled";
 import YoungMan from "../../assets/images/young man with laptop on chair.png";
 import Popup from "../../components/Popup/Popup";
@@ -14,6 +15,7 @@ export default function UpdateBlog() {
   const { id: blog_id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [thumbnailFile, setThumbnailFile] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { selectedBlog, isSuccess, isLoading, message } = useSelector(
     (state) => state.blog
@@ -28,9 +30,6 @@ export default function UpdateBlog() {
 
   useEffect(() => {
     dispatch(getBlogById(blog_id));
-    return () => {
-      dispatch(resetBlogState());
-    };
   }, [dispatch, blog_id]);
 
   useEffect(() => {
@@ -45,9 +44,7 @@ export default function UpdateBlog() {
   }, [selectedBlog]);
 
   useEffect(() => {
-    if (isSuccess) {
-      setIsPopupOpen(true);
-    } else if (message) {
+    if (isSuccess || message) {
       setIsPopupOpen(true);
     }
   }, [isSuccess, message]);
@@ -57,20 +54,50 @@ export default function UpdateBlog() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setThumbnailFile(file);
+      setFormData({ ...formData, thumbnail: URL.createObjectURL(file) });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedBlogData = {
-      title: formData.title,
-      content: formData.content,
-      thumbnail: formData.thumbnail,
-      hashtags: formData.hashtags.split(",").map((tag) => tag.trim()),
-    };
-    dispatch(updateBlogByUser({ blog_id, blogData: updatedBlogData }));
+    let thumnailUrl = formData.thumbnail;
+
+    if (thumbnailFile) {
+      dispatch(uploadImage(thumbnailFile))
+        .then((result) => {
+          if (uploadImage.fulfilled.match(result)) {
+            thumnailUrl = result.payload;
+            const updatedBlogData = {
+              title: formData.title,
+              content: formData.content,
+              thumbnail: thumnailUrl,
+              hashtags: formData.hashtags.split(","),
+            };
+            dispatch(updateBlogByUser({ blog_id, blogData: updatedBlogData }));
+          }
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+    } else {
+      const updatedBlogData = {
+        title: formData.title,
+        content: formData.content,
+        thumbnail: formData.thumbnail,
+        hashtags: formData.hashtags.split(",").map((tag) => tag.trim()),
+      };
+      dispatch(updateBlogByUser({ blog_id, blogData: updatedBlogData }));
+    }
   };
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);
     dispatch(resetBlogState());
+    dispatch(resetImageState());
     if (isSuccess) {
       navigate("/user-info");
     }
@@ -104,13 +131,10 @@ export default function UpdateBlog() {
           </S.Group>
           <S.Group>
             <S.Label>Image :</S.Label>
-            <S.Input
-              type="url"
-              name="thumbnail"
-              placeholder="Thumbnail URL"
-              value={formData.thumbnail}
-              onChange={handleInputChange}
-            />
+            <S.Input type="file" accept="image/*" onChange={handleFileChange} />
+            {formData.thumbnail && (
+              <S.ImagePreview src={formData.thumbnail} alt="Preview" />
+            )}
           </S.Group>
           <S.Group>
             <S.Label>HasTags :</S.Label>
@@ -155,7 +179,6 @@ export default function UpdateBlog() {
         >
           {isLoading ? "Updating..." : "Update"}
         </S.BtnSubmit>
-        {/* Popup thông báo */}
         <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
           {message}
         </Popup>
