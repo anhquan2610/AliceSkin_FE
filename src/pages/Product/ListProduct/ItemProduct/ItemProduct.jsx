@@ -1,4 +1,4 @@
-import TypeProduct from "../../../../components/TypeProduct/TypeProduct";
+
 import * as S from "./ItemProduct.styled";
 
 export default function ItemProduct({ product, navigate }) {

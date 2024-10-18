@@ -69,7 +69,7 @@ export const getBlogById = createAsyncThunk(
     "blog/getCommentByBlogId",
     async (blog_id, { rejectWithValue }) => {
       try {
-        const response = await instanceAxios.get(`/api/comments/blog/${blog_id}`);
+        const response = await instanceAxios.get(`/api/blogs/${blog_id}/comments`);
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);
@@ -82,7 +82,7 @@ export const getBlogById = createAsyncThunk(
     "blog/addComment",
     async ({ blog_id, commentData }, { rejectWithValue }) => {
       try {
-        const response = await instanceAxios.post(`/api/comments/blog/${blog_id}`, commentData);
+        const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, commentData);
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);

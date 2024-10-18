@@ -6,13 +6,13 @@ import { getCartItems } from "../../store/cartSlice";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const { cart, isLoading } = useSelector((state) => state.cart.cart);
+  const { cart } = useSelector((state) => state.cart.cart); // Không cần destructure
 
   useEffect(() => {
     dispatch(getCartItems());
   }, [dispatch]);
 
-  if (!cart || !cart.items || isLoading) {
+  if (!cart || !cart.items) {
     return <S.LoadingSpinner />;
   }
 
@@ -20,14 +20,17 @@ export default function Cart() {
     <S.Container>
       <S.HeaderContainer>
         <S.Title>Shopping Cart</S.Title>
-        <S.TotalOnCart>You have {cart.items.length} items in cart</S.TotalOnCart>
+        <S.TotalOnCart>
+          You have {cart.items.length} items in cart
+        </S.TotalOnCart>
       </S.HeaderContainer>
       <S.ListCartContainer>
         {cart.items.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
       </S.ListCartContainer>
-      <S.TotalPrice>Total: {cart.subtotal} $</S.TotalPrice>
+      <S.TotalPrice>Total: {cart.subtotal} $</S.TotalPrice>{" "}
+      {/* Cập nhật subtotal */}
       <S.ButtonContainer>
         <S.BtnCheckout>
           Checkout
