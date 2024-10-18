@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
 
 const initialState = {
-  user: "",
+  user: [],
   token: null,
   isLoading: false,
   isError: false,
@@ -184,7 +184,7 @@ const authSlice = createSlice({
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.user = action.payload.user;
+      state.user = action.payload;
       state.token = action.payload.access_token;
     });
 

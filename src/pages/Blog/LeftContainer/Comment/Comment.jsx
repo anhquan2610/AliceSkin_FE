@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import AddComment from "./AddComment/AddComment";
 import * as S from "./Comment.styled";
 import CommentItem from "./CommentItem/CommentItem";
 import { useEffect } from "react";
 import { getCommentByBlogId } from "../../../../store/blogSlice";
 import { useParams } from "react-router-dom";
+import AddComment from "./AddComment/AddComment";
 
 export default function Comment() {
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ export default function Comment() {
         <S.Divider></S.Divider>
       </S.TitleContainer>
       <S.CommentContainer>
-        {comments.map((comment, index) => (
-          <S.BoxComment key={comment.comment_id || index}>
+        {comments.map((comment) => (
+          <S.BoxComment key={comment.comment_id}>
             <CommentItem comment={comment} />
           </S.BoxComment>
         ))}

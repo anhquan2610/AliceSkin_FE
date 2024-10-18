@@ -91,4 +91,8 @@ margin-bottom: var(--s-2);
 }
 `;
 
-
+export const BtnDelete = styled.button`
+background-color: transparent;
+color: var(--gray-3);
+font-size: var(--fs-md);
+`;
