@@ -27,8 +27,8 @@ export default function Comment() {
             <CommentItem comment={comment} />
           </S.BoxComment>
         ))}
+        <AddComment />
       </S.CommentContainer>
-      <AddComment />
     </S.Container>
   );
 }

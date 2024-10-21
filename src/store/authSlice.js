@@ -32,6 +32,7 @@ export const signIn = createAsyncThunk(
     try {
       const response = await instanceAxios.post("/api/login", credentials);
       localStorage.setItem("token", response.data?.access_token);
+      localStorage.setItem("id", response.data?.id);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -147,6 +148,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("id");
     },
     resetAuthState: (state) => { 
       state.isLoading = false;
@@ -243,7 +245,7 @@ const authSlice = createSlice({
       state.user = action.payload.user;
     });
 
-    builder.addCase(getUserById.rejected, (state, action) => {
+    builder.addCase(getUserById.rejected, (state) => {
       state.isLoading = false;
     });
     

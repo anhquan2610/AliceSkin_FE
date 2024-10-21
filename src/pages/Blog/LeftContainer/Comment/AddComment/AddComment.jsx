@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./AddComment.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addComment } from "../../../../../store/blogSlice";
 
-export default function AddComment() {
+export default function AddComment({ parentId = null, onClose }) {
   const [content, setContent] = useState("");
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.blog);
@@ -13,9 +13,20 @@ export default function AddComment() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const commentData = { content };
-    dispatch(addComment({ blog_id, commentData }));
-    setContent("");
+    if (content.trim()) {
+      dispatch(
+        addComment({
+          blog_id,
+          commentData,
+          parent_id: parentId,
+        })
+      );
+
+      setContent("");
+      if (onClose) onClose();
+    }
   };
+
   return (
     <S.Container onSubmit={handleSubmit}>
       <S.LabelComment>
