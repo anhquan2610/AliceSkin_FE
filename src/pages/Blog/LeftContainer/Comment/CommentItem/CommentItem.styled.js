@@ -96,3 +96,10 @@ background-color: transparent;
 color: var(--gray-3);
 font-size: var(--fs-md);
 `;
+
+
+export const ContainerReply = styled.div`
+margin-left: var(--s-16);
+`;
+
+export const CommentReply = styled.div``;

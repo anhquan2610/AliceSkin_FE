@@ -83,9 +83,12 @@ export const getBlogById = createAsyncThunk(
   //Create Comment by Blog ID
   export const addComment = createAsyncThunk(
     "blog/addComment",
-    async ({ blog_id, commentData }, { rejectWithValue }) => {
+    async ({ blog_id, commentData, parent_id }, { rejectWithValue }) => {
       try {
-        const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, commentData);
+        const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, {
+          ...commentData,
+          parent_id,
+        });
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);
@@ -98,7 +101,11 @@ export const getBlogById = createAsyncThunk(
     "blog/updateCommentByUser",
     async ({ blog_id, comment_id, commentData }, { rejectWithValue }) => {
       try {
-        const response = await instanceAxios.put(`/api/blogs/${blog_id}/comments/${comment_id}`, commentData);
+        // const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, {
+        //   ...commentData,
+        //   parent_id,
+        // });
+        console.log("Adding comment with parent_id:", parent_id); 
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);
@@ -249,12 +256,24 @@ const blogSlice = createSlice({
     });
     builder.addCase(addComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.comments.push(action.payload);
+    if (action.payload.parent_id) {
+        const parentComment = state.comments.find(comment => comment.comment_id === action.payload.parent_id);
+        if (parentComment) {
+            parentComment.replies = parentComment.replies || [];
+            parentComment.replies.push(action.payload);
+        }
+    } else {
+        state.comments.push(action.payload);
+    }
     });
     builder.addCase(addComment.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
+    
+    
+    
+  
 
     //Update Comment by User---------------------------------------------
     builder.addCase(updateCommentByUser.pending, (state) => {
@@ -274,6 +293,15 @@ const blogSlice = createSlice({
       state.message = action.payload.message;
     });
 
+    const removeCommentById = (comments, commentId) => {
+      return comments
+        .filter(comment => comment.comment_id !== commentId)
+        .map(comment => ({
+          ...comment,
+          replies: comment.replies ? removeCommentById(comment.replies, commentId) : [], 
+        }));
+    };
+
     //Delete Comment By User---------------------------------------------
     builder.addCase(deleteCommentByUser.pending, (state) => {
       state.isLoading = true;
@@ -281,7 +309,7 @@ const blogSlice = createSlice({
     builder.addCase(deleteCommentByUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.comments = state.comments.filter((comment) => comment.comment_id !== action.meta.arg.comment_id);
+      state.comments = removeCommentById(state.comments, action.meta.arg.comment_id);
     });
     builder.addCase(deleteCommentByUser.rejected, (state, action) => {
       state.isLoading = false;
