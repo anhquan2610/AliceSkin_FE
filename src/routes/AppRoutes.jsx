@@ -13,16 +13,36 @@ import InformationUser from "../pages/InformationUser/InformationUser";
 import CreateBlog from "../pages/CreateBlog/CreateBlog";
 import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
 import Cart from "../pages/Cart/Cart";
+import UserProtectedRoute from "../components/UserProtectedRoute/UserProtectedRoute";
+import AdminProtectedRoute from "../components/AdminProtectedRoute/AdminProtectedRoute";
+import AdminHome from "../pages/managementPages/AdminHome";
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/landing" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
       <Route path="/password/reset" element={<ResetPassword />} />
-      <Route path="/" element={<DefaultLayout />}>
+      <Route
+        path="/"
+        element={
+          <AdminProtectedRoute>
+            <AdminHome />
+          </AdminProtectedRoute>
+        }
+      >
+        <Route path="admin" element={<AdminHome />} />
+      </Route>
+      <Route
+        path="/"
+        element={
+          <UserProtectedRoute>
+            <DefaultLayout />
+          </UserProtectedRoute>
+        }
+      >
         <Route path="home" element={<HomePage />} />
         <Route path="blog/:id" element={<Blog />} />
         <Route path="product" element={<Product />} />

@@ -10,7 +10,7 @@ import Popup from "../../../../components/Popup/Popup.jsx";
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, token, message, isSuccess, isError } = useSelector(
+  const { isLoading, token, message, role, isError } = useSelector(
     (state) => state.auth
   );
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -36,9 +36,13 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (token) {
-      navigate("/home");
+      if (role === "admin") {
+        navigate("/admin"); 
+      } else {
+        navigate("/home"); 
+      }
     }
-  }, [token, navigate]);
+  }, [token, role, navigate]);
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);

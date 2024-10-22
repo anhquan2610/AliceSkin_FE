@@ -5,7 +5,8 @@ import { instanceAxios } from "../axios/customAxios";
 
 const initialState = {
   user: [],
-  token: null,
+  role: localStorage.getItem("role") || null,
+  token: localStorage.getItem("token")|| null,
   isLoading: false,
   isError: false,
   errorMessage: "",
@@ -33,6 +34,7 @@ export const signIn = createAsyncThunk(
       const response = await instanceAxios.post("/api/login", credentials);
       localStorage.setItem("token", response.data?.access_token);
       localStorage.setItem("id", response.data?.id);
+      localStorage.setItem("role", response.data?.role);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -147,8 +149,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-      localStorage.removeItem("token");
-      localStorage.removeItem("id");
+      localStorage.clear();
     },
     resetAuthState: (state) => { 
       state.isLoading = false;
