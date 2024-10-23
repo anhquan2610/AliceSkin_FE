@@ -5,29 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlog, resetBlogState } from "../../store/blogSlice";
 import { uploadImage, resetImageState } from "../../store/imageSlice";
 import { useNavigate } from "react-router-dom";
-import Popup from "../../components/Popup/Popup";
+import { notifySuccess } from "../../utils/Nontification.utils";
 
 export default function CreateBlog() {
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [hashtags, setHashTags] = useState("");
   const [content, setContent] = useState("");
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const dispatch = useDispatch();
-  const {
-    isLoading: isBlogLoading,
-    isSuccess: isBlogSuccess,
-    message: blogMessage,
-  } = useSelector((state) => state.blog);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isBlogSuccess) {
-      setIsPopupOpen(true);
-    } else if (blogMessage) {
-      setIsPopupOpen(true);
-    }
-  }, [isBlogSuccess, blogMessage]);
+  const { isLoading: isBlogLoading, isSuccess: isBlogSuccess } = useSelector(
+    (state) => state.blog
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,14 +44,13 @@ export default function CreateBlog() {
     }
   };
 
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    dispatch(resetBlogState());
-    dispatch(resetImageState());
+  useEffect(() => {
     if (isBlogSuccess) {
-      navigate("/user-info");
+      notifySuccess("Blog created successfully!");
+      navigate("/user_info");
+      dispatch(resetBlogState());
     }
-  };
+  }, [isBlogSuccess, navigate, dispatch]);
 
   return (
     <S.Container onSubmit={handleSubmit}>
@@ -127,11 +116,6 @@ export default function CreateBlog() {
           {isBlogLoading ? "Creating..." : "Create Blog"}
         </S.BtnSubmit>
       </S.ButtonContainer>
-
-      {/* Popup thông báo */}
-      <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-        {blogMessage}
-      </Popup>
     </S.Container>
   );
 }

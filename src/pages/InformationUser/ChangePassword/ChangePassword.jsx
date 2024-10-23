@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./ChangePassword.styled";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { changePassword, resetAuthState } from "../../../store/authSlice";
+import { changePassword } from "../../../store/authSlice";
 import * as Yup from "yup";
-import { useEffect, useState } from "react";
+
 import Popup from "../../../components/Popup/Popup";
 
 export default function ChangePassword() {
@@ -11,7 +11,6 @@ export default function ChangePassword() {
   const { isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.auth
   );
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const validationSchema = Yup.object().shape({
     current_password: Yup.string().required("Please enter current password"),
@@ -35,19 +34,6 @@ export default function ChangePassword() {
 
     dispatch(changePassword(formattedValues));
     resetForm();
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      setIsPopupOpen(true);
-    } else if (isError) {
-      setIsPopupOpen(true);
-    }
-  }, [isSuccess, isError]);
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    dispatch(resetAuthState());
   };
 
   return (
@@ -102,9 +88,6 @@ export default function ChangePassword() {
               <S.ButtonSave type="submit" disabled={isSubmitting || isLoading}>
                 {isLoading ? "Đang thay đổi..." : "Đổi mật khẩu"}
               </S.ButtonSave>
-              <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-                {message}
-              </Popup>
             </Form>
           )}
         </Formik>

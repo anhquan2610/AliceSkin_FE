@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../../store/productSlice";
 import { getAllShipping } from "../../../store/shippingSlice";
 import { addItemToCart } from "../../../store/cartSlice";
+import { notifySuccess } from "../../../utils/Nontification.utils";
 
 export default function ProductInformation() {
   const [count, setCount] = useState(0);
@@ -33,7 +34,9 @@ export default function ProductInformation() {
 
   const handleAddToCart = () => {
     if (count > 0) {
-      dispatch(addItemToCart({ productId, quantity: count }));
+      dispatch(addItemToCart({ productId, quantity: count })).then(() => {
+        notifySuccess("Product added to cart successfully!");
+      });
     } else {
       alert("Please select quantity");
     }

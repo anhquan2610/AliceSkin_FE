@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
+import { notifyError, notifySuccess } from "../utils/Nontification.utils";
 
 const initialState = {
   cart: {
@@ -26,6 +27,7 @@ export const addItemToCart = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data);
     }
   }
@@ -50,8 +52,10 @@ export const removeItemFromCart = createAsyncThunk(
   async (item_id, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.delete(`/api/cart/${item_id}`);
+      notifySuccess(response.data.message);
       return response.data;
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data);
     }
   }

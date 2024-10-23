@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/authSlice";
+import { notifySuccess } from "../../utils/Nontification.utils";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -13,6 +14,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const handleLogout = () => {
     dispatch(logout());
+    notifySuccess("Logged out successfully");
     navigate("/login");
   };
   const handlUserClick = (e) => {

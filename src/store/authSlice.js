@@ -2,6 +2,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
+import { notifyError, notifySuccess } from "../utils/Nontification.utils";
 
 const initialState = {
   user: [],
@@ -21,6 +22,7 @@ export const signUp = createAsyncThunk(
       const response = await instanceAxios.post("/api/register", user);
       return response.data;
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -37,6 +39,7 @@ export const signIn = createAsyncThunk(
       localStorage.setItem("role", response.data?.role);
       return response.data;
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data);
     }
   }
@@ -50,8 +53,10 @@ export const forgotPassword = createAsyncThunk(
       const response = await instanceAxios.post("/api/password/forgot", {
         email,
       });
+      notifySuccess(response.data.message);
       return response.data;
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data);
     }
   }
@@ -71,8 +76,10 @@ export const resetPassword = createAsyncThunk(
         password_confirmation,
         token,
       });
+      notifySuccess(response.data.message);
       return response.data;
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data);
     }
   }
@@ -116,8 +123,10 @@ export const changePassword = createAsyncThunk(
           Authorization: `Bearer ${token}`, 
         },
       });
+      notifySuccess(response.data.message);
       return response.data; 
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data || 'An error occurred while changing the password');
     }
   }
@@ -134,8 +143,10 @@ export const updateUser = createAsyncThunk(
           Authorization: `Bearer ${token}`, 
         },
       });
+      notifySuccess(response.data.message);
       return response.data; 
     } catch (error) {
+      notifyError(error.response.data.message);
       return rejectWithValue(error.response.data);
     }
   }
@@ -155,6 +166,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
       state.message = "";
+      state.role = null;
       state.isError = false;
     } 
   },
@@ -189,6 +201,8 @@ const authSlice = createSlice({
       state.isSuccess = true;
       state.user = action.payload;
       state.token = action.payload.access_token;
+      state.role = action.payload.role;
+      state.message = "Login successfully";
     });
 
     builder.addCase(signIn.rejected, (state, action) => {

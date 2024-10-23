@@ -9,15 +9,15 @@ import {
 import { uploadImage, resetImageState } from "../../store/imageSlice";
 import * as S from "./UpdateBlog.styled";
 import YoungMan from "../../assets/images/young man with laptop on chair.png";
-import Popup from "../../components/Popup/Popup";
+import { notifySuccess } from "../../utils/Nontification.utils";
 
 export default function UpdateBlog() {
   const { id: blog_id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [thumbnailFile, setThumbnailFile] = useState(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const { selectedBlog, isSuccess, isLoading, message } = useSelector(
+
+  const { selectedBlog, isSuccess, isLoading } = useSelector(
     (state) => state.blog
   );
 
@@ -44,10 +44,12 @@ export default function UpdateBlog() {
   }, [selectedBlog]);
 
   useEffect(() => {
-    if (isSuccess || message) {
-      setIsPopupOpen(true);
+    if (isSuccess) {
+      notifySuccess("Blog updated successfully!");
+      navigate("/user_info");
+      dispatch(resetBlogState());
     }
-  }, [isSuccess, message]);
+  }, [isSuccess, navigate, dispatch]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -91,15 +93,6 @@ export default function UpdateBlog() {
         hashtags: formData.hashtags.split(",").map((tag) => tag.trim()),
       };
       dispatch(updateBlogByUser({ blog_id, blogData: updatedBlogData }));
-    }
-  };
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    dispatch(resetBlogState());
-    dispatch(resetImageState());
-    if (isSuccess) {
-      navigate("/user-info");
     }
   };
 
@@ -179,9 +172,6 @@ export default function UpdateBlog() {
         >
           {isLoading ? "Updating..." : "Update"}
         </S.BtnSubmit>
-        <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-          {message}
-        </Popup>
       </S.ButtonContainer>
     </S.Container>
   );

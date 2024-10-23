@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
+import { notifyError } from "../utils/Nontification.utils";
 
 const initialState = {
   blogs: [],
@@ -11,9 +12,7 @@ const initialState = {
   selectedBlog: {},
   isSuccess: false,
   message: "",
-  user:{
-    
-  }
+  user: {},
 };
 
 // Get All  Blog
@@ -22,148 +21,193 @@ export const getAllBlog = createAsyncThunk("getAllBlog", async () => {
   return response.data;
 });
 
+//Get All Blog for adminpage
+export const getAllBlogAdmin = createAsyncThunk("getAllBlogAdmin", async () => {
+  const response = await instanceAxios.get("/api/blogs");
+  return response.data;
+});
+
 // Get Blog by ID
 export const getBlogById = createAsyncThunk(
-    "getBlogById",
-    async (blog_id, { rejectWithValue }) => {
-      try {
-        const response = await instanceAxios.get(`/api/blogs/${blog_id}`);
-        return response.data; 
-      } catch (error) {
-        return rejectWithValue(error.response.data); 
-      }
+  "getBlogById",
+  async (blog_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get(`/api/blogs/${blog_id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  // Get All Hashtags
-  export const getAllHashtags = createAsyncThunk("getAllHashtags", async () => {
-    const response = await instanceAxios.get("/api/hashtags");
-    return response.data;
-  });
+// Get All Hashtags
+export const getAllHashtags = createAsyncThunk("getAllHashtags", async () => {
+  const response = await instanceAxios.get("/api/hashtags");
+  return response.data;
+});
 
-  //Create Blog
-  export const createBlog = createAsyncThunk(
-    "createBlog",
-    async (blogData, { rejectWithValue }) => {
-      try {
-        const response = await instanceAxios.post("/api/blogs", blogData);
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data.message);
-      }
+//Create Blog
+export const createBlog = createAsyncThunk(
+  "createBlog",
+  async (blogData, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.post("/api/blogs", blogData);
+      return response.data;
+    } catch (error) {
+      notifyError(error.response.data.message);
+      return rejectWithValue(error.response.data.message);
     }
-  );
+  }
+);
 
-  //GetUserBlog
-  export const GetUserBlog = createAsyncThunk(
-    "GetUserBlog", 
-    async (_, {rejectWithValue}) => {
-      try {
-        const response = await instanceAxios.get("/api/my-blogs");
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+//Delete Blog by Admin
+export const deleteBlogByAdmin = createAsyncThunk(
+  "deleteBlogByAdmin",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.delete(`/api/admin/blogs/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  //Get Commnet by Blog ID
-  export const getCommentByBlogId = createAsyncThunk(
-    "blog/getCommentByBlogId",
-    async (blog_id, { rejectWithValue }) => {
-      try {
-        const response = await instanceAxios.get(`/api/blogs/${blog_id}/comments`);
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+//Change Status Blog by Admin
+export const changeStatusBlogByAdmin = createAsyncThunk(
+  "changeStatusBlogByAdmin",
+  async ({ blog_id, status }, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.put(
+        `/api/admin/blogs/changestatus/${blog_id}`,
+        { status }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  //Create Comment by Blog ID
-  export const addComment = createAsyncThunk(
-    "blog/addComment",
-    async ({ blog_id, commentData, parent_id }, { rejectWithValue }) => {
-      try {
-        const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, {
+//GetUserBlog
+export const GetUserBlog = createAsyncThunk(
+  "GetUserBlog",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get("/api/my-blogs");
+      return response.data;
+    } catch (error) {
+      notifyError(error.response.data.message);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//Get Commnet by Blog ID
+export const getCommentByBlogId = createAsyncThunk(
+  "blog/getCommentByBlogId",
+  async (blog_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get(
+        `/api/blogs/${blog_id}/comments`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//Create Comment by Blog ID
+export const addComment = createAsyncThunk(
+  "blog/addComment",
+  async ({ blog_id, commentData, parent_id }, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.post(
+        `/api/blogs/${blog_id}/comments`,
+        {
           ...commentData,
           parent_id,
-        });
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  //Update Commnet by User
-  export const updateCommentByUser = createAsyncThunk(
-    "blog/updateCommentByUser",
-    async ({ blog_id, comment_id, commentData }, { rejectWithValue }) => {
-      try {
-        // const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, {
-        //   ...commentData,
-        //   parent_id,
-        // });
-        console.log("Adding comment with parent_id:", parent_id); 
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+//Update Commnet by User
+export const updateCommentByUser = createAsyncThunk(
+  "blog/updateCommentByUser",
+  async ({ blog_id, comment_id, commentData }, { rejectWithValue }) => {
+    try {
+      // const response = await instanceAxios.post(`/api/blogs/${blog_id}/comments`, {
+      //   ...commentData,
+      //   parent_id,
+      // });
+      console.log("Adding comment with parent_id:", parent_id);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  //Delete Comment by User
-  export const deleteCommentByUser = createAsyncThunk(
-    "blog/deleteCommentByUser",
-    async ({ blog_id, comment_id }, { rejectWithValue }) => {
-      try {
-        const response = await instanceAxios.delete(`/api/blogs/${blog_id}/comments/${comment_id}`);
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+//Delete Comment by User
+export const deleteCommentByUser = createAsyncThunk(
+  "blog/deleteCommentByUser",
+  async ({ blog_id, comment_id }, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.delete(
+        `/api/blogs/${blog_id}/comments/${comment_id}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  //Like for blog
-  export const likeByBlogId = createAsyncThunk(
-    "blog/likeByBlogId",
-    async (blog_id, { rejectWithValue }) => {
-      try {
-        const response = await instanceAxios.post(`/api/blogs/like/${blog_id}`);
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+//Like for blog
+export const likeByBlogId = createAsyncThunk(
+  "blog/likeByBlogId",
+  async (blog_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.post(`/api/blogs/like/${blog_id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  //Update Blog By User
-  export const updateBlogByUser = createAsyncThunk(
-    "blog/updateBlogByUser",
-    async ({ blog_id, blogData }, { rejectWithValue }) => {
-      try {
-        const response = await instanceAxios.put(`/api/blogs/${blog_id}`, blogData);
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+//Update Blog By User
+export const updateBlogByUser = createAsyncThunk(
+  "blog/updateBlogByUser",
+  async ({ blog_id, blogData }, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.put(
+        `/api/blogs/${blog_id}`,
+        blogData
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
-
-
+  }
+);
 
 const blogSlice = createSlice({
   name: "blog",
   initialState,
   reducers: {
-    resetBlogState (state) {
+    resetBlogState(state) {
       state.isLoading = false;
       state.error = null;
       state.message = "";
       state.isSuccess = false;
-    }
+    },
   },
   extraReducers: (builder) => {
     //Get information blog---------------------------------------------
@@ -175,6 +219,19 @@ const blogSlice = createSlice({
       state.blogs = action.payload;
     });
     builder.addCase(getAllBlog.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+
+    //Get all blog for admin---------------------------------------------
+    builder.addCase(getAllBlogAdmin.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllBlogAdmin.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.blogs = action.payload;
+    });
+    builder.addCase(getAllBlogAdmin.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error;
     });
@@ -208,7 +265,7 @@ const blogSlice = createSlice({
     //Create blog---------------------------------------------
     builder.addCase(createBlog.pending, (state) => {
       state.isLoading = true;
-      
+      state.message = "";
     });
     builder.addCase(createBlog.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -223,10 +280,45 @@ const blogSlice = createSlice({
       state.error = action.payload.message;
     });
 
+    //Delete blog by Admin---------------------------------------------
+    builder.addCase(deleteBlogByAdmin.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteBlogByAdmin.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      const deleteBlogId = action.meta.arg;
+      state.blogs = state.blogs.filter((blog) => blog.blog_id !== deleteBlogId);
+    });
+    builder.addCase(deleteBlogByAdmin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+
+    //Change Status Blog by Admin---------------------------------------------
+    builder.addCase(changeStatusBlogByAdmin.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(changeStatusBlogByAdmin.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+
+      // Giữ lại dữ liệu cũ và chỉ thay đổi trạng thái
+      state.blogs = state.blogs.map((blog) =>
+        blog.blog_id === action.payload.blog_id
+          ? { ...blog, status: action.payload.status } // Chỉ thay đổi trạng thái
+          : blog
+      );
+    });
+    builder.addCase(changeStatusBlogByAdmin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+
     //Get blog  user---------------------------------------------
     builder.addCase(GetUserBlog.pending, (state) => {
       state.isLoading = true;
-    }); 
+    });
     builder.addCase(GetUserBlog.fulfilled, (state, action) => {
       state.isLoading = false;
       state.blogsUser = action.payload;
@@ -234,7 +326,7 @@ const blogSlice = createSlice({
     builder.addCase(GetUserBlog.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload.message;
-      state.message = action.payload.message; 
+      state.message = action.payload.message;
     });
 
     //Get comment by blog ID---------------------------------------------
@@ -256,24 +348,22 @@ const blogSlice = createSlice({
     });
     builder.addCase(addComment.fulfilled, (state, action) => {
       state.isLoading = false;
-    if (action.payload.parent_id) {
-        const parentComment = state.comments.find(comment => comment.comment_id === action.payload.parent_id);
+      if (action.payload.parent_id) {
+        const parentComment = state.comments.find(
+          (comment) => comment.comment_id === action.payload.parent_id
+        );
         if (parentComment) {
-            parentComment.replies = parentComment.replies || [];
-            parentComment.replies.push(action.payload);
+          parentComment.replies = parentComment.replies || [];
+          parentComment.replies.push(action.payload);
         }
-    } else {
+      } else {
         state.comments.push(action.payload);
-    }
+      }
     });
     builder.addCase(addComment.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
-    
-    
-    
-  
 
     //Update Comment by User---------------------------------------------
     builder.addCase(updateCommentByUser.pending, (state) => {
@@ -284,21 +374,25 @@ const blogSlice = createSlice({
       state.isSuccess = true;
       const updatedComment = action.payload;
       state.comments = state.comments.map((comment) =>
-        comment.comment_id === updatedComment.comment_id ? updatedComment : comment
+        comment.comment_id === updatedComment.comment_id
+          ? updatedComment
+          : comment
       );
     });
     builder.addCase(updateCommentByUser.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action
+      state.error = action;
       state.message = action.payload.message;
     });
 
     const removeCommentById = (comments, commentId) => {
       return comments
-        .filter(comment => comment.comment_id !== commentId)
-        .map(comment => ({
+        .filter((comment) => comment.comment_id !== commentId)
+        .map((comment) => ({
           ...comment,
-          replies: comment.replies ? removeCommentById(comment.replies, commentId) : [], 
+          replies: comment.replies
+            ? removeCommentById(comment.replies, commentId)
+            : [],
         }));
     };
 
@@ -309,7 +403,10 @@ const blogSlice = createSlice({
     builder.addCase(deleteCommentByUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.comments = removeCommentById(state.comments, action.meta.arg.comment_id);
+      state.comments = removeCommentById(
+        state.comments,
+        action.meta.arg.comment_id
+      );
     });
     builder.addCase(deleteCommentByUser.rejected, (state, action) => {
       state.isLoading = false;
@@ -323,10 +420,13 @@ const blogSlice = createSlice({
     });
     builder.addCase(likeByBlogId.fulfilled, (state, action) => {
       state.isLoading = false;
-      if(state.selectedBlog && state.selectedBlog.blog_id === action.payload.blog_id) {
+      if (
+        state.selectedBlog &&
+        state.selectedBlog.blog_id === action.payload.blog_id
+      ) {
         state.selectedBlog.like = action.payload.like;
       }
-    }); 
+    });
     builder.addCase(likeByBlogId.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
@@ -345,11 +445,10 @@ const blogSlice = createSlice({
     builder.addCase(updateBlogByUser.rejected, (state, action) => {
       state.isLoading = false;
       state.message = action.payload.message;
-      state.error = action.payload; 
+      state.error = action.payload;
     });
   },
 });
-
 
 export const { resetBlogState } = blogSlice.actions;
 export default blogSlice;

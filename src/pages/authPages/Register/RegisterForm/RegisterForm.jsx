@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import * as S from "./RegisterForm.styled";
 import { resetAuthState, signUp } from "../../../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Popup from "../../../../components/Popup/Popup";
+import { notifySuccess } from "../../../../utils/Nontification.utils";
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, isSuccess, message, isError } = useSelector(
-    (state) => state.auth
-  );
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { isLoading, isSuccess } = useSelector((state) => state.auth);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Full Name is required").max(255),
@@ -43,21 +40,12 @@ export default function RegisterForm() {
   };
 
   useEffect(() => {
-    if (isError) {
-      setIsPopupOpen(true);
-    }
-  }, [isError]);
-
-  useEffect(() => {
     if (isSuccess) {
+      dispatch(resetAuthState());
+      notifySuccess("Registration successful!");
       navigate("/login");
     }
   }, [isSuccess, navigate]);
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    dispatch(resetAuthState());
-  };
 
   return (
     <S.Container>
@@ -136,9 +124,6 @@ export default function RegisterForm() {
             <S.BtnLogin type="submit" disabled={isSubmitting}>
               {isLoading ? "Registering..." : "Register"}
             </S.BtnLogin>
-            <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-              {message}
-            </Popup>
           </Form>
         )}
       </Formik>

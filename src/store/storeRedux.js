@@ -6,6 +6,7 @@ import productSlice from "./productSlice";
 import shippingSlice from "./shippingSlice";
 import imageSlice from "./imageSlice";
 import cartSlice from "./cartSlice";
+import userSlice from "./userSlice";
 
 export const store = configureStore({
 
@@ -16,5 +17,6 @@ export const store = configureStore({
     [shippingSlice.name]: shippingSlice.reducer,
     [imageSlice.name]: imageSlice.reducer,
     [cartSlice.name]: cartSlice.reducer,
+    [userSlice.name]: userSlice.reducer,
   }
 });
