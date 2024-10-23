@@ -1,17 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import * as S from "./ForgotPassword.styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword, resetAuthState } from "../../../store/authSlice";
-import Popup from "../../../components/Popup/Popup";
+import { forgotPassword } from "../../../store/authSlice";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const dispatch = useDispatch();
-  const { isLoading, isSuccess, isError, message } = useSelector(
-    (state) => state.auth
-  );
+  const { isLoading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -19,19 +16,8 @@ export default function ForgotPassword() {
     dispatch(forgotPassword(email));
   };
 
-  useEffect(() => {
-    if (isSuccess || isError) {
-      setIsPopupOpen(true);
-    }
-  }, [isSuccess, isError]);
-
   const handleCancel = () => {
     navigate("/login");
-  };
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    dispatch(resetAuthState());
   };
 
   return (
@@ -54,9 +40,9 @@ export default function ForgotPassword() {
             {isLoading ? "Sending..." : "Send Reset Link"}
           </S.BtnSubmit>
           <S.BtnCancel onClick={handleCancel}>Cancel</S.BtnCancel>
-          <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
+          {/* <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
             {message}
-          </Popup>
+          </Popup> */}
         </S.ContainerForm>
       </S.ContainerMiddle>
       <S.ContainerRight />

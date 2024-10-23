@@ -16,6 +16,11 @@ import Cart from "../pages/Cart/Cart";
 import UserProtectedRoute from "../components/UserProtectedRoute/UserProtectedRoute";
 import AdminProtectedRoute from "../components/AdminProtectedRoute/AdminProtectedRoute";
 import AdminHome from "../pages/managementPages/AdminHome";
+import ManagementLayout from "../layout/ManagementLayout/ManagementLayout";
+import ProductManage from "../pages/managementPages/ProductManage/ProductManage";
+import UserManage from "../pages/managementPages/UserManage/UserManage";
+import BlogManage from "../pages/managementPages/BlogManage/BlogManage";
+import BlogDetailManage from "../pages/managementPages/BlogManage/BlogDetailManage/BlogDetailManage";
 
 export default function AppRoutes() {
   return (
@@ -26,14 +31,18 @@ export default function AppRoutes() {
       <Route path="/forgot_password" element={<ForgotPassword />} />
       <Route path="/password/reset" element={<ResetPassword />} />
       <Route
-        path="/"
+        path="manage/"
         element={
           <AdminProtectedRoute>
-            <AdminHome />
+            <ManagementLayout />
           </AdminProtectedRoute>
         }
       >
         <Route path="admin" element={<AdminHome />} />
+        <Route path="products" element={<ProductManage />} />
+        <Route path="users" element={<UserManage />} />
+        <Route path="blogs" element={<BlogManage />} />
+        <Route path="blogs/:id" element={<BlogDetailManage />} />
       </Route>
       <Route
         path="/"

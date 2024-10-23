@@ -2,14 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import * as S from "./UpdateInformation.styled";
 import { useEffect, useState } from "react";
 import { resetAuthState, updateUser } from "../../../store/authSlice";
-import { uploadImage, resetImageState } from "../../../store/imageSlice";
-import Popup from "../../../components/Popup/Popup";
+import { uploadImage } from "../../../store/imageSlice";
 
 export default function UpdateInformation() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const { message, isLoading, isSuccess } = useSelector((state) => state.auth);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const [thumbnailFile, setThumbnailFile] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -60,17 +59,9 @@ export default function UpdateInformation() {
     dispatch(resetAuthState());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (isSuccess && message) {
-      setIsPopupOpen(true);
-    }
-  }, [isSuccess, message]);
 
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    dispatch(resetAuthState());
-    window.location.reload();
-  };
+
+
 
   const isFormChanged = () => {
     return (
@@ -157,9 +148,6 @@ export default function UpdateInformation() {
           {isLoading ? "Updating..." : "Update User"}
         </S.ButtonSave>
       </S.ContentContainer>
-      <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-        {message}
-      </Popup>
     </S.Container>
   );
 }

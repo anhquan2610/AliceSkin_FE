@@ -1,5 +1,4 @@
 import * as S from "./ItemBlogPage.styled";
-
 import DateOfBlog from "../../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 
 export default function ItemBlogPage({ blog, navigate }) {

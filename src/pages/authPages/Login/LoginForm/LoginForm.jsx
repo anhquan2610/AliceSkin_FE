@@ -5,15 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetAuthState, signIn } from "../../../../store/authSlice.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Popup from "../../../../components/Popup/Popup.jsx";
+import { notifySuccess } from "../../../../utils/Nontification.utils.js";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, token, message, role, isError } = useSelector(
-    (state) => state.auth
-  );
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { isLoading, token } = useSelector((state) => state.auth);
+  const role = useSelector((state) => state.auth.role);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -23,31 +21,25 @@ export default function LoginForm() {
   });
 
   const handleLogin = (values, { setSubmitting }) => {
-    dispatch(signIn(values)).finally(() => {
-      setSubmitting(false);
-    });
+    dispatch(signIn(values))
+      .unwrap()
+      .then(() => {
+        notifySuccess("Login successfully");
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
   };
 
   useEffect(() => {
-    if (isError) {
-      setIsPopupOpen(true);
-    }
-  }, [isError]);
-
-  useEffect(() => {
-    if (token) {
+    if (token && role) {
       if (role === "admin") {
-        navigate("/admin"); 
+        navigate("/manage/admin");
       } else {
-        navigate("/home"); 
+        navigate("/home");
       }
     }
   }, [token, role, navigate]);
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    dispatch(resetAuthState());
-  };
 
   return (
     <S.Container>
@@ -92,9 +84,6 @@ export default function LoginForm() {
               <S.BtnLogin type="submit" disabled={isSubmitting || isLoading}>
                 {isLoading ? "Logging in..." : "Login"}
               </S.BtnLogin>
-              <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-                {message}
-              </Popup>
             </S.ContainerForm>
           </Form>
         )}

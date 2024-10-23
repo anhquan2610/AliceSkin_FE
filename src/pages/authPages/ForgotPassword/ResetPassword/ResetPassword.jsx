@@ -1,21 +1,16 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import * as S from "./ResetPassword.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { resetAuthState, resetPassword } from "../../../../store/authSlice";
+import { resetPassword } from "../../../../store/authSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Popup from "../../../../components/Popup/Popup";
-import { useEffect, useState } from "react";
 
 export default function ResetPassword() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { isLoading } = useSelector((state) => state.auth);
 
   // Validation schema using Yup
   const validationSchema = Yup.object().shape({
@@ -38,27 +33,19 @@ export default function ResetPassword() {
         password_confirmation: values.passwordConfirmation,
         token,
       })
-    ).then(() => {
-      setSubmitting(false);
-    });
+    )
+      .unwrap()
+      .then(() => {
+        setSubmitting(false);
+        navigate("/login"); 
+      })
+      .catch(() => {
+        setSubmitting(false); 
+      });
   };
-
-  useEffect(() => {
-    if (isSuccess || isError) {
-      setIsPopupOpen(true);
-    }
-  }, [isSuccess, isError]);
 
   const handleCancel = () => {
     navigate("/forgotpassword");
-  };
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    if (isSuccess) {
-      navigate("/login");
-    }
-    dispatch(resetAuthState());
   };
 
   return (
@@ -131,9 +118,6 @@ export default function ResetPassword() {
                     Cancel
                   </S.BtnCancel>
                 </S.Group>
-                <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-                  {message}
-                </Popup>
               </Form>
             )}
           </Formik>
