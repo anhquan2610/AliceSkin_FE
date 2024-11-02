@@ -168,7 +168,8 @@ const authSlice = createSlice({
       state.message = "";
       state.role = null;
       state.isError = false;
-    } 
+    } ,
+    
   },
   extraReducers: (builder) => {
     //Register
@@ -313,6 +314,6 @@ const authSlice = createSlice({
 });
 
 
-export const { logout, resetAuthState } = authSlice.actions;
+export const { logout, resetAuthState} = authSlice.actions;
 
 export default authSlice;
