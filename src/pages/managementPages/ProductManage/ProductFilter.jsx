@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   TextField,
   Select,
@@ -6,8 +5,9 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
+import { useState } from "react";
 
-const BlogFilter = ({ onFilterChange }) => {
+export default function ProductFilter({ onFilterChange }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [status, setStatus] = useState("");
 
@@ -16,7 +16,7 @@ const BlogFilter = ({ onFilterChange }) => {
     onFilterChange({ searchTerm: e.target.value, status });
   };
 
-  const handleStatusChange = (e) => {
+  const handleRoleChange = (e) => {
     setStatus(e.target.value);
     onFilterChange({ searchTerm, status: e.target.value });
   };
@@ -24,27 +24,26 @@ const BlogFilter = ({ onFilterChange }) => {
   return (
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
       <TextField
-        label="Search by Title or Hashtags"
+        label="Search by Name"
         variant="outlined"
         value={searchTerm}
         onChange={handleSearchChange}
       />
       <FormControl variant="outlined" sx={{ width: "var(--s-30)" }}>
-        <InputLabel>Status</InputLabel>
+        <InputLabel id="role-select-label">Status</InputLabel>
         <Select
+          labelId="role-select-label"
           value={status}
-          onChange={handleStatusChange} 
+          onChange={handleRoleChange}
           label="Status"
         >
           <MenuItem value="">
             <em>All</em>
           </MenuItem>
-          <MenuItem value="draft">Draft</MenuItem>
-          <MenuItem value="published">Published</MenuItem>
+          <MenuItem value="available">Available</MenuItem>
+          <MenuItem value="sold out">Sold Out</MenuItem>
         </Select>
       </FormControl>
     </div>
   );
-};
-
-export default BlogFilter;
+}

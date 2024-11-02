@@ -17,7 +17,13 @@ const initialState = {
 
 // Get All  Blog
 export const getAllBlog = createAsyncThunk("getAllBlog", async () => {
-  const response = await instanceAxios.get("/api/blogs/published");
+  const token = localStorage.getItem("token");
+  const response = await instanceAxios.get("/api/blogs/published",{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  
   return response.data;
 });
 
@@ -242,7 +248,7 @@ const blogSlice = createSlice({
     });
     builder.addCase(getBlogById.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.selectedBlog = action.payload; //save information blog
+      state.selectedBlog = action.payload;
     });
     builder.addCase(getBlogById.rejected, (state, action) => {
       state.isLoading = false;
@@ -303,10 +309,10 @@ const blogSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
 
-      // Giữ lại dữ liệu cũ và chỉ thay đổi trạng thái
+      
       state.blogs = state.blogs.map((blog) =>
         blog.blog_id === action.payload.blog_id
-          ? { ...blog, status: action.payload.status } // Chỉ thay đổi trạng thái
+          ? { ...blog, status: action.payload.status } 
           : blog
       );
     });

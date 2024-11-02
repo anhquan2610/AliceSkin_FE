@@ -85,15 +85,18 @@ export const BtnLoginFacebook = styled.button`
 
 export const BtnLoginGoogle = styled.button`
   color: var(--black);
-  box-shadow: var(--shadow-1);
-  padding: var(--s-2) var(--s-10);
-  border-radius: var(--br-xl);
+  width: 100%;
+  border: 2px solid var(--gray);
+  padding: var(--s-2) 0;
+  border-radius: var(--br-md);
   font-size: var(--fs-md);
   cursor: pointer;
-  &:hover {
-    box-shadow: var(--shadow-6);
-    border: none;
-  }
+  display: flex;
+  gap: var(--s-2);
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  
 `;
 
 export const ErrorMessageStyled = styled.div`

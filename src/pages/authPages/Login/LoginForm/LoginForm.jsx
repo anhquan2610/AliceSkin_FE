@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginForm.styled.js";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetAuthState, signIn } from "../../../../store/authSlice.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { notifySuccess } from "../../../../utils/Nontification.utils.js";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -40,6 +42,28 @@ export default function LoginForm() {
       }
     }
   }, [token, role, navigate]);
+
+  // Xử lý thành công login với Google
+  const handleGoogleLoginSuccess = async (response) => {
+    try {
+      const token = localStorage.getItem("token");
+      const result = await axios.get(
+        `http://127.0.0.1:8000/api/auth/google/callback`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Lưu token từ backend vào localStorage
+      localStorage.setItem("token", result.data.access_token);
+      notifySuccess("Login with Google successfully");
+      navigate("/home"); // Điều hướng đến trang home
+    } catch (error) {
+      console.error("Google login failed:", error);
+    }
+  };
 
   return (
     <S.Container>
@@ -91,8 +115,15 @@ export default function LoginForm() {
 
       <S.BlankSpace />
       <S.ContainerBottom>
-        <S.BtnLoginFacebook>Login with Facebook</S.BtnLoginFacebook>
-        <S.BtnLoginGoogle>Login with Google</S.BtnLoginGoogle>
+        {/* Nút đăng nhập với Google */}
+        <GoogleOAuthProvider clientId="795793395963-4vcbsu2b6fn5d38j09r5fke87ku92qpe.apps.googleusercontent.com">
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        </GoogleOAuthProvider>
       </S.ContainerBottom>
     </S.Container>
   );
