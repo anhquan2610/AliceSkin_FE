@@ -22,6 +22,7 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import { notifySuccess } from "../../../../utils/Nontification.utils";
 import { uploadImage } from "../../../../store/imageSlice";
+import { getAllBrands } from "../../../../store/brandSlice";
 
 export default function UpdateProduct() {
   const dispatch = useDispatch();
@@ -31,7 +32,11 @@ export default function UpdateProduct() {
   const { selectedProduct, isLoading, isSuccess } = useSelector(
     (state) => state.product
   );
-  const { brands } = useSelector((state) => state.brand);
+  const brands = useSelector((state) => state.brand.brands);
+  useEffect(() => {
+    dispatch(getAllBrands());
+  }, []);
+
   const [productData, setProductData] = useState({
     name: "",
     price: "",
@@ -98,10 +103,9 @@ export default function UpdateProduct() {
     e.preventDefault();
     let imagesUrl = productData.image;
 
-  
     const brand = brands.find((b) => b.brand_id === productData.brand_id);
     if (brand) {
-      productData.brand_id = brand.brand_id; 
+      productData.brand_id = brand.brand_id;
     }
 
     if (thumbnailFile) {

@@ -58,7 +58,9 @@ export default function ProductRows({ product }) {
         </TableCell>
         <TableCell>{product.brand?.name}</TableCell>
         <TableCell>{product.price}$</TableCell>
-        <TableCell>{product.discount}%</TableCell>
+        <TableCell>
+          {product.discount ? `${product.discount}%` : "0.00%"}
+        </TableCell>
         <TableCell>{product.discounted_price}$ </TableCell>
         <TableCell>{product.quantity}</TableCell>
         <TableCell>{product.status}</TableCell>
@@ -66,7 +68,7 @@ export default function ProductRows({ product }) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "var(--s-2)"
+            gap: "var(--s-2)",
           }}
         >
           <Link
