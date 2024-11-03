@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
 import { notifyError, notifySuccess } from "../utils/Nontification.utils";
+import { getAllBrands } from "./brandSlice";
+;
 
 const initialState = {
   products: [],
@@ -80,6 +82,7 @@ export const addNewProduct = createAsyncThunk(
       const response = await instanceAxios.post("/api/admin/products", productData);
       notifySuccess(response.data.message);
       return response.data;
+      
     } catch (error) {
       notifyError(error.response.data.message);
       return rejectWithValue(error.response.data);
@@ -142,6 +145,7 @@ const productSlice = createSlice({
     resetProductState: (state) => {
       state.isLoading = false;
       state.isSuccess = false;
+      state.selectedProduct = {};
     },
   },
   extraReducers: (builder) => {
@@ -219,6 +223,9 @@ const productSlice = createSlice({
       state.isLoading = false;
       state.products.push(action.payload);
       state.isSuccess = true;
+      
+
+     
     });
     builder.addCase(addNewProduct.rejected, (state, action) => {
       state.isLoading = false;
@@ -251,7 +258,7 @@ const productSlice = createSlice({
       state.isSuccess = true;
       state.products = state.products.map((product) =>
         product.product_id === action.payload.product_id
-          ? { ...product, ...action.payload } // Cập nhật sản phẩm mà không làm mất các thuộc tính khác
+          ? { ...product, ...action.payload } 
           : product
       );
     });

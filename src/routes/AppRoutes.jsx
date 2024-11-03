@@ -22,7 +22,9 @@ import UserManage from "../pages/managementPages/UserManage/UserManage";
 import BlogManage from "../pages/managementPages/BlogManage/BlogManage";
 import BlogDetailManage from "../pages/managementPages/BlogManage/BlogDetailManage/BlogDetailManage";
 import UpdateProduct from "../pages/managementPages/ProductManage/UpdateProduct/UpdateProduct";
-
+import BrandManage from "../pages/managementPages/BrandManage/BrandManage";
+import BrandDetail from "../pages/managementPages/BrandManage/BrandDetail/BrandDetail";
+import AddProduct from "../pages/managementPages/ProductManage/AddProduct.jsx/AddProduct";
 
 export default function AppRoutes() {
   return (
@@ -42,7 +44,10 @@ export default function AppRoutes() {
       >
         <Route path="admin" element={<AdminHome />} />
         <Route path="products" element={<ProductManage />} />
+        <Route path="products/add_new" element={<AddProduct />} />
         <Route path="products/update/:id" element={<UpdateProduct />} />
+        <Route path="brands" element={<BrandManage />} />
+        <Route path="brands/:id" element={<BrandDetail />} />
         <Route path="users" element={<UserManage />} />
         <Route path="blogs" element={<BlogManage />} />
         <Route path="blogs/:id" element={<BlogDetailManage />} />

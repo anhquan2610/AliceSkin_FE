@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as S from "./ProductInformation.styled";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductById } from "../../../store/productSlice";
+import { getProductById, resetProductState } from "../../../store/productSlice";
 import { getAllShipping } from "../../../store/shippingSlice";
 import { addItemToCart } from "../../../store/cartSlice";
 import { notifySuccess } from "../../../utils/Nontification.utils";
@@ -21,6 +21,12 @@ export default function ProductInformation() {
 
   useEffect(() => {
     dispatch(getAllShipping());
+  }, [dispatch]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetProductState());
+    };
   }, [dispatch]);
 
   const handleIncrement = () => {
@@ -42,12 +48,6 @@ export default function ProductInformation() {
     }
   };
 
-  const imagesArray = selectProduct.images
-    ? JSON.parse(selectProduct.images)
-    : [];
-  const imageUrl =
-    imagesArray.length > 0 ? imagesArray[0] : "https://via.placeholder.com/150";
-
   return (
     <S.Container>
       <S.TopContainer>
@@ -61,7 +61,7 @@ export default function ProductInformation() {
       <S.BottomContainer>
         <S.LeftContainer>
           <S.ImageContainer>
-            <S.ImageProduct src={imageUrl} alt={selectProduct.name} />
+            <S.ImageProduct src={selectProduct.image} />
           </S.ImageContainer>
         </S.LeftContainer>
         <S.RightContainer>

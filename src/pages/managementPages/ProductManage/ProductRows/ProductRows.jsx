@@ -57,11 +57,18 @@ export default function ProductRows({ product }) {
           {product.name}
         </TableCell>
         <TableCell>{product.brand?.name}</TableCell>
-        <TableCell>{product.price}</TableCell>
-        <TableCell>{product.discounted_price}</TableCell>
+        <TableCell>{product.price}$</TableCell>
+        <TableCell>{product.discount}%</TableCell>
+        <TableCell>{product.discounted_price}$ </TableCell>
         <TableCell>{product.quantity}</TableCell>
         <TableCell>{product.status}</TableCell>
-        <TableCell>
+        <TableCell
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--s-2)"
+          }}
+        >
           <Link
             to={{
               pathname: `/manage/products/update/${product.product_id}`,
@@ -71,6 +78,7 @@ export default function ProductRows({ product }) {
             <Button
               variant="outlined"
               size="small"
+              fullWidth
               sx={{ color: "var(--green-fresh)" }}
               startIcon={<UpgradeOutlinedIcon />}
             >
@@ -80,7 +88,8 @@ export default function ProductRows({ product }) {
           <Button
             variant="outlined"
             size="small"
-            sx={{ color: "var(--blue)", ml: 2 }}
+            fullWidth
+            sx={{ color: "var(--blue)" }}
             startIcon={<PublishedWithChangesIcon />}
             onClick={() => handleClickOpenStatus(product.product_id)}
           >
@@ -91,7 +100,7 @@ export default function ProductRows({ product }) {
             variant="outlined"
             size="small"
             color="error"
-            sx={{ ml: 2 }}
+            fullWidth
             startIcon={<DeleteIcon />}
             onClick={handleClickOpen}
           >

@@ -13,21 +13,12 @@ import { useEffect, useState } from "react";
 import { getAllProduct } from "../../../store/productSlice";
 import ProductRows from "./ProductRows/ProductRows";
 import ProductFilter from "./ProductFilter";
-import AddProductModal from "./ProductModal/AddProductModal";
+import { Link } from "react-router-dom";
 
 export default function ProductManage() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [openAddProduct, setOpenAddProduct] = useState(false);
-
-  const handleOpenAddProduct = () => {
-    setOpenAddProduct(true);
-  };
-
-  const handleCloseAddProduct = () => {
-    setOpenAddProduct(false);
-  };
 
   useEffect(() => {
     dispatch(getAllProduct());
@@ -61,14 +52,11 @@ export default function ProductManage() {
       <ProductFilter onFilterChange={handleFilterChange} />
       <S.MiddleContainer>
         <S.Description>List of products</S.Description>
-        <Button
-          variant="contained"
-          size="large"
-          color="success"
-          onClick={handleOpenAddProduct}
-        >
-          Add Product
-        </Button>
+        <Link to="/manage/products/add_new">
+          <Button variant="contained" size="large" color="success">
+            Add Product
+          </Button>
+        </Link>
       </S.MiddleContainer>
 
       <TableContainer>
@@ -78,6 +66,7 @@ export default function ProductManage() {
               <TableCell>Product Name</TableCell>
               <TableCell>Brand</TableCell>
               <TableCell>Price</TableCell>
+              <TableCell>Discount Percent</TableCell>
               <TableCell>Discount Price</TableCell>
               <TableCell>Quantity</TableCell>
               <TableCell>Status</TableCell>
@@ -91,7 +80,6 @@ export default function ProductManage() {
           </TableBody>
         </Table>
       </TableContainer>
-      <AddProductModal open={openAddProduct} handleClose={handleCloseAddProduct} />
     </S.Container>
   );
 }
