@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { deleteProductById } from "../../../../store/productSlice";
 import DeleteProductModal from "../ProductModal/DeleteProductModal";
 import DeleteIcon from "@mui/icons-material/Delete";
+import UpgradeOutlinedIcon from "@mui/icons-material/UpgradeOutlined";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import ChangeStatusProductModal from "../ProductModal/ChangeStatusProductModal";
+import { Link } from "react-router-dom";
 
 export default function ProductRows({ product }) {
   const [open, setOpen] = useState(false);
@@ -60,16 +62,21 @@ export default function ProductRows({ product }) {
         <TableCell>{product.quantity}</TableCell>
         <TableCell>{product.status}</TableCell>
         <TableCell>
-          <Button
-            variant="outlined"
-            size="small"
-            color="error"
-            startIcon={<DeleteIcon />}
-            onClick={handleClickOpen}
+          <Link
+            to={{
+              pathname: `/manage/products/update/${product.product_id}`,
+              state: { product_id: product.product_id },
+            }}
           >
-            Delete
-          </Button>
-
+            <Button
+              variant="outlined"
+              size="small"
+              sx={{ color: "var(--green-fresh)" }}
+              startIcon={<UpgradeOutlinedIcon />}
+            >
+              Update
+            </Button>
+          </Link>
           <Button
             variant="outlined"
             size="small"
@@ -78,6 +85,17 @@ export default function ProductRows({ product }) {
             onClick={() => handleClickOpenStatus(product.product_id)}
           >
             Change Status
+          </Button>
+
+          <Button
+            variant="outlined"
+            size="small"
+            color="error"
+            sx={{ ml: 2 }}
+            startIcon={<DeleteIcon />}
+            onClick={handleClickOpen}
+          >
+            Delete
           </Button>
         </TableCell>
       </TableRow>
