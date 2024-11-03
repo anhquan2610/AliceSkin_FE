@@ -21,6 +21,8 @@ import ProductManage from "../pages/managementPages/ProductManage/ProductManage"
 import UserManage from "../pages/managementPages/UserManage/UserManage";
 import BlogManage from "../pages/managementPages/BlogManage/BlogManage";
 import BlogDetailManage from "../pages/managementPages/BlogManage/BlogDetailManage/BlogDetailManage";
+import UpdateProduct from "../pages/managementPages/ProductManage/UpdateProduct/UpdateProduct";
+
 
 export default function AppRoutes() {
   return (
@@ -40,6 +42,7 @@ export default function AppRoutes() {
       >
         <Route path="admin" element={<AdminHome />} />
         <Route path="products" element={<ProductManage />} />
+        <Route path="products/update/:id" element={<UpdateProduct />} />
         <Route path="users" element={<UserManage />} />
         <Route path="blogs" element={<BlogManage />} />
         <Route path="blogs/:id" element={<BlogDetailManage />} />

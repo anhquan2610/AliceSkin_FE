@@ -42,10 +42,16 @@ export default function CartItem({ item }) {
     });
   };
 
+  const imagesArray = item.product.images
+    ? JSON.parse(item.product.images)
+    : [];
+  const imageUrl =
+    imagesArray.length > 0 ? imagesArray[0] : "https://via.placeholder.com/150";
+
   return (
     <S.Container>
       <S.ImageContainer>
-        <S.ImageItem src={item.product.images} alt="product" />
+        <S.ImageItem src={imageUrl} alt={item.product.name} />
       </S.ImageContainer>
       <S.NameContainer>
         <S.ItemName>{item.product.name}</S.ItemName>

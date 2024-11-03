@@ -8,7 +8,7 @@ const initialState = {
   totalReviews: 0,
   isLoading: false,
   error: null,
-  selectedProduct: "",
+  selectedProduct: {},
   message: "",
   isSuccess: false,
 };
@@ -95,6 +95,21 @@ export const changeStatusProductByAdmin = createAsyncThunk(
     try {
       const response = await instanceAxios.put(`/api/admin/products/${product_id}/status`, { status });
       notifySuccess(response.data.message);
+      return response.data;
+    } catch (error) {
+      notifyError(error.response.data.message);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//Update Product by Admin
+export const updateProductByAdmin = createAsyncThunk(
+  "product/updateProductByAdmin",
+  async ({ product_id, productData }, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.put(`/api/admin/products/${product_id}`, productData);
+
       return response.data;
     } catch (error) {
       notifyError(error.response.data.message);
@@ -226,7 +241,24 @@ const productSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     });
-
+    
+    //Update product by Admin
+    builder.addCase(updateProductByAdmin.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateProductByAdmin.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.products = state.products.map((product) =>
+        product.product_id === action.payload.product_id
+          ? { ...product, ...action.payload } // Cập nhật sản phẩm mà không làm mất các thuộc tính khác
+          : product
+      );
+    });
+    builder.addCase(updateProductByAdmin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
 
     //Delete product by ID
     builder.addCase(deleteProductById.pending, (state) => {

@@ -42,6 +42,12 @@ export default function ProductInformation() {
     }
   };
 
+  const imagesArray = selectProduct.images
+    ? JSON.parse(selectProduct.images)
+    : [];
+  const imageUrl =
+    imagesArray.length > 0 ? imagesArray[0] : "https://via.placeholder.com/150";
+
   return (
     <S.Container>
       <S.TopContainer>
@@ -55,7 +61,7 @@ export default function ProductInformation() {
       <S.BottomContainer>
         <S.LeftContainer>
           <S.ImageContainer>
-            <S.ImageProduct src={selectProduct.images} />
+            <S.ImageProduct src={imageUrl} alt={selectProduct.name} />
           </S.ImageContainer>
         </S.LeftContainer>
         <S.RightContainer>

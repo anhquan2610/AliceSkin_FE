@@ -7,7 +7,6 @@ import {
   CardActions,
   Typography,
   Button,
-  CircularProgress,
   CardMedia,
 } from "@mui/material";
 import { getBlogById, resetBlogState } from "../../../../store/blogSlice";

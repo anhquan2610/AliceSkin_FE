@@ -107,7 +107,7 @@ export default function AddProductModal({ open, handleClose }) {
           sx={{
             display: "flex",
             flexWrap: "wrap",
-            gap: 2,
+            gap: "var(--s-1)",
           }}
         >
           <TextField
