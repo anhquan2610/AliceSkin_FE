@@ -14,10 +14,15 @@ import {
   TextField,
   Typography,
   CardMedia,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import { notifySuccess } from "../../../../utils/Nontification.utils";
 import { uploadImage } from "../../../../store/imageSlice";
+import { getAllBrands } from "../../../../store/brandSlice";
 
 export default function UpdateProduct() {
   const dispatch = useDispatch();
@@ -27,13 +32,18 @@ export default function UpdateProduct() {
   const { selectedProduct, isLoading, isSuccess } = useSelector(
     (state) => state.product
   );
+  const brands = useSelector((state) => state.brand.brands);
+  useEffect(() => {
+    dispatch(getAllBrands());
+  }, []);
+
   const [productData, setProductData] = useState({
     name: "",
     price: "",
     discount: "",
     quantity: "",
     brand_id: "",
-    images: [], // Đảm bảo images là một mảng
+    image: "",
     volume: "",
     nature: "",
     description: "",
@@ -52,7 +62,7 @@ export default function UpdateProduct() {
         discount: selectedProduct.discount || "",
         quantity: selectedProduct.quantity || "",
         brand_id: selectedProduct.brand_id || "",
-        images: JSON.parse(selectedProduct.images || "[]"), // Đảm bảo images là một mảng
+        image: selectedProduct.image || "",
         volume: selectedProduct.volume || "",
         nature: selectedProduct.nature || "",
         description: selectedProduct.description || "",
@@ -70,10 +80,10 @@ export default function UpdateProduct() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const newValue = name === "quantity" ? parseInt(value) : value;
+
     setProductData((prev) => ({
       ...prev,
-      [name]: newValue,
+      [name]: value,
     }));
   };
 
@@ -84,30 +94,28 @@ export default function UpdateProduct() {
       const url = URL.createObjectURL(file);
       setProductData((prev) => ({
         ...prev,
-        images: [url],
+        image: url,
       }));
     }
   };
 
   const handleUpdateProduct = (e) => {
     e.preventDefault();
-    let imagesUrl = productData.images;
+    let imagesUrl = productData.image;
+
+    const brand = brands.find((b) => b.brand_id === productData.brand_id);
+    if (brand) {
+      productData.brand_id = brand.brand_id;
+    }
 
     if (thumbnailFile) {
       dispatch(uploadImage(thumbnailFile))
         .then((result) => {
           if (uploadImage.fulfilled.match(result)) {
-            imagesUrl = [result.payload];
+            imagesUrl = result.payload;
             const updatedProductData = {
-              name: productData.name,
-              price: productData.price,
-              discount: productData.discount,
-              quantity: productData.quantity,
-              brand_id: productData.brand_id,
+              ...productData,
               images: imagesUrl,
-              volume: productData.volume,
-              nature: productData.nature,
-              description: productData.description,
             };
             dispatch(
               updateProductByAdmin({
@@ -122,15 +130,8 @@ export default function UpdateProduct() {
         });
     } else {
       const updatedProductData = {
-        name: productData.name,
-        price: productData.price,
-        discount: productData.discount,
-        quantity: productData.quantity,
-        brand_id: productData.brand_id,
-        images: productData.images,
-        volume: productData.volume,
-        nature: productData.nature,
-        description: productData.description,
+        ...productData,
+        image: productData.image,
       };
       dispatch(
         updateProductByAdmin({ product_id, productData: updatedProductData })
@@ -154,12 +155,7 @@ export default function UpdateProduct() {
                 objectFit: "cover",
                 aspectRatio: 1 / 1,
               }}
-              image={
-                productData.images.length > 0
-                  ? productData.images[0]
-                  : "https://via.placeholder.com/600"
-              }
-              alt="Product Image"
+              image={productData.image}
             />
           </Box>
           <Box sx={{ flex: 1 }}>
@@ -182,7 +178,6 @@ export default function UpdateProduct() {
             <TextField
               label="Giá"
               name="price"
-              type="number"
               fullWidth
               margin="normal"
               value={productData.price}
@@ -192,7 +187,6 @@ export default function UpdateProduct() {
             <TextField
               label="Giảm giá (%)"
               name="discount"
-              type="number"
               fullWidth
               margin="normal"
               value={productData.discount}
@@ -201,25 +195,29 @@ export default function UpdateProduct() {
             <TextField
               label="Số lượng"
               name="quantity"
-              type="number"
               fullWidth
               margin="normal"
               value={productData.quantity}
               onChange={handleChange}
             />
-            <TextField
-              label="ID thương hiệu"
-              name="brand_id"
-              fullWidth
-              margin="normal"
-              value={productData.brand_id}
-              onChange={handleChange}
-              required
-            />
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="brand-select-label">Chọn thương hiệu</InputLabel>
+              <Select
+                labelId="brand-select-label"
+                name="brand_id"
+                value={productData.brand_id}
+                onChange={handleChange}
+              >
+                {brands.map((brand) => (
+                  <MenuItem key={brand.brand_id} value={brand.brand_id}>
+                    {brand.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <TextField
               label="Dung tích"
               name="volume"
-              type="number"
               fullWidth
               margin="normal"
               value={productData.volume}

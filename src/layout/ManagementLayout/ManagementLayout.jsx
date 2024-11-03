@@ -16,8 +16,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logout, resetAuthState } from "../../store/authSlice";
@@ -27,6 +25,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import StoreIcon from "@mui/icons-material/Store";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import { notifySuccess } from "../../utils/Nontification.utils";
+import SpaIcon from '@mui/icons-material/Spa';
 
 const drawerWidth = 240;
 
@@ -175,7 +174,8 @@ export default function MiniDrawer() {
           {[
             { text: "User", link: "users", icon: <PersonIcon /> },
             { text: "Blog", link: "blogs", icon: <ArticleIcon /> },
-            { text: "Product", link: "products", icon: <StoreIcon /> },
+            { text: "Product", link: "products", icon: <SpaIcon /> },
+            { text: "Brand", link: "brands", icon: <StoreIcon /> },
             { text: "Admin", link: "admin", icon: <DraftsIcon /> },
           ].map((item, index) => (
             <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
