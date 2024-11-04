@@ -25,6 +25,10 @@ import UpdateProduct from "../pages/managementPages/ProductManage/UpdateProduct/
 import BrandManage from "../pages/managementPages/BrandManage/BrandManage";
 import BrandDetail from "../pages/managementPages/BrandManage/BrandDetail/BrandDetail";
 import AddProduct from "../pages/managementPages/ProductManage/AddProduct.jsx/AddProduct";
+import Survey from "../pages/Survey/Survey";
+import SurveyQuestion from "../pages/Survey/SurveyQuestion/SurveyQuestion";
+import RecommendItem from "../pages/Survey/RecommendItem/RecommendItem";
+import UpdateSurvey from "../pages/Survey/UpdateSurvey/UpdateSurvey";
 
 export default function AppRoutes() {
   return (
@@ -68,6 +72,10 @@ export default function AppRoutes() {
         <Route path="Add_Blog" element={<CreateBlog />} />
         <Route path="Update_Blog/:id" element={<UpdateBlog />} />
         <Route path="Shopping_Cart" element={<Cart />} />
+        <Route path="Survey" element={<Survey />} />
+        <Route path="Survey/Question" element={<SurveyQuestion />} />
+        <Route path="Survey/Update" element={<UpdateSurvey />} />
+        <Route path="RecommendItem" element={<RecommendItem />} />
       </Route>
     </Routes>
   );

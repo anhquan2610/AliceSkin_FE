@@ -8,6 +8,7 @@ import imageSlice from "./imageSlice";
 import cartSlice from "./cartSlice";
 import userSlice from "./userSlice";
 import brandSlice from "./brandSlice";
+import surveySlice from "./surveySlice";
 
 export const store = configureStore({
 
@@ -20,5 +21,6 @@ export const store = configureStore({
     [cartSlice.name]: cartSlice.reducer,
     [userSlice.name]: userSlice.reducer,
     [brandSlice.name]: brandSlice.reducer,
+    [surveySlice.name]: surveySlice.reducer,
   }
 });
