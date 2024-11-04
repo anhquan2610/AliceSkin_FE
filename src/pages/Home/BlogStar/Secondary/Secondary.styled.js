@@ -16,7 +16,11 @@ margin-bottom: var(--s-10);
 
 export const BtnGetStarted = styled.button`
 padding: var(--s-3);
-border: 1px solid var(--gray);
+border: 2px solid var(--gray);
 border-radius: var(--br-md);
 font-weight: var(--fw-semibold);
+cursor: pointer;
+&:hover {
+    box-shadow: var(--shadow-4);
+}
 `;

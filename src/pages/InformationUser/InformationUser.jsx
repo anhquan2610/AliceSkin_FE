@@ -5,6 +5,7 @@ import AvartarUser from "./AvartarUser/AvartarUser";
 import UpdateInformation from "./UpdateInformation/UpdateInformation";
 import ChangePassword from "./ChangePassword/ChangePassword";
 import MyBlog from "./MyBlog/MyBlog";
+import SkinInformation from "./SkinInformation/SkinInformation";
 
 export default function InformationUser() {
   const [currentLayout, setCurrentLayout] = useState("form"); 
@@ -12,6 +13,7 @@ export default function InformationUser() {
   const switchToForm = () => setCurrentLayout("form");
   const switchToUpdate = () => setCurrentLayout("update");
   const switchToReset = () => setCurrentLayout("reset");
+  const switchToSkin = () => setCurrentLayout("skin");
   const switchToMyBlog = () => setCurrentLayout("myBlog");
 
   return (
@@ -28,6 +30,12 @@ export default function InformationUser() {
           isSelected={currentLayout === "update"}
         >
           Update Information
+        </S.NavButton>
+        <S.NavButton
+          onClick={switchToSkin}
+          isSelected={currentLayout === "skin"}
+        >
+          Skin Information
         </S.NavButton>
         <S.NavButton
           onClick={switchToReset}
@@ -48,6 +56,7 @@ export default function InformationUser() {
             {currentLayout === "form" && <UserInforDetail />}
             {currentLayout === "update" && <UpdateInformation />}
             {currentLayout === "reset" && <ChangePassword />}
+            {currentLayout === "skin" && <SkinInformation />}
             {currentLayout === "myBlog" && <MyBlog />}
           </S.Content>
         </S.RightContainer>

@@ -33,9 +33,10 @@ export default function UpdateProduct() {
     (state) => state.product
   );
   const brands = useSelector((state) => state.brand.brands);
+
   useEffect(() => {
     dispatch(getAllBrands());
-  }, []);
+  }, [dispatch]);
 
   const [productData, setProductData] = useState({
     name: "",
@@ -47,7 +48,11 @@ export default function UpdateProduct() {
     volume: "",
     nature: "",
     description: "",
+    product_type: "",
+    main_ingredient: "",
+    target_skin_type: "",
   });
+
   const [thumbnailFile, setThumbnailFile] = useState(null);
 
   useEffect(() => {
@@ -66,6 +71,9 @@ export default function UpdateProduct() {
         volume: selectedProduct.volume || "",
         nature: selectedProduct.nature || "",
         description: selectedProduct.description || "",
+        product_type: selectedProduct.product_type || "",
+        main_ingredient: selectedProduct.main_ingredient || "",
+        target_skin_type: selectedProduct.target_skin_type || "",
       });
     }
   }, [selectedProduct]);
@@ -239,6 +247,33 @@ export default function UpdateProduct() {
               margin="normal"
               value={productData.description}
               onChange={handleChange}
+            />
+            <TextField
+              label="Loại sản phẩm"
+              name="product_type"
+              fullWidth
+              margin="normal"
+              value={productData.product_type}
+              onChange={handleChange}
+              placeholder="Nhập loại sản phẩm"
+            />
+            <TextField
+              label="Thành phần chính"
+              name="main_ingredient"
+              fullWidth
+              margin="normal"
+              value={productData.main_ingredient}
+              onChange={handleChange}
+              placeholder="Nhập thành phần chính"
+            />
+            <TextField
+              label="Loại da mục tiêu"
+              name="target_skin_type"
+              fullWidth
+              margin="normal"
+              value={productData.target_skin_type}
+              onChange={handleChange}
+              placeholder="Nhập loại da mục tiêu"
             />
           </Box>
         </Box>
