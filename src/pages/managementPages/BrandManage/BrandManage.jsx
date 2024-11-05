@@ -13,10 +13,12 @@ import { useEffect, useState } from "react";
 import { getAllBrands } from "../../../store/brandSlice";
 import BrandsRows from "./BrandsRows/BrandsRows";
 import AddBrandModal from "./BrandsModal/AddBrandModal";
+import BrandFilter from "./BrandFilter";
 
 export default function BrandManage() {
   const dispatch = useDispatch();
   const brands = useSelector((state) => state.brand.brands);
+  const [filteredBrands, setFilteredBrands] = useState(brands);
   const [openAddBrand, setOpenAddBrand] = useState(false);
 
   const handleOpenAddBrand = () => {
@@ -30,9 +32,29 @@ export default function BrandManage() {
   useEffect(() => {
     dispatch(getAllBrands());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredBrands(brands); // Khởi tạo danh sách lọc với tất cả thương hiệu khi brands thay đổi
+  }, [brands]);
+
+  const handleFilterChange = (filters) => {
+    const { searchTerm } = filters;
+    let filtered = brands;
+
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter((brand) =>
+        brand.name.toLowerCase().includes(searchLower)
+      );
+    }
+
+    setFilteredBrands(filtered); // Cập nhật danh sách đã lọc
+  };
+
   return (
     <S.Container>
       <S.Title>Brand Manage</S.Title>
+      <BrandFilter onFilterChange={handleFilterChange} />
       <S.MiddleContainer>
         <S.Description>List of brands</S.Description>
         <Button
@@ -55,7 +77,7 @@ export default function BrandManage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {brands.map((brand) => (
+            {filteredBrands.map((brand) => (
               <BrandsRows key={brand.brand_id} brand={brand} />
             ))}
           </TableBody>

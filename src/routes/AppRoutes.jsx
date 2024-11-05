@@ -29,6 +29,7 @@ import Survey from "../pages/Survey/Survey";
 import SurveyQuestion from "../pages/Survey/SurveyQuestion/SurveyQuestion";
 import RecommendItem from "../pages/Survey/RecommendItem/RecommendItem";
 import UpdateSurvey from "../pages/Survey/UpdateSurvey/UpdateSurvey";
+import QuestionManage from "../pages/managementPages/QuestionManage/QuestionManage";
 
 export default function AppRoutes() {
   return (
@@ -55,6 +56,7 @@ export default function AppRoutes() {
         <Route path="users" element={<UserManage />} />
         <Route path="blogs" element={<BlogManage />} />
         <Route path="blogs/:id" element={<BlogDetailManage />} />
+        <Route path="questions" element={<QuestionManage />} />
       </Route>
       <Route
         path="/"

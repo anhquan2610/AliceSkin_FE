@@ -3,18 +3,24 @@ import {
   getCartItems,
   removeItemFromCart,
   updateItemInCart,
-} from "../../../store/cartSlice"; // Import action
+} from "../../../store/cartSlice";
 import { useState } from "react";
 import * as S from "./CartItem.styled";
+import { notifyError } from "../../../utils/Nontification.utils";
 
-export default function CartItem({ item }) {
+export default function CartItem({ item, availableQuantity }) {
   const dispatch = useDispatch();
   const [count, setCount] = useState(item.quantity);
 
   const handleIncrement = () => {
-    const newQuantity = count + 1;
-    setCount(newQuantity);
-    updateCartItem(newQuantity);
+    if (count < availableQuantity) {
+      // Kiểm tra số lượng trước khi tăng
+      const newQuantity = count + 1;
+      setCount(newQuantity);
+      updateCartItem(newQuantity);
+    } else {
+      notifyError("Quantity is not enough");
+    }
   };
 
   const handleDecrement = () => {

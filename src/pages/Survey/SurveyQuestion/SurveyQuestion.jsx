@@ -35,8 +35,8 @@ export default function SurveyQuestion() {
 
   useEffect(() => {
     if (responsesFromStore.length > 0) {
-      navigate("/RecommendItem");
       notifyWarning("You have already answered the survey, let update it!");
+      navigate("/RecommendItem");
     }
   }, [responsesFromStore, navigate]);
 

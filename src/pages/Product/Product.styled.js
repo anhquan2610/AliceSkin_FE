@@ -29,6 +29,9 @@ gap: var(--s-5);
 
 export const LeftContainer = styled.div`
 flex: 3;
+display: flex;
+flex-direction: column;
+gap: var(--s-3);
 `;
 
 export const RightContainer = styled.div`

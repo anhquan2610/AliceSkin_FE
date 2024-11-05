@@ -21,10 +21,11 @@ export const MiddleContainer = styled.div`
 export const RecommnedItemContainer = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: center;
 flex-wrap: wrap;
 width: 100%;
 gap: var(--s-10);
-margin: var(--s-6);
+margin: var(--s-6) 0;
 `;
 
 export const ButtonContainer = styled.div`
@@ -65,3 +66,10 @@ padding: var(--s-4) var(--s-25);
   }
 `;
 
+export const NoProductText = styled.p`
+  font-size: var(--fs-sm);
+  font-style: italic;
+  color: gray;
+
+  margin-top: var(--s-5);
+`;
