@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
 import { notifyError, notifySuccess } from "../utils/Nontification.utils";
 
@@ -63,6 +63,7 @@ export const removeItemFromCart = createAsyncThunk(
 
 
 
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -105,5 +106,11 @@ const cartSlice = createSlice({
     });
   },
 });
+
+export const selectTotalItemsCount = (state) => {
+  // Trả về độ dài của mảng items trong giỏ hàng
+  return state.cart.cart.items ? state.cart.cart.items.length : 0;
+};
+
 
 export default cartSlice;

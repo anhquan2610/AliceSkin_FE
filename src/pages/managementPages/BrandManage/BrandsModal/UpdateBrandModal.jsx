@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetBrandState, updateBrandById } from "../../../../store/brandSlice";
 import { uploadImage, resetImageState } from "../../../../store/imageSlice";
-import { notifySuccess } from "../../../../utils/Nontification.utils";
 
 export default function UpdateBrandModal({ open, handleClose, brand }) {
   const dispatch = useDispatch();

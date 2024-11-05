@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
+import { notifySuccess } from "../utils/Nontification.utils";
 
 export const initialState = {
   users: [],
   isLoading: false,
   isError: null,
+  message: "",
 };
 //List All Users
 export const ListAllUsers = createAsyncThunk(
@@ -39,6 +41,30 @@ export const DeleteUser = createAsyncThunk(
   }
 );
 
+//Change Role User
+export const ChangeRoleUser = createAsyncThunk(
+  "user/ChangeRoleUser",
+  async ({ userId, role }, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.put(
+        `/api/admin/user/${userId}/role`,
+        { role },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      notifySuccess(response.data.message);
+      return { userId, role }; 
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -64,11 +90,29 @@ const userSlice = createSlice({
       state.isError = null;
     });
     builder.addCase(DeleteUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const deletedUserId = action.meta.arg; 
-        state.users = state.users.filter(user => user.id !== deletedUserId);
+      state.isLoading = false;
+      const deletedUserId = action.meta.arg;
+      state.users = state.users.filter((user) => user.id !== deletedUserId);
     });
     builder.addCase(DeleteUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = action.payload;
+    });
+
+    //Change Role User
+    builder.addCase(ChangeRoleUser.pending, (state) => {
+      state.isLoading = true;
+      state.isError = null;
+    });
+    builder.addCase(ChangeRoleUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.users = state.users.map((user) =>
+        user.id === action.payload.userId
+          ? { ...user, role: action.payload.role } 
+          : user
+      );
+    });
+    builder.addCase(ChangeRoleUser.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = action.payload;
     });

@@ -240,7 +240,7 @@ const productSlice = createSlice({
       state.isLoading = false;
       state.products = state.products.map((product) =>
         product.product_id === action.payload.product.product_id
-          ? { ...product, ...action.payload.product } // Cập nhật toàn bộ sản phẩm để giữ nguyên brand và các thuộc tính khác
+          ? { ...product, ...action.payload.product } 
           : product
       );
     });

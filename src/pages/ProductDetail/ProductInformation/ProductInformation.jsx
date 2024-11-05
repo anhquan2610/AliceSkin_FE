@@ -19,7 +19,7 @@ export default function ProductInformation() {
   const shippings = useSelector((state) => state.shipping.shippings);
   const cartItems = useSelector((state) => state.cart.cart.items) || [];
 
-  // Lấy số lượng sản phẩm đã có trong giỏ hàng
+
   const productInCart = cartItems.find((item) => item.product_id === productId);
   const quantityInCart = productInCart ? productInCart.quantity : 0;
   const availableToAdd = selectProduct.quantity - quantityInCart;
@@ -110,9 +110,9 @@ export default function ProductInformation() {
                 +
               </S.BtnInCrement>
             </S.BtnCount>
-            <S.BtnBuy>Mua</S.BtnBuy>
+            <S.BtnBuy>Buy</S.BtnBuy>
             <S.BtnAddToCart onClick={handleAddToCart}>
-              Thêm vào giỏ hàng <span></span>
+              Add To Cart <span></span>
               <i className="bi bi-cart"></i>
             </S.BtnAddToCart>
           </S.ButtonContainer>
