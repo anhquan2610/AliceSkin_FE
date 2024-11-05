@@ -12,7 +12,7 @@ const initialState = {
 
 //Get all brands
 export const getAllBrands = createAsyncThunk("brand/getAllBrands", async () => {
-  const response = await instanceAxios.get("/api/admin/brands");
+  const response = await instanceAxios.get("/api/brands");
   return response.data;
 });
 

@@ -6,7 +6,7 @@ import { getCartItems } from "../../store/cartSlice";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state.cart.cart); // Không cần destructure
+  const { cart } = useSelector((state) => state.cart.cart);
 
   useEffect(() => {
     dispatch(getCartItems());
@@ -26,7 +26,11 @@ export default function Cart() {
       </S.HeaderContainer>
       <S.ListCartContainer>
         {cart.items.map((item) => (
-          <CartItem key={item.id} item={item} />
+          <CartItem
+            key={item.id}
+            item={item}
+            availableQuantity={item.product.quantity}
+          />
         ))}
       </S.ListCartContainer>
       <S.TotalPrice>Total: {cart.subtotal} $</S.TotalPrice>{" "}

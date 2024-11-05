@@ -9,6 +9,7 @@ import {
 } from "../../../store/surveySlice";
 import { useNavigate } from "react-router-dom";
 import * as S from "./UpdateSurvey.styled";
+import { notifySuccess } from "../../../utils/Nontification.utils";
 
 export default function UpdateSurvey() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ export default function UpdateSurvey() {
     () => {
       if (isSuccess) {
         navigate("/RecommendItem");
+        notifySuccess("Update survey successfully!");
         dispatch(resetUpdateSurveyState());
       }
     },

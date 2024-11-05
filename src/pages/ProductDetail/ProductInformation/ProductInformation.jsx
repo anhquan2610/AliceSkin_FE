@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById, resetProductState } from "../../../store/productSlice";
 import { getAllShipping } from "../../../store/shippingSlice";
-import { addItemToCart } from "../../../store/cartSlice";
-import { notifySuccess } from "../../../utils/Nontification.utils";
+import { addItemToCart, getCartItems } from "../../../store/cartSlice";
+import {
+  notifySuccess,
+  notifyWarning,
+} from "../../../utils/Nontification.utils";
 
 export default function ProductInformation() {
   const [count, setCount] = useState(0);
@@ -14,9 +17,16 @@ export default function ProductInformation() {
 
   const selectProduct = useSelector((state) => state.product.selectedProduct);
   const shippings = useSelector((state) => state.shipping.shippings);
+  const cartItems = useSelector((state) => state.cart.cart.items) || [];
+
+  // Lấy số lượng sản phẩm đã có trong giỏ hàng
+  const productInCart = cartItems.find((item) => item.product_id === productId);
+  const quantityInCart = productInCart ? productInCart.quantity : 0;
+  const availableToAdd = selectProduct.quantity - quantityInCart;
 
   useEffect(() => {
     dispatch(getProductById(productId));
+    dispatch(getCartItems());
   }, [dispatch, productId]);
 
   useEffect(() => {
@@ -30,8 +40,11 @@ export default function ProductInformation() {
   }, [dispatch]);
 
   const handleIncrement = () => {
-    setCount(count + 1);
+    if (count < availableToAdd) {
+      setCount(count + 1);
+    }
   };
+
   const handleDecrement = () => {
     if (count > 0) {
       setCount(count - 1);
@@ -40,11 +53,16 @@ export default function ProductInformation() {
 
   const handleAddToCart = () => {
     if (count > 0) {
-      dispatch(addItemToCart({ productId, quantity: count })).then(() => {
-        notifySuccess("Product added to cart successfully!");
-      });
+      dispatch(addItemToCart({ productId, quantity: count })).then(
+        (response) => {
+          if (response.meta.requestStatus === "fulfilled") {
+            notifySuccess("Sản phẩm đã được thêm vào giỏ hàng!");
+          } else {
+          }
+        }
+      );
     } else {
-      alert("Please select quantity");
+      notifyWarning("Vui lòng chọn số lượng để thêm vào giỏ hàng!");
     }
   };
 
@@ -69,15 +87,15 @@ export default function ProductInformation() {
             <S.Price>{selectProduct.price}$</S.Price>
             <S.DiscountPrice>{selectProduct.discounted_price}$</S.DiscountPrice>
             <S.DiscountDescription>
-              Discount {Math.round(selectProduct.discount)}%
+              Giảm giá {Math.round(selectProduct.discount)}%
             </S.DiscountDescription>
           </S.PriceProduct>
           <S.CapacityProduct>
-            Capacity: {selectProduct.volume}
+            Dung tích: {selectProduct.volume}
           </S.CapacityProduct>
-          <S.StatusProduct>Status: {selectProduct.status}</S.StatusProduct>
+          <S.StatusProduct>Trạng thái: {selectProduct.status}</S.StatusProduct>
           <S.QuantityProduct>
-            Quantity: {selectProduct.quantity}
+            Số lượng: {selectProduct.quantity}
           </S.QuantityProduct>
           <S.ButtonContainer>
             <S.BtnCount>
@@ -87,33 +105,33 @@ export default function ProductInformation() {
               <S.Count>{count}</S.Count>
               <S.BtnInCrement
                 onClick={handleIncrement}
-                disabled={count >= selectProduct.quantity}
+                disabled={count >= availableToAdd}
               >
                 +
               </S.BtnInCrement>
             </S.BtnCount>
-            <S.BtnBuy>Buy</S.BtnBuy>
+            <S.BtnBuy>Mua</S.BtnBuy>
             <S.BtnAddToCart onClick={handleAddToCart}>
-              Add to Cart <span></span>
+              Thêm vào giỏ hàng <span></span>
               <i className="bi bi-cart"></i>
             </S.BtnAddToCart>
           </S.ButtonContainer>
           <S.GroupInformation>
-            <S.Title>Brand:</S.Title>
+            <S.Title>Thương hiệu:</S.Title>
             <S.Content>{selectProduct.brand?.name}</S.Content>
           </S.GroupInformation>
           <S.GroupInformation>
-            <S.Title>Description:</S.Title>
+            <S.Title>Mô tả:</S.Title>
             <S.Content>{selectProduct.description}</S.Content>
           </S.GroupInformation>
           <S.GroupInformation>
-            <S.Title>Delivery Cash:</S.Title>
+            <S.Title>Phí vận chuyển:</S.Title>
             <S.Content>
               <S.TableDelivery>
                 <S.TableHeader>
                   <S.Tr>
-                    <S.Th>Name</S.Th>
-                    <S.Th>Shipping Cost</S.Th>
+                    <S.Th>Tên</S.Th>
+                    <S.Th>Phí vận chuyển</S.Th>
                   </S.Tr>
                 </S.TableHeader>
                 <S.TableBody>

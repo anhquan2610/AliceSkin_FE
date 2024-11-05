@@ -5,10 +5,9 @@ import { getAllProduct } from "../../../store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export default function ListProduct({ priceFilter }) {
+export default function ListProduct({ priceFilter, selectedBrands }) {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
-  const { isLoading } = useSelector((state) => state.product);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
@@ -25,14 +24,19 @@ export default function ListProduct({ priceFilter }) {
         return price >= 0 && price <= 50;
       case "50-100":
         return price > 50 && price <= 100;
-      case "100-150":
-        return price > 100 && price <= 150;
+      case "100+":
+        return price > 100;
       default:
         return true;
     }
   };
 
-  const sortedProducts = products.filter(filterByPrice);
+  const filterByBrand = (product) => {
+    if (selectedBrands.length === 0) return true;
+    return selectedBrands.includes(product.brand?.name);
+  };
+
+  const sortedProducts = products.filter(filterByPrice).filter(filterByBrand);
 
   return (
     <S.Container>
@@ -58,7 +62,11 @@ export default function ListProduct({ priceFilter }) {
               .toLocaleLowerCase()
               .includes(searchLower);
 
-            return searchLower === "" || nameSearch;
+            const natureSearch = product.nature
+              .toLocaleLowerCase()
+              .includes(searchLower);
+
+            return searchLower === "" || nameSearch || natureSearch;
           })
           .map((product) => (
             <ItemProduct
