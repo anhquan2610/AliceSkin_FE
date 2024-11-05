@@ -17,7 +17,7 @@ export default function Navbar() {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(resetSurveyState());
-    notifySuccess("Đăng xuất thành công");
+    notifySuccess("Logout successfully");
     navigate("/login");
   };
 
@@ -39,17 +39,16 @@ export default function Navbar() {
       </S.Group>
       <S.NavList>
         <S.StyledLink to="/home">
-          <S.NavItem>Trang Chủ</S.NavItem>
+          <S.NavItem>Home</S.NavItem>
         </S.StyledLink>
         <S.StyledLink to="/blog/1">
           <S.NavItem>Blog</S.NavItem>
         </S.StyledLink>
         <S.StyledLink to="/product">
-          <S.NavItem>Sản Phẩm</S.NavItem>
+          <S.NavItem>Products</S.NavItem>
         </S.StyledLink>
-        <S.NavItem>Thương Hiệu</S.NavItem>
-        <S.NavItem>Bộ Sưu Tập</S.NavItem>
-        <S.NavItem>Liên Hệ</S.NavItem>
+        <S.NavItem>Brands</S.NavItem>
+       
       </S.NavList>
       <S.Group>
         <S.StyledLink to="/Shopping_Cart">
@@ -77,9 +76,9 @@ export default function Navbar() {
         }}
       >
         <S.StyledLink to="/user_info">
-          <MenuItem onClick={handleCloseMenu}>Tài Khoản Của Tôi</MenuItem>
+          <MenuItem onClick={handleCloseMenu}>My Information</MenuItem>
         </S.StyledLink>
-        <MenuItem onClick={handleLogout}>Đăng Xuất</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </S.Container>
   );

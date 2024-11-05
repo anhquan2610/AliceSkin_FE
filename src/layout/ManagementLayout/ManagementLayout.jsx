@@ -19,7 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logout, resetAuthState } from "../../store/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PersonIcon from "@mui/icons-material/Person";
 import ArticleIcon from "@mui/icons-material/Article";
 import StoreIcon from "@mui/icons-material/Store";
@@ -114,6 +114,9 @@ export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const role = useSelector((state) => state.auth.role);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -128,6 +131,42 @@ export default function MiniDrawer() {
     notifySuccess("Logout successfully!");
     navigate("/login");
   };
+
+  const menuItems = [
+    {
+      text: "Dashboard",
+      link: "admin",
+      icon: <DraftsIcon />,
+      roles: ["admin", "staff"],
+    },
+    { text: "User", link: "users", icon: <PersonIcon />, roles: ["admin"] },
+    {
+      text: "Blog",
+      link: "blogs",
+      icon: <ArticleIcon />,
+      roles: ["admin", "staff"],
+    },
+    { text: "Product", link: "products", icon: <SpaIcon />, roles: ["admin"] },
+    { text: "Brand", link: "brands", icon: <StoreIcon />, roles: ["admin"] },
+    {
+      text: "Question",
+      link: "questions",
+      icon: <QuizOutlinedIcon />,
+      roles: ["admin", "staff"],
+    },
+    {
+      text: "Shippings",
+      link: "shippings",
+      icon: <LocalShippingTwoToneIcon />,
+      roles: ["admin"],
+    },
+    {
+      text: "Vouchers",
+      link: "vouchers",
+      icon: <ConfirmationNumberOutlinedIcon />,
+      roles: ["admin"],
+    },
+  ];
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -155,7 +194,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Alice Skin Admin Management
+            Alice Skin Management
           </Typography>
           <IconButton color="inherit" onClick={handleLogout}>
             <LogoutIcon />
@@ -174,74 +213,39 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {[
-            { text: "Admin", link: "admin", icon: <DraftsIcon /> },
-            { text: "User", link: "users", icon: <PersonIcon /> },
-            { text: "Blog", link: "blogs", icon: <ArticleIcon /> },
-            { text: "Product", link: "products", icon: <SpaIcon /> },
-            { text: "Brand", link: "brands", icon: <StoreIcon /> },
-            { text: "Question", link: "questions", icon: <QuizOutlinedIcon /> },
-            {
-              text: "Shippings",
-              link: "shippings",
-              icon: <LocalShippingTwoToneIcon />,
-            },
-            {
-              text: "Vouchers",
-              link: "vouchers",
-              icon: <ConfirmationNumberOutlinedIcon />,
-            },
-          ].map((item, index) => (
-            <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                component={Link}
-                to={item.link}
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: "initial",
-                      }
-                    : {
-                        justifyContent: "center",
-                      },
-                ]}
+          {menuItems
+            .filter((item) => item.roles.includes(role))
+            .map((item) => (
+              <ListItem
+                key={item.text}
+                disablePadding
+                sx={{ display: "block" }}
               >
-                <ListItemIcon
+                <ListItemButton
+                  component={Link}
+                  to={item.link}
                   sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: "center",
-                    },
+                    { minHeight: 48, px: 2.5 },
                     open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: "auto",
-                        },
+                      ? { justifyContent: "initial" }
+                      : { justifyContent: "center" },
                   ]}
                 >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
+                  <ListItemIcon
+                    sx={[
+                      { minWidth: 0, justifyContent: "center" },
+                      open ? { mr: 3 } : { mr: "auto" },
+                    ]}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    sx={[open ? { opacity: 1 } : { opacity: 0 }]}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
         </List>
         <Divider />
       </Drawer>

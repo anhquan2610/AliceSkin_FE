@@ -51,7 +51,7 @@ export default function BlogManage() {
   return (
     <S.Container>
       <S.Title>Blog Manage</S.Title>
-      <BlogFilter onFilterChange={handleFilterChange} />{" "}
+      <BlogFilter onFilterChange={handleFilterChange} />
     
       <S.Description>List of blogs</S.Description>
       <TableContainer>

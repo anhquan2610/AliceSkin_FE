@@ -13,15 +13,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllQuestions } from "../../../store/surveySlice";
 import AddQuestionModal from "./QuestionsModal/AddQuestionModal";
+import FilterQuestion from "./FilterQuestion";
 
 export default function QuestionManage() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.survey.questions);
   const [openAdd, setOpenAdd] = useState(false);
+  const [filteredQuestions, setFilteredQuestions] = useState(questions);
 
   useEffect(() => {
     dispatch(getAllQuestions());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredQuestions(questions);
+  }, [questions]);
+
+  const handleFilterChange = (filters) => {
+    const { searchTerm, category } = filters;
+    let filtered = questions;
+
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter((question) =>
+        question.question_text.toLowerCase().includes(searchLower)
+      );
+    }
+
+    if (category) {
+      filtered = filtered.filter((question) => question.category === category);
+    }
+
+    setFilteredQuestions(filtered);
+  };
 
   const handleOpenAdd = () => {
     setOpenAdd(true);
@@ -34,6 +58,7 @@ export default function QuestionManage() {
   return (
     <S.Container>
       <S.Title>Question Manage</S.Title>
+      <FilterQuestion onFilterChange={handleFilterChange} />
       <S.MiddleContainer>
         <S.Description>List of manage</S.Description>
         <Button
@@ -55,7 +80,7 @@ export default function QuestionManage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {questions.map((question) => (
+            {filteredQuestions.map((question) => (
               <QuestionsRows key={question.question_id} question={question} />
             ))}
           </TableBody>

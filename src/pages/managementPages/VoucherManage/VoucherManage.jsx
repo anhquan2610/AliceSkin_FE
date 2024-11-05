@@ -13,11 +13,39 @@ import { useEffect, useState } from "react";
 import { getAllVoucher } from "../../../store/voucherSlice";
 import VoucherRows from "./VoucherRows/VoucherRows";
 import AddVoucherModal from "./VoucherModal/AddVoucherModal";
+import VoucherFilter from "./VoucherFilter";
 
 export default function VoucherManage() {
   const dispatch = useDispatch();
   const vouchers = useSelector((state) => state.voucher.vouchers);
   const [openAddVoucher, setOpenAddVoucher] = useState(false);
+  const [filteredVouchers, setFilteredVouchers] = useState(vouchers);
+
+  useEffect(() => {
+    dispatch(getAllVoucher());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredVouchers(vouchers);
+  }, [vouchers]);
+
+  const handleFilterChange = (filters) => {
+    const { searchTerm, status } = filters;
+    let filtered = vouchers;
+
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter((voucher) =>
+        voucher.code.toLowerCase().includes(searchLower)
+      );
+    }
+
+    if (status) {
+      filtered = filtered.filter((voucher) => voucher.status === status);
+    }
+
+    setFilteredVouchers(filtered);
+  };
 
   const handleOpenAddVoucher = () => {
     setOpenAddVoucher(true);
@@ -27,13 +55,10 @@ export default function VoucherManage() {
     setOpenAddVoucher(false);
   };
 
-  useEffect(() => {
-    dispatch(getAllVoucher());
-  }, [dispatch]);
-
   return (
     <S.Container>
       <S.Title>Voucher Manage</S.Title>
+      <VoucherFilter onFilterChange={handleFilterChange} />
       <S.MiddleContainer>
         <S.Description>List of voucher</S.Description>
         <Button
@@ -58,7 +83,7 @@ export default function VoucherManage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {vouchers.map((voucher) => (
+            {filteredVouchers.map((voucher) => (
               <VoucherRows key={voucher.voucher_id} voucher={voucher} />
             ))}
           </TableBody>
