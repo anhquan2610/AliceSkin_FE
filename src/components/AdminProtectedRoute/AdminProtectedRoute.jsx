@@ -8,7 +8,7 @@ export default function AdminProtectedRoute({ children }) {
   if (!token) {
     return <Navigate to="/login" />;
   }
-  if (role !== "admin") {
+  if (role !== "admin" && role !== "staff") {
     return <Navigate to="/home" />;
   }
 
