@@ -10,7 +10,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { changeStatusProductByAdmin } from "../../../../store/productSlice";
+import { changeVoucherStatus } from "../../../../store/voucherSlice";
 
 const style = {
   position: "absolute",
@@ -23,14 +23,14 @@ const style = {
   p: 4,
 };
 
-const ChangeStatusProductModal = ({ open, onClose, productId }) => {
+const ChangeStatusVoucherModal = ({ open, onClose, voucherId }) => {
   const [status, setStatus] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (status) {
-      dispatch(changeStatusProductByAdmin({ product_id: productId, status }))
+      dispatch(changeVoucherStatus({ voucher_id: voucherId, status }))
         .unwrap()
         .then(() => {
           onClose();
@@ -42,7 +42,7 @@ const ChangeStatusProductModal = ({ open, onClose, productId }) => {
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
         <Typography variant="h6" component="h2" mb={2}>
-          Change Product Status
+          Change Voucher Status
         </Typography>
         <form onSubmit={handleSubmit}>
           <FormControl fullWidth required sx={{ mb: 2 }}>
@@ -55,8 +55,8 @@ const ChangeStatusProductModal = ({ open, onClose, productId }) => {
               <MenuItem value="" disabled>
                 Select Status
               </MenuItem>
-              <MenuItem value="available">Available</MenuItem>
-              <MenuItem value="out of stock">Out of stock</MenuItem>
+              <MenuItem value="active">Active</MenuItem>
+              <MenuItem value="inactive">Inactive</MenuItem>
             </Select>
           </FormControl>
           <Button type="submit" variant="contained" color="primary">
@@ -68,4 +68,4 @@ const ChangeStatusProductModal = ({ open, onClose, productId }) => {
   );
 };
 
-export default ChangeStatusProductModal;
+export default ChangeStatusVoucherModal;

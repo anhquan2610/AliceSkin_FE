@@ -30,6 +30,8 @@ import SurveyQuestion from "../pages/Survey/SurveyQuestion/SurveyQuestion";
 import RecommendItem from "../pages/Survey/RecommendItem/RecommendItem";
 import UpdateSurvey from "../pages/Survey/UpdateSurvey/UpdateSurvey";
 import QuestionManage from "../pages/managementPages/QuestionManage/QuestionManage";
+import ShippingManage from "../pages/managementPages/ShippingManage/ShippingManage";
+import VoucherManage from "../pages/managementPages/VoucherManage/VoucherManage";
 
 export default function AppRoutes() {
   return (
@@ -57,6 +59,9 @@ export default function AppRoutes() {
         <Route path="blogs" element={<BlogManage />} />
         <Route path="blogs/:id" element={<BlogDetailManage />} />
         <Route path="questions" element={<QuestionManage />} />
+        <Route path="shippings" element={<ShippingManage />} />
+        <Route path="vouchers" element={<VoucherManage />} />
+
       </Route>
       <Route
         path="/"

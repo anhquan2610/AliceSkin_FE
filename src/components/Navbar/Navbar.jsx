@@ -1,9 +1,9 @@
 import * as S from "./Navbar.styled";
 import Logo from "../../assets/images/logo.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Menu, MenuItem } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { Menu, MenuItem, Badge } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/authSlice";
 import { notifySuccess } from "../../utils/Nontification.utils";
@@ -13,13 +13,15 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(logout());
     dispatch(resetSurveyState());
-    notifySuccess("Logged out successfully");
+    notifySuccess("Đăng xuất thành công");
     navigate("/login");
   };
-  const handlUserClick = (e) => {
+
+  const handleUserClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
 
@@ -37,25 +39,27 @@ export default function Navbar() {
       </S.Group>
       <S.NavList>
         <S.StyledLink to="/home">
-          <S.NavItem>Home</S.NavItem>
+          <S.NavItem>Trang Chủ</S.NavItem>
         </S.StyledLink>
         <S.StyledLink to="/blog/1">
           <S.NavItem>Blog</S.NavItem>
         </S.StyledLink>
         <S.StyledLink to="/product">
-          <S.NavItem>Products</S.NavItem>
+          <S.NavItem>Sản Phẩm</S.NavItem>
         </S.StyledLink>
-        <S.NavItem>Brands</S.NavItem>
-        <S.NavItem>Collection</S.NavItem>
-        <S.NavItem>Contact</S.NavItem>
+        <S.NavItem>Thương Hiệu</S.NavItem>
+        <S.NavItem>Bộ Sưu Tập</S.NavItem>
+        <S.NavItem>Liên Hệ</S.NavItem>
       </S.NavList>
       <S.Group>
         <S.StyledLink to="/Shopping_Cart">
           <S.ShoppingCart>
-            <i className="bi bi-bag" />
+            <Badge>
+              <i className="bi bi-bag" />
+            </Badge>
           </S.ShoppingCart>
         </S.StyledLink>
-        <S.Profile onClick={handlUserClick}>
+        <S.Profile onClick={handleUserClick}>
           <i className="bi bi-person" />
         </S.Profile>
       </S.Group>
@@ -73,9 +77,9 @@ export default function Navbar() {
         }}
       >
         <S.StyledLink to="/user_info">
-          <MenuItem onClick={handleCloseMenu}>My Account</MenuItem>
+          <MenuItem onClick={handleCloseMenu}>Tài Khoản Của Tôi</MenuItem>
         </S.StyledLink>
-        <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+        <MenuItem onClick={handleLogout}>Đăng Xuất</MenuItem>
       </Menu>
     </S.Container>
   );

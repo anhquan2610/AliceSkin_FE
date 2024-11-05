@@ -33,7 +33,7 @@ export default function QuestionManage() {
 
   return (
     <S.Container>
-      Question Manage
+      <S.Title>Question Manage</S.Title>
       <S.MiddleContainer>
         <S.Description>List of manage</S.Description>
         <Button

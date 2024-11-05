@@ -10,7 +10,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { changeStatusProductByAdmin } from "../../../../store/productSlice";
+import { ChangeRoleUser } from "../../../../store/userSlice";
 
 const style = {
   position: "absolute",
@@ -23,17 +23,20 @@ const style = {
   p: 4,
 };
 
-const ChangeStatusProductModal = ({ open, onClose, productId }) => {
-  const [status, setStatus] = useState("");
+const ChangeRoleModal = ({ open, onClose, userId }) => {
+  const [role, setRole] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (status) {
-      dispatch(changeStatusProductByAdmin({ product_id: productId, status }))
+    if (role) {
+      dispatch(ChangeRoleUser({ userId, role }))
         .unwrap()
         .then(() => {
-          onClose();
+          onClose(); // Đóng modal sau khi cập nhật thành công
+        })
+        .catch((error) => {
+          console.error("Failed to change role:", error);
         });
     }
   };
@@ -42,25 +45,26 @@ const ChangeStatusProductModal = ({ open, onClose, productId }) => {
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
         <Typography variant="h6" component="h2" mb={2}>
-          Change Product Status
+          Change User Role
         </Typography>
         <form onSubmit={handleSubmit}>
           <FormControl fullWidth required sx={{ mb: 2 }}>
-            <InputLabel>Status</InputLabel>
+            <InputLabel>Role</InputLabel>
             <Select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              label="Status"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              label="Role"
             >
               <MenuItem value="" disabled>
-                Select Status
+                Select Role
               </MenuItem>
-              <MenuItem value="available">Available</MenuItem>
-              <MenuItem value="out of stock">Out of stock</MenuItem>
+              <MenuItem value="user">User</MenuItem>
+              <MenuItem value="staff">Staff</MenuItem>
+              <MenuItem value="admin">Admin</MenuItem>
             </Select>
           </FormControl>
           <Button type="submit" variant="contained" color="primary">
-            Change Status
+            Change Role
           </Button>
         </form>
       </Box>
@@ -68,4 +72,4 @@ const ChangeStatusProductModal = ({ open, onClose, productId }) => {
   );
 };
 
-export default ChangeStatusProductModal;
+export default ChangeRoleModal;

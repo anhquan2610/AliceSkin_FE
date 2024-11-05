@@ -27,6 +27,8 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import { notifySuccess } from "../../utils/Nontification.utils";
 import SpaIcon from "@mui/icons-material/Spa";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
+import LocalShippingTwoToneIcon from "@mui/icons-material/LocalShippingTwoTone";
+import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
 
 const drawerWidth = 240;
 
@@ -179,6 +181,16 @@ export default function MiniDrawer() {
             { text: "Product", link: "products", icon: <SpaIcon /> },
             { text: "Brand", link: "brands", icon: <StoreIcon /> },
             { text: "Question", link: "questions", icon: <QuizOutlinedIcon /> },
+            {
+              text: "Shippings",
+              link: "shippings",
+              icon: <LocalShippingTwoToneIcon />,
+            },
+            {
+              text: "Vouchers",
+              link: "vouchers",
+              icon: <ConfirmationNumberOutlinedIcon />,
+            },
           ].map((item, index) => (
             <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
