@@ -29,17 +29,7 @@ const FilterQuestion = ({ onFilterChange }) => {
         value={searchTerm}
         onChange={handleSearchChange}
       />
-      <FormControl variant="outlined" sx={{ width: "var(--s-30)" }}>
-        <InputLabel>Category</InputLabel>
-        <Select value={status} onChange={handleStatusChange} label="Category">
-          <MenuItem value="">
-            <em>All</em>
-          </MenuItem>
-          <MenuItem value="interest">Interest</MenuItem>
-          <MenuItem value="Goal">Goal</MenuItem>
-          <MenuItem value="Factor">Factor</MenuItem>
-        </Select>
-      </FormControl>
+     
     </div>
   );
 };
