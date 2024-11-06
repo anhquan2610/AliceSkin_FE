@@ -18,11 +18,18 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  IconButton,
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import { notifySuccess } from "../../../../utils/Nontification.utils";
 import { uploadImage } from "../../../../store/imageSlice";
 import { getAllBrands } from "../../../../store/brandSlice";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {
+  PRODUCT_TYPES,
+  MAIN_INGREDIENTS,
+  TARGET_SKIN_TYPES,
+} from "../ProductValue";
 
 export default function UpdateProduct() {
   const dispatch = useDispatch();
@@ -80,7 +87,7 @@ export default function UpdateProduct() {
 
   useEffect(() => {
     if (isSuccess) {
-      notifySuccess("Updated product successfully!");
+      notifySuccess("Cập nhật sản phẩm thành công!");
       dispatch(resetProductState());
       navigate("/manage/products");
     }
@@ -88,7 +95,6 @@ export default function UpdateProduct() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setProductData((prev) => ({
       ...prev,
       [name]: value,
@@ -123,7 +129,7 @@ export default function UpdateProduct() {
             imagesUrl = result.payload;
             const updatedProductData = {
               ...productData,
-              images: imagesUrl,
+              image: imagesUrl,
             };
             dispatch(
               updateProductByAdmin({
@@ -134,7 +140,7 @@ export default function UpdateProduct() {
           }
         })
         .catch((error) => {
-          console.error("Error uploading image:", error);
+          console.error("Lỗi khi tải ảnh lên:", error);
         });
     } else {
       const updatedProductData = {
@@ -149,9 +155,18 @@ export default function UpdateProduct() {
 
   return (
     <Card sx={{ height: "auto" }}>
+      <IconButton
+        sx={{
+          color: "var(--black)",
+          mb: "var(--s-3)",
+        }}
+        onClick={() => navigate("/manage/products")}
+      >
+        <ArrowBackIcon />
+      </IconButton>
       <CardContent>
         <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>
-          Update Product: {productData.name}
+          Cập nhật sản phẩm: {productData.name}
         </Typography>
         <Box sx={{ display: "flex" }}>
           <Box sx={{ flex: 1, paddingRight: 2 }}>
@@ -168,7 +183,7 @@ export default function UpdateProduct() {
           </Box>
           <Box sx={{ flex: 1 }}>
             <TextField
-              label="Name Product"
+              label="Tên sản phẩm"
               name="name"
               fullWidth
               margin="normal"
@@ -176,13 +191,16 @@ export default function UpdateProduct() {
               onChange={handleChange}
               required
             />
-            <TextField
-              label="Chọn ảnh"
-              type="file"
-              onChange={handleFileChange}
+
+            <Button
+              variant="outlined"
+              component="label"
               fullWidth
               margin="normal"
-            />
+            >
+              Chọn ảnh
+              <input type="file" hidden onChange={handleFileChange} />
+            </Button>
             <TextField
               label="Giá"
               name="price"
@@ -248,33 +266,57 @@ export default function UpdateProduct() {
               value={productData.description}
               onChange={handleChange}
             />
-            <TextField
-              label="Loại sản phẩm"
-              name="product_type"
-              fullWidth
-              margin="normal"
-              value={productData.product_type}
-              onChange={handleChange}
-              placeholder="Nhập loại sản phẩm"
-            />
-            <TextField
-              label="Thành phần chính"
-              name="main_ingredient"
-              fullWidth
-              margin="normal"
-              value={productData.main_ingredient}
-              onChange={handleChange}
-              placeholder="Nhập thành phần chính"
-            />
-            <TextField
-              label="Loại da mục tiêu"
-              name="target_skin_type"
-              fullWidth
-              margin="normal"
-              value={productData.target_skin_type}
-              onChange={handleChange}
-              placeholder="Nhập loại da mục tiêu"
-            />
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="product_type-select-label">
+                Loại sản phẩm
+              </InputLabel>
+              <Select
+                labelId="product_type-select-label"
+                name="product_type"
+                value={productData.product_type}
+                onChange={handleChange}
+              >
+                {PRODUCT_TYPES.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    {type}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="main_ingredient-select-label">
+                Thành phần chính
+              </InputLabel>
+              <Select
+                labelId="main_ingredient-select-label"
+                name="main_ingredient"
+                value={productData.main_ingredient}
+                onChange={handleChange}
+              >
+                {MAIN_INGREDIENTS.map((ingredient) => (
+                  <MenuItem key={ingredient} value={ingredient}>
+                    {ingredient}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="target_skin_type-select-label">
+                Loại da mục tiêu
+              </InputLabel>
+              <Select
+                labelId="target_skin_type-select-label"
+                name="target_skin_type"
+                value={productData.target_skin_type}
+                onChange={handleChange}
+              >
+                {TARGET_SKIN_TYPES.map((skinType) => (
+                  <MenuItem key={skinType} value={skinType}>
+                    {skinType}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Box>
         </Box>
       </CardContent>
@@ -290,7 +332,7 @@ export default function UpdateProduct() {
           onClick={handleUpdateProduct}
           disabled={isLoading}
         >
-          {isLoading ? "Uploading...." : "Update Product"}
+          {isLoading ? "Đang tải...." : "Cập nhật sản phẩm"}
         </Button>
       </CardActions>
     </Card>

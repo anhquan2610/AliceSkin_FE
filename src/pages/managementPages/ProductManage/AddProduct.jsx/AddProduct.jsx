@@ -12,6 +12,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  IconButton,
 } from "@mui/material";
 import { getAllBrands } from "../../../../store/brandSlice";
 import { resetImageState, uploadImage } from "../../../../store/imageSlice";
@@ -21,6 +22,12 @@ import {
 } from "../../../../store/productSlice";
 import { useNavigate } from "react-router-dom";
 import { notifySuccess } from "../../../../utils/Nontification.utils";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {
+  PRODUCT_TYPES,
+  MAIN_INGREDIENTS,
+  TARGET_SKIN_TYPES,
+} from "../ProductValue";
 
 export default function AddProduct() {
   const dispatch = useDispatch();
@@ -87,6 +94,15 @@ export default function AddProduct() {
 
   return (
     <Card>
+      <IconButton
+        sx={{
+          color: "var(--black)",
+          mb: "var(--s-3)",
+        }}
+        onClick={() => navigate("/manage/products")}
+      >
+        <ArrowBackIcon />
+      </IconButton>
       <CardContent>
         <Typography variant="h5" gutterBottom>
           Add New Product
@@ -100,9 +116,18 @@ export default function AddProduct() {
           <Box
             display="flex"
             flexDirection="column"
+            gap={3}
             alignItems="center"
             width="40%"
           >
+            {formData.image && (
+              <Box
+                component="img"
+                src={formData.image}
+                alt="Product"
+                sx={{ width: "100%", height: "auto", marginTop: 2 }}
+              />
+            )}
             <Button
               variant="contained"
               component="label"
@@ -117,14 +142,6 @@ export default function AddProduct() {
                 onChange={handleImageChange}
               />
             </Button>
-            {formData.image && (
-              <Box
-                component="img"
-                src={formData.image}
-                alt="Product"
-                sx={{ width: "100%", height: "auto", marginTop: 2 }}
-              />
-            )}
           </Box>
 
           <Box component="form" onSubmit={handleSubmit} flex="1">
@@ -208,30 +225,62 @@ export default function AddProduct() {
               onChange={handleInputChange}
               margin="normal"
             />
-            <TextField
-              fullWidth
-              name="product_type"
-              label="Product Type"
-              value={formData.product_type}
-              onChange={handleInputChange}
-              margin="normal"
-            />
-            <TextField
-              fullWidth
-              name="main_ingredient"
-              label="Main Ingredient"
-              value={formData.main_ingredient}
-              onChange={handleInputChange}
-              margin="normal"
-            />
-            <TextField
-              fullWidth
-              name="target_skin_type"
-              label="Target Skin Type"
-              value={formData.target_skin_type}
-              onChange={handleInputChange}
-              margin="normal"
-            />
+            <FormControl fullWidth margin="normal" sx={{ flex: "1 1 48%" }}>
+              <InputLabel id="product-type-select-label">
+                Product Type
+              </InputLabel>
+              <Select
+                labelId="product-type-select-label"
+                name="product_type"
+                value={formData.product_type}
+                onChange={handleInputChange}
+                required
+              >
+                {PRODUCT_TYPES.map((type, index) => (
+                  <MenuItem key={index} value={type}>
+                    {type}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth margin="normal" sx={{ flex: "1 1 48%" }}>
+              <InputLabel id="main-ingredient-select-label">
+                Main Ingredient
+              </InputLabel>
+              <Select
+                labelId="main-ingredient-select-label"
+                name="main_ingredient"
+                value={formData.main_ingredient}
+                onChange={handleInputChange}
+                required
+              >
+                {MAIN_INGREDIENTS.map((ingredient, index) => (
+                  <MenuItem key={index} value={ingredient}>
+                    {ingredient}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth margin="normal" sx={{ flex: "1 1 48%" }}>
+              <InputLabel id="target-skin-type-select-label">
+                Target Skin Type
+              </InputLabel>
+              <Select
+                labelId="target-skin-type-select-label"
+                name="target_skin_type"
+                value={formData.target_skin_type}
+                onChange={handleInputChange}
+                required
+              >
+                {TARGET_SKIN_TYPES.map((skinType, index) => (
+                  <MenuItem key={index} value={skinType}>
+                    {skinType}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <Button
               type="submit"
               variant="contained"

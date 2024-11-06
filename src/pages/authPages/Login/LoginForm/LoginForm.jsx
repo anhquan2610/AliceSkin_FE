@@ -6,7 +6,6 @@ import { resetAuthState, signIn } from "../../../../store/authSlice.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { notifySuccess } from "../../../../utils/Nontification.utils.js";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
 export default function LoginForm() {
@@ -35,7 +34,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (token && role) {
-      if (role === "admin") {
+      if (role === "admin" || role === "staff") {
         navigate("/manage/admin");
       } else {
         navigate("/home");
@@ -43,33 +42,31 @@ export default function LoginForm() {
     }
   }, [token, role, navigate]);
 
-  // Xử lý thành công login với Google
-  const handleGoogleLoginSuccess = async (response) => {
-    try {
-      const token = localStorage.getItem("token");
-      const result = await axios.get(
-        `http://127.0.0.1:8000/api/auth/google/callback`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      // Lưu token từ backend vào localStorage
-      localStorage.setItem("token", result.data.access_token);
-      notifySuccess("Login with Google successfully");
-      navigate("/home"); // Điều hướng đến trang home
-    } catch (error) {
-      console.error("Google login failed:", error);
-    }
+  // Xử lý đăng nhập với Google
+  const handleLoginWithGoogle = () => {
+    // Chuyển hướng người dùng tới backend để đăng nhập Google
+    window.location.href = "http://127.0.0.1:8000/api/auth/google/callback"; // Đảm bảo URL này trùng khớp với route của bạn
   };
+
+  // Xử lý khi người dùng được chuyển về sau khi đăng nhập thành công
+  useEffect(() => {
+    // Kiểm tra URL có token từ query params hay không
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromUrl = params.get("tk");
+
+    if (tokenFromUrl) {
+      // Lưu token vào localStorage
+      localStorage.setItem("token", tokenFromUrl);
+      notifySuccess("Login with Google successfully");
+      navigate("/home"); // Điều hướng đến trang home sau khi login thành công
+    }
+  }, [navigate]);
 
   return (
     <S.Container>
       <S.Title>Login</S.Title>
       <S.Subtitle>
-        Don’t have an account ?<span> </span>
+        Don’t have an account? <span> </span>
         <Link to="/register" style={{ color: "var(--blue)" }}>
           Request account
         </Link>
@@ -115,15 +112,9 @@ export default function LoginForm() {
 
       <S.BlankSpace />
       <S.ContainerBottom>
-        {/* Nút đăng nhập với Google */}
-        <GoogleOAuthProvider clientId="795793395963-4vcbsu2b6fn5d38j09r5fke87ku92qpe.apps.googleusercontent.com">
-          <GoogleLogin
-            onSuccess={handleGoogleLoginSuccess}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          />
-        </GoogleOAuthProvider>
+        <S.BtnLoginGoogle onClick={handleLoginWithGoogle}>
+          Login With Google
+        </S.BtnLoginGoogle>
       </S.ContainerBottom>
     </S.Container>
   );

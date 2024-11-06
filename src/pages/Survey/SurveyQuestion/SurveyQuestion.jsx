@@ -7,10 +7,7 @@ import {
   submitSurveyReponses,
 } from "../../../store/surveySlice";
 import { useNavigate } from "react-router-dom";
-import {
-  notifySuccess,
-  notifyWarning,
-} from "../../../utils/Nontification.utils";
+import { notifyWarning } from "../../../utils/Nontification.utils";
 
 export default function SurveyQuestion() {
   const dispatch = useDispatch();
@@ -72,7 +69,7 @@ export default function SurveyQuestion() {
         {questions.map((question) => (
           <S.Question key={question.question_id}>
             <S.QuestionText>{question.question_text}</S.QuestionText>
-            {question.type === "multiple_choice" && (
+            {question.question_type === "multiple_choice" && (
               <S.OptionContainer>
                 {question.options.map((option, index) => (
                   <S.Option key={index}>

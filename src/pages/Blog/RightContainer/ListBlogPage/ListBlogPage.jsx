@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function ListBlogPage() {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blog.blogs);
-  const [visibleBlogs, setVisibleBlogs] = useState(3);
+  const [visibleBlogs, setVisibleBlogs] = useState(10);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 

@@ -25,7 +25,7 @@ export const addVoucher = createAsyncThunk(
   async (voucherData, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.post(
-        "/api/admin/vouchers",
+        "/api/manager/vouchers",
         voucherData
       );
       notifySuccess("Add Voucher Successfully");
@@ -43,7 +43,7 @@ export const updateVoucherById = createAsyncThunk(
   async ({ voucher_id, voucherData }, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.put(
-        `/api/admin/vouchers/${voucher_id}`,
+        `/api/manager/vouchers/${voucher_id}`,
         voucherData
       );
       notifySuccess("Update Voucher Successfully");
@@ -61,7 +61,7 @@ export const deleteVoucherById = createAsyncThunk(
   async (voucher_id, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.delete(
-        `/api/admin/vouchers/${voucher_id}`
+        `/api/manager/vouchers/${voucher_id}`
       );
       notifySuccess(response.data.message);
       return response.data;
@@ -78,7 +78,7 @@ export const changeVoucherStatus = createAsyncThunk(
   async ({ voucher_id, status }, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.put(
-        `/api/admin/vouchers/${voucher_id}/status`,
+        `/api/manager/vouchers/${voucher_id}/status`,
         { status }
       );
       notifySuccess(response.data.message);
@@ -140,7 +140,7 @@ const voucherSlice = createSlice({
       state.isSuccess = true;
       state.vouchers = state.vouchers.map((voucher) =>
         voucher.voucher_id === action.payload.voucher_id
-          ? { ...voucher, status: action.payload.status }
+          ? { ...voucher, ... action.payload }
           : voucher
       );
     });

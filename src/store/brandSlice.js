@@ -21,7 +21,7 @@ export const addBrand = createAsyncThunk(
   "brand/addBrand",
   async (brandData, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.post("/api/admin/brands", brandData);
+      const response = await instanceAxios.post("/api/manager/brands", brandData);
       notifySuccess(response.data.message);
       return response.data;
     } catch (error) {
@@ -36,7 +36,7 @@ export const getBrandById = createAsyncThunk(
     "brand/getBrandById",
     async (brand_id, { rejectWithValue }) => {
         try {
-            const response = await instanceAxios.get(`/api/admin/brands/${brand_id}`);
+            const response = await instanceAxios.get(`/api/manager/brands/${brand_id}`);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -50,7 +50,7 @@ export const updateBrandById = createAsyncThunk(
   async ({ brand_id, brandData }, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.put(
-        `/api/admin/brands/${brand_id}`,
+        `/api/manager/brands/${brand_id}`,
         brandData
       );
       notifySuccess(response.data.message);
@@ -68,7 +68,7 @@ export const deleteBrandById = createAsyncThunk(
   async (brand_id, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.delete(
-        `/api/admin/brands/${brand_id}`
+        `/api/manager/brands/${brand_id}`
       );
       notifySuccess(response.data.message);
       return response.data;

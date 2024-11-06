@@ -59,7 +59,7 @@ export const updateSurveyResponses = createAsyncThunk(
     async (responses) => {
       const response = await instanceAxios.put("/api/surveys/1/responses", { responses });
      
-      return response.data; // Dữ liệu trả về từ API
+      return response.data; 
     }
   );
 
@@ -83,7 +83,7 @@ export const addQuestion = createAsyncThunk(
     "survey/addQuestion",
     async (questionData, { rejectWithValue }) => {
         try {
-            const response = await instanceAxios.post(`/api/admin/surveys/1/questions`, questionData);
+            const response = await instanceAxios.post(`/api/manager/surveys/1/questions`, questionData);
             notifySuccess("Question added successfully");
             return response.data;
         } catch (error) {
@@ -99,7 +99,7 @@ export const updateQuestionById = createAsyncThunk(
     "survey/updateQuestionById",
     async ({ question_id, questionData }, { rejectWithValue }) => {
         try {
-            const response = await instanceAxios.put(`/api/admin/surveys/1/questions/${question_id}`, questionData);
+            const response = await instanceAxios.put(`/api/manager/surveys/1/questions/${question_id}`, questionData);
             notifySuccess(response.data.message);
             return response.data;
         } catch (error) {
@@ -114,7 +114,7 @@ export const deleteQuestionById = createAsyncThunk(
     "survey/deleteQuestionById",
     async (question_id, { rejectWithValue }) => {
         try {
-            const response = await instanceAxios.delete(`/api/admin/surveys/1/questions/${question_id}`);
+            const response = await instanceAxios.delete(`/api/manager/surveys/1/questions/${question_id}`);
             notifySuccess(response.data.message);
             return response.data;
         } catch (error) {

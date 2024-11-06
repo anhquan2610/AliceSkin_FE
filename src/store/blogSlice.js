@@ -71,7 +71,7 @@ export const deleteBlogByAdmin = createAsyncThunk(
   "deleteBlogByAdmin",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.delete(`/api/admin/blogs/${id}`);
+      const response = await instanceAxios.delete(`/api/manager/blogs/${id}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -85,7 +85,7 @@ export const changeStatusBlogByAdmin = createAsyncThunk(
   async ({ blog_id, status }, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.put(
-        `/api/admin/blogs/changestatus/${blog_id}`,
+        `/api/manager/blogs/changestatus/${blog_id}`,
         { status }
       );
       return response.data;

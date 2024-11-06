@@ -20,7 +20,7 @@ export const getAllShipping = createAsyncThunk("shipping/getAll", async () => {
 export const showAllShippingManage = createAsyncThunk(
   "shipping/showAll",
   async () => {
-    const response = await instanceAxios.get("/api/admin/shippings");
+    const response = await instanceAxios.get("/api/manager/shippings");
     return response.data;
   }
 );
@@ -31,7 +31,7 @@ export const addShipping = createAsyncThunk(
   async (shippingData, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.post(
-        "/api/admin/shippings",
+        "/api/manager/shippings",
         shippingData
       );
 
@@ -50,7 +50,7 @@ export const updateShippingById = createAsyncThunk(
   async ({ shipping_id, shippingData }, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.put(
-        `/api/admin/shippings/${shipping_id}`,
+        `/api/manager/shippings/${shipping_id}`,
         shippingData
       );
 
@@ -69,7 +69,7 @@ export const deleteShippingById = createAsyncThunk(
   async (shipping_id, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.delete(
-        `/api/admin/shippings/${shipping_id}`
+        `/api/manager/shippings/${shipping_id}`
       );
 
       notifySuccess(response.data.message);

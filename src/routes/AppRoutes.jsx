@@ -33,6 +33,8 @@ import QuestionManage from "../pages/managementPages/QuestionManage/QuestionMana
 import ShippingManage from "../pages/managementPages/ShippingManage/ShippingManage";
 import VoucherManage from "../pages/managementPages/VoucherManage/VoucherManage";
 
+import ProdfileUser from "../pages/managementPages/ProfileUser/ProfileUser";
+
 export default function AppRoutes() {
   return (
     <Routes>
@@ -61,7 +63,7 @@ export default function AppRoutes() {
         <Route path="questions" element={<QuestionManage />} />
         <Route path="shippings" element={<ShippingManage />} />
         <Route path="vouchers" element={<VoucherManage />} />
-
+        <Route path="infoUser" element={<ProdfileUser />} />
       </Route>
       <Route
         path="/"
