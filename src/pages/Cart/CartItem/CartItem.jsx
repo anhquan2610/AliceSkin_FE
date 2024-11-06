@@ -14,7 +14,6 @@ export default function CartItem({ item, availableQuantity }) {
 
   const handleIncrement = () => {
     if (count < availableQuantity) {
-      // Kiểm tra số lượng trước khi tăng
       const newQuantity = count + 1;
       setCount(newQuantity);
       updateCartItem(newQuantity);

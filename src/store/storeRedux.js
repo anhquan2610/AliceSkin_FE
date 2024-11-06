@@ -10,6 +10,7 @@ import userSlice from "./userSlice";
 import brandSlice from "./brandSlice";
 import surveySlice from "./surveySlice";
 import voucherSlice from "./voucherSlice";
+import orderSlice from "./orderSlice";
 
 export const store = configureStore({
 
@@ -24,5 +25,6 @@ export const store = configureStore({
     [brandSlice.name]: brandSlice.reducer,
     [surveySlice.name]: surveySlice.reducer,
     [voucherSlice.name]: voucherSlice.reducer,
+    [orderSlice.name]: orderSlice.reducer,
   }
 });

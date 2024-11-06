@@ -34,6 +34,8 @@ import ShippingManage from "../pages/managementPages/ShippingManage/ShippingMana
 import VoucherManage from "../pages/managementPages/VoucherManage/VoucherManage";
 
 import ProdfileUser from "../pages/managementPages/ProfileUser/ProfileUser";
+import Payment from "../pages/Payment/Payment";
+import PaymentSuccess from "../pages/Payment/PaymentSuccess/PaymentSuccess";
 
 export default function AppRoutes() {
   return (
@@ -85,6 +87,8 @@ export default function AppRoutes() {
         <Route path="Survey/Question" element={<SurveyQuestion />} />
         <Route path="Survey/Update" element={<UpdateSurvey />} />
         <Route path="RecommendItem" element={<RecommendItem />} />
+        <Route path="Order_payment" element={<Payment />} />
+        <Route path="Payment_notifi" element={<PaymentSuccess />} />
       </Route>
     </Routes>
   );

@@ -61,6 +61,20 @@ export const removeItemFromCart = createAsyncThunk(
   }
 );
 
+//Change status cart
+export const completeCart = createAsyncThunk(
+  "completeCart",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.post("/api/cart/complete"); // Cập nhật đường dẫn API của bạn
+      notifySuccess(response.data.message);
+      return response.data; // Trả về thông tin giỏ hàng đã được cập nhật
+    } catch (error) {
+      notifyError(error.response.data.message);
+      return rejectWithValue(error.response.data); // Trả về lỗi nếu có
+    }
+  }
+);
 
 
 
@@ -104,13 +118,14 @@ const cartSlice = createSlice({
       state.cart.items = state.cart.items.filter((item) => item.id !== action.meta.arg.item.id);
 
     });
+
+    //Change status cart-----------------------------------------
+    builder.addCase(completeCart.fulfilled, (state, action) => {
+      state.cart = action.payload;
+    });
   },
 });
 
-export const selectTotalItemsCount = (state) => {
-  // Trả về độ dài của mảng items trong giỏ hàng
-  return state.cart.cart.items ? state.cart.cart.items.length : 0;
-};
 
 
 export default cartSlice;

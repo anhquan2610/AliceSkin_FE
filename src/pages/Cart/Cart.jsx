@@ -3,6 +3,7 @@ import * as S from "./Cart.styled";
 import CartItem from "./CartItem/CartItem";
 import { useEffect } from "react";
 import { getCartItems } from "../../store/cartSlice";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -34,14 +35,15 @@ export default function Cart() {
         ))}
       </S.ListCartContainer>
       <S.TotalPrice>Total: {cart.subtotal} $</S.TotalPrice>{" "}
-      {/* Cập nhật subtotal */}
       <S.ButtonContainer>
-        <S.BtnCheckout>
-          Checkout
-          <S.BtnIcon>
-            <i className="bi bi-arrow-right"></i>
-          </S.BtnIcon>
-        </S.BtnCheckout>
+        <Link to="/Order_payment" style={{ textDecoration: "none" }}>
+          <S.BtnCheckout disabled={cart.items.length === 0}>
+            Checkout
+            <S.BtnIcon>
+              <i className="bi bi-arrow-right"></i>
+            </S.BtnIcon>
+          </S.BtnCheckout>
+        </Link>
       </S.ButtonContainer>
     </S.Container>
   );
