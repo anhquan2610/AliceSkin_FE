@@ -4,11 +4,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
-  CardActions,
   Typography,
-  Button,
+  IconButton,
   CardMedia,
 } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { getBlogById, resetBlogState } from "../../../../store/blogSlice";
 import * as S from "./BlogDetailManage.styled";
 
@@ -27,6 +27,15 @@ const BlogDetailManage = () => {
 
   return (
     <Card>
+      <IconButton
+        sx={{
+          color: "var(--black)",
+          mb: "var(--s-3)",
+        }}
+        onClick={() => navigate("/manage/blogs")}
+      >
+        <ArrowBackIcon />
+      </IconButton>
       <CardMedia
         component="img"
         sx={{
@@ -48,7 +57,20 @@ const BlogDetailManage = () => {
           sx={{ display: "flex", flexDirection: "row", gap: "var(--s-1)" }}
         >
           {selectedBlog.hashtags?.map((hashtag, index) => (
-            <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
+            <Typography
+              key={index}
+              component="span"
+              sx={{
+                color: "var(--white)",
+                backgroundColor: "var(--green-fresh)",
+                padding: "var(--s-1) var(--s-3)",
+                margin: "var(--s-1) 0",
+                borderRadius: "var(--br-md)",
+                fontSize: "var(--fs-md)",
+              }}
+            >
+              #{hashtag}
+            </Typography>
           ))}
         </Typography>
         <Typography>Status: {selectedBlog.status}</Typography>
@@ -62,11 +84,6 @@ const BlogDetailManage = () => {
           {new Date(selectedBlog.created_at).toLocaleString("en-GB")}
         </Typography>
       </CardContent>
-      <CardActions sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-        <Button variant="outlined" onClick={() => navigate("/manage/blogs")}>
-          Back to List
-        </Button>
-      </CardActions>
     </Card>
   );
 };

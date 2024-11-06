@@ -6,7 +6,7 @@ export default function RightContainer() {
     return (
        <S.Container>
         <ListBlogPage  />
-        <ListCategory />
+        {/* <ListCategory /> */}
        </S.Container>
     )
 }

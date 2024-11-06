@@ -42,6 +42,7 @@ export default function UserFilter({ onFilterChange }) {
           </MenuItem>
           <MenuItem value="admin">Admin</MenuItem>
           <MenuItem value="user">User</MenuItem>
+          <MenuItem value="staff">Staff</MenuItem>
         </Select>
       </FormControl>
     </div>

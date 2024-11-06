@@ -73,7 +73,7 @@ export default function UpdateSurvey() {
         {questions.map((question) => (
           <S.Question key={question.question_id}>
             <S.QuestionText>{question.question_text}</S.QuestionText>
-            {question.type === "multiple_choice" && (
+            {question.question_type === "multiple_choice" && (
               <S.OptionContainer>
                 {question.options.map((option, index) => (
                   <S.Option key={index}>

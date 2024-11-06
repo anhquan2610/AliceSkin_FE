@@ -12,7 +12,7 @@ export default function AddQuestionModal({ open, handleClose }) {
 
   const [questionData, setQuestionData] = useState({
     question_text: "",
-    type: "",
+    question_type: "",
     options: [],
     category: "",
     code: "",
@@ -28,7 +28,6 @@ export default function AddQuestionModal({ open, handleClose }) {
 
   useEffect(() => {
     if (isSuccess) {
-
       handleClose();
       dispatch(resetSurveyState());
 
@@ -81,9 +80,9 @@ export default function AddQuestionModal({ open, handleClose }) {
             margin="normal"
           />
           <TextField
-            name="type"
+            name="question_type"
             label="Loại"
-            value={questionData.type}
+            value={questionData.question_type}
             onChange={handleChange}
             required
             fullWidth

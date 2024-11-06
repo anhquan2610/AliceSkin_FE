@@ -67,7 +67,7 @@ export default function QuestionManage() {
           size="large"
           color="success"
         >
-          Add Brand
+          Add Question
         </Button>
       </S.MiddleContainer>
       <TableContainer>

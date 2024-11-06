@@ -33,7 +33,6 @@ export const DeleteUser = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      // Ghi rõ lỗi trả về nếu có từ API
       return rejectWithValue(
         error.response ? error.response.data : error.message
       );
@@ -47,7 +46,7 @@ export const ChangeRoleUser = createAsyncThunk(
   async ({ userId, role }, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.put(
-        `/api/admin/user/${userId}/role`,
+        `/api/manager/user/${userId}/role`,
         { role },
         {
           headers: {

@@ -79,7 +79,7 @@ export const addNewProduct = createAsyncThunk(
   "product/addNewProduct",
   async (productData, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.post("/api/admin/products", productData);
+      const response = await instanceAxios.post("/api/manager/products", productData);
       notifySuccess(response.data.message);
       return response.data;
       
@@ -96,7 +96,7 @@ export const changeStatusProductByAdmin = createAsyncThunk(
   "product/changeStatusProductByAdmin",
   async ({ product_id, status }, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.put(`/api/admin/products/${product_id}/status`, { status });
+      const response = await instanceAxios.put(`/api/manager/products/${product_id}/status`, { status });
       notifySuccess(response.data.message);
       return response.data;
     } catch (error) {
@@ -111,7 +111,7 @@ export const updateProductByAdmin = createAsyncThunk(
   "product/updateProductByAdmin",
   async ({ product_id, productData }, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.put(`/api/admin/products/${product_id}`, productData);
+      const response = await instanceAxios.put(`/api/manager/products/${product_id}`, productData);
 
       return response.data;
     } catch (error) {
@@ -126,7 +126,7 @@ export const deleteProductById = createAsyncThunk(
   "product/deleteProductById",
   async (product_id, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.delete(`/api/admin/products/${product_id}`);
+      const response = await instanceAxios.delete(`/api/manager/products/${product_id}`);
       notifySuccess(response.data.message);
       return response.data;
     } catch (error) {

@@ -29,6 +29,7 @@ import SpaIcon from "@mui/icons-material/Spa";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import LocalShippingTwoToneIcon from "@mui/icons-material/LocalShippingTwoTone";
 import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const drawerWidth = 240;
 
@@ -196,9 +197,16 @@ export default function MiniDrawer() {
           <Typography variant="h6" noWrap component="div">
             Alice Skin Management
           </Typography>
-          <IconButton color="inherit" onClick={handleLogout}>
-            <LogoutIcon />
-          </IconButton>
+          <Box>
+            <Link to="/manage/infoUser" style={{color:"var(--white)"}}>
+              <IconButton color="inherit">
+                <AccountCircleOutlinedIcon />
+              </IconButton>
+            </Link>
+            <IconButton color="inherit" onClick={handleLogout}>
+              <LogoutIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

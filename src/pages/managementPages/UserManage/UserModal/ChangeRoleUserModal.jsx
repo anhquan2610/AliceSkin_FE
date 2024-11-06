@@ -33,7 +33,7 @@ const ChangeRoleModal = ({ open, onClose, userId }) => {
       dispatch(ChangeRoleUser({ userId, role }))
         .unwrap()
         .then(() => {
-          onClose(); // Đóng modal sau khi cập nhật thành công
+          onClose(); 
         })
         .catch((error) => {
           console.error("Failed to change role:", error);

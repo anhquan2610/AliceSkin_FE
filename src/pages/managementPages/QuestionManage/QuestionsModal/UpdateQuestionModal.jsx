@@ -13,7 +13,7 @@ export default function UpdateQuestionModal({ open, handleClose, question }) {
 
   const [questionData, setQuestionData] = useState({
     question_text: question.question_text || "",
-    type: question.type || "",
+    question_type: question.question_type || "",
     options: question.options || [],
     category: question.category || "",
     code: question.code || "",
@@ -93,10 +93,10 @@ export default function UpdateQuestionModal({ open, handleClose, question }) {
             />
             <TextField
               label="Loại câu hỏi"
-              name="type"
+              name="question_type"
               fullWidth
               margin="normal"
-              value={questionData.type}
+              value={questionData.question_type}
               onChange={handleChange}
               required
             />

@@ -13,19 +13,17 @@ export default function CommentItem({ comment }) {
   const [showReply, setShowReply] = useState(false);
 
   const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this comment?")) {
-      dispatch(
-        deleteCommentByUser(
-          {
-            blog_id: comment.blog_id,
-            comment_id: comment.comment_id,
-          },
-          [dispatch]
-        )
-      ).then(() => {
-        dispatch(resetBlogState());
-      }, [dispatch]);
-    }
+    dispatch(
+      deleteCommentByUser(
+        {
+          blog_id: comment.blog_id,
+          comment_id: comment.comment_id,
+        },
+        [dispatch]
+      )
+    ).then(() => {
+      dispatch(resetBlogState());
+    }, [dispatch]);
   };
 
   const toggleReplyForm = () => {
