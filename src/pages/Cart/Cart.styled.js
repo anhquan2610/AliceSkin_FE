@@ -54,7 +54,9 @@ export const BtnCheckout = styled.button`
   z-index: 1;
   transition: color 0.4s ease;
   border: 1px solid var(--black-2);
-  &::before {
+
+  /* Hiệu ứng ::before cho trạng thái không bị disabled */
+  &:not(:disabled)::before {
     content: "";
     position: absolute;
     top: 0;
@@ -65,14 +67,26 @@ export const BtnCheckout = styled.button`
     transition: left 0.4s ease;
     z-index: -1;
   }
-  &:hover::before {
+
+  /* Hiệu ứng hover chỉ áp dụng khi không bị disabled */
+  &:not(:disabled):hover::before {
     left: 0;
   }
-  &:hover {
+
+  &:not(:disabled):hover {
     color: var(--black-2);
     border: 1px solid var(--black-2);
   }
+
+  /* Style cho trạng thái disabled */
+  &:disabled {
+    background-color: var(--gray);
+    color: var(--white);
+    cursor: not-allowed;
+    border: 1px solid var(--gray);
+  }
 `;
+
 
 const spin = keyframes`
   0% {
