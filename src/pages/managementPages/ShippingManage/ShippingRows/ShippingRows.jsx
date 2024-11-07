@@ -43,7 +43,7 @@ export default function ShippingRows({ shipping }) {
           {shipping.name}
         </TableCell>
         <TableCell>
-          {shipping.shipping_amount ? `${shipping.shipping_amount}$` : "0.00$"}{" "}
+          {Math.floor(shipping.shipping_amount).toLocaleString("vi-VN")} VND
         </TableCell>
         <TableCell>{shipping.method}</TableCell>
         <TableCell>

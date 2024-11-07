@@ -8,9 +8,13 @@ export default function ItemCart({ item }) {
       </S.ContainerImage>
       <S.ContainerInfo>
         <S.NameItem>{item.product.name}</S.NameItem>
-        <S.CapacityItem>{item.product.volume}ml</S.CapacityItem>
+        <S.CapacityItem>{Math.floor(item.product.volume)} ml</S.CapacityItem>
+
         <S.Group>
-          <S.PriceItem>{item.price}$</S.PriceItem>
+          <S.PriceItem>
+            {Math.floor(item.price).toLocaleString("vi-VN")} VND
+          </S.PriceItem>
+
           <S.QuantityItem>Quantity: x{item.quantity}</S.QuantityItem>
         </S.Group>
       </S.ContainerInfo>

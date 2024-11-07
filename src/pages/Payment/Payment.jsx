@@ -167,7 +167,9 @@ export default function Payment() {
               <S.OrderTitle>Tóm tắt đơn hàng</S.OrderTitle>
               <S.TopContainer>
                 <S.TextTop>Sản phẩm ({cart.items.length})</S.TextTop>
-                <S.PriceTop>{cart.subtotal} $</S.PriceTop>
+                <S.PriceTop>
+                  {Math.floor(cart.subtotal).toLocaleString("vi-VN")} VND
+                </S.PriceTop>
               </S.TopContainer>
               <S.ItemContainer>
                 {cart.items.map((item) => (
@@ -180,8 +182,10 @@ export default function Payment() {
                 <S.TextTop>Phương thức giao hàng</S.TextTop>
                 <S.PriceTop>
                   {selectedShippingData
-                    ? `${selectedShippingData.shipping_amount} $`
-                    : "0 $"}
+                    ? `${Math.floor(
+                        selectedShippingData.shipping_amount
+                      ).toLocaleString("vi-VN")} VND`
+                    : "0 VND"}
                 </S.PriceTop>
               </S.TopContainer>
               <S.GroupItemContainer>
@@ -198,7 +202,11 @@ export default function Payment() {
                     <MenuItem value="">Chọn phương thức giao hàng</MenuItem>
                     {shippings.map((shipping) => (
                       <MenuItem key={shipping.id} value={shipping.id}>
-                        {shipping.name}
+                        {shipping.name} -
+                        {Math.floor(shipping.shipping_amount).toLocaleString(
+                          "vi-VN"
+                        )}
+                        VND
                       </MenuItem>
                     ))}
                   </Select>
@@ -210,8 +218,10 @@ export default function Payment() {
                 <S.TextTop>Voucher</S.TextTop>
                 <S.PriceTop>
                   {selectedVoucherData
-                    ? `-${selectedVoucherData.discount_amount} $`
-                    : "-0 $"}
+                    ? `-${Math.floor(
+                        selectedVoucherData.discount_amount
+                      ).toLocaleString("vi-VN")} VND`
+                    : "-0 VND"}
                 </S.PriceTop>
               </S.TopContainer>
               <S.GroupItemContainer>
@@ -231,7 +241,11 @@ export default function Payment() {
                         key={voucher.voucher_id}
                         value={voucher.voucher_id}
                       >
-                        {voucher.code}
+                        {voucher.code} (
+                        {Math.floor(voucher.discount_amount).toLocaleString(
+                          "vi-VN"
+                        )}
+                        )
                       </MenuItem>
                     ))}
                   </Select>
@@ -241,16 +255,16 @@ export default function Payment() {
             <S.SubTotalContainer>
               <S.TextSubTotal>Tổng cộng:</S.TextSubTotal>
               <S.PriceTop>
-                {(
+                {Math.floor(
                   (parseFloat(cart.subtotal) || 0) +
-                  (selectedShippingData
-                    ? parseFloat(selectedShippingData.shipping_amount)
-                    : 0) -
-                  (selectedVoucherData
-                    ? parseFloat(selectedVoucherData.discount_amount)
-                    : 0)
-                ).toFixed(2)}
-                $
+                    (selectedShippingData
+                      ? parseFloat(selectedShippingData.shipping_amount)
+                      : 0) -
+                    (selectedVoucherData
+                      ? parseFloat(selectedVoucherData.discount_amount)
+                      : 0)
+                ).toLocaleString("vi-VN")}{" "}
+                VND
               </S.PriceTop>
             </S.SubTotalContainer>
           </S.RightContainer>

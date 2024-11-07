@@ -75,7 +75,11 @@ export default function UpdateVoucherModal({ open, handleClose, voucher }) {
             label="Discount Amount"
             name="discount_amount"
             type="number"
-            value={voucherData.discount_amount}
+            value={
+              voucherData.discount_amount
+                ? Math.floor(voucherData.discount_amount)
+                : ""
+            }
             onChange={handleChange}
           />
           <Typography variant="body2" color="textSecondary" sx={{ mb: 1 }}>

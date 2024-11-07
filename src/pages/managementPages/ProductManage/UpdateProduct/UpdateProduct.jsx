@@ -206,7 +206,7 @@ export default function UpdateProduct() {
               name="price"
               fullWidth
               margin="normal"
-              value={productData.price}
+              value={productData.price ? Math.floor(productData.price) : ""}
               onChange={handleChange}
               required
             />
@@ -215,7 +215,7 @@ export default function UpdateProduct() {
               name="discount"
               fullWidth
               margin="normal"
-              value={productData.discount}
+              value={productData.discount ? Math.floor(productData.discount) : ""}
               onChange={handleChange}
             />
             <TextField
@@ -246,7 +246,7 @@ export default function UpdateProduct() {
               name="volume"
               fullWidth
               margin="normal"
-              value={productData.volume}
+              value={productData.volume ? Math.floor(productData.volume) : ""}
               onChange={handleChange}
             />
             <TextField

@@ -68,7 +68,10 @@ export default function CartItem({ item, availableQuantity }) {
           </S.IconQuantityContainer>
         </S.QuantityContainer>
         <S.ItemPrice>
-          {(item.product.discounted_price * count).toFixed(2)} $
+          {Math.floor(item.product.discounted_price * count).toLocaleString(
+            "vi-VN"
+          )}{" "}
+          VND
         </S.ItemPrice>
         <S.IconDelete onClick={handleRemoveItem}>
           <i className="bi bi-trash"></i>

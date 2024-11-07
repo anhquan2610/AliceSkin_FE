@@ -64,7 +64,10 @@ export default function VoucherRows({ voucher }) {
         <TableCell component="th" align="left">
           {voucher.code}
         </TableCell>
-        <TableCell>{voucher.discount_amount}$</TableCell>
+        <TableCell>
+          {Math.floor(voucher.discount_amount).toLocaleString("vi-VN")} VND
+        </TableCell>
+
         <TableCell>{formatDate(voucher.start_date)}</TableCell>
         <TableCell>{formatDate(voucher.expiry_date)}</TableCell>
         <TableCell>{voucher.status}</TableCell>

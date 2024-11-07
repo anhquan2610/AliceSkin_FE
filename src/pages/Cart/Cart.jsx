@@ -34,7 +34,9 @@ export default function Cart() {
           />
         ))}
       </S.ListCartContainer>
-      <S.TotalPrice>Total: {cart.subtotal} $</S.TotalPrice>{" "}
+      <S.TotalPrice>
+        Total: {Math.floor(cart.subtotal).toLocaleString("vi-VN")} VND
+      </S.TotalPrice>
       <S.ButtonContainer>
         <Link to="/Order_payment" style={{ textDecoration: "none" }}>
           <S.BtnCheckout disabled={cart.items.length === 0}>
