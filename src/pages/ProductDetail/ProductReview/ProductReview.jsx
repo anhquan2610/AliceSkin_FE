@@ -7,7 +7,6 @@ import {
   getTotalReviewByProductId,
 } from "../../../store/productSlice";
 import { useEffect } from "react";
-import AddReview from "./AddReview/AddReview";
 
 export default function ProductReview() {
   const dispatch = useDispatch();
@@ -37,9 +36,6 @@ export default function ProductReview() {
         </S.ReviewItemContainer>
         <S.Divider />
       </S.ReviewContainer>
-      <S.AddReviewContainer>
-        <AddReview />
-      </S.AddReviewContainer>
     </S.Container>
   );
 }

@@ -114,6 +114,11 @@ color: var(--white);
 padding: var(--s-3) var(--s-20);
 border-radius: var(--br-md);
 cursor: pointer;
+
+&:disabled {
+  background-color: var(--gray);
+  cursor: not-allowed;
+}
 `;
 
 //RightPayment

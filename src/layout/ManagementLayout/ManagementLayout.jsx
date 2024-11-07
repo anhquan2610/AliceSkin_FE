@@ -30,6 +30,7 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import LocalShippingTwoToneIcon from "@mui/icons-material/LocalShippingTwoTone";
 import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 
 const drawerWidth = 240;
 
@@ -167,6 +168,12 @@ export default function MiniDrawer() {
       icon: <ConfirmationNumberOutlinedIcon />,
       roles: ["admin"],
     },
+    {
+      text: "Orders",
+      link: "orders",
+      icon: <ContentPasteIcon />,
+      roles: ["admin", "staff"],
+    },
   ];
 
   return (
@@ -198,7 +205,7 @@ export default function MiniDrawer() {
             Alice Skin Management
           </Typography>
           <Box>
-            <Link to="/manage/infoUser" style={{color:"var(--white)"}}>
+            <Link to="/manage/infoUser" style={{ color: "var(--white)" }}>
               <IconButton color="inherit">
                 <AccountCircleOutlinedIcon />
               </IconButton>

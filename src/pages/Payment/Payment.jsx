@@ -93,6 +93,15 @@ export default function Payment() {
     (voucher) => voucher.voucher_id === selectedVoucher
   );
 
+  const isFormValid = () => {
+    return (
+      selectedShipping !== "" &&
+      shippingAddress !== "" &&
+      paymentMethod !== "" &&
+      selectedVoucher !== ""
+    );
+  };
+
   if (!cart || !cart.items) {
     return <S.LoadingSpinner />;
   }
@@ -102,7 +111,7 @@ export default function Payment() {
       <S.PaymentContainer>
         <S.LeftContainer>
           <S.MethodPaymentContainer>
-            <S.Title>Phương thức thanh toán</S.Title>
+            <S.Title>Payment Method</S.Title>
             <S.PaymentMethod>
               <S.ItemPaymentLabel>
                 <S.HiddenRadio
@@ -115,7 +124,7 @@ export default function Payment() {
                   <S.PaymentImageContainer>
                     <S.PaymentImage src={cashon} />
                   </S.PaymentImageContainer>
-                  <S.PaymentName>Thanh toán khi nhận hàng</S.PaymentName>
+                  <S.PaymentName>Cash on delivery</S.PaymentName>
                 </S.ItemPaymentContainer>
               </S.ItemPaymentLabel>
               <S.ItemPaymentLabel>
@@ -135,18 +144,18 @@ export default function Payment() {
             </S.PaymentMethod>
           </S.MethodPaymentContainer>
           <S.AddressContainer>
-            <S.Title>Địa chỉ giao hàng</S.Title>
+            <S.Title>Shipping Address</S.Title>
             <S.InformationContaienr>
               <S.InformationGroup>
-                <S.LabelInformation>Họ và tên:</S.LabelInformation>
+                <S.LabelInformation>Full Name:</S.LabelInformation>
                 <S.InputInformation />
               </S.InformationGroup>
               <S.InformationGroup>
-                <S.LabelInformation>Số điện thoại:</S.LabelInformation>
+                <S.LabelInformation>Phone Number:</S.LabelInformation>
                 <S.InputInformation />
               </S.InformationGroup>
               <S.InformationGroup>
-                <S.LabelInformation>Địa chỉ</S.LabelInformation>
+                <S.LabelInformation>Address:</S.LabelInformation>
                 <S.InputInformation
                   value={shippingAddress}
                   onChange={handleShippingAddressChange}
@@ -155,7 +164,9 @@ export default function Payment() {
             </S.InformationContaienr>
           </S.AddressContainer>
           <S.ButtonContainer>
-            <S.BtnOder onClick={handleOrderNow}>Đặt hàng ngay</S.BtnOder>
+            <S.BtnOder onClick={handleOrderNow} disabled={!isFormValid()}>
+              Order Now
+            </S.BtnOder>
           </S.ButtonContainer>
         </S.LeftContainer>
       </S.PaymentContainer>
@@ -164,9 +175,9 @@ export default function Payment() {
         <S.SuperContainer>
           <S.RightContainer>
             <S.OderItemContainer>
-              <S.OrderTitle>Tóm tắt đơn hàng</S.OrderTitle>
+              <S.OrderTitle>Order Summary</S.OrderTitle>
               <S.TopContainer>
-                <S.TextTop>Sản phẩm ({cart.items.length})</S.TextTop>
+                <S.TextTop>Items({cart.items.length})</S.TextTop>
                 <S.PriceTop>
                   {Math.floor(cart.subtotal).toLocaleString("vi-VN")} VND
                 </S.PriceTop>
@@ -179,7 +190,7 @@ export default function Payment() {
             </S.OderItemContainer>
             <S.ShippingContainer>
               <S.TopContainer>
-                <S.TextTop>Phương thức giao hàng</S.TextTop>
+                <S.TextTop>Ship Method</S.TextTop>
                 <S.PriceTop>
                   {selectedShippingData
                     ? `${Math.floor(
@@ -199,7 +210,7 @@ export default function Payment() {
                     displayEmpty
                     fullWidth
                   >
-                    <MenuItem value="">Chọn phương thức giao hàng</MenuItem>
+                    <MenuItem value="">Select ship method</MenuItem>
                     {shippings.map((shipping) => (
                       <MenuItem key={shipping.id} value={shipping.id}>
                         {shipping.name} -
@@ -235,7 +246,7 @@ export default function Payment() {
                     displayEmpty
                     fullWidth
                   >
-                    <MenuItem value="">Chọn voucher</MenuItem>
+                    <MenuItem value="">Select voucher</MenuItem>
                     {vouchers.map((voucher) => (
                       <MenuItem
                         key={voucher.voucher_id}
@@ -253,7 +264,7 @@ export default function Payment() {
               </S.GroupItemContainer>
             </S.VoucherContainer>
             <S.SubTotalContainer>
-              <S.TextSubTotal>Tổng cộng:</S.TextSubTotal>
+              <S.TextSubTotal>Total:</S.TextSubTotal>
               <S.PriceTop>
                 {Math.floor(
                   (parseFloat(cart.subtotal) || 0) +
