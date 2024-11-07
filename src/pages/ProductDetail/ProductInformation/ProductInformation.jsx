@@ -19,7 +19,6 @@ export default function ProductInformation() {
   const shippings = useSelector((state) => state.shipping.shippings);
   const cartItems = useSelector((state) => state.cart.cart.items) || [];
 
-
   const productInCart = cartItems.find((item) => item.product_id === productId);
   const quantityInCart = productInCart ? productInCart.quantity : 0;
   const availableToAdd = selectProduct.quantity - quantityInCart;
@@ -84,14 +83,22 @@ export default function ProductInformation() {
         </S.LeftContainer>
         <S.RightContainer>
           <S.PriceProduct>
-            <S.Price>{selectProduct.price}$</S.Price>
-            <S.DiscountPrice>{selectProduct.discounted_price}$</S.DiscountPrice>
+            <S.Price>
+              {Math.floor(selectProduct.price).toLocaleString("vi-VN")} VND
+            </S.Price>
+            <S.DiscountPrice>
+              {Math.floor(selectProduct.discounted_price).toLocaleString(
+                "vi-VN"
+              )}
+              VND
+            </S.DiscountPrice>
             <S.DiscountDescription>
               Giảm giá {Math.round(selectProduct.discount)}%
             </S.DiscountDescription>
           </S.PriceProduct>
           <S.CapacityProduct>
-            Dung tích: {selectProduct.volume}
+            Dung tích:
+            {selectProduct.volume ? Math.floor(selectProduct.volume) : ""} ml
           </S.CapacityProduct>
           <S.StatusProduct>Trạng thái: {selectProduct.status}</S.StatusProduct>
           <S.QuantityProduct>
@@ -138,7 +145,8 @@ export default function ProductInformation() {
                   {shippings.map((shipping) => (
                     <S.Tr key={shipping.id}>
                       <S.Td>{shipping.name}</S.Td>
-                      <S.Td>{shipping.shipping_amount}$</S.Td>
+                      <S.Td>{Math.floor(shipping.shipping_amount).toLocaleString("vi-VN")} VND</S.Td>
+                      
                     </S.Tr>
                   ))}
                 </S.TableBody>

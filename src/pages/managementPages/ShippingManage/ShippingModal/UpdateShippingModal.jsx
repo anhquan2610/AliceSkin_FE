@@ -78,7 +78,11 @@ export default function UpdateShippingModal({ open, handleClose, shipping }) {
             fullWidth
             label="Price"
             name="shipping_amount"
-            value={shippingData.shipping_amount}
+            value={
+              shippingData.shipping_amount
+                ? Math.floor(shippingData.shipping_amount)
+                : ""
+            }
             onChange={handleChange}
           />
           <TextField

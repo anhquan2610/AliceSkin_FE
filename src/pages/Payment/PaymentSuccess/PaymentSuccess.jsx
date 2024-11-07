@@ -16,11 +16,7 @@ export default function PaymentSuccess() {
       {paymentUrl && (
         <S.UrlContainer>
           <S.Text3>For payment details, please visit:</S.Text3>
-          <S.UrlLink
-            href={paymentUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <S.UrlLink href={paymentUrl} rel="noopener noreferrer">
             Click here to view payment details
           </S.UrlLink>
         </S.UrlContainer>

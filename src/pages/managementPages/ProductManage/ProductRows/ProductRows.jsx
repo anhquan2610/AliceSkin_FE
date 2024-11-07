@@ -57,11 +57,18 @@ export default function ProductRows({ product }) {
           {product.name}
         </TableCell>
         <TableCell>{product.brand?.name}</TableCell>
-        <TableCell>{product.price}$</TableCell>
         <TableCell>
-          {product.discount ? `${product.discount}%` : "0.00%"}
+          {Math.floor(product.price).toLocaleString("vi-VN")} VND
         </TableCell>
-        <TableCell>{product.discounted_price}$ </TableCell>
+
+        <TableCell>
+          {product.discount ? `${Math.floor(product.discount)}%` : "0%"}
+        </TableCell>
+
+        <TableCell>
+          {Math.floor(product.discounted_price).toLocaleString("vi-VN")} VND
+        </TableCell>
+
         <TableCell>{product.quantity}</TableCell>
         <TableCell>{product.status}</TableCell>
         <TableCell

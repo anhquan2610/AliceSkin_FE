@@ -20,8 +20,10 @@ export default function ItemProduct({ product, navigate }) {
         <S.ProductName>{product.name}</S.ProductName>
         <S.Description>{product.description}</S.Description>
         <S.PriceProduct>
-          <S.Price>{product.price}$</S.Price>
-          <S.DiscountPrice>{product.discounted_price}$</S.DiscountPrice>
+          <S.Price>
+            {Math.floor(product.price).toLocaleString("vi-VN")} VND
+          </S.Price>
+          <S.DiscountPrice>{Math.floor(product.discounted_price).toLocaleString("vi-VN")} VND</S.DiscountPrice>
         </S.PriceProduct>
       </S.ContentContainer>
     </S.Container>

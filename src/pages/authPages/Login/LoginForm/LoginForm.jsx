@@ -6,7 +6,7 @@ import { resetAuthState, signIn } from "../../../../store/authSlice.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { notifySuccess } from "../../../../utils/Nontification.utils.js";
-import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -41,26 +41,6 @@ export default function LoginForm() {
       }
     }
   }, [token, role, navigate]);
-
-  // Xử lý đăng nhập với Google
-  const handleLoginWithGoogle = () => {
-    // Chuyển hướng người dùng tới backend để đăng nhập Google
-    window.location.href = "http://127.0.0.1:8000/api/auth/google/callback"; // Đảm bảo URL này trùng khớp với route của bạn
-  };
-
-  // Xử lý khi người dùng được chuyển về sau khi đăng nhập thành công
-  useEffect(() => {
-    // Kiểm tra URL có token từ query params hay không
-    const params = new URLSearchParams(window.location.search);
-    const tokenFromUrl = params.get("tk");
-
-    if (tokenFromUrl) {
-      // Lưu token vào localStorage
-      localStorage.setItem("token", tokenFromUrl);
-      notifySuccess("Login with Google successfully");
-      navigate("/home"); // Điều hướng đến trang home sau khi login thành công
-    }
-  }, [navigate]);
 
   return (
     <S.Container>
@@ -112,9 +92,7 @@ export default function LoginForm() {
 
       <S.BlankSpace />
       <S.ContainerBottom>
-        <S.BtnLoginGoogle onClick={handleLoginWithGoogle}>
-          Login With Google
-        </S.BtnLoginGoogle>
+        <S.BtnLoginGoogle>Login With Google</S.BtnLoginGoogle>
       </S.ContainerBottom>
     </S.Container>
   );
