@@ -6,15 +6,17 @@ import UpdateInformation from "./UpdateInformation/UpdateInformation";
 import ChangePassword from "./ChangePassword/ChangePassword";
 import MyBlog from "./MyBlog/MyBlog";
 import SkinInformation from "./SkinInformation/SkinInformation";
+import OrderHistory from "./OrderHistory/OrderHistory";
 
 export default function InformationUser() {
-  const [currentLayout, setCurrentLayout] = useState("form"); 
+  const [currentLayout, setCurrentLayout] = useState("form");
 
   const switchToForm = () => setCurrentLayout("form");
   const switchToUpdate = () => setCurrentLayout("update");
   const switchToReset = () => setCurrentLayout("reset");
   const switchToSkin = () => setCurrentLayout("skin");
   const switchToMyBlog = () => setCurrentLayout("myBlog");
+  const switchToMyOrder = () => setCurrentLayout("myOrder");
 
   return (
     <S.Container>
@@ -49,6 +51,12 @@ export default function InformationUser() {
         >
           My Blog
         </S.NavButton>
+        <S.NavButton
+          onClick={switchToMyOrder}
+          isSelected={currentLayout === "myOrder"}
+        >
+          Order History
+        </S.NavButton>
       </S.Navigation>
       <S.Middle>
         <S.RightContainer>
@@ -58,6 +66,7 @@ export default function InformationUser() {
             {currentLayout === "reset" && <ChangePassword />}
             {currentLayout === "skin" && <SkinInformation />}
             {currentLayout === "myBlog" && <MyBlog />}
+            {currentLayout === "myOrder" && <OrderHistory />}
           </S.Content>
         </S.RightContainer>
         <S.LeftContainer>

@@ -5,6 +5,8 @@ export default function ItemProduct({ product, navigate }) {
     navigate(`/product/${product.product_id}`);
   };
 
+  
+
   return (
     <S.Container onClick={handleClick}>
       <S.ContainerImage>

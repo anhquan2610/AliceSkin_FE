@@ -48,18 +48,7 @@ export const getReviewByProductId = createAsyncThunk(
 );
 
 
-//Create Review by Product ID
-export const addReview = createAsyncThunk(
-  "review/addReview",
-  async ({product_id, reviewData}, { rejectWithValue }) => {
-    try {
-      const response = await instanceAxios.post(`/api/reviews/${product_id}`, reviewData);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-)
+
 
 //Get Total Review by Product ID
 export const getTotalReviewByProductId = createAsyncThunk(
@@ -189,18 +178,7 @@ const productSlice = createSlice({
       state.error = action.error;
     });
 
-    //Create review by product ID
-    builder.addCase(addReview.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(addReview.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.reviews.push(action.payload);
-    });
-    builder.addCase(addReview.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error;
-    });
+    
 
     //Get total review by product ID
     builder.addCase(getTotalReviewByProductId.pending, (state) => {
@@ -221,7 +199,7 @@ const productSlice = createSlice({
     });
     builder.addCase(addNewProduct.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.products.push(action.payload);
+      state.products = action.payload;
       state.isSuccess = true;
       
 

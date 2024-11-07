@@ -37,6 +37,8 @@ import ProdfileUser from "../pages/managementPages/ProfileUser/ProfileUser";
 import Payment from "../pages/Payment/Payment";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess/PaymentSuccess";
 import PaymentStatus from "../pages/Payment/PaymentStatus/PaymentStatus";
+import OrderDetail from "../pages/OrderDetail/OrderDetail";
+import OrderManage from "../pages/managementPages/OrderManage/OrderManage";
 
 export default function AppRoutes() {
   return (
@@ -67,6 +69,7 @@ export default function AppRoutes() {
         <Route path="shippings" element={<ShippingManage />} />
         <Route path="vouchers" element={<VoucherManage />} />
         <Route path="infoUser" element={<ProdfileUser />} />
+        <Route path="orders" element={<OrderManage />} />
       </Route>
       <Route
         path="/"
@@ -91,6 +94,7 @@ export default function AppRoutes() {
         <Route path="Order_payment" element={<Payment />} />
         <Route path="Payment_notifi" element={<PaymentSuccess />} />
         <Route path="Payment_status" element={<PaymentStatus />} />
+        <Route path="Order_detail/:id" element={<OrderDetail />} />
       </Route>
     </Routes>
   );

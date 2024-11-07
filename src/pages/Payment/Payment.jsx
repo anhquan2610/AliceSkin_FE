@@ -93,6 +93,15 @@ export default function Payment() {
     (voucher) => voucher.voucher_id === selectedVoucher
   );
 
+  const isFormValid = () => {
+    return (
+      selectedShipping !== "" &&
+      shippingAddress !== "" &&
+      paymentMethod !== "" &&
+      selectedVoucher !== ""
+    );
+  };
+
   if (!cart || !cart.items) {
     return <S.LoadingSpinner />;
   }
@@ -155,7 +164,9 @@ export default function Payment() {
             </S.InformationContaienr>
           </S.AddressContainer>
           <S.ButtonContainer>
-            <S.BtnOder onClick={handleOrderNow}>Order Now</S.BtnOder>
+            <S.BtnOder onClick={handleOrderNow} disabled={!isFormValid()}>
+              Order Now
+            </S.BtnOder>
           </S.ButtonContainer>
         </S.LeftContainer>
       </S.PaymentContainer>
