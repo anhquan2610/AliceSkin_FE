@@ -32,6 +32,7 @@ import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumb
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import TagIcon from "@mui/icons-material/Tag";
+import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 
 const drawerWidth = 240;
 
@@ -179,6 +180,12 @@ export default function MiniDrawer() {
       text: "HashTags",
       link: "hashtags",
       icon: <TagIcon />,
+      roles: ["admin", "staff"],
+    },
+    {
+      text: "Cashflow",
+      link: "cashflow",
+      icon: <SavingsOutlinedIcon />,
       roles: ["admin", "staff"],
     },
   ];

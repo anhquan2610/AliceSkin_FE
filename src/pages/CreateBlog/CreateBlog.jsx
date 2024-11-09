@@ -11,9 +11,9 @@ import { searchHastags } from "../../store/hastagsSlice";
 export default function CreateBlog() {
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
-  const [hashtags, setHashtags] = useState([]); // Lưu các hashtag dưới dạng mảng
-  const [inputHashtag, setInputHashtag] = useState(""); // Lưu giá trị input tạm thời
-  const [content, setContent] = useState(""); // Thêm state cho content (nội dung bài viết)
+  const [hashtags, setHashtags] = useState([]);
+  const [inputHashtag, setInputHashtag] = useState("");
+  const [content, setContent] = useState("");
   const [hashtagSuggestions, setHashtagSuggestions] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,14 +27,14 @@ export default function CreateBlog() {
   useEffect(() => {
     if (inputHashtag) {
       const query = inputHashtag.split(",").join(" ");
-      dispatch(searchHastags(query)); // Gửi query dưới dạng chuỗi
+      dispatch(searchHastags(query));
     } else {
-      setHashtagSuggestions([]); // Đóng dropdown nếu không có hashtag
+      setHashtagSuggestions([]);
     }
   }, [inputHashtag, dispatch]);
 
   useEffect(() => {
-    setHashtagSuggestions(availableHastags); // Cập nhật gợi ý hashtags khi có thay đổi
+    setHashtagSuggestions(availableHastags);
   }, [availableHastags]);
 
   const handleSubmit = (e) => {
@@ -72,18 +72,18 @@ export default function CreateBlog() {
 
   const handleHashtagSelect = (hashtag) => {
     if (!hashtags.includes(hashtag)) {
-      setHashtags([...hashtags, hashtag]); // Thêm hashtag vào mảng
+      setHashtags([...hashtags, hashtag]);
     }
-    setInputHashtag(""); // Xoá giá trị input sau khi chọn
-    setHashtagSuggestions([]); // Đóng dropdown sau khi chọn
+    setInputHashtag("");
+    setHashtagSuggestions([]);
   };
 
   const handleInputChange = (e) => {
-    setInputHashtag(e.target.value); // Cập nhật giá trị input
+    setInputHashtag(e.target.value);
   };
 
   const handleRemoveHashtag = (hashtag) => {
-    setHashtags(hashtags.filter((item) => item !== hashtag)); // Xoá hashtag khỏi mảng
+    setHashtags(hashtags.filter((item) => item !== hashtag));
   };
 
   const handleKeyDown = (e) => {
@@ -91,9 +91,9 @@ export default function CreateBlog() {
       e.preventDefault();
       const newHashtag = inputHashtag.trim();
       if (!hashtags.includes(newHashtag)) {
-        setHashtags([...hashtags, newHashtag]); // Thêm hashtag tự nhập vào mảng
+        setHashtags([...hashtags, newHashtag]);
       }
-      setInputHashtag(""); // Xoá input sau khi thêm
+      setInputHashtag("");
     }
   };
 
@@ -131,48 +131,34 @@ export default function CreateBlog() {
               placeholder="Add Hashtags"
               value={inputHashtag}
               onChange={handleInputChange}
-              onKeyDown={handleKeyDown} // Lắng nghe sự kiện Enter
+              onKeyDown={handleKeyDown}
             />
             {inputHashtag && (
-              <div>
+              <S.SuggestionsWrapper>
                 {Array.isArray(hashtagSuggestions) &&
                   hashtagSuggestions.map((hashtag) => (
-                    <div
+                    <S.HashtagSuggestionsContainer
                       key={hashtag.id}
                       onClick={() => handleHashtagSelect(hashtag.name)}
-                      style={{
-                        cursor: "pointer",
-                        padding: "5px",
-                        border: "1px solid #ccc",
-                      }}
                     >
                       {hashtag.name}
-                    </div>
+                    </S.HashtagSuggestionsContainer>
                   ))}
-              </div>
+              </S.SuggestionsWrapper>
             )}
-            <div>
+            <S.SelectedHashtagsWrapper>
               {hashtags.map((hashtag, index) => (
-                <span
-                  key={index}
-                  style={{ margin: "5px", display: "inline-block" }}
-                >
+                <S.HashtagContainer key={index}>
                   <span>{hashtag}</span>
-                  <button
+                  <S.RemoveHashtagButton
                     type="button"
                     onClick={() => handleRemoveHashtag(hashtag)}
-                    style={{
-                      marginLeft: "5px",
-                      cursor: "pointer",
-                      border: "none",
-                      background: "transparent",
-                    }}
                   >
-                    X
-                  </button>
-                </span>
+                    <i className="bi bi-x-octagon"></i>
+                  </S.RemoveHashtagButton>
+                </S.HashtagContainer>
               ))}
-            </div>
+            </S.SelectedHashtagsWrapper>
           </S.Group>
         </S.LeftTopContainer>
         <S.RightTopContainer>
@@ -188,7 +174,7 @@ export default function CreateBlog() {
             <S.ContentInput
               placeholder="Write Content Here..."
               value={content}
-              onChange={(e) => setContent(e.target.value)} // Cập nhật content
+              onChange={(e) => setContent(e.target.value)}
             />
           </S.GroupContent>
         </S.LeftBottomContainer>

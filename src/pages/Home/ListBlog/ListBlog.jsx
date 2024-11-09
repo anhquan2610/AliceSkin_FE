@@ -18,17 +18,29 @@ export default function ListBlog() {
     <S.Container>
       <S.TopContainer>
         <S.Title>Latest Post</S.Title>
-        <S.Filter>Filter</S.Filter>
       </S.TopContainer>
-      <S.ListItem>
-        {blogs.map((blog, index) => (
-          <ItemBlog
-            key={`${blog.blog_id}-${index}`}
-            blog={blog}
-            navigate={navigate}
-          />
-        ))}
-      </S.ListItem>
+      {blogs && blogs.length > 0 ? (
+        <S.ListItem>
+          {blogs.map((blog, index) => (
+            <ItemBlog
+              key={`${blog.blog_id}-${index}`}
+              blog={blog}
+              navigate={navigate}
+            />
+          ))}
+        </S.ListItem>
+      ) : (
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "var(--fs-lg)",
+            fontStyle: "italic",
+            color: "var(--gray)",
+          }}
+        >
+          No blogs available.
+        </p>
+      )}
     </S.Container>
   );
 }

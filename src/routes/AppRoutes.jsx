@@ -40,6 +40,9 @@ import PaymentStatus from "../pages/Payment/PaymentStatus/PaymentStatus";
 import OrderDetail from "../pages/OrderDetail/OrderDetail";
 import OrderManage from "../pages/managementPages/OrderManage/OrderManage";
 import HashtagsManage from "../pages/managementPages/HashtagsManage/HashtagsManage";
+import Cashflow from "../pages/managementPages/CashflowManage/CashflowManage";
+import Brand from "../pages/Brand/Brand";
+import ShowDetailBrand from "../pages/Brand/ShowDetailBrand/ShowDeatailBrand";
 
 export default function AppRoutes() {
   return (
@@ -72,6 +75,7 @@ export default function AppRoutes() {
         <Route path="infoUser" element={<ProdfileUser />} />
         <Route path="orders" element={<OrderManage />} />
         <Route path="hashtags" element={<HashtagsManage />} />
+        <Route path="cashflow" element={<Cashflow />} />
       </Route>
       <Route
         path="/"
@@ -97,6 +101,8 @@ export default function AppRoutes() {
         <Route path="Payment_notifi" element={<PaymentSuccess />} />
         <Route path="Payment_status" element={<PaymentStatus />} />
         <Route path="Order_detail/:id" element={<OrderDetail />} />
+        <Route path="Brand" element={<Brand/>} />
+        <Route path="Brand_detail/:id" element={<ShowDetailBrand />} />
       </Route>
     </Routes>
   );

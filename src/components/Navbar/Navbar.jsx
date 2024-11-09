@@ -47,8 +47,9 @@ export default function Navbar() {
         <S.StyledLink to="/product">
           <S.NavItem>Products</S.NavItem>
         </S.StyledLink>
-        <S.NavItem>Brands</S.NavItem>
-       
+        <S.StyledLink to="/brand">
+          <S.NavItem>Brands</S.NavItem>
+        </S.StyledLink>
       </S.NavList>
       <S.Group>
         <S.StyledLink to="/Shopping_Cart">

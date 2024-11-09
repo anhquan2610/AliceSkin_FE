@@ -31,6 +31,19 @@ export const addBrand = createAsyncThunk(
   }
 );
 
+//Show brand by ID
+export const showBrandById = createAsyncThunk(
+  "brand/showBrandById",
+  async (brand_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get(`/api/brands/${brand_id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 //Get brand by ID
 export const getBrandById = createAsyncThunk(
     "brand/getBrandById",
@@ -87,6 +100,7 @@ const brandSlice = createSlice({
       state.isLoading = false;
       state.message = "";
       state.isSuccess = false;
+      state.selectedBrand = {};
     },
   },
   extraReducers: (builder) => {
@@ -99,6 +113,19 @@ const brandSlice = createSlice({
       state.brands = action.payload;
     });
     builder.addCase(getAllBrands.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.error.message;
+    });
+
+    // Show brand by ID
+    builder.addCase(showBrandById.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(showBrandById.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.selectedBrand = action.payload;
+    });
+    builder.addCase(showBrandById.rejected, (state, action) => {
       state.isLoading = false;
       state.message = action.error.message;
     });
