@@ -34,7 +34,7 @@ export const submitSurveyReponses = createAsyncThunk(
               const response = await instanceAxios.post(`/api/surveys/1/responses`, {
                 responses: formattedResponses,
               });
-              notifySuccess(response.data.message);
+              notifySuccess("Submitted successfully");
               return response.data; 
         
         } catch (error) {

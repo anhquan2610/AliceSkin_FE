@@ -20,12 +20,12 @@ export default function ListProduct({ priceFilter, selectedBrands }) {
 
     const price = parseFloat(product.discounted_price);
     switch (priceFilter) {
-      case "0-50":
-        return price >= 0 && price <= 50;
-      case "50-100":
-        return price > 50 && price <= 100;
-      case "100+":
-        return price > 100;
+      case "0-50000":
+        return price >= 0 && price <= 50000;
+      case "50000-100000":
+        return price > 50000 && price <= 100000;
+      case "100000+":
+        return price > 100000;
       default:
         return true;
     }

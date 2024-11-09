@@ -31,6 +31,7 @@ import LocalShippingTwoToneIcon from "@mui/icons-material/LocalShippingTwoTone";
 import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
+import TagIcon from "@mui/icons-material/Tag";
 
 const drawerWidth = 240;
 
@@ -172,6 +173,12 @@ export default function MiniDrawer() {
       text: "Orders",
       link: "orders",
       icon: <ContentPasteIcon />,
+      roles: ["admin", "staff"],
+    },
+    {
+      text: "HashTags",
+      link: "hashtags",
+      icon: <TagIcon />,
       roles: ["admin", "staff"],
     },
   ];

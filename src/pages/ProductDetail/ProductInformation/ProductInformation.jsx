@@ -117,7 +117,6 @@ export default function ProductInformation() {
                 +
               </S.BtnInCrement>
             </S.BtnCount>
-            <S.BtnBuy>Buy</S.BtnBuy>
             <S.BtnAddToCart onClick={handleAddToCart}>
               Add To Cart <span></span>
               <i className="bi bi-cart"></i>
@@ -145,8 +144,12 @@ export default function ProductInformation() {
                   {shippings.map((shipping) => (
                     <S.Tr key={shipping.id}>
                       <S.Td>{shipping.name}</S.Td>
-                      <S.Td>{Math.floor(shipping.shipping_amount).toLocaleString("vi-VN")} VND</S.Td>
-                      
+                      <S.Td>
+                        {Math.floor(shipping.shipping_amount).toLocaleString(
+                          "vi-VN"
+                        )}{" "}
+                        VND
+                      </S.Td>
                     </S.Tr>
                   ))}
                 </S.TableBody>

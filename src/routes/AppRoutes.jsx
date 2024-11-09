@@ -39,6 +39,7 @@ import PaymentSuccess from "../pages/Payment/PaymentSuccess/PaymentSuccess";
 import PaymentStatus from "../pages/Payment/PaymentStatus/PaymentStatus";
 import OrderDetail from "../pages/OrderDetail/OrderDetail";
 import OrderManage from "../pages/managementPages/OrderManage/OrderManage";
+import HashtagsManage from "../pages/managementPages/HashtagsManage/HashtagsManage";
 
 export default function AppRoutes() {
   return (
@@ -70,6 +71,7 @@ export default function AppRoutes() {
         <Route path="vouchers" element={<VoucherManage />} />
         <Route path="infoUser" element={<ProdfileUser />} />
         <Route path="orders" element={<OrderManage />} />
+        <Route path="hashtags" element={<HashtagsManage />} />
       </Route>
       <Route
         path="/"
