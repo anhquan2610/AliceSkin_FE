@@ -11,7 +11,7 @@ export default function FilterOrder({ status, onStatusChange }) {
       >
         <MenuItem value="all">All</MenuItem>
         <MenuItem value="Pending">Pending</MenuItem>
-        <MenuItem value="Completed">Completed</MenuItem>
+        <MenuItem value="Waiting for Delivery">Waiting for Delivery</MenuItem>
       </Select>
     </FormControl>
   );

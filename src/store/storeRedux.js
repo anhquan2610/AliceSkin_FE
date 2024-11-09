@@ -11,6 +11,7 @@ import brandSlice from "./brandSlice";
 import surveySlice from "./surveySlice";
 import voucherSlice from "./voucherSlice";
 import orderSlice from "./orderSlice";
+import hashtagsSlice from "./hastagsSlice";
 
 export const store = configureStore({
 
@@ -26,5 +27,6 @@ export const store = configureStore({
     [surveySlice.name]: surveySlice.reducer,
     [voucherSlice.name]: voucherSlice.reducer,
     [orderSlice.name]: orderSlice.reducer,
+    [hashtagsSlice.name]: hashtagsSlice.reducer,
   }
 });

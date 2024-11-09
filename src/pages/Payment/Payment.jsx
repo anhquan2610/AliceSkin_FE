@@ -80,8 +80,8 @@ export default function Payment() {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(resetOderState());
       dispatch(completeCart());
+      dispatch(resetOderState());
     }
   }, [dispatch, isSuccess]);
 

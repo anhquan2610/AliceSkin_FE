@@ -85,7 +85,7 @@ flex-direction: row;
 gap: var(--s-10);
 align-items: center;
 margin: var(--s-5) 0;
-justify-content: space-between;
+
 `;
 
 export const BtnCount = styled.div`
