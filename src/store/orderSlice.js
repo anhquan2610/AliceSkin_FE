@@ -8,6 +8,9 @@ const initialState = {
   isSuccess: false,
   message: "",
   paymentUrl: null,
+  totalVNPay: "",
+  totalCOD: "",
+  totalAmount: "",
 };
 
 //Get All Orders
@@ -148,6 +151,20 @@ export const submitReview = createAsyncThunk(
   }
 );
 
+//Get Cash Flow
+export const fetchCashflowData = createAsyncThunk(
+  "cashflow/fetchCashflowData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.get("/api/manager/orders/total-payments");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+  
+
 const orderSlice = createSlice({
   name: "order",
   initialState,
@@ -287,6 +304,21 @@ const orderSlice = createSlice({
       state.isLoading = false;
       state.message = action.error.message;
     });
+
+    //Get Cash Flow
+    builder.addCase(fetchCashflowData.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchCashflowData.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.totalVNPay = action.payload.total_VNPay;
+      state.totalCOD = action.payload.total_COD;
+      state.totalAmount = action.payload.total_amount;
+    });
+    builder.addCase(fetchCashflowData.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    
   },
 });
 

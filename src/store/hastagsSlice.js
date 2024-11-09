@@ -28,7 +28,7 @@ export const addHastag = createAsyncThunk(
     async (hastagData, { rejectWithValue }) => {
         try {
             const response = await instanceAxios.post(`/api/hashtags`, hastagData);
-            notifySuccess(response.data.message);
+            notifySuccess("Add hastag successfully");
             return response.data;
         } catch (error) {
             notifyError(error.response.data.message);

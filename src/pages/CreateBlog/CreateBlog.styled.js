@@ -36,6 +36,7 @@ export const Group = styled.div`
 display: flex;
 flex-direction: column;
 width: 100%;
+position: relative;
 `;
 
 export const Label = styled.label`
@@ -120,3 +121,46 @@ border-radius: var(--br-md);
 font-size: var(--fs-lg);
 `;
 
+export const HashtagSuggestionsContainer = styled.div`
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #ccc;
+`;
+
+export const HashtagContainer = styled.div`
+  margin: 5px;
+  display: inline-block;
+  background-color: var(--green);
+  color: var(--white);
+  padding: var(--s-2);
+  border-radius: var(--br-md);
+`;
+
+export const RemoveHashtagButton = styled.button`
+  margin-left: var(--s-2);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--white);
+`;
+
+export const SuggestionsWrapper = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: var(--br-md);
+  max-height: 150px; 
+  overflow-y: auto; 
+  z-index: 10; 
+`;
+
+
+export const SelectedHashtagsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  
+`;

@@ -1,30 +1,25 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
-
-padding: var(--s-5) 0;
-`;
-
-export const TopContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+padding: var(--s-5) var(--s-30);
 `;
 
 export const Title = styled.div`
+text-align: center;
+font-size: var(--fs-2xl);
 font-weight: var(--fw-semibold);
+margin-bottom: var(--s-5);
 `;
 
-export const Filter =   styled.div``;
-
-export const ListItem = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: var(--s-4) 0;
-    row-gap: var(--s-8);
+export const ListBrandContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+gap: var(--s-5);
+flex-wrap: wrap;
 `;
+
+export const BrandItem = styled.div``;
 
 const spin = keyframes`
   0% {

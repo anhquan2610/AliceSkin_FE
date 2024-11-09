@@ -24,7 +24,12 @@ export default function HightLight() {
     return <S.LoadingSpinner />;
   }
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return <p style={{
+      textAlign: "center",
+      fontSize: "var(--fs-lg)",
+      fontStyle: "italic",
+      color: "var(--gray)"
+    }}>No blogs available.</p>;
   }
   if (!blog) {
     return <p>No blogs available.</p>;

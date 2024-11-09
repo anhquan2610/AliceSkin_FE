@@ -18,3 +18,12 @@ flex: 8;
 export const RightContainer = styled.div`
 flex: 4;
 `;
+
+
+export const NoBlogsMessage = styled.div`
+text-align: center;
+width: 100%;
+font-size: var(--fs-lg);
+font-style: italic;
+color: var(--gray);
+`;
