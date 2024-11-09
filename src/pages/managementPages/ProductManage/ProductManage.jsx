@@ -27,13 +27,13 @@ export default function ProductManage() {
 
   // Update filteredProducts whenever products change
   useEffect(() => {
-    setFilteredProducts(Array.isArray(products) ? products : []); 
+    setFilteredProducts(Array.isArray(products) ? products : []);
   }, [products]);
 
   // Handle filter change
   const handleFilterChange = (filters) => {
     const { searchTerm, status } = filters;
-    let filtered = Array.isArray(products) ? [...products] : []; 
+    let filtered = Array.isArray(products) ? [...products] : [];
 
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
@@ -46,7 +46,7 @@ export default function ProductManage() {
       filtered = filtered.filter((product) => product.status === status);
     }
 
-    setFilteredProducts(filtered); 
+    setFilteredProducts(filtered);
   };
 
   return (
