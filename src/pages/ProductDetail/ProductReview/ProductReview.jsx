@@ -26,12 +26,11 @@ export default function ProductReview() {
           <S.Title>Review Of Product</S.Title>
           <S.TotalReview>(Tổng cộng: {totalReviews} Reviews)</S.TotalReview>
         </S.TitleContainer>
-        <S.Filter>Filte</S.Filter>
       </S.TopContainer>
       <S.ReviewContainer>
         <S.ReviewItemContainer>
-          {reviews.map((review, index) => (
-            <ReviewItem key={`${review.id}-${index}`} review={review} />
+          {reviews.map((review) => (
+            <ReviewItem key={review.review_id} review={review} />
           ))}
         </S.ReviewItemContainer>
         <S.Divider />

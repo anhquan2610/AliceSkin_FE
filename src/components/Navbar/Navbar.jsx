@@ -29,6 +29,10 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
+  const getRandomId = (maxId) => {
+    return Math.floor(Math.random() * maxId) + 1;
+  };
+
   return (
     <S.Container>
       <S.Group>
@@ -41,7 +45,7 @@ export default function Navbar() {
         <S.StyledLink to="/home">
           <S.NavItem>Home</S.NavItem>
         </S.StyledLink>
-        <S.StyledLink to="/blog/1">
+        <S.StyledLink to="/blog/39">
           <S.NavItem>Blog</S.NavItem>
         </S.StyledLink>
         <S.StyledLink to="/product">

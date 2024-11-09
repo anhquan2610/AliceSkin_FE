@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlog, resetBlogState } from "../../store/blogSlice";
 import { uploadImage, resetImageState } from "../../store/imageSlice";
 import { useNavigate } from "react-router-dom";
-import { notifySuccess } from "../../utils/Nontification.utils";
+import { notifySuccess, notifyError } from "../../utils/Nontification.utils"; // Import notifyError
 import { searchHastags } from "../../store/hastagsSlice";
 
 export default function CreateBlog() {
@@ -71,7 +71,9 @@ export default function CreateBlog() {
   }, [isBlogSuccess, navigate, dispatch]);
 
   const handleHashtagSelect = (hashtag) => {
-    if (!hashtags.includes(hashtag)) {
+    if (hashtags.includes(hashtag)) {
+      notifyError("This hashtag has already been added.");
+    } else {
       setHashtags([...hashtags, hashtag]);
     }
     setInputHashtag("");
@@ -92,6 +94,8 @@ export default function CreateBlog() {
       const newHashtag = inputHashtag.trim();
       if (!hashtags.includes(newHashtag)) {
         setHashtags([...hashtags, newHashtag]);
+      } else {
+        notifyError("This hashtag has already been added.");
       }
       setInputHashtag("");
     }

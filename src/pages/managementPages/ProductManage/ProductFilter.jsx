@@ -41,7 +41,7 @@ export default function ProductFilter({ onFilterChange }) {
             <em>All</em>
           </MenuItem>
           <MenuItem value="available">Available</MenuItem>
-          <MenuItem value="sold out">Sold Out</MenuItem>
+          <MenuItem value="out of stock">Out of stock</MenuItem>
         </Select>
       </FormControl>
     </div>
