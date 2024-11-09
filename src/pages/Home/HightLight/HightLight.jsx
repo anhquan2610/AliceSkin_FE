@@ -1,13 +1,14 @@
-import * as S from "./HightLight.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllBlog } from "../../../store/blogSlice";
-import DateOfBlog from "../../../components/infoBlog/dateOfBlog/dateOfBlog";
 import { useNavigate } from "react-router-dom";
+import { getAllBlog } from "../../../store/blogSlice";
+import { useEffect } from "react";
+import DateOfBlog from "../../../components/infoBlog/dateOfBlog/dateOfBlog";
+import * as S from "./HightLight.styled";
 
 export default function HightLight() {
   const dispatch = useDispatch();
-  const { blogs, isLoading, error } = useSelector((state) => state.blog);
+  const { isLoading } = useSelector((state) => state.blog);
+  const blogs = useSelector((state) => state.blog.blogs);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,53 +16,52 @@ export default function HightLight() {
   }, [dispatch]);
 
   const handleBlogClick = () => {
-    navigate(`/blog/${blog.blog_id}`);
+    if (blog && blog.blog_id) {
+      navigate(`/blog/${blog.blog_id}`);
+    }
   };
 
-  const blog = blogs[Math.floor(Math.random() * blogs.length)];
+  // Kiểm tra nếu blogs có ít nhất 1 phần tử, nếu không thì tránh lỗi
+  const blog =
+    blogs.length > 0 ? blogs[Math.floor(Math.random() * blogs.length)] : null;
 
   if (isLoading) {
     return <S.LoadingSpinner />;
   }
-  if (error) {
-    return <p style={{
-      textAlign: "center",
-      fontSize: "var(--fs-lg)",
-      fontStyle: "italic",
-      color: "var(--gray)"
-    }}>No blogs available.</p>;
-  }
-  if (!blog) {
-    return <p>No blogs available.</p>;
+
+  // Kiểm tra nếu blog là hợp lệ và có thumbnail trước khi render
+  if (!blog || !blog.thumbnail) {
+    return <div>No blog available</div>;
   }
 
   return (
     <S.Container onClick={handleBlogClick}>
-      <S.Image src={blog.thumbnail}></S.Image>
+      <S.Image src={blog.thumbnail} alt="Blog Thumbnail"></S.Image>
       <S.BoxTitle>
         <S.CongfigBox>
           <S.ContainerHashtags>
-            {blog.hashtags.map((hashtag, index) => (
-              <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
-            ))}
+            {blog.hashtags &&
+              blog.hashtags.map((hashtag, index) => (
+                <S.Hashtag key={index}>#{hashtag}</S.Hashtag>
+              ))}
           </S.ContainerHashtags>
           <S.Title>{blog.title}</S.Title>
           <S.Content>{blog.content}</S.Content>
           <S.AuthorContainer>
             <S.AuthorGroup>
               <S.AvatarContainer>
-                <S.Avatar src={blog.user?.image}></S.Avatar>
+                <S.Avatar src={blog.user?.image || ""} alt="Author Avatar" />
               </S.AvatarContainer>
               <S.AuthorName>{blog.user?.name}</S.AuthorName>
             </S.AuthorGroup>
             <DateOfBlog date={blog.created_at} />
           </S.AuthorContainer>
           <S.LikeContainer>
-          <S.IconLike>
-            <i className="bi bi-hand-thumbs-up-fill"></i>
-          </S.IconLike>
-          <S.CountLike>{blog.like}</S.CountLike>
-        </S.LikeContainer>
+            <S.IconLike>
+              <i className="bi bi-hand-thumbs-up-fill"></i>
+            </S.IconLike>
+            <S.CountLike>{blog.like}</S.CountLike>
+          </S.LikeContainer>
         </S.CongfigBox>
       </S.BoxTitle>
     </S.Container>

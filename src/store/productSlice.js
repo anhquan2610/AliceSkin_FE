@@ -39,7 +39,7 @@ export const getReviewByProductId = createAsyncThunk(
   "product/getReviewByProductId",
   async (product_id, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.get(`/api/reviews/product/${product_id}`);
+      const response = await instanceAxios.get(`/api/products/${product_id}/reviews`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -171,7 +171,7 @@ const productSlice = createSlice({
     });
     builder.addCase(getReviewByProductId.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.reviews = action.payload;
+      state.reviews = action.payload.reviews;
     });
     builder.addCase(getReviewByProductId.rejected, (state, action) => {
       state.isLoading = false;

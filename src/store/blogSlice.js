@@ -13,6 +13,10 @@ const initialState = {
   isSuccess: false,
   message: "",
   user: {},
+  status_counts: {
+    draft: 0,
+    published: 0,
+  },
 };
 
 // Get All  Blog
@@ -235,7 +239,8 @@ const blogSlice = createSlice({
     });
     builder.addCase(getAllBlogAdmin.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.blogs = action.payload;
+      state.blogs = action.payload.blogs;
+      state.status_counts = action.payload.status_counts; 
     });
     builder.addCase(getAllBlogAdmin.rejected, (state, action) => {
       state.isLoading = false;

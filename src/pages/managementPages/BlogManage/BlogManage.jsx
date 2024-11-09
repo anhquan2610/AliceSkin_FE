@@ -11,7 +11,7 @@ import BlogRows from "./BlogRows/BlogRows";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllBlogAdmin } from "../../../store/blogSlice";
-import BlogFilter from "./BlogFilter"; 
+import BlogFilter from "./BlogFilter";
 
 export default function BlogManage() {
   const dispatch = useDispatch();
@@ -52,17 +52,13 @@ export default function BlogManage() {
     <S.Container>
       <S.Title>Blog Manage</S.Title>
       <BlogFilter onFilterChange={handleFilterChange} />
-    
+
       <S.Description>List of blogs</S.Description>
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell
-                align="left"
-              >
-                Title&nbsp;
-              </TableCell>
+              <TableCell align="left">Title&nbsp;</TableCell>
               <TableCell align="left">Author&nbsp;</TableCell>
               <TableCell align="left">Created at&nbsp;</TableCell>
               <TableCell align="left">Hashtags&nbsp;</TableCell>

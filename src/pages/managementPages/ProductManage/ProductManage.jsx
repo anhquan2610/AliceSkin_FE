@@ -18,19 +18,22 @@ import { Link } from "react-router-dom";
 export default function ProductManage() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
+  // Fetch all products when the component mounts
   useEffect(() => {
     dispatch(getAllProduct());
   }, [dispatch]);
 
+  // Update filteredProducts whenever products change
   useEffect(() => {
-    setFilteredProducts(products);
+    setFilteredProducts(Array.isArray(products) ? products : []);
   }, [products]);
 
+  // Handle filter change
   const handleFilterChange = (filters) => {
     const { searchTerm, status } = filters;
-    let filtered = products;
+    let filtered = Array.isArray(products) ? [...products] : [];
 
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
@@ -74,9 +77,17 @@ export default function ProductManage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredProducts.map((product) => (
-              <ProductRows key={product.product_id} product={product} />
-            ))}
+            {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
+              filteredProducts.map((product) => (
+                <ProductRows key={product.product_id} product={product} />
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={8} align="center">
+                  No products found.
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

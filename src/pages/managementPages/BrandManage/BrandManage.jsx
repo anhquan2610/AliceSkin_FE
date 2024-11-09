@@ -34,7 +34,7 @@ export default function BrandManage() {
   }, [dispatch]);
 
   useEffect(() => {
-    setFilteredBrands(brands); // Khởi tạo danh sách lọc với tất cả thương hiệu khi brands thay đổi
+    setFilteredBrands(brands); 
   }, [brands]);
 
   const handleFilterChange = (filters) => {
