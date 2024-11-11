@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import {
-  TextField,
-  Select,
-  MenuItem,
   FormControl,
   InputLabel,
+  MenuItem,
+  Select,
+  TextField,
 } from "@mui/material";
 
-const FilterQuestion = ({ onFilterChange }) => {
+const FilterOrder = ({ onFilterChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("");
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -17,8 +17,8 @@ const FilterQuestion = ({ onFilterChange }) => {
   };
 
   const handleStatusChange = (e) => {
-    setCategory(e.target.value);
-    onFilterChange({ searchTerm, category: e.target.value });
+    setStatus(e.target.value);
+    onFilterChange({ searchTerm, status: e.target.value });
   };
 
   return (
@@ -29,24 +29,24 @@ const FilterQuestion = ({ onFilterChange }) => {
         value={searchTerm}
         onChange={handleSearchChange}
       />
+
       <FormControl variant="outlined" sx={{ width: "var(--s-30)" }}>
-        <InputLabel id="role-select-label">Category</InputLabel>
+        <InputLabel id="role-select-label">Status</InputLabel>
         <Select
           labelId="role-select-label"
-          value={category}
+          value={status}
           onChange={handleStatusChange}
           label="Status"
         >
           <MenuItem value="">
             <em>All</em>
           </MenuItem>
-          <MenuItem value="Interest">Interest</MenuItem>
-          <MenuItem value="Goal">Goal</MenuItem>
-          <MenuItem value="Factor">Factor</MenuItem>
+          <MenuItem value="Completed">Completed</MenuItem>
+          <MenuItem value="Waiting for Delivery">Waiting for Delivery</MenuItem>
         </Select>
       </FormControl>
     </div>
   );
 };
 
-export default FilterQuestion;
+export default FilterOrder;

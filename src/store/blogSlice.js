@@ -192,6 +192,19 @@ export const likeByBlogId = createAsyncThunk(
   }
 );
 
+//Unlike for blog
+export const unlikeByBlogId = createAsyncThunk(
+  "blog/unlikeByBlogId",
+  async (blog_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.delete(`/api/blogs/like/${blog_id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 //Update Blog By User
 export const updateBlogByUser = createAsyncThunk(
   "blog/updateBlogByUser",
@@ -442,6 +455,22 @@ const blogSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     });
+
+    //Unlike for blog---------------------------------------------
+    builder.addCase(unlikeByBlogId.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(unlikeByBlogId.fulfilled, (state, action) => {
+      state.isLoading = false;
+      if (state.selectedBlog && state.selectedBlog.blog_id === action.payload.blog_id) {
+        state.selectedBlog.like = action.payload.like;
+      }
+    });
+    builder.addCase(unlikeByBlogId.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    
 
     //Update Blog By User---------------------------------------------
     builder.addCase(updateBlogByUser.pending, (state) => {

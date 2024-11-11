@@ -7,7 +7,9 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   message: "",
-  selectedBrand: {},
+  selectedBrand: {
+    products: [],
+  },
 };
 
 //Get all brands
@@ -124,6 +126,7 @@ const brandSlice = createSlice({
     builder.addCase(showBrandById.fulfilled, (state, action) => {
       state.isLoading = false;
       state.selectedBrand = action.payload;
+      state.selectedBrand.products = action.payload.products;
     });
     builder.addCase(showBrandById.rejected, (state, action) => {
       state.isLoading = false;
