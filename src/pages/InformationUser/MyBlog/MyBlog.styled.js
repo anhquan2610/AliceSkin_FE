@@ -29,15 +29,26 @@ flex: 10;
 export const SearchContainer = styled.div`
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+gap: var(--s-3);
 align-items: center;
 margin-bottom: var(--s-3);
 `;
 
+export const ContainerFilter = styled.div`
+flex: 2;
+`;
+
 export const SearchInput = styled.input`
 border: 2px solid var(--gray);
-padding: var(--s-1) var(--s-2);
+padding: var(--s-2) var(--s-3);
 border-radius: var(--br-lg);
+width: 100%;
+`;
+
+export const ContainerGroup = styled.div`
+flex: 6;
+display: flex;
+justify-content: center;
 `;
 
 export const BtnCreateBlog = styled.button`
@@ -46,6 +57,7 @@ color: var(--white);
 padding: var(--s-2) var(--s-3);
 cursor: pointer;
 display: flex;
+
 align-items: center;
 gap: var(--s-1);
 border-radius: var(--br-md);
