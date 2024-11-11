@@ -13,11 +13,13 @@ import { useEffect, useState } from "react";
 import { showAllShippingManage } from "../../../store/shippingSlice";
 import ShippingRows from "./ShippingRows/ShippingRows";
 import AddShippingModal from "./ShippingModal/AddShippingModal";
+import FilterShipping from "./FilterShipping";
 
 export default function ShippingManage() {
   const dispatch = useDispatch();
   const shippings = useSelector((state) => state.shipping.shippings);
   const [openAddShipping, setOpenAddShipping] = useState(false);
+  const [filteredShippings, setFilteredShippings] = useState(shippings);
 
   const handleOpenAddShipping = () => {
     setOpenAddShipping(true);
@@ -28,12 +30,31 @@ export default function ShippingManage() {
   };
 
   useEffect(() => {
+    setFilteredShippings(shippings);
+  }, [shippings]);
+
+  const handleFilterChange = (filters) => {
+    const { searchTerm } = filters;
+    let filtered = shippings;
+
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter((shipping) =>
+        shipping.name.toLowerCase().includes(searchLower)
+      );
+    }
+
+    setFilteredShippings(filtered);
+  };
+
+  useEffect(() => {
     dispatch(showAllShippingManage());
   }, [dispatch]);
 
   return (
     <S.Container>
       <S.Title>Shipping Manage</S.Title>
+      <FilterShipping onFilterChange={handleFilterChange} />
       <S.MiddleContainer>
         <S.Description>List of shipping</S.Description>
         <Button
@@ -42,7 +63,7 @@ export default function ShippingManage() {
           color="success"
           onClick={handleOpenAddShipping}
         >
-          Add Product
+          Add Shipping
         </Button>
       </S.MiddleContainer>
 
@@ -57,7 +78,7 @@ export default function ShippingManage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {shippings.map((shipping) => (
+            {filteredShippings.map((shipping) => (
               <ShippingRows key={shipping.id} shipping={shipping} />
             ))}
           </TableBody>

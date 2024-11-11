@@ -13,11 +13,31 @@ import { useEffect, useState } from "react";
 import { getAllHastags } from "../../../store/hastagsSlice";
 import HashtagsRows from "./HashtagsRows/HashtagsRows";
 import AddHashtagsModal from "./HashtagsModal/AddHashtagsModal";
+import HashtagFilter from "./HashtagFilter";
 
 export default function HashtagsManage() {
   const dispatch = useDispatch();
   const hashtags = useSelector((state) => state.hastag.hastags);
   const [openAddHashtag, setOpenAddHashtag] = useState(false);
+  const [filteredHashtags, setFilteredHashtags] = useState([]);
+
+  useEffect(() => {
+    setFilteredHashtags(Array.isArray(hashtags) ? hashtags : []);
+  }, [hashtags]);
+
+  const handleFilterChange = (filters) => {
+    const { searchTerm } = filters;
+    let filtered = Array.isArray(hashtags) ? [...hashtags] : [];
+
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter((hashtag) =>
+        hashtag.name.toLowerCase().includes(searchLower)
+      );
+    }
+
+    setFilteredHashtags(filtered);
+  };
 
   const handleOpenAddHashtag = () => {
     setOpenAddHashtag(true);
@@ -34,6 +54,7 @@ export default function HashtagsManage() {
   return (
     <S.Container>
       <S.Title>Hashtags Manage</S.Title>
+      <HashtagFilter onFilterChange={handleFilterChange} />
       <S.MiddleContainer>
         <S.Description>List of hashtags</S.Description>
         <Button
@@ -55,7 +76,7 @@ export default function HashtagsManage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {hashtags.map((hashtag) => (
+            {filteredHashtags.map((hashtag) => (
               <HashtagsRows key={hashtag.id} hashtag={hashtag} />
             ))}
           </TableBody>

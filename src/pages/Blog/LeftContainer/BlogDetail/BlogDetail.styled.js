@@ -79,6 +79,14 @@ export const LikeGroup = styled.div`
 
 export const HeartIcon = styled.div`
   font-size: var(--fs-md);
+
+  cursor: pointer;
+  color: #ccc;  /* Màu mặc định */
+  transition: color 0.3s ease;
+
+  &.liked {
+    color: red;  /* Màu đỏ khi like */
+  }
 `;
 
 export const HeartCount = styled.div`
@@ -137,6 +145,8 @@ export const GroupNavigate = styled.div`
     color: var(--black);
   }
 `;
+
+
 
 export const BtnNavigate = styled.div``;
 
