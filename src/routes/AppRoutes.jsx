@@ -47,7 +47,7 @@ import ShowDetailBrand from "../pages/Brand/ShowDetailBrand/ShowDeatailBrand";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/landing" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
@@ -101,7 +101,7 @@ export default function AppRoutes() {
         <Route path="Payment_notifi" element={<PaymentSuccess />} />
         <Route path="Payment_status" element={<PaymentStatus />} />
         <Route path="Order_detail/:id" element={<OrderDetail />} />
-        <Route path="Brand" element={<Brand/>} />
+        <Route path="Brand" element={<Brand />} />
         <Route path="Brand_detail/:id" element={<ShowDetailBrand />} />
       </Route>
     </Routes>

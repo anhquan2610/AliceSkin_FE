@@ -37,6 +37,7 @@ export default function HightLight() {
   return (
     <S.Container onClick={handleBlogClick}>
       <S.Image src={blog.thumbnail} alt="Blog Thumbnail"></S.Image>
+
       <S.BoxTitle>
         <S.CongfigBox>
           <S.ContainerHashtags>
@@ -56,12 +57,12 @@ export default function HightLight() {
             </S.AuthorGroup>
             <DateOfBlog date={blog.created_at} />
           </S.AuthorContainer>
-          <S.LikeContainer>
+          {/* <S.LikeContainer>
             <S.IconLike>
               <i className="bi bi-hand-thumbs-up-fill"></i>
             </S.IconLike>
             <S.CountLike>{blog.like}</S.CountLike>
-          </S.LikeContainer>
+          </S.LikeContainer> */}
         </S.CongfigBox>
       </S.BoxTitle>
     </S.Container>

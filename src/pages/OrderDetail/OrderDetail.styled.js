@@ -40,18 +40,20 @@ export const Status = styled.div`
 export const AddressShipping = styled.div`
   margin: var(--s-3) 0;
   font-size: var(--fs-md);
-  font-size: var(--fs-md);
+
   font-style: italic;
   color: var(--dark-brown);
 `;
 
 export const ShipPrice = styled.div`
-  font-size: var(--fs-md);
+
   margin-bottom: var(--s-3);
   font-size: var(--fs-md);
   font-style: italic;
   color: var(--dark-brown);
 `;
+
+
 
 export const VoucherPrice = styled.div`
   font-size: var(--fs-md);

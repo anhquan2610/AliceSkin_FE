@@ -37,7 +37,7 @@ export default function OrderDetail() {
     };
     dispatch(submitReview({ orderId, review: reviewData }));
     const newReviews = [...reviews];
-    newReviews[index] = { content: "", rate: 1 }; 
+    newReviews[index] = { content: "", rate: 1 };
     setReviews(newReviews);
   };
 
@@ -86,6 +86,14 @@ export default function OrderDetail() {
             ).toLocaleString("vi-VN")}{" "}
             VND
           </S.ShipPrice>
+          <S.VoucherPrice>
+            Voucher:{" "}
+            - {parseInt(
+              orders.voucher?.discount_amount.replace(/,/g, ""),
+              10
+            ).toLocaleString("vi-VN")}{" "}
+            VND
+          </S.VoucherPrice>
           <S.TotalPrice>
             Total:{" "}
             {parseInt(orders.total_amount.replace(/,/g, ""), 10).toLocaleString(

@@ -10,8 +10,8 @@ export default function HomePage() {
       <S.ContainerOutLet>
         <Highlight />
         <BlogStar />
-        <ListBlog />
-        <Instagram />
+        <ListBlog /> 
+        {/* <Instagram /> */}
       </S.ContainerOutLet>
     </S.Container>
   );
