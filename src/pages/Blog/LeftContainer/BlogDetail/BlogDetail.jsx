@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-
-// Blog detail
 import * as S from "./BlogDetail.styled";
 import DateOfBlog from "../../../../components/infoBlog/dateOfBlog/dateOfBlog";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -10,7 +8,6 @@ import {
   getBlogById,
   likeByBlogId,
   unlikeByBlogId,
-
 } from "../../../../store/blogSlice";
 
 export default function BlogDetail() {
@@ -18,28 +15,40 @@ export default function BlogDetail() {
   const dispatch = useDispatch();
 
   const selectBlog = useSelector((state) => state.blog.selectedBlog);
-  const [liked, setLiked] = useState(false); // State to track if the blog is liked
+  const [likedBlogs, setLikedBlogs] = useState({});
 
-  // Handle Like and Unlike actions
   const handleLike = () => {
-    if (liked) {
-      dispatch(unlikeByBlogId(blogId)); // If already liked, unlike it
+    const isLiked = likedBlogs[blogId];
+
+    // Nếu đã like, thực hiện unlike
+    if (isLiked) {
+      dispatch(unlikeByBlogId(blogId)).then(() => {
+        setLikedBlogs((prevState) => ({
+          ...prevState,
+          [blogId]: false, // Cập nhật lại trạng thái likedBlogs thành false
+        }));
+      });
     } else {
-      dispatch(likeByBlogId(blogId)); 
+      dispatch(likeByBlogId(blogId)).then(() => {
+        setLikedBlogs((prevState) => ({
+          ...prevState,
+          [blogId]: true, // Cập nhật lại trạng thái likedBlogs thành true
+        }));
+      });
     }
-    setLiked(!liked); 
   };
 
   useEffect(() => {
-    dispatch(getBlogById(blogId));
+    dispatch(getBlogById(blogId)); // Lấy thông tin blog khi component mount
   }, [dispatch, blogId]);
 
   useEffect(() => {
-    // Check if the user has liked the blog
-    if (selectBlog.liked_by_user) {
-      setLiked(true);
-    }
-  }, [selectBlog]);
+    // Đồng bộ trạng thái like từ Redux store vào state local likedBlogs
+    setLikedBlogs((prevState) => ({
+      ...prevState,
+      [blogId]: selectBlog.liked_by_user || false, // Cập nhật từ store
+    }));
+  }, [selectBlog, blogId]);
 
   return (
     <S.Container>
@@ -62,7 +71,10 @@ export default function BlogDetail() {
           ))}
         </S.ContainerHashtags>
         <S.LikeGroup>
-          <S.HeartIcon onClick={handleLike} className={liked ? "liked" : ""}>
+          <S.HeartIcon
+            onClick={handleLike}
+            className={likedBlogs[blogId] ? "liked" : ""} // Đảm bảo cập nhật màu sắc khi like/unlike
+          >
             <i className="bi bi-heart-fill"></i>
           </S.HeartIcon>
           <S.HeartCount>{selectBlog.like}</S.HeartCount>
@@ -79,3 +91,4 @@ export default function BlogDetail() {
     </S.Container>
   );
 }
+  

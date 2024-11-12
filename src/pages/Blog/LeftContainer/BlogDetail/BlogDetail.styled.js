@@ -79,13 +79,12 @@ export const LikeGroup = styled.div`
 
 export const HeartIcon = styled.div`
   font-size: var(--fs-md);
-
   cursor: pointer;
-  color: #ccc;  /* Màu mặc định */
+  color: #ccc;  
   transition: color 0.3s ease;
 
   &.liked {
-    color: red;  /* Màu đỏ khi like */
+    color: red;  
   }
 `;
 
