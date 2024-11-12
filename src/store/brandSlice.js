@@ -68,7 +68,7 @@ export const updateBrandById = createAsyncThunk(
         `/api/manager/brands/${brand_id}`,
         brandData
       );
-      notifySuccess(response.data.message);
+      notifySuccess("Brand updated successfully!");
       return response.data;
     } catch (error) {
       notifyError(error.response.data.message);

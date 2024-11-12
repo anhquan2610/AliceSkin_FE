@@ -78,6 +78,7 @@ export default function AddShippingModal({ open, handleClose }) {
             sx={{ mb: 2 }}
           />
           <TextField
+            required
             fullWidth
             label="Method"
             name="method"

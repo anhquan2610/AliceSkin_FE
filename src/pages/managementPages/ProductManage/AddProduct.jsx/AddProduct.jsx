@@ -27,6 +27,7 @@ import {
   PRODUCT_TYPES,
   MAIN_INGREDIENTS,
   TARGET_SKIN_TYPES,
+  PRODUCT_NATURES
 } from "../ProductValue";
 
 export default function AddProduct() {
@@ -217,14 +218,30 @@ export default function AddProduct() {
               onChange={handleInputChange}
               margin="normal"
             />
-            <TextField
+            {/* <TextField
               fullWidth
               name="nature"
               label="Nature"
               value={formData.nature}
               onChange={handleInputChange}
               margin="normal"
-            />
+            /> */}
+            <FormControl fullWidth margin="normal" sx={{ flex: "1 1 48%" }}>
+              <InputLabel id="product-nature-select-label">Product Nature</InputLabel>
+              <Select
+                labelId="product-nature-select-label"
+                name="nature"
+                value={formData.nature}
+                onChange={handleInputChange}
+                required
+              >
+                {PRODUCT_NATURES.map((nature, index) => (
+                  <MenuItem key={index} value={nature}>
+                    {nature}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <FormControl fullWidth margin="normal" sx={{ flex: "1 1 48%" }}>
               <InputLabel id="product-type-select-label">
                 Product Type
