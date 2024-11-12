@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: var(--s-5);
+  gap: var(--s-3);
 `;
 
 export const Title = styled.div`
@@ -18,7 +18,7 @@ export const Subtitle = styled.div`
 export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
-  gap: var(--s-4);
+  gap: var(--s-2);
 `;
 
 export const Label = styled.label`

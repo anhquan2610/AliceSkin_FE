@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./RegisterForm.styled";
 import { resetAuthState, signUp } from "../../../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { notifySuccess } from "../../../../utils/Nontification.utils";
 export default function RegisterForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
   const { isLoading, isSuccess } = useSelector((state) => state.auth);
 
   const validationSchema = Yup.object().shape({
@@ -47,6 +48,21 @@ export default function RegisterForm() {
     }
   }, [isSuccess, navigate]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Gọi hàm ngay khi component được mount để xác định trạng thái ban đầu
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <S.Container>
       <Formik
@@ -65,10 +81,10 @@ export default function RegisterForm() {
         {({ isSubmitting }) => (
           <Form
             style={{
-              display: "flex",
-              flexDirection: "row",
+              display:  "flex",
+              flexDirection: isMobile ? "column" : "row", // Dùng state isMobile để xác định hướng
               flexWrap: "wrap",
-              justifyContent: "space-between",
+              justifyContent: isMobile ? "" : "space-between",
               marginBottom: "var(--s-5)",
             }}
           >

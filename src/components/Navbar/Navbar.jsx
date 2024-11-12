@@ -2,8 +2,8 @@ import * as S from "./Navbar.styled";
 import Logo from "../../assets/images/logo.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Menu, MenuItem, Badge } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/authSlice";
 import { notifySuccess } from "../../utils/Nontification.utils";
@@ -11,6 +11,7 @@ import { resetSurveyState } from "../../store/surveySlice";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Trạng thái menu
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,8 +30,8 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
-  const getRandomId = (maxId) => {
-    return Math.floor(Math.random() * maxId) + 1;
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen); // Đóng/mở menu hamburger
   };
 
   return (
@@ -41,6 +42,7 @@ export default function Navbar() {
         </S.Logo>
         <S.NameWeb>Alice Skin</S.NameWeb>
       </S.Group>
+
       <S.NavList>
         <S.StyledLink to="/home">
           <S.NavItem>Home</S.NavItem>
@@ -55,6 +57,29 @@ export default function Navbar() {
           <S.NavItem>Brands</S.NavItem>
         </S.StyledLink>
       </S.NavList>
+
+      <S.HamburgerIcon onClick={toggleMenu}>
+        <i className={`bi ${isMenuOpen ? "bi-list" : "bi-list"}`} />
+      </S.HamburgerIcon>
+
+      <S.MobileMenu className={isMenuOpen ? "open" : ""}>
+        <S.CloseMenuButton onClick={toggleMenu} >
+          <i className="bi bi-x" />
+        </S.CloseMenuButton>
+        <S.StyledLink to="/home">
+          <S.NavItem>Home</S.NavItem>
+        </S.StyledLink>
+        <S.StyledLink to="/blog/39">
+          <S.NavItem>Blog</S.NavItem>
+        </S.StyledLink>
+        <S.StyledLink to="/product">
+          <S.NavItem>Products</S.NavItem>
+        </S.StyledLink>
+        <S.StyledLink to="/brand">
+          <S.NavItem>Brands</S.NavItem>
+        </S.StyledLink>
+      </S.MobileMenu>
+
       <S.Group>
         <S.StyledLink to="/Shopping_Cart">
           <S.ShoppingCart>
@@ -67,6 +92,7 @@ export default function Navbar() {
           <i className="bi bi-person" />
         </S.Profile>
       </S.Group>
+
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

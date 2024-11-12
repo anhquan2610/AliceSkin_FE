@@ -1,14 +1,21 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../config/responsiveUi";
 export const Container = styled.div`
   display: flex;
 `;
 
 export const ContainerLeft = styled.div`
-  flex: 3;
+  flex: 1;
+  @media ${DEVICES.TABLET}{
+    flex: 3;
+  }
 `;
 
 export const ContainerRight = styled.div`
-  flex: 3;
+   flex: 1;
+  @media ${DEVICES.TABLET}{
+    flex: 3;
+  }
 `;
 
 export const ContainerMiddle = styled.div`
@@ -21,13 +28,19 @@ export const ContainerMiddle = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: var(--fs-4xl);
+  font-size: var(--fs-3xl);
   font-weight: var(--fw-semibold);
+  @media ${DEVICES.PHONE_L}{
+    font-size: var(--fs-4xl);
+  }
 `;
 
 export const Description = styled.div`
-  font-size: var(--fs-xl);
+  font-size: var(--fs-sm);
   margin-bottom: var(--s-4);
+  @media ${DEVICES.PHONE_L}{
+    font-size: var(--fs-xl);
+  }
 `;
 
 export const ContainerForm = styled.form`
@@ -35,10 +48,13 @@ export const ContainerForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: var(--s-7) var(--s-15);
+  padding: var(--s-4) var(--s-5);
   gap: var(--s-2);
   border-radius: var(--br-md);
-  box-shadow: var(--shadow-3);
+  box-shadow: var(--shadow-2);
+  @media ${DEVICES.PHONE_L}{
+    padding: var(--s-7) var(--s-15);
+  }
 `;
 
 export const Group = styled.div``;

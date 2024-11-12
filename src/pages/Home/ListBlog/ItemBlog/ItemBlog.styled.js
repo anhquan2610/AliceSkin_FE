@@ -1,18 +1,24 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveUi";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 24%;
-  gap: var(--s-4);
+  width: 49%;
+  gap: var(--s-2);
   box-shadow: var(--shadow-1);
-  padding: var(--s-4);
+  padding: var(--s-2);
   border-radius: var(--br-xl);
   overflow: hidden;
   &:hover {
     cursor: pointer;
     box-shadow: var(--shadow-2);
     transform: scale(1.05);
+  }
+  @media ${DEVICES.PHONE_L} {
+    width: 24%; 
+    gap: var(--s-4);
+    padding: var(--s-4);
   }
 `;
 
@@ -32,7 +38,10 @@ export const ContentContainer = styled.div`
   flex: 9;
   display: flex;
   flex-direction: column;
-  gap: var(--s-2);
+  gap: var(--s-1);
+  @media ${DEVICES.PHONE_L} {
+    gap: var(--s-2);
+  }
 `;
 
 export const ContainerHashtags = styled.div`
@@ -43,10 +52,13 @@ export const ContainerHashtags = styled.div`
 
 export const Hashtag = styled.div`
   color: var(--white);
-  padding: var(--s-2);
+  padding: 1px;
   background-color: var(--green-fresh);
   border-radius: var(--br-md);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
+  @media ${DEVICES.DESKTOP} {
+    padding: var(--s-2);
+  }
 `;
 
 export const Title = styled.div`
@@ -63,10 +75,18 @@ export const Description = styled.div`
   font-size: var(--fs-xs);
   width: 100%;
   margin-bottom: var(--s-1);
+  height: 15px;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  @media ${DEVICES.DESKTOP} {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: auto;
+  }
 `;
 
 export const Infor = styled.div`

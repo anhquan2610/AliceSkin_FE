@@ -1,25 +1,27 @@
-import { Formik } from "formik";
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveUi";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  /* align-items: center; */
 `;
-
 
 export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  width: 49%;
-  margin-bottom: var(--s-5);
+  width: 100%;
+  margin-bottom: var(--s-3);
+  @media ${DEVICES.PHONE_L} {
+    width: 49%;
+    margin-bottom: var(--s-5);
+  }
 `;
 
 export const Label = styled.label`
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   margin: var(--s-1) 0;
   font-weight: var(--fw-medium);
+  @media ${DEVICES.PHONE_L} {
+    font-size: var(--fs-lg);
+  }
 `;
 
 export const Input = styled.input`
@@ -27,7 +29,6 @@ export const Input = styled.input`
   font-size: var(--fs-md);
   border-radius: var(--br-md);
   border: 2px solid var(--gray);
-
   &:hover {
     background-color: var(--light-gray-2);
   }
