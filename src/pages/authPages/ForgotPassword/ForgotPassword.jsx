@@ -40,9 +40,6 @@ export default function ForgotPassword() {
             {isLoading ? "Sending..." : "Send Reset Link"}
           </S.BtnSubmit>
           <S.BtnCancel onClick={handleCancel}>Cancel</S.BtnCancel>
-          {/* <Popup isOpen={isPopupOpen} onClose={handlePopupClose}>
-            {message}
-          </Popup> */}
         </S.ContainerForm>
       </S.ContainerMiddle>
       <S.ContainerRight />
