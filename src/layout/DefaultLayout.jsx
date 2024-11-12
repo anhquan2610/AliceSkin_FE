@@ -7,7 +7,7 @@ export const DefaultLayout = () => {
     <>
       <Navbar />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
