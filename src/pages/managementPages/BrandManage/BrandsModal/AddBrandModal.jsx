@@ -1,9 +1,16 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addBrand, resetBrandState } from "../../../../store/brandSlice";
+import {
+  addBrand,
+  getAllBrands,
+  resetBrandState,
+} from "../../../../store/brandSlice";
 import { uploadImage, resetImageState } from "../../../../store/imageSlice";
-import { notifySuccess } from "../../../../utils/Nontification.utils";
+import {
+  notifySuccess,
+  notifyWarning,
+} from "../../../../utils/Nontification.utils";
 
 export default function AddBrandModal({ open, handleClose }) {
   const dispatch = useDispatch();
@@ -47,8 +54,8 @@ export default function AddBrandModal({ open, handleClose }) {
 
   useEffect(() => {
     if (isSuccess) {
-      notifySuccess("Brand added successfully!");
       handleClose();
+      dispatch(getAllBrands());
       dispatch(resetBrandState());
 
       setBrandData({
@@ -61,6 +68,12 @@ export default function AddBrandModal({ open, handleClose }) {
 
   const handleAddBrand = (e) => {
     e.preventDefault();
+
+    if (!brandData.image || !brandData.name || !brandData.description) {
+      notifyWarning("Please fill in all fields!");
+      return;
+    }
+
     dispatch(addBrand(brandData));
   };
 
@@ -98,6 +111,7 @@ export default function AddBrandModal({ open, handleClose }) {
             required
           />
           <TextField
+            required
             label="Description"
             name="description"
             fullWidth
@@ -106,6 +120,7 @@ export default function AddBrandModal({ open, handleClose }) {
             onChange={handleChange}
           />
           <TextField
+            required
             label="Image"
             type="file"
             accept="image/*"
@@ -115,6 +130,7 @@ export default function AddBrandModal({ open, handleClose }) {
           />
         </Box>
         <Button
+        
           variant="contained"
           color="primary"
           fullWidth

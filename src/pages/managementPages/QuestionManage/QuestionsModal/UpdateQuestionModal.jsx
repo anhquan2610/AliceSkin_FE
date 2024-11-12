@@ -1,4 +1,14 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Modal,
+  TextField,
+  Typography,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,6 +16,7 @@ import {
   resetSurveyState,
   updateQuestionById,
 } from "../../../../store/surveySlice";
+import { QUESTION_CATEGORY } from "../QuestionValue";
 
 export default function UpdateQuestionModal({ open, handleClose, question }) {
   const dispatch = useDispatch();
@@ -52,7 +63,7 @@ export default function UpdateQuestionModal({ open, handleClose, question }) {
   useEffect(() => {
     if (isSuccess) {
       handleClose();
-      dispatch(getAllQuestions()); // Gọi lại để cập nhật danh sách câu hỏi
+      dispatch(getAllQuestions());
       dispatch(resetSurveyState());
     }
   }, [isSuccess, dispatch, handleClose]);
@@ -77,10 +88,8 @@ export default function UpdateQuestionModal({ open, handleClose, question }) {
           borderRadius: 4,
         }}
       >
-        <Typography variant="h6" mb={2}>
-          Update Question
-        </Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+        <Typography variant="h6">Update Question</Typography>
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
           <Box sx={{ flex: 1, minWidth: "300px" }}>
             <TextField
               label="Nội dung"
@@ -98,7 +107,7 @@ export default function UpdateQuestionModal({ open, handleClose, question }) {
               margin="normal"
               value={questionData.question_type}
               onChange={handleChange}
-              required
+              disabled
             />
             <Typography variant="subtitle1">Tùy chọn</Typography>
             {questionData.options.map((option, index) => (
@@ -114,15 +123,21 @@ export default function UpdateQuestionModal({ open, handleClose, question }) {
             ))}
           </Box>
           <Box sx={{ flex: 1, minWidth: "300px" }}>
-            <TextField
-              label="Thể loại"
-              name="category"
-              fullWidth
-              margin="normal"
-              value={questionData.category}
-              onChange={handleChange}
-              required
-            />
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Thể loại</InputLabel>
+              <Select
+                name="category"
+                value={questionData.category}
+                onChange={handleChange}
+                required
+              >
+                {QUESTION_CATEGORY.map((category) => (
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <TextField
               label="Mã câu hỏi"
               name="code"

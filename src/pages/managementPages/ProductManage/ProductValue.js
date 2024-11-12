@@ -1,4 +1,4 @@
-
+export const PRODUCT_NATURES = ["new", "best seller", "exclusive"];
 
 export const PRODUCT_TYPES = [
     "Cleanser",

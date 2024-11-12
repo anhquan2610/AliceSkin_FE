@@ -29,6 +29,7 @@ import {
   PRODUCT_TYPES,
   MAIN_INGREDIENTS,
   TARGET_SKIN_TYPES,
+  PRODUCT_NATURES,
 } from "../ProductValue";
 
 export default function UpdateProduct() {
@@ -215,7 +216,9 @@ export default function UpdateProduct() {
               name="discount"
               fullWidth
               margin="normal"
-              value={productData.discount ? Math.floor(productData.discount) : ""}
+              value={
+                productData.discount ? Math.floor(productData.discount) : ""
+              }
               onChange={handleChange}
             />
             <TextField
@@ -249,15 +252,24 @@ export default function UpdateProduct() {
               value={productData.volume ? Math.floor(productData.volume) : ""}
               onChange={handleChange}
             />
-            <TextField
-              label="Tính chất"
-              name="nature"
-              fullWidth
-              margin="normal"
-              value={productData.nature}
-              onChange={handleChange}
-              placeholder="ví dụ: mới, bán chạy, độc quyền"
-            />
+
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="product_nature-select-label">
+                Tính chất
+              </InputLabel>
+              <Select
+                labelId="product_nature-select-label"
+                name="nature"
+                value={productData.nature}
+                onChange={handleChange}
+              >
+                {PRODUCT_NATURES.map((nature) => (
+                  <MenuItem key={nature} value={nature}>
+                    {nature}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <TextField
               label="Mô tả"
               name="description"

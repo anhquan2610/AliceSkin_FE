@@ -59,16 +59,6 @@ export default function Footer() {
               <S.CopyRight>© 2021 Alice Skin. All Rights Reserved</S.CopyRight>
             </S.GroupName>
           </S.SocialContainer>
-          <S.MiddleGroup>
-            <S.Text>Terms Of Use</S.Text>
-            <S.Text>Privacy Policy</S.Text>
-            <S.Text>Cookie Policy</S.Text>
-          </S.MiddleGroup>
-          <S.GoupIcon>
-            <S.Text>1</S.Text>
-            <S.Text>2</S.Text>
-            <S.Text>3</S.Text>
-          </S.GoupIcon>
         </S.ContainerBottom>
       </S.Container>
     </S.BigContainer>

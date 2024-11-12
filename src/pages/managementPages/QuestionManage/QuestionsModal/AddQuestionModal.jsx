@@ -1,8 +1,19 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestion, resetSurveyState } from "../../../../store/surveySlice";
 import { notifySuccess } from "../../../../utils/Nontification.utils";
+import { QUESTION_CATEGORY } from "../QuestionValue";
 
 export default function AddQuestionModal({ open, handleClose }) {
   const dispatch = useDispatch();
@@ -12,7 +23,7 @@ export default function AddQuestionModal({ open, handleClose }) {
 
   const [questionData, setQuestionData] = useState({
     question_text: "",
-    question_type: "",
+    question_type: "multiple_choice", // Đặt giá trị mặc định là "multiple_choice"
     options: [],
     category: "",
     code: "",
@@ -31,10 +42,10 @@ export default function AddQuestionModal({ open, handleClose }) {
       handleClose();
       dispatch(resetSurveyState());
 
-      // Reset dữ liệu câu hỏi
+      // Reset dữ liệu câu hỏi với giá trị mặc định cho question_type
       setQuestionData({
         question_text: "",
-        type: "",
+        question_type: "multiple_choice", // Đặt lại giá trị mặc định
         options: [],
         category: "",
         code: "",
@@ -62,13 +73,11 @@ export default function AddQuestionModal({ open, handleClose }) {
           borderRadius: 4,
         }}
       >
-        <Typography variant="h6" mb={2}>
-          Thêm Câu Hỏi Mới
-        </Typography>
+        <Typography variant="h6">Thêm Câu Hỏi Mới</Typography>
         <Box
           component="form"
           onSubmit={handleSubmit}
-          sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          sx={{ display: "flex", flexDirection: "column", gap: 1 }}
         >
           <TextField
             name="question_text"
@@ -91,12 +100,12 @@ export default function AddQuestionModal({ open, handleClose }) {
           <TextField
             name="options"
             label="Tùy chọn (cách nhau bằng dấu phẩy)"
-            value={questionData.options.join(",")} // Hiển thị tùy chọn dưới dạng chuỗi
+            value={questionData.options.join(",")}
             onChange={(e) =>
               handleChange({
                 target: {
                   name: "options",
-                  value: e.target.value.split(","), // Chuyển đổi chuỗi thành mảng
+                  value: e.target.value.split(","),
                 },
               })
             }
@@ -104,15 +113,22 @@ export default function AddQuestionModal({ open, handleClose }) {
             fullWidth
             margin="normal"
           />
-          <TextField
-            name="category"
-            label="Danh mục"
-            value={questionData.category}
-            onChange={handleChange}
-            required
-            fullWidth
-            margin="normal"
-          />
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Danh mục</InputLabel>
+            <Select
+              name="category"
+              value={questionData.category}
+              onChange={handleChange}
+              required
+            >
+              {QUESTION_CATEGORY.map((category) => (
+                <MenuItem key={category} value={category}>
+                  {category}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           <TextField
             name="code"
             label="Mã"
