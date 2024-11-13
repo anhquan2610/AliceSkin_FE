@@ -29,21 +29,26 @@ export default function AdminHome() {
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Typography variant="h4" gutterBottom>
+      {/* <Typography variant="h4" gutterBottom>
         Admin Home
-      </Typography>
+      </Typography> */}
 
-      <Card sx={{ padding: 2 }}>
-        <CardContent>
-          <PaymentChart data={data} isLoading={isLoading} />
-        </CardContent>
-      </Card>
-
-      <Card sx={{ padding: 2 }}>
-        <CardContent>
-          <BlogStatusChart />
-        </CardContent>
-      </Card>
+      <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
+        <Box sx={{ flex: 1 }}>
+          <Card sx={{ padding: 2 }}>
+            <CardContent>
+              <PaymentChart data={data} isLoading={isLoading} />
+            </CardContent>
+          </Card>
+        </Box>
+        <Box sx={{ flex: 1 }}>
+          <Card sx={{ padding: 2 }}>
+            <CardContent>
+              <BlogStatusChart />
+            </CardContent>
+          </Card>
+        </Box>
+      </Box>
     </Box>
   );
 }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { DEVICES } from '../../../config/responsiveUi';
 
 
 export const Container = styled.div`
@@ -10,16 +10,23 @@ flex-direction: column;
 
 export const HeaderContainer = styled.div`
 display: flex;
-
+margin-bottom: var(--s-3);
+@media ${DEVICES.TABLET} 
+{
+  margin-bottom: 0;
+}
 `;
 
 export const Title = styled.div`
-font-size: var(--fs-lg);
-font-weight: var(--fw-semibold);
+font-size: var(--fs-xs);
 background-color: var(--green);
 flex: 2;
 color: var(--white);
 padding: var(--s-3) var(--s-2);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+}
 `;
 
 export const Divider = styled.div`
@@ -31,7 +38,9 @@ export const ContentContainer = styled.form`
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-padding: var(--s-5) var(--s-40);
+@media ${DEVICES.TABLET}{
+  padding: var(--s-5) var(--s-40);
+}
 `;
 
 export const Group = styled.div`
@@ -43,8 +52,11 @@ margin-bottom: var(--s-3);
 `;
 
 export const Label = styled.div`
-font-size: var(--fs-md);
+font-size: var(--fs-sm);
 font-weight: var(--fw-semibold);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-md);
+}
 `;
 
 export const Input = styled.input`
@@ -55,18 +67,29 @@ border-radius: var(--br-md);
 background-color: var(--light-gray-3);
 color: var(--black);
 font-size: var(--fs-md);
+@media ${DEVICES.TABLET} {
+  padding: var(--s-2);
+}
 `;
 
 export const Select = styled.select`
 border: 2px solid var(--gray);
-width: 100%;
 padding: var(--s-2);
 border-radius: var(--br-md);
 background-color: var(--light-gray-3);
 color: var(--black);
+width: 100%;
+max-width: 100%;
+
+   
+
+@media ${DEVICES.TABLET} {
+}
 `;
 
-export const Option = styled.option``;
+export const Option = styled.option`
+ 
+`;
 
 export const ButtonSave = styled.button`
  background-color: var(--green);

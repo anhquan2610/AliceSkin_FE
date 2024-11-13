@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { DEVICES } from '../../../config/responsiveUi';
 
 export const Container = styled.div`
 display: flex;
@@ -12,12 +13,15 @@ text-align: center;
 `;
 
 export const Title = styled.div`
-font-size: var(--fs-lg);
-font-weight: var(--fw-semibold);
+font-size: var(--fs-sm);
 background-color: var(--green);
 flex: 2;
 color: var(--white);
 padding: var(--s-3) var(--s-2);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+}
 `;
 
 export const Divider = styled.div`

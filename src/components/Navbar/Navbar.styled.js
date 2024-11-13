@@ -23,6 +23,15 @@ export const Group = styled.div`
     align-items: center;
   }
 `;
+export const Group2 = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  @media (max-width: 1200px) {
+    order: 2;
+    
+  }
+`;
 
 export const Logo = styled.div``;
 
@@ -120,6 +129,9 @@ export const MobileMenu = styled.div`
 `;
 
 export const CloseMenuButton = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
   font-size: var(--fs-2xl);
   cursor: pointer;
   color: var(--black);

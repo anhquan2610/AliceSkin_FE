@@ -1,64 +1,102 @@
 import styled, { keyframes } from "styled-components";
+import { DEVICES } from "../../config/responsiveUi"
 
 export const Container = styled.div`
-  padding: var(--s-5) var(--s-30);
+  padding: var(--s-3) var(--s-10);
+  @media ${DEVICES.DESKTOP} {
+    padding: var(--s-5) var(--s-30);
+  }
 `;
 
 export const Title = styled.div`
   text-align: center;
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-xl);
   font-weight: var(--fw-semibold);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-2xl);
+  }
 `;
 
 export const ContainerContent = styled.div`
-  padding: var(--s-5) var(--s-40);
+  padding: var(--s-5) 0;
+  @media ${DEVICES.DESKTOP} {
+    padding: var(--s-5) var(--s-40);
+  }
 `;
 
 export const Content = styled.div`
   box-shadow: var(--shadow-4);
-  padding: var(--s-5);
+  padding: var(--s-2);
   border-radius: var(--br-md);
+  @media ${DEVICES.TABLET} {
+    padding: var(--s-5);
+  }
 `;
 
 export const OrderItemContainer = styled.div`
-  padding: var(--s-5);
   border-bottom: 1px solid var(--gray);
+  padding: var(--s-1) 0;
+  @media ${DEVICES.TABLET} {
+    padding: var(--s-3);
+  }
 `;
 
 export const TotalPrice = styled.div`
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
+  margin-top: var(--s-2);
   font-weight: var(--fw-semibold);
   text-align: center;
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-lg);
+  }
 `;
 
-export const DateOrder = styled.div``;
+export const DateOrder = styled.div`
+font-size: var(--fs-xs);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-md);
+}
+`;
 
 export const Status = styled.div`
-  margin-bottom: var(--s-3);
+  margin-bottom: var(--s-2);
+  font-size: var(--fs-xs);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-md);
+    margin-bottom: var(--s-3);
+  }
 `;
 
 export const AddressShipping = styled.div`
-  margin: var(--s-3) 0;
-  font-size: var(--fs-md);
-
+  margin: var(--s-1) 0;
+  font-size: var(--fs-sm);
   font-style: italic;
   color: var(--dark-brown);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-md);
+    margin: var(--s-3) 0;
+  }
 `;
 
 export const ShipPrice = styled.div`
-
-  margin-bottom: var(--s-3);
-  font-size: var(--fs-md);
+  margin-bottom: var(--s-1);
+  font-size: var(--fs-sm);
   font-style: italic;
   color: var(--dark-brown);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-md);
+  }
 `;
 
 
 
 export const VoucherPrice = styled.div`
-  font-size: var(--fs-md);
+  font-size: var(--fs-sm);
   font-style: italic;
   color: var(--dark-brown);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-md);
+  }
 `;
 
 export const Group = styled.div`

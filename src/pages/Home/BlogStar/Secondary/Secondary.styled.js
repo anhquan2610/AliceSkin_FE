@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { DEVICES } from "../../../../config/responsiveUi";
+import image from "../../../../assets/images/o-ads-space.png";
 
 export const Container = styled.div`
 flex-wrap: wrap;
 margin-bottom: var(--s-2);
+background-image: url(${image});
+width: 100%;
+background-size: cover;
 `;
 
 export const Title = styled.div`

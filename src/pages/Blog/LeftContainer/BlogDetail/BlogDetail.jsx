@@ -20,33 +20,32 @@ export default function BlogDetail() {
   const handleLike = () => {
     const isLiked = likedBlogs[blogId];
 
-    // Nếu đã like, thực hiện unlike
+  
     if (isLiked) {
       dispatch(unlikeByBlogId(blogId)).then(() => {
         setLikedBlogs((prevState) => ({
           ...prevState,
-          [blogId]: false, // Cập nhật lại trạng thái likedBlogs thành false
+          [blogId]: false, 
         }));
       });
     } else {
       dispatch(likeByBlogId(blogId)).then(() => {
         setLikedBlogs((prevState) => ({
           ...prevState,
-          [blogId]: true, // Cập nhật lại trạng thái likedBlogs thành true
+          [blogId]: true, 
         }));
       });
     }
   };
 
   useEffect(() => {
-    dispatch(getBlogById(blogId)); // Lấy thông tin blog khi component mount
+    dispatch(getBlogById(blogId)); 
   }, [dispatch, blogId]);
 
   useEffect(() => {
-    // Đồng bộ trạng thái like từ Redux store vào state local likedBlogs
     setLikedBlogs((prevState) => ({
       ...prevState,
-      [blogId]: selectBlog.liked_by_user || false, // Cập nhật từ store
+      [blogId]: selectBlog.liked_by_user || false, 
     }));
   }, [selectBlog, blogId]);
 
@@ -60,7 +59,7 @@ export default function BlogDetail() {
           <S.AuthorName>{selectBlog.user?.name}</S.AuthorName>
         </S.AuthorContainer>
         <S.Date>
-          Posted on <DateOfBlog date={selectBlog.created_at} />
+           <DateOfBlog date={selectBlog.created_at} />
         </S.Date>
       </S.AuthorBlog>
       <S.TitleBlog>{selectBlog.title}</S.TitleBlog>

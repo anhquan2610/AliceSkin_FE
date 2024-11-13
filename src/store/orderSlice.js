@@ -11,6 +11,7 @@ const initialState = {
   totalVNPay: "",
   totalCOD: "",
   totalAmount: "",
+  id: null
 };
 
 //Get All Orders
@@ -27,6 +28,7 @@ export const createOrder = createAsyncThunk(
   async (orderData, { rejectWithValue }) => {
     try {
       const response = await instanceAxios.post("/api/orders", orderData);
+      
       notifySuccess(response.data.message);
       return response.data;
     } catch (error) {
@@ -35,6 +37,7 @@ export const createOrder = createAsyncThunk(
     }
   }
 );
+
 
 //Create Payment
 export const createPayment = createAsyncThunk(
@@ -156,14 +159,15 @@ export const fetchCashflowData = createAsyncThunk(
   "cashflow/fetchCashflowData",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.get("/api/manager/orders/total-payments");
+      const response = await instanceAxios.get(
+        "/api/orders/total-payments"
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
   }
 );
-  
 
 const orderSlice = createSlice({
   name: "order",
@@ -184,6 +188,7 @@ const orderSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
       state.orders = action.payload;
+      
     });
     builder.addCase(fetchAllOrders.rejected, (state, action) => {
       state.isLoading = false;
@@ -198,6 +203,7 @@ const orderSlice = createSlice({
       state.isSuccess = true;
       state.orders.push(action.payload);
       state.id = action.payload.id;
+     
     });
     builder.addCase(createOrder.rejected, (state, action) => {
       state.isLoading = false;
@@ -318,7 +324,6 @@ const orderSlice = createSlice({
     builder.addCase(fetchCashflowData.rejected, (state, action) => {
       state.isLoading = false;
     });
-    
   },
 });
 

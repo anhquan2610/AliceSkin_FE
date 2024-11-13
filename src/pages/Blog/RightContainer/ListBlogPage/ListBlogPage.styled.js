@@ -1,9 +1,13 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveUi";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--s-10);
+  margin-bottom: var(--s-3);
+  @media ${DEVICES.TABLET}{
+    margin-bottom: var(--s-10);
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -27,17 +31,18 @@ width: 100%;
 
 `;
 
-export const SearchIcon = styled.div`
-
-`;
+export const SearchIcon = styled.div``;
 
 export const Title = styled.div`
 flex: 1;
 background-color: var(--green);
-padding: var(--s-3) var(--s-4);
+padding: var(--s-2);
 font-size: var(--fs-lg);
 color: var(--white);
 font-weight: var(--fw-semibold);
+@media ${DEVICES.TABLET}{
+  padding: var(--s-3) var(--s-4);
+}
 `;
 
 export const Divider = styled.div`

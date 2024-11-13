@@ -10,7 +10,7 @@ export const TopContainer = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-
+margin-bottom: var(--s-4); ;
 `;
 
 export const Title = styled.div`
@@ -25,7 +25,7 @@ export const ListItem = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    row-gap: var(--s-2);
+    row-gap: var(--s-5);
     @media ${DEVICES.PHONE_L} {
     padding: var(--s-4) 0;
     row-gap: var(--s-8);

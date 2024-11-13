@@ -1,9 +1,9 @@
+import React, { useState } from "react";
 import * as S from "./Navbar.styled";
 import Logo from "../../assets/images/logo.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Menu, MenuItem, Badge } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; // Import useSelector
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/authSlice";
 import { notifySuccess } from "../../utils/Nontification.utils";
@@ -11,9 +11,19 @@ import { resetSurveyState } from "../../store/surveySlice";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Trạng thái menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Sử dụng useSelector để lấy danh sách blogs từ Redux state
+  const blogs = useSelector((state) => state.blog.blogs);
+
+  // Hàm chọn ngẫu nhiên một blog_id từ blogs
+  const getRandomBlogId = () => {
+    if (blogs.length === 0) return "39"; // Giá trị mặc định nếu không có blog
+    const randomIndex = Math.floor(Math.random() * blogs.length);
+    return blogs[randomIndex].blog_id;
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -31,7 +41,7 @@ export default function Navbar() {
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Đóng/mở menu hamburger
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -47,7 +57,7 @@ export default function Navbar() {
         <S.StyledLink to="/home">
           <S.NavItem>Home</S.NavItem>
         </S.StyledLink>
-        <S.StyledLink to="/blog/39">
+        <S.StyledLink to={`/blog/${getRandomBlogId()}`}>
           <S.NavItem>Blog</S.NavItem>
         </S.StyledLink>
         <S.StyledLink to="/product">
@@ -63,24 +73,24 @@ export default function Navbar() {
       </S.HamburgerIcon>
 
       <S.MobileMenu className={isMenuOpen ? "open" : ""}>
-        <S.CloseMenuButton onClick={toggleMenu} >
+        <S.CloseMenuButton onClick={toggleMenu}>
           <i className="bi bi-x" />
         </S.CloseMenuButton>
-        <S.StyledLink to="/home">
+        <S.StyledLink to="/home" onClick={toggleMenu}>
           <S.NavItem>Home</S.NavItem>
         </S.StyledLink>
-        <S.StyledLink to="/blog/39">
+        <S.StyledLink to={`/blog/${getRandomBlogId()}`} onClick={toggleMenu}>
           <S.NavItem>Blog</S.NavItem>
         </S.StyledLink>
-        <S.StyledLink to="/product">
+        <S.StyledLink to="/product" onClick={toggleMenu}>
           <S.NavItem>Products</S.NavItem>
         </S.StyledLink>
-        <S.StyledLink to="/brand">
+        <S.StyledLink to="/brand" onClick={toggleMenu}>
           <S.NavItem>Brands</S.NavItem>
         </S.StyledLink>
       </S.MobileMenu>
 
-      <S.Group>
+      <S.Group2>
         <S.StyledLink to="/Shopping_Cart">
           <S.ShoppingCart>
             <Badge>
@@ -91,7 +101,7 @@ export default function Navbar() {
         <S.Profile onClick={handleUserClick}>
           <i className="bi bi-person" />
         </S.Profile>
-      </S.Group>
+      </S.Group2>
 
       <Menu
         anchorEl={anchorEl}

@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../config/responsiveUi";
 
 export const Container = styled.form`
 display: flex;
-
+align-items: center;
 `;
 
 export const LeftContainer = styled.div`
@@ -20,17 +21,25 @@ margin-right: var(--s-2);
 export const InputReview = styled.input`
 border: 3px solid var(--gray);
 width: 100%;
-padding: var(--s-2);
-font-size: var(--fs-md);
+padding: var(--s-1);
+font-size: var(--fs-xs);
 border-radius: var(--br-md);
 background-color: var(--gray-2);
+@media ${DEVICES.TABLET} {
+    padding: var(--s-2);
+font-size: var(--fs-md);
+}
 `;
 
 export const RateAndBtnContainer = styled.div`
-flex: 4;
 display: flex;
 flex-direction: row;
-gap: var(--s-2);
+justify-content: center;
+gap: var(--s-0);
+@media ${DEVICES.TABLET} {
+    gap: var(--s-2);
+    flex: 4;
+}
 `;
 
 export const RateStar = styled.div`
@@ -38,7 +47,10 @@ export const RateStar = styled.div`
 `;
 
 export const RightContainer = styled.div`
-flex: 4;
+
+@media ${DEVICES.TABLET} {
+    flex: 4;
+}
 `;
 
 export const BtnSubmit = styled.button``;
