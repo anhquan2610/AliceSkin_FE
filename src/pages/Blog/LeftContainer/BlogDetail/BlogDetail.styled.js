@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { Name } from "../../../../components/infoBlog/infoUser/infoUser.styled";
+import { DEVICES } from "../../../../config/responsiveUi";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: var(--s-4);
+  gap: var(--s-2);
+  @media ${DEVICES.TABLET} {
+    gap: var(--s-4);
+  }
 `;
 
 export const AuthorBlog = styled.div`
@@ -14,39 +18,50 @@ export const AuthorBlog = styled.div`
   align-items: center;
 `;
 export const AuthorContainer = styled.div`
-display: flex;
-flex-direction: row;
-gap: var(--s-1);
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: var(--s-1);
+  align-items: center;
 `;
 
 export const AvatarContainer = styled.div``;
 
 export const Avatar = styled.img`
-border-radius: 50%;
-aspect-ratio: 1/1;
-width: 50px;
-height: 100%;
-overflow: hidden;
-object-fit: cover;
-border: 2px solid var(--gray);
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  width: 50px;
+  height: 100%;
+  overflow: hidden;
+  object-fit: cover;
+  border: 2px solid var(--gray);
+  @media ${DEVICES.TABLET} {
+    width: 50px;
+  height: 100%;
+  }
 `;
 
 export const AuthorName = styled(Name)`
   color: var(--green);
-  font-size: var(--fs-xl);
+  font-size: var(--fs-lg);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-xl);
+  }
 `;
 
 export const Date = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: var(--s-2);
   color: var(--dark-brown);
 `;
 
 export const TitleBlog = styled.div`
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-xl);
   font-weight: var(--fw-bold);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-2xl);
+  }
 `;
 
 export const ContainerType = styled.div`
@@ -67,7 +82,10 @@ export const Hashtag = styled.div`
   padding: var(--s-2);
   background-color: var(--green-fresh);
   border-radius: var(--br-md);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-sm);
+  }
 `;
 
 export const LikeGroup = styled.div`
@@ -80,11 +98,11 @@ export const LikeGroup = styled.div`
 export const HeartIcon = styled.div`
   font-size: var(--fs-md);
   cursor: pointer;
-  color: #ccc;  
+  color: #ccc;
   transition: color 0.3s ease;
 
   &.liked {
-    color: red;  
+    color: red;
   }
 `;
 
@@ -123,7 +141,10 @@ export const ContentBlog = styled.div`
 `;
 
 export const Content = styled.div`
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-lg);
+  }
 `;
 
 export const Navigate = styled.div`
@@ -144,8 +165,6 @@ export const GroupNavigate = styled.div`
     color: var(--black);
   }
 `;
-
-
 
 export const BtnNavigate = styled.div``;
 

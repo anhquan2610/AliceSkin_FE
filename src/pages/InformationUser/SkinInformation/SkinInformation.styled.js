@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from '../../../config/responsiveUi';
 
 export const Container = styled.div`
 display: flex;
@@ -10,13 +11,16 @@ export const ContainerHeader = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: var(--fs-md);
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-xs);
   background-color: var(--green);
   flex: 2;
   color: var(--white);
   padding: var(--s-3) var(--s-2);
-  text-align: center;
+ 
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+  }
 `;
 
 export const Divider = styled.div`
@@ -35,8 +39,11 @@ height: 100%;
 
 export const Description = styled.div`
 margin-top: var(--s-2);
-font-size: var(--fs-lg);
+font-size: var(--fs-sm);
 font-weight: var(--fw-semibold);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-lg);
+}
 `;
 
 export const Group = styled.div`
@@ -58,14 +65,17 @@ export const ButtonContainer = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-margin-top: var(--s-15);
+margin-top: var(--s-5);
 gap: var(--s-2);
+@media ${DEVICES.TABLET} {
+  margin-top: var(--s-15);
+}
 `;
 
 export const ButtonUpdate = styled.button`
-padding: var(--s-4) var(--s-32  );
+padding: var(--s-3) var(--s-32);
   background-color: var(--green);
-  font-size: var(--fs-md);
+  font-size: var(--fs-sm);
   color: var(--white);
   border-radius: var(--br-sm);
   border: 1px solid var(--green);
@@ -74,7 +84,11 @@ padding: var(--s-4) var(--s-32  );
   overflow: hidden;
   z-index: 1;
   transition: color 0.4s ease; 
-  
+  @media ${DEVICES.TABLET} {
+    padding: var(--s-4) var(--s-32);
+    font-size: var(--fs-md);
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -97,9 +111,9 @@ padding: var(--s-4) var(--s-32  );
 `;
 
 export const ButtonSeeRecommend = styled.button`
-padding: var(--s-4) var(--s-15);
+padding: var(--s-3) var(--s-17);
   background-color: var(--white);
-  font-size: var(--fs-md);
+  font-size: var(--fs-sm);
   border: 1px solid var(--green);
   color: var(--green);
   border-radius: var(--br-sm);
@@ -108,7 +122,12 @@ padding: var(--s-4) var(--s-15);
   overflow: hidden;
   z-index: 1;
   transition: color 0.4s ease; 
-  
+  @media ${DEVICES.TABLET} {
+    padding: var(--s-4) var(--s-15);
+    font-size: var(--fs-md);
+  }
+
+
   &::before {
     content: '';
     position: absolute;

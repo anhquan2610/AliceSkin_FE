@@ -66,12 +66,12 @@ export const completeCart = createAsyncThunk(
   "completeCart",
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await instanceAxios.post("/api/cart/complete"); // Cập nhật đường dẫn API của bạn
+      const response = await instanceAxios.post("/api/cart/complete"); 
       notifySuccess(response.data.message);
-      return response.data; // Trả về thông tin giỏ hàng đã được cập nhật
+      return response.data; 
     } catch (error) {
       notifyError(error.response.data.message);
-      return rejectWithValue(error.response.data); // Trả về lỗi nếu có
+      return rejectWithValue(error.response.data); 
     }
   }
 );

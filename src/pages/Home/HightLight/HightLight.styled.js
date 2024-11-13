@@ -24,7 +24,7 @@ padding: var(--s-2);
 z-index: 1;
 margin-top: var(--s-4);
 margin-left: var(--s-2);
-background-color: transparent;
+background-color: rgba(0, 0, 0, 0.5);
 box-shadow: var(--shadow-2);
 border-radius: var(--br-md);
 font-size: var(--fs-sm);
@@ -78,15 +78,17 @@ align-items: center;
 export const AuthorGroup = styled.div`
 display: flex;
 flex-direction: row;
-
+gap: var(--s-1);
 align-items: center;
 `;
 
 export const AuthorName = styled.div`
 font-size: var(--fs-sm);
 font-weight: var(--fw-semibold);
+color: var(--white);
 @media ${DEVICES.DESKTOP} {
   font-size: var(--fs-md);
+  color: var(--black);
 }
 `;
 
@@ -107,12 +109,14 @@ border: 2px solid var(--gray);
 
 export const Title = styled.div`
 font-size: var(--fs-md);
+color: var(--white);
 font-weight: var(--fw-semibold);
 display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 @media ${DEVICES.DESKTOP} {
+  color: var(--black);
   font-size: var(--fs-2xl);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -123,11 +127,13 @@ display: -webkit-box;
 
 export const Content = styled.div`
 font-size: var(--fs-sm);
+color: var(--white);
 display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 @media ${DEVICES.DESKTOP} {
+  color: var(--black);
   font-size: var(--fs-lg);
   display: -webkit-box;
   -webkit-line-clamp: 2;

@@ -25,7 +25,7 @@ export default function InformationUser() {
           onClick={switchToForm}
           isSelected={currentLayout === "form"}
         >
-          Infomation
+          Infomation User
         </S.NavButton>
         <S.NavButton
           onClick={switchToUpdate}
@@ -59,6 +59,9 @@ export default function InformationUser() {
         </S.NavButton>
       </S.Navigation>
       <S.Middle>
+        <S.LeftContainer>
+          <AvartarUser />
+        </S.LeftContainer>
         <S.RightContainer>
           <S.Content>
             {currentLayout === "form" && <UserInforDetail />}
@@ -69,9 +72,6 @@ export default function InformationUser() {
             {currentLayout === "myOrder" && <OrderHistory />}
           </S.Content>
         </S.RightContainer>
-        <S.LeftContainer>
-          <AvartarUser />
-        </S.LeftContainer>
       </S.Middle>
     </S.Container>
   );

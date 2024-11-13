@@ -1,14 +1,25 @@
 import styled, { keyframes } from "styled-components";
+import { DEVICES } from "../../config/responsiveUi";
 
 export const Container = styled.div``;
 
 export const ContainerOutlet = styled.div`
 display: flex;
-flex-direction: row;
-padding: var(--s-5) var(--s-30);
-gap: var(--s-10);
+flex-direction: column;
+padding: var(--s-3) var(--s-10);
+
 height: auto;
-flex-wrap: wrap;
+@media ${DEVICES.DESKTOP}{
+  padding: var(--s-5) var(--s-30);
+  display: flex;
+  flex-direction: row;
+  gap: var(--s-10);
+}
+@media ${DEVICES.TABLET}{
+  display: flex;
+  flex-direction: row;
+  gap: var(--s-10);
+}
 `;
 
 export const LeftContainer = styled.div`

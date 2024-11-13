@@ -54,6 +54,7 @@ export default function Payment() {
     setPaymentMethod(method);
   };
 
+  
   const handleOrderNow = () => {
     const orderData = {
       shipping_id: selectedShipping,
@@ -63,7 +64,7 @@ export default function Payment() {
     };
 
     dispatch(createOrder(orderData)).then((order) => {
-      if (paymentMethod === "VNpay Payment" && order) {
+      if (paymentMethod === "VNpay Payment" && order && order.payload) {
         const orderId = order.payload.id;
         dispatch(createPayment(orderId)).then((paymentAction) => {
           if (paymentAction.payload.payment_url) {

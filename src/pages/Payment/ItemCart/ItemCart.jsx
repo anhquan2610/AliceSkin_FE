@@ -12,7 +12,7 @@ export default function ItemCart({ item }) {
 
         <S.Group>
           <S.PriceItem>
-            {Math.floor(item.price).toLocaleString("vi-VN")} VND
+            {Math.floor(item.product.discounted_price).toLocaleString("vi-VN")} VND
           </S.PriceItem>
 
           <S.QuantityItem>Quantity: x{item.quantity}</S.QuantityItem>

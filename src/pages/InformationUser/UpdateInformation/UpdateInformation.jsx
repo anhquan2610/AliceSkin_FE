@@ -123,6 +123,7 @@ export default function UpdateInformation() {
             name="gender"
             value={formData.gender}
             onChange={handleChange}
+            
           >
             <S.Option value="">Select Gender</S.Option>
             <S.Option value="male">Male</S.Option>

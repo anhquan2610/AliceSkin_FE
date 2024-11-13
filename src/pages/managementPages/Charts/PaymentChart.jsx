@@ -1,31 +1,41 @@
 import { Box, CircularProgress, Tooltip, Typography } from "@mui/material";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Legend, LabelList } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip as RechartsTooltip,
+  Legend,
+} from "recharts";
 
 export default function PaymentChart({ data, isLoading }) {
   const COLORS = ["#0088FE", "#00C49F"];
 
   return (
     <Box sx={{ textAlign: "center" }}>
-     
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <BarChart width={400} height={500} data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="value" fill="#8884d8">
-            <LabelList dataKey="value" position="top" /> 
+        <PieChart width={400} height={400}>
+          <Pie
+            data={data}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={120}
+            fill="#8884d8"
+            label
+          >
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
               />
             ))}
-          </Bar>
-        </BarChart>
+          </Pie>
+          <RechartsTooltip />
+          <Legend />
+        </PieChart>
       )}
     </Box>
   );
