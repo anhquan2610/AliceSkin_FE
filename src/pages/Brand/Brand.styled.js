@@ -1,22 +1,33 @@
 import styled, { keyframes } from "styled-components";
+import { DEVICES } from "../../config/responsiveUi";
 
 export const Container = styled.div`
-padding: var(--s-5) var(--s-30);
+padding: var(--s-3) var(--s-10);
+@media ${DEVICES.DESKTOP} {
+  padding: var(--s-5) var(--s-30);
+}
 `;
 
 export const Title = styled.div`
 text-align: center;
-font-size: var(--fs-2xl);
+font-size: var(--fs-lg);
 font-weight: var(--fw-semibold);
-margin-bottom: var(--s-5);
+margin-bottom: var(--s-3);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--s-5);
+}
 `;
 
 export const ListBrandContainer = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: center;
-gap: var(--s-5);
+gap: var(--s-2);
 flex-wrap: wrap;
+@media ${DEVICES.TABLET} {
+  gap: var(--s-5);
+}
 `;
 
 export const BrandItem = styled.div``;

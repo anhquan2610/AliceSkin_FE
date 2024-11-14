@@ -51,6 +51,7 @@
   --green: #00adb5;
 
   /* Font sizes -------------------- */
+  --fs-xxs: 0.615rem;
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
   --fs-md: 1rem;

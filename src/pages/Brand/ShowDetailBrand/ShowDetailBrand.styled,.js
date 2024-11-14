@@ -1,29 +1,41 @@
 import styled, { keyframes } from "styled-components";
+import { DEVICES } from "../../../config/responsiveUi";
 
 export const Container = styled.div`
-padding: var(--s-5) var(--s-30);
+padding: var(--s-3) var(--s-10);
+@media ${DEVICES.DESKTOP} {
+  padding: var(--s-5) var(--s-30);
+}
 `;
 
 export const ImageContainer = styled.div`
 margin-bottom: var(--s-5);
 display: flex;
 justify-content: center;
+
 `;
 
 export const Image = styled.img`
 aspect-ratio: 16/9;
 width: auto;
-height: 300px;
+height: 150px;
 object-fit: cover;
 border-radius: var(--br-md);
+@media ${DEVICES.TABLET} {
+  width: auto;
+height: 300px;
+}
 `;
 
 export const InfoContainer = styled.div`
 display: flex;
 flex-direction: column;
 gap: var(--s-2);
-font-size: var(--fs-lg);
+font-size: var(--fs-md);
 margin-bottom: var(--s-7);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-lg);
+}
 `;
 
 export const ContentGroup = styled.div`
@@ -50,13 +62,24 @@ export const ItemContainer = styled.div`
 display: flex;
 flex-wrap: wrap;
 flex-direction: row;
+justify-content: space-between;
+gap: var(--s-1);
+@media ${DEVICES.TABLET} {
+  display: flex;
+flex-wrap: wrap;
+flex-direction: row;
 gap: var(--s-5);
+justify-content: flex-start;
+}
 
 `;
 
 export const TitleItem = styled.div`
-font-size: var(--fs-lg);
+font-size: var(--fs-md);
 font-weight: var(--fw-bold);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-lg);
+}
 `;
 
 const spin = keyframes`

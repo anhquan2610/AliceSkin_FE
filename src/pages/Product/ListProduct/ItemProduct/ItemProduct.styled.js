@@ -133,7 +133,7 @@ align-items: baseline;
 
 export const Price = styled.div`
 text-decoration: line-through;
-font-size: var(--fs-xs);
+font-size: var(--fs-xxs);
 @media ${DEVICES.TABLET} {
   font-size: var(--fs-sm);
 }
