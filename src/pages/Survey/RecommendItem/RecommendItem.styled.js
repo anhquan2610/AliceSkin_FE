@@ -86,6 +86,7 @@ export const NoProductText = styled.p`
   font-size: var(--fs-sm);
   font-style: italic;
   color: gray;
-
+  text-align: center;
+  width: 100%;
   margin-top: var(--s-5);
 `;
