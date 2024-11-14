@@ -23,7 +23,12 @@ font-size: var(--fs-sm);
 gap: var(--s-2);
 `;
 
-export const NameItem = styled.div``;
+export const NameItem = styled.div`
+display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
 
 export const CapacityItem = styled.div`
 `;
