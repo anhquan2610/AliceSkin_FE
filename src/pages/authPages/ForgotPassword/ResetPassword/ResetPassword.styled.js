@@ -1,4 +1,25 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { DEVICES } from "../../../../config/responsiveUi";
+
+const slideInFromLeft = keyframes`
+from {
+  transform: translate(-100%, 100%);
+}
+to {
+  transform: translate(0, 0);
+}
+`;
+
+const slideInFromRight = keyframes`
+0% {
+  opacity: 0;
+  transform: translateX(100%);
+}
+100% {
+  opacity: 1;
+  transform: translateX(0);
+}
+`;
 
 export const Container = styled.div`
 display: flex;
@@ -23,13 +44,22 @@ display: flex;
 `;
 
 export const Title = styled.div`
-  font-size: var(--fs-4xl);
+  font-size: var(--fs-3xl);
   font-weight: var(--fw-semibold);
+  @media ${DEVICES.TABLET}{
+    font-size: var(--fs-4xl);
+  }
+  animation: ${slideInFromLeft} 1s ease-in-out;
 `;
 
 export const Description = styled.div`
-  font-size: var(--fs-xl);
+  font-size: var(--fs-md);
+  text-align: center;
   margin-bottom: var(--s-4);
+  @media ${DEVICES.TABLET}{
+    font-size: var(--fs-xl);
+  }
+  animation: ${slideInFromLeft} 1s ease-in-out;
 `;
 
 export const ContainerForm = styled.div`
@@ -37,10 +67,14 @@ export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: var(--s-7) var(--s-15);
+  padding: var(--s-3) var(--s-15);
   gap: var(--s-2);
   border-radius: var(--br-md);
-  box-shadow: var(--shadow-3);
+  box-shadow: var(--shadow-4);
+  @media ${DEVICES.TABLET}{
+    padding: var(--s-7) var(--s-15);
+  }
+  animation: ${slideInFromRight} 1s ease-in-out;
 `;
 
 export const Group = styled.div`
@@ -49,9 +83,12 @@ flex-direction: column;
 `;
 
 export const Label = styled.label`
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   margin: var(--s-1) 0;
   font-weight: var(--fw-medium);
+  @media ${DEVICES.TABLET}{
+    font-size: var(--fs-lg);
+  }
 `;
 
 export const Input = styled.input`
