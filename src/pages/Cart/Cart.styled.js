@@ -1,23 +1,37 @@
 import styled, { keyframes } from "styled-components";
+import { DEVICES } from "../../config/responsiveUi";
 
 export const Container = styled.div`
-  padding: var(--s-5) var(--s-30);
+  padding: var(--s-3) var(--s-10);
   display: flex;
   flex-direction: column;
+  @media ${DEVICES.TABLET} {
+    padding: var(--s-5) var(--s-30);
+  }
+  
 `;
 
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--s-2);
+
 `;
 
 export const Title = styled.div`
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-xl);
   font-weight: var(--fw-semibold);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-2xl);
+  }
 `;
 
-export const TotalOnCart = styled.div``;
+export const TotalOnCart = styled.div`
+font-size: var(--fs-xs);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-sm);
+}
+`;
 
 export const ListCartContainer = styled.div``;
 
@@ -25,8 +39,11 @@ export const TotalPrice = styled.div`
 justify-content: center;
 display: flex;
 margin-bottom: var(--s-5);
-font-size: var(--fs-xl);
+font-size: var(--fs-md);
 font-weight: var(--fw-semibold);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-xl);
+}
 `;
 
 export const ButtonContainer = styled.div`
@@ -39,13 +56,13 @@ margin-left: var(--s-2);
 `;
 
 export const BtnCheckout = styled.button`
-  padding: var(--s-4) var(--s-20);
+  padding: var(--s-3) var(--s-15);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: var(--black-2);
-  font-size: var(--fs-md);
+  font-size: var(--fs-sm);
   color: var(--white);
   border-radius: var(--fs-sm);
   cursor: pointer;
@@ -54,6 +71,10 @@ export const BtnCheckout = styled.button`
   z-index: 1;
   transition: color 0.4s ease;
   border: 1px solid var(--black-2);
+  @media ${DEVICES.TABLET} {
+    font-size: var(--fs-md);
+    padding: var(--s-4) var(--s-20);
+  }
 
   /* Hiệu ứng ::before cho trạng thái không bị disabled */
   &:not(:disabled)::before {
