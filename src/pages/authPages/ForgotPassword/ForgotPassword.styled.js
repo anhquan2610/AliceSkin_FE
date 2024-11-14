@@ -1,5 +1,26 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { DEVICES } from "../../../config/responsiveUi";
+
+const slideInFromLeft = keyframes`
+from {
+  transform: translate(-100%, 100%);
+}
+to {
+  transform: translate(0, 0);
+}
+`;
+
+const slideInFromRight = keyframes`
+0% {
+  opacity: 0;
+  transform: translateX(100%);
+}
+100% {
+  opacity: 1;
+  transform: translateX(0);
+}
+`;
+
 export const Container = styled.div`
   display: flex;
 `;
@@ -33,6 +54,7 @@ export const Title = styled.div`
   @media ${DEVICES.PHONE_L}{
     font-size: var(--fs-4xl);
   }
+  animation: ${slideInFromLeft} 1s ease-in-out;
 `;
 
 export const Description = styled.div`
@@ -41,6 +63,7 @@ export const Description = styled.div`
   @media ${DEVICES.PHONE_L}{
     font-size: var(--fs-xl);
   }
+  animation: ${slideInFromLeft} 1s ease-in-out;
 `;
 
 export const ContainerForm = styled.form`
@@ -55,6 +78,7 @@ export const ContainerForm = styled.form`
   @media ${DEVICES.PHONE_L}{
     padding: var(--s-7) var(--s-15);
   }
+  animation: ${slideInFromRight} 1s ease-in-out;
 `;
 
 export const Group = styled.div``;

@@ -37,15 +37,15 @@ export default function ResetPassword() {
       .unwrap()
       .then(() => {
         setSubmitting(false);
-        navigate("/login"); 
+        navigate("/login");
       })
       .catch(() => {
-        setSubmitting(false); 
+        setSubmitting(false);
       });
   };
 
   const handleCancel = () => {
-    navigate("/forgotpassword");
+    navigate("/login");
   };
 
   return (

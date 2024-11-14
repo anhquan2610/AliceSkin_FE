@@ -1,17 +1,34 @@
 import styled, { keyframes } from "styled-components";
+import { DEVICES } from "../../config/responsiveUi";
 
 export const Container = styled.div`
-padding: var(--s-5) var(--s-30);
+padding: var(--s-3) var(--s-10);
 display: flex;
+flex-direction: column;
 gap: var(--s-5);
+@media ${DEVICES.DESKTOP}{
+  padding: var(--s-5) var(--s-30);
+}
+@media ${DEVICES.TABLET}{
+  display: flex;
+  flex-direction: row;
+}
 `;
 
 export const PaymentContainer = styled.div`
-flex: 6;
+order: 2;
+@media ${DEVICES.TABLET}{
+  flex: 6;
+  order: 1;
+}
 `;
 
 export const OrderContainer = styled.div`
-flex: 6;
+order: 1;
+@media ${DEVICES.TABLET}{
+  flex: 6;
+  order: 2;
+}
 `;
 
 //LeftPayment
@@ -26,19 +43,29 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-bottom: var(--s-7);
+margin-bottom: var(--s-4);
+@media ${DEVICES.TABLET}{
+  margin-bottom: var(--s-7);
+}
 `;
 
 export const Title = styled.div`
-font-size: var(--fs-xl);
+font-size: var(--fs-md);
 font-weight: var(--fw-semibold);
+@media ${DEVICES.TABLET}{
+  font-size: var(--fs-xl);
+}
 `;
 
 export const PaymentMethod = styled.div`
 display: flex;
 flex-direction: row;
-gap: var(--s-5);
-margin-top: var(--s-5);
+gap: var(--s-2);
+margin-top: var(--s-2);
+@media ${DEVICES.TABLET}{
+  gap: var(--s-5);
+  margin-top: var(--s-5);
+}
 `;
 
 export const HiddenRadio = styled.input`
@@ -52,9 +79,12 @@ export const ItemPaymentLabel = styled.label`
 export const ItemPaymentContainer = styled.div`
   text-align: center;
   box-shadow: var(--shadow-1);
-  padding: var(--s-5) var(--s-10);
+  padding: var(--s-2) var(--s-5);
   border-radius: var(--br-lg);
   transition: all 0.3s ease;
+  @media ${DEVICES.TABLET}{
+    padding: var(--s-5) var(--s-10);
+  }
   
   ${ItemPaymentLabel}:has(${HiddenRadio}:checked) & {
     border: 2px solid var(--primary-color); 

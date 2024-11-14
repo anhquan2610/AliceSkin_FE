@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import bgr1 from "../../../assets/images/bgr1.png";
+import { DEVICES } from "../../../config/responsiveUi";
 
 export const Container = styled.div`
-  padding: var(--s-5) var(--s-30);
+  padding: var(--s-3) var(--s-10);
   width: 100%;
   height: auto;
   background-image: url(${bgr1});
+  @media ${DEVICES.DESKTOP} {
+    padding: var(--s-5) var(--s-30);
+  }
 `;
 
 export const TitleContaienr = styled.div`
@@ -18,7 +22,9 @@ export const TitleContaienr = styled.div`
   gap: var(--s-1);
 `;
 
-export const Title = styled.div``;
+export const Title = styled.div`
+font-size: var(--fs-lg);
+`;
 
 export const IconTitle = styled.div``;
 
@@ -26,10 +32,13 @@ export const QuestionContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 70vh;
   align-content: space-around;
   gap: var(--s-5);
-  margin-top: var(--s-10);
+  margin-top: var(--s-5);
+  @media ${DEVICES.TABLET} {
+    height: 70vh;
+    margin-top: var(--s-10);
+  }
 `;
 
 export const Question = styled.div``;

@@ -1,5 +1,26 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { DEVICES } from "../../../../config/responsiveUi";
+
+const slideInFromLeft = keyframes`
+from {
+  transform: translate(-100%, 100%);
+}
+to {
+  transform: translate(0, 0);
+}
+`;
+
+const slideInFromRight = keyframes`
+0% {
+  opacity: 0;
+  transform: translateX(100%);
+}
+100% {
+  opacity: 1;
+  transform: translateX(0);
+}
+`;
+
 
 export const Container = styled.div`
 `;
@@ -22,6 +43,7 @@ export const Label = styled.label`
   @media ${DEVICES.PHONE_L} {
     font-size: var(--fs-lg);
   }
+  animation: ${slideInFromLeft} 1s ease-in-out;
 `;
 
 export const Input = styled.input`
@@ -32,6 +54,7 @@ export const Input = styled.input`
   &:hover {
     background-color: var(--light-gray-2);
   }
+  animation: ${slideInFromRight} 1s ease-in-out;
 `;
 
 export const Select = styled.select`
@@ -43,6 +66,7 @@ export const Select = styled.select`
   &:hover {
     background-color: var(--light-gray-2);
   }
+  animation: ${slideInFromRight} 1s ease-in-out;
 `;
 
 export const BtnGroup = styled.div`
@@ -65,6 +89,7 @@ export const BtnLogin = styled.button`
   &:hover {
     background-color: var(--navy-2);
   }
+  animation: ${slideInFromRight} 1s ease-in-out;
 `;
 
 export const BlankSpace = styled.div`

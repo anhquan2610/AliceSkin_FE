@@ -18,6 +18,7 @@ export default function ProductInformation() {
   const selectProduct = useSelector((state) => state.product.selectedProduct);
   const shippings = useSelector((state) => state.shipping.shippings);
   const cartItems = useSelector((state) => state.cart.cart.items) || [];
+  const { isLoading } = useSelector((state) => state.product);
 
   const productInCart = cartItems.find((item) => item.product_id === productId);
   const quantityInCart = productInCart ? productInCart.quantity : 0;
@@ -64,6 +65,10 @@ export default function ProductInformation() {
       notifyWarning("Vui lòng chọn số lượng để thêm vào giỏ hàng!");
     }
   };
+
+  if (isLoading) {
+    return <S.LoadingSpinner />;
+  }
 
   return (
     <S.Container>

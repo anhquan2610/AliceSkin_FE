@@ -9,7 +9,7 @@ import { getAllVoucher } from "../../store/voucherSlice";
 import ItemCart from "./ItemCart/ItemCart";
 import ship from "../../assets/images/image 15.png";
 import voucher from "../../assets/images/Ticket_alt.png";
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import {
   createOrder,
@@ -54,7 +54,6 @@ export default function Payment() {
     setPaymentMethod(method);
   };
 
-  
   const handleOrderNow = () => {
     const orderData = {
       shipping_id: selectedShipping,
@@ -69,7 +68,6 @@ export default function Payment() {
         dispatch(createPayment(orderId)).then((paymentAction) => {
           if (paymentAction.payload.payment_url) {
             const paymentUrl = paymentAction.payload.payment_url;
-
             navigate("/Payment_notifi", { state: { paymentUrl } });
           }
         });
@@ -107,6 +105,14 @@ export default function Payment() {
     return <S.LoadingSpinner />;
   }
 
+  const labelStyle = {
+    whiteSpace: "nowrap", // Ngăn không cho văn bản xuống dòng
+    overflow: "hidden", // Ẩn phần văn bản tràn
+    textOverflow: "ellipsis", // Hiển thị dấu "..."
+  };
+
+  const maxLabelWidth = {}; // Giới hạn chiều rộng của Select và Label cho đồng nhất
+
   return (
     <S.Container>
       <S.PaymentContainer>
@@ -125,7 +131,9 @@ export default function Payment() {
                   <S.PaymentImageContainer>
                     <S.PaymentImage src={cashon} />
                   </S.PaymentImageContainer>
-                  <S.PaymentName>Cash on delivery</S.PaymentName>
+                  <S.PaymentName>
+                    <Typography style={labelStyle}>Cash on delivery</Typography>
+                  </S.PaymentName>
                 </S.ItemPaymentContainer>
               </S.ItemPaymentLabel>
               <S.ItemPaymentLabel>
@@ -139,7 +147,9 @@ export default function Payment() {
                   <S.PaymentImageContainer>
                     <S.PaymentImage src={vnpay} />
                   </S.PaymentImageContainer>
-                  <S.PaymentName>VNpay</S.PaymentName>
+                  <S.PaymentName>
+                    <Typography style={labelStyle}>VNpay</Typography>
+                  </S.PaymentName>
                 </S.ItemPaymentContainer>
               </S.ItemPaymentLabel>
             </S.PaymentMethod>
@@ -210,15 +220,20 @@ export default function Payment() {
                     onChange={handleShippingChange}
                     displayEmpty
                     fullWidth
+                    style={{
+                      maxWidth: window.innerWidth <= 576 ? "230px" : "none",
+                    }}
                   >
                     <MenuItem value="">Select ship method</MenuItem>
                     {shippings.map((shipping) => (
                       <MenuItem key={shipping.id} value={shipping.id}>
-                        {shipping.name} -
-                        {Math.floor(shipping.shipping_amount).toLocaleString(
-                          "vi-VN"
-                        )}
-                        VND
+                        <Typography style={labelStyle}>
+                          {shipping.name} -{" "}
+                          {Math.floor(shipping.shipping_amount).toLocaleString(
+                            "vi-VN"
+                          )}
+                          VND
+                        </Typography>
                       </MenuItem>
                     ))}
                   </Select>
@@ -246,6 +261,9 @@ export default function Payment() {
                     onChange={handleVoucherChange}
                     displayEmpty
                     fullWidth
+                    style={{
+                      maxWidth: window.innerWidth <= 576 ? "230px" : "none",
+                    }}
                   >
                     <MenuItem value="">Select voucher</MenuItem>
                     {vouchers.map((voucher) => (
@@ -253,11 +271,13 @@ export default function Payment() {
                         key={voucher.voucher_id}
                         value={voucher.voucher_id}
                       >
-                        {voucher.code} (
-                        {Math.floor(voucher.discount_amount).toLocaleString(
-                          "vi-VN"
-                        )}
-                        )
+                        <Typography style={labelStyle}>
+                          {voucher.code} (
+                          {Math.floor(voucher.discount_amount).toLocaleString(
+                            "vi-VN"
+                          )}
+                          )
+                        </Typography>
                       </MenuItem>
                     ))}
                   </Select>
