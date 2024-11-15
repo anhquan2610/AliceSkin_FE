@@ -17,7 +17,11 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 450,
+  width: {
+    xs: "90%", 
+    sm: "400px", 
+    lg: "450px", 
+  },
   bgcolor: "background.paper",
   borderRadius: 4,
   p: 4,
@@ -33,7 +37,7 @@ const ChangeRoleModal = ({ open, onClose, userId }) => {
       dispatch(ChangeRoleUser({ userId, role }))
         .unwrap()
         .then(() => {
-          onClose(); 
+          onClose();
         })
         .catch((error) => {
           console.error("Failed to change role:", error);

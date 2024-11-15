@@ -59,7 +59,7 @@ export default function OrderRows({ order }) {
           <Button
             variant="outlined"
             size="small"
-            sx={{ color: "var(--blue)", ml: 2 }}
+            sx={{ color: "var(--blue)" }}
             startIcon={<PublishedWithChangesIcon />}
             onClick={() => handleClickOpenStatus(order.order_id)}
             disabled={order.status === "Completed"}

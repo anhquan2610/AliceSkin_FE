@@ -75,7 +75,7 @@ export default function VoucherRows({ voucher }) {
           <Button
             variant="outlined"
             size="small"
-            sx={{ color: "var(--green-fresh)" }}
+            sx={{ color: "var(--green-fresh)", marginRight: 2 }}
             startIcon={<UpgradeOutlinedIcon />}
             onClick={handleClickOpenUpdate}
           >
@@ -84,7 +84,7 @@ export default function VoucherRows({ voucher }) {
           <Button
             variant="outlined"
             size="small"
-            sx={{ color: "var(--blue)", ml: 2 }}
+            sx={{ color: "var(--blue)", marginRight: 2 }}
             startIcon={<PublishedWithChangesIcon />}
             onClick={() => handleClickOpenStatus(voucher.voucher_id)}
           >
@@ -94,7 +94,7 @@ export default function VoucherRows({ voucher }) {
             variant="outlined"
             size="small"
             color="error"
-            sx={{ ml: 2 }}
+            
             startIcon={<DeleteIcon />}
             onClick={handleClickOpen}
           >

@@ -20,7 +20,7 @@ export default function ProfileUser() {
   const user = useSelector((state) => state.auth.user);
   const { isLoading } = useSelector((state) => state.auth);
 
-  // Initialize state for user information
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -32,7 +32,7 @@ export default function ProfileUser() {
 
   const [thumbnailFile, setThumbnailFile] = useState(null);
 
-  // Handle changes in user information
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -40,7 +40,6 @@ export default function ProfileUser() {
     });
   };
 
-  // Handle image file changes
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -49,10 +48,8 @@ export default function ProfileUser() {
     }
   };
 
-  // Submit updated information when user clicks the update button
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (thumbnailFile) {
       dispatch(uploadImage(thumbnailFile))
         .then((result) => {
@@ -77,12 +74,12 @@ export default function ProfileUser() {
   };
 
   useEffect(() => {
-    // Call fetchUserByToken when the component mounts or after login
+ 
     dispatch(fetchUserByToken());
   }, [dispatch]);
 
   useEffect(() => {
-    // Update formData when user data changes
+
     if (user) {
       setFormData({
         name: user.name || "",
@@ -206,7 +203,7 @@ export default function ProfileUser() {
             variant="contained"
             color="primary"
             onClick={handleSubmit}
-            disabled={!isFormChanged || isLoading} // Disable if no changes
+            disabled={!isFormChanged || isLoading}
           >
             {isLoading ? "Updating..." : "Update Information"}
           </Button>
