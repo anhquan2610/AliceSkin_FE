@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveUi";
+
 
 export const Container = styled.div`
 
@@ -28,8 +30,11 @@ export const ContainerImage = styled.div`
 export const ImageBrand = styled.img`
 aspect-ratio: 16/9 ;
 width: 100%;
-height:300px;
+height:200px;
 object-fit: cover;
+@media ${DEVICES.DESKTOP} {
+    height:300px;
+}
 `;
 
 export const ContainerInformation = styled.div`

@@ -50,7 +50,7 @@ export default function ShippingRows({ shipping }) {
           <Button
             variant="outlined"
             size="small"
-            sx={{ color: "var(--green-fresh)" }}
+            sx={{ color: "var(--green-fresh)", marginRight: 2 }}
             startIcon={<UpgradeOutlinedIcon />}
             onClick={handleClickOpenUpdate}
           >
@@ -60,7 +60,7 @@ export default function ShippingRows({ shipping }) {
             variant="outlined"
             size="small"
             color="error"
-            sx={{ ml: 2 }}
+            
             startIcon={<DeleteIcon />}
             onClick={handleClickOpen}
           >

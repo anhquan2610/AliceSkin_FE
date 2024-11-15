@@ -33,7 +33,17 @@ export default function AdminHome() {
         Admin Home
       </Typography> */}
 
-      <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 2,
+          flexDirection: {
+            xs: "column", // Dạng cột khi màn hình nhỏ hơn 600px
+            lg: "row", // Dạng hàng ngang khi màn hình >= 1200px
+          },
+        }}
+      >
         <Box sx={{ flex: 1 }}>
           <Card sx={{ padding: 2 }}>
             <CardContent>

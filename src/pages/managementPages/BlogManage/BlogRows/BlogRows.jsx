@@ -92,6 +92,7 @@ export default function BlogRows({ blog }) {
             size="small"
             color="error"
             startIcon={<DeleteIcon />}
+            sx={{ marginRight: 2 }}
             onClick={handleClickOpen}
           >
             Delete
@@ -100,7 +101,7 @@ export default function BlogRows({ blog }) {
           <Button
             variant="outlined"
             size="small"
-            sx={{ color: "var(--blue)", ml: 2 }}
+            sx={{ color: "var(--blue)",  }}
             startIcon={<PublishedWithChangesIcon />}
             onClick={() => handleClickOpenStatus(blog.blog_id)}
           >
