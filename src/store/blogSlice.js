@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../axios/customAxios";
-import { notifyError } from "../utils/Nontification.utils";
+import { notifyError, notifySuccess } from "../utils/Nontification.utils";
 
 const initialState = {
   blogs: [],
@@ -66,6 +66,21 @@ export const createBlog = createAsyncThunk(
     } catch (error) {
       notifyError(error.response.data.message);
       return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+//Delete Blog by User
+export const deleteBlogByUser = createAsyncThunk(
+  "deleteBlogByUser",
+  async (blog_id, { rejectWithValue }) => {
+    try {
+      const response = await instanceAxios.delete(`/api/blogs/delete/${blog_id}`);
+      notifySuccess("Delete blog successfully");
+      return response.data;
+    } catch (error) {
+      notifyError(error.response.data.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -302,6 +317,21 @@ const blogSlice = createSlice({
       state.isSuccess = false;
       state.message = action.payload;
       state.error = action.payload.message;
+    });
+
+    //Delete blog by User---------------------------------------------
+    builder.addCase(deleteBlogByUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteBlogByUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      const deletedBlogId = action.meta.arg;
+  state.blogs = state.blogs.filter((blog) => blog.blog_id !== deletedBlogId);
+    });
+    builder.addCase(deleteBlogByUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     });
 
     //Delete blog by Admin---------------------------------------------

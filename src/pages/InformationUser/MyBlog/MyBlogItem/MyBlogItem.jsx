@@ -1,8 +1,32 @@
 import { Link } from "react-router-dom";
 import * as S from "./MyBlogItem.styled";
+import { useDispatch } from "react-redux";
+import {
+  deleteBlogByUser,
+  GetUserBlog,
+  resetBlogState,
+} from "../../../../store/blogSlice";
 
 export default function MyBlogItem({ blog }) {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    // Gọi action xóa blog
+    dispatch(deleteBlogByUser(blog.blog_id))
+      .then(() => {
+        // Reset trạng thái sau khi xóa
+        dispatch(resetBlogState());
+
+        // Lấy lại danh sách blog
+        dispatch(GetUserBlog());
+      })
+      .catch((error) => {
+        console.error("Failed to delete blog:", error);
+      });
+  };
+
   const isPublished = blog.status === "published";
+
   return (
     <S.Container>
       <S.LeftContainer>
@@ -17,16 +41,24 @@ export default function MyBlogItem({ blog }) {
         </S.HashtagBlog>
         <S.ContentBlog>{blog.content}</S.ContentBlog>
 
-        <Link
-          to={{
-            pathname: `/Update_Blog/${blog.blog_id}`,
-            state: { blog_id: blog.blog_id },
-          }}
-        >
-          <S.IconEdit className={isPublished ? "disabled" : ""}>
-            <i className="bi bi-pencil-square"></i>
-          </S.IconEdit>
-        </Link>
+        <S.GroupIcon>
+          <Link
+            to={{
+              pathname: `/Update_Blog/${blog.blog_id}`,
+              state: { blog_id: blog.blog_id },
+            }}
+          >
+            <S.IconEdit className={isPublished ? "disabled" : ""}>
+              <i className="bi bi-pencil-square"></i>
+            </S.IconEdit>
+          </Link>
+          <S.IconDelete
+            className={isPublished ? "disabled" : ""}
+            onClick={handleDelete}
+          >
+            <i className="bi bi-trash"></i>
+          </S.IconDelete>
+        </S.GroupIcon>
       </S.MiddleContainer>
       <S.RightContainer>
         <S.StatusBlog>{blog.status}</S.StatusBlog>
