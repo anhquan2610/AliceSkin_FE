@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import {DEVICES} from "../../config/responsiveUi"
 
 export const Container = styled.form`
 display: flex;
-padding: var(--s-5) var(--s-30);
+padding: var(--s-3) var(--s-10);
 flex-direction: column;
 height: 180vh;
+@media ${DEVICES.DESKTOP} {
+  padding: var(--s-5) var(--s-30);
+}
 `;
 
 export const TopContainer = styled.div`
@@ -21,15 +25,25 @@ gap: var(--s-3);
 `;
 
 export const Title = styled.div`
-font-size: var(--fs-3xl);
+font-size: var(--fs-xl);
+text-align: center;
 font-weight: var(--fw-semibold);
 color: var(--black);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-3xl);
+  text-align: start;
+}
 `;
 
 export const Description = styled.div`
-font-size: var(--fs-md);
+font-size: var(--fs-xs);
+text-align: center;
 color: var(--black);
 margin-bottom: var(--s-2);
+@media ${DEVICES.TABLET} {
+  font-size: var(--fs-md);
+  text-align: start;
+}
 `;
 
 export const Group = styled.div`
@@ -54,10 +68,13 @@ width: 100%;
 `;
 
 export const RightTopContainer = styled.div`
-flex: 2;
+display: none;
+@media ${DEVICES.TABLET} {
+  flex: 2;
 display: flex;
 justify-content: center;
 align-items: center;
+}
 `;
 
 export const ImageContainer = styled.div`
@@ -97,12 +114,15 @@ font-size: var(--fs-md);
 `;
 
 export const RightBottomContainer = styled.div`
-flex: 4;
+display: none;
+@media ${DEVICES.TABLET} {
+  flex: 4;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
 gap: var(--s-3);
+}
 `;
 
 export const ButtonContainer = styled.div`
