@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./Navbar.styled";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/images/Logo.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Menu, MenuItem, Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux"; // Import useSelector
