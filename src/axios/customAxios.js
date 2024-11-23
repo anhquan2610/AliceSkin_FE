@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL= "http://127.0.0.1:8000";
+// const BASE_URL= "http://127.0.0.1:8000";
+const BASE_URL= "https://aliceskin-be-final-595329362226.asia-east1.run.app";
 
 //Custom axios instance
 export const instanceAxios = axios.create({
