@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const BASE_URL= "https://aliceskin.alhkq.live";
+const BASE_URL= "https://api.aliceskin.alhkq.live";
 
 //Custom axios instance
 export const instanceAxios = axios.create({
