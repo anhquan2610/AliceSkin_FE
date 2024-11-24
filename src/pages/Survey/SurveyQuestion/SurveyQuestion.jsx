@@ -59,7 +59,7 @@ export default function SurveyQuestion() {
     <S.Container>
       <S.TitleContaienr>
         <S.Title>
-          Chúng tôi sẽ hỗ trợ bạn tốt hơn khi bạn trả lời đầy đủ
+          Please answer the following questions to help us understand you better
         </S.Title>
         <S.IconTitle>
           <i className="bi bi-emoji-heart-eyes"></i>
@@ -90,7 +90,7 @@ export default function SurveyQuestion() {
       </S.QuestionContainer>
       <S.ButtonContainer>
         <S.BtnSubmit onClick={handleSubmit} disabled={isLoading}>
-          {isLoading ? "Đang gửi..." : "Gửi"}
+          {isLoading ? "Sumbting..." : "Sumbit"}
         </S.BtnSubmit>
       </S.ButtonContainer>
     </S.Container>
