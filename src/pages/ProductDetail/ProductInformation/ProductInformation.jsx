@@ -105,7 +105,7 @@ export default function ProductInformation() {
             Capacity:
             {selectProduct.volume ? Math.floor(selectProduct.volume) : ""} ml
           </S.CapacityProduct>
-          <S.StatusProduct>Trạng thái: {selectProduct.status}</S.StatusProduct>
+          <S.StatusProduct>Status: {selectProduct.status}</S.StatusProduct>
           <S.QuantityProduct>
             Quantity: {selectProduct.quantity}
           </S.QuantityProduct>
