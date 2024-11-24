@@ -29,9 +29,7 @@ export default function AdminHome() {
 
   return (
     <Box sx={{ padding: 2 }}>
-      {/* <Typography variant="h4" gutterBottom>
-        Admin Home
-      </Typography> */}
+      
 
       <Box
         sx={{
@@ -39,8 +37,8 @@ export default function AdminHome() {
           justifyContent: "space-between",
           gap: 2,
           flexDirection: {
-            xs: "column", // Dạng cột khi màn hình nhỏ hơn 600px
-            lg: "row", // Dạng hàng ngang khi màn hình >= 1200px
+            xs: "column", 
+            lg: "row", 
           },
         }}
       >
