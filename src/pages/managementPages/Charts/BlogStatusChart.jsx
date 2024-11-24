@@ -10,9 +10,11 @@ import {
   ResponsiveContainer,
   LabelList,
   Label,
+  Cell,
 } from "recharts";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBlogAdmin } from "../../../store/blogSlice";
+import { Typography } from "@mui/material";
 
 export default function BlogStatusChart() {
   const dispatch = useDispatch();
@@ -26,8 +28,8 @@ export default function BlogStatusChart() {
   useEffect(() => {
     if (status_counts) {
       const data = [
-        { name: "Draft", count: status_counts.draft, color: "#8884d8" }, 
-        { name: "Published", count: status_counts.published, color: "#82ca9d" }, 
+        { name: "Draft", count: status_counts.draft, color: "#8884d8" },
+        { name: "Published", count: status_counts.published, color: "#82ca9d" },
       ];
       setChartData(data);
     }
@@ -35,8 +37,10 @@ export default function BlogStatusChart() {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h3 style={{ marginBottom: "20px" }}>Blog Status Overview</h3>
-      <ResponsiveContainer width="100%" height={300}>
+      <Typography variant="h6" component="div" sx={{ marginBottom: 2 }}>
+        Blog Status Overview
+      </Typography>
+      <ResponsiveContainer width="100%" height={430}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name">
@@ -52,11 +56,10 @@ export default function BlogStatusChart() {
           </YAxis>
           <Tooltip />
           <Legend />
-          <Bar dataKey="count">
+          <Bar dataKey="count" isAnimationActive={true}>
+            <LabelList dataKey="count" position="top" />
             {chartData.map((entry, index) => (
-              <Bar key={`bar-${index}`} dataKey="count" fill={entry.color}>
-                <LabelList dataKey="count" position="top" fill={entry.color} />
-              </Bar>
+              <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Bar>
         </BarChart>
