@@ -11,7 +11,12 @@ export default function PaymentChart({ data, isLoading }) {
   const COLORS = ["#0088FE", "#00C49F"];
 
   return (
-    <Box sx={{ textAlign: "center" }}>
+    <Box sx={{ textAlign: "center", padding: 2 }}>
+
+      <Typography variant="h6"  component="div" sx={{ marginBottom: 2 }}>
+        Payment Status Overview
+      </Typography>
+
       {isLoading ? (
         <CircularProgress />
       ) : (
