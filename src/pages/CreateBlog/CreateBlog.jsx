@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlog, resetBlogState } from "../../store/blogSlice";
 import { uploadImage, resetImageState } from "../../store/imageSlice";
 import { useNavigate } from "react-router-dom";
-import { notifySuccess, notifyError } from "../../utils/Nontification.utils"; // Import notifyError
+import { notifySuccess, notifyError } from "../../utils/Nontification.utils"; 
 import { searchHastags } from "../../store/hastagsSlice";
 
 export default function CreateBlog() {

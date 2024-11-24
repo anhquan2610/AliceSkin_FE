@@ -56,13 +56,13 @@ export default function ProductInformation() {
       dispatch(addItemToCart({ productId, quantity: count })).then(
         (response) => {
           if (response.meta.requestStatus === "fulfilled") {
-            notifySuccess("Sản phẩm đã được thêm vào giỏ hàng!");
+            notifySuccess("Add to cart successfully!");
           } else {
           }
         }
       );
     } else {
-      notifyWarning("Vui lòng chọn số lượng để thêm vào giỏ hàng!");
+      notifyWarning("Please select quantity to add to cart!");
     }
   };
 
@@ -74,7 +74,7 @@ export default function ProductInformation() {
     <S.Container>
       <S.TopContainer>
         <S.NameProduct>
-          Sản Phẩm:
+          Product:{" "}
           <span style={{ fontWeight: "normal", marginLeft: "var(--s-3)" }}>
             {selectProduct.name}
           </span>
@@ -102,12 +102,12 @@ export default function ProductInformation() {
             </S.DiscountDescription>
           </S.PriceProduct>
           <S.CapacityProduct>
-            Dung tích:
+            Capacity:
             {selectProduct.volume ? Math.floor(selectProduct.volume) : ""} ml
           </S.CapacityProduct>
           <S.StatusProduct>Trạng thái: {selectProduct.status}</S.StatusProduct>
           <S.QuantityProduct>
-            Số lượng: {selectProduct.quantity}
+            Quantity: {selectProduct.quantity}
           </S.QuantityProduct>
           <S.ButtonContainer>
             <S.BtnCount>
@@ -128,21 +128,21 @@ export default function ProductInformation() {
             </S.BtnAddToCart>
           </S.ButtonContainer>
           <S.GroupInformation>
-            <S.Title>Thương hiệu:</S.Title>
+            <S.Title>Brand Name:</S.Title>
             <S.Content>{selectProduct.brand?.name}</S.Content>
           </S.GroupInformation>
           <S.GroupInformation>
-            <S.Title>Mô tả:</S.Title>
+            <S.Title>Description:</S.Title>
             <S.Content>{selectProduct.description}</S.Content>
           </S.GroupInformation>
           <S.GroupInformation>
-            <S.Title>Phí vận chuyển:</S.Title>
+            <S.Title>Ship cost:</S.Title>
             <S.Content>
               <S.TableDelivery>
                 <S.TableHeader>
                   <S.Tr>
-                    <S.Th>Tên</S.Th>
-                    <S.Th>Phí vận chuyển</S.Th>
+                    <S.Th>Name</S.Th>
+                    <S.Th>Price</S.Th>
                   </S.Tr>
                 </S.TableHeader>
                 <S.TableBody>

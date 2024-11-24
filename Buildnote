@@ -1,0 +1,41 @@
+# Build Note - Project Alice Skin Project
+
+## Packages installed:
+- Install mui/material version 6.1.6
+- Install redux/toolkit version 2.2.7
+- Install axios version 1.7.7
+- Install react-router-dom version 6.26.2
+- Install formik version 2.4.6
+- Install YUP version 1.4.0
+- Install Styled Component version 6.1.13
+- Install React-toastyfy version 10.0.5
+- Install Boostrap-icon version 1.11.3
+
+## Implementation instructions:
+1. **Install dependencies:**
+- Run `npm install` to install packages.
+
+2. **Build the application for production:**
+- Use `npm run build` to generate the build.
+
+3. **Run the application in development mode:**
+- Run `npm start` to start the application on localhost.
+
+## Testing steps:
+1.Check:
+- Forgot password feature and sending new password registration link via email (Especially notifications)
+- Account registration feature with checking and notification of duplicate data via email.
+- Blog post comment feature
+- Add, edit and delete blog feature from users
+- Blog and product search feature
+- Product suggestion feature after answering survey
+- Shopping cart creation feature with payment methods
+- Product review feature
+2. **Run unit tests:** Use `npm test` to test features.
+## Fixed issues:
+- Fix the error of not uploading images by file.
+- Fix the error of interface deviation when converting to sizes smaller than 1600px
+- Fix the error of not showing link when paying with Vnpay
+
+## Next steps:
+- **Add login feature with social media accounts.**
