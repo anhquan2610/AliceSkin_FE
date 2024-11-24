@@ -73,7 +73,7 @@ export default function Payment() {
         });
       } else {
         navigate("/Payment_notifi");
-      }
+      } 
     });
   };
 
@@ -106,12 +106,12 @@ export default function Payment() {
   }
 
   const labelStyle = {
-    whiteSpace: "nowrap", // Ngăn không cho văn bản xuống dòng
-    overflow: "hidden", // Ẩn phần văn bản tràn
-    textOverflow: "ellipsis", // Hiển thị dấu "..."
+    whiteSpace: "nowrap", 
+    overflow: "hidden", 
+    textOverflow: "ellipsis", 
   };
 
-  const maxLabelWidth = {}; // Giới hạn chiều rộng của Select và Label cho đồng nhất
+  const maxLabelWidth = {}; 
 
   return (
     <S.Container>
