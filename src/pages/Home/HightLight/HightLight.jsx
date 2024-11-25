@@ -21,7 +21,7 @@ export default function HightLight() {
     }
   };
 
-  // Kiểm tra nếu blogs có ít nhất 1 phần tử, nếu không thì tránh lỗi
+  
   const blog =
     blogs.length > 0 ? blogs[Math.floor(Math.random() * blogs.length)] : null;
 
@@ -29,7 +29,7 @@ export default function HightLight() {
     return <S.LoadingSpinner />;
   }
 
-  // Kiểm tra nếu blog là hợp lệ và có thumbnail trước khi render
+  
   if (!blog || !blog.thumbnail) {
     return <div>No blog available</div>;
   }
