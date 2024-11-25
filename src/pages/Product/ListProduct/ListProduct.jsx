@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function ListProduct({ priceFilter, selectedBrands }) {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+  const {isLoading} = useSelector((state) => state.product);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
@@ -37,6 +38,9 @@ export default function ListProduct({ priceFilter, selectedBrands }) {
   };
 
   const sortedProducts = products.filter(filterByPrice).filter(filterByBrand);
+  if (isLoading) {
+    return <S.LoadingSpinner />;
+  }
 
   return (
     <S.Container>
