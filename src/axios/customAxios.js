@@ -14,7 +14,7 @@ export const instanceAxios = axios.create({
 
 
 
-//interceptor for request (Trước khi gửi request và sau khi nhận phản hồi sẽ lgi)
+
 instanceAxios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("token");
   if (token) {

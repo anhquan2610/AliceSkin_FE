@@ -14,7 +14,7 @@ export const Container = styled.div`
     transform: scale(1.05); 
   }
   @media ${DEVICES.TABLET} {
-    width: 19%;
+    width: 18%;
   }
 `;
 
