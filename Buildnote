@@ -19,7 +19,7 @@
 - Use `npm run build` to generate the build.
 
 3. **Run the application in development mode:**
-- Run `npm start` to start the application on localhost.
+- Run `npm run dev` to start the application on localhost.
 
 ## Testing steps:
 1.Check:
