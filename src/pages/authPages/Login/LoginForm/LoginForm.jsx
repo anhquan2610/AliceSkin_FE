@@ -6,7 +6,6 @@ import { resetAuthState, signIn } from "../../../../store/authSlice.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { notifySuccess } from "../../../../utils/Nontification.utils.js";
-import { GoogleLogin } from "@react-oauth/google";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -91,9 +90,9 @@ export default function LoginForm() {
       </Formik>
 
       <S.BlankSpace />
-      <S.ContainerBottom>
+      {/* <S.ContainerBottom>
         <S.BtnLoginGoogle>Login With Google</S.BtnLoginGoogle>
-      </S.ContainerBottom>
+      </S.ContainerBottom> */}
     </S.Container>
   );
 }
