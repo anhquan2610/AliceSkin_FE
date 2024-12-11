@@ -11,13 +11,10 @@ export default function MyBlogItem({ blog }) {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    // Gọi action xóa blog
-    dispatch(deleteBlogByUser(blog.blog_id))
-      .then(() => {
-        // Reset trạng thái sau khi xóa
-        dispatch(resetBlogState());
 
-        // Lấy lại danh sách blog
+    dispatch(deleteBlogByUser(blog.blog_id))
+      .then(() => {    
+        dispatch(resetBlogState());
         dispatch(GetUserBlog());
       })
       .catch((error) => {
@@ -40,7 +37,6 @@ export default function MyBlogItem({ blog }) {
           ))}
         </S.HashtagBlog>
         <S.ContentBlog>{blog.content}</S.ContentBlog>
-
         <S.GroupIcon>
           <Link
             to={{
