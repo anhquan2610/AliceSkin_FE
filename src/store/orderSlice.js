@@ -201,7 +201,12 @@ const orderSlice = createSlice({
     builder.addCase(createOrder.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.orders.push(action.payload);
+      if (Array.isArray(state.orders)) {
+        state.orders.push(action.payload); 
+      } else {
+        state.orders = [action.payload]; 
+      }
+      state.id = action.payload.id;
       state.id = action.payload.id;
      
     });
