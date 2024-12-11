@@ -24,14 +24,11 @@ export const ContainerImage = styled.div`
 
 export const ImgProduct = styled.img`
   width: 100%;
-  height: 100px;
+  height: auto;
   aspect-ratio: 1/1;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: var(--br-lg);
-  @media ${DEVICES.TABLET} {
-    width: 100%;
-    height: 100%;
-  }
+  
 `;
 
 export const ContentContainer = styled.div`

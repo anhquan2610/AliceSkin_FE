@@ -9,10 +9,9 @@ import ReviewForm from "./ReviewForm/ReviewForm";
 export default function OrderDetail() {
   const dispatch = useDispatch();
   const { id: orderId } = useParams();
+  const [reviews, setReviews] = useState([]);
   const orders = useSelector((state) => state.order.orders);
   const { isLoading } = useSelector((state) => state.order);
-
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     dispatch(fetchOrderByOrderId(orderId));
