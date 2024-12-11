@@ -36,6 +36,9 @@ export const Content = styled.div`
 export const OrderItemContainer = styled.div`
   border-bottom: 1px solid var(--gray);
   padding: var(--s-1) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
   @media ${DEVICES.TABLET} {
     padding: var(--s-3);
   }

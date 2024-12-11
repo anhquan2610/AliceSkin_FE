@@ -4,7 +4,7 @@ import { DEVICES } from "../../../config/responsiveUi";
 export const Container = styled.div`
 display: flex;
 flex-direction: row;
-
+gap: var(--s-2);
 `;
 
 export const ImageContainer = styled.div`
@@ -12,12 +12,13 @@ flex: 2;
 `;
 
 export const Image = styled.img`
-aspect-ratio: 1/1;
-  object-fit: contain;
-  width: 70px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  width: 100%;
   height: auto;
+  border-radius: var(--br-lg);
   @media ${DEVICES.TABLET} {
-    width: 100px;
+    width: 100%;
   }
 `;
 
