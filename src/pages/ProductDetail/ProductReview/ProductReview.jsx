@@ -24,7 +24,7 @@ export default function ProductReview() {
       <S.TopContainer>
         <S.TitleContainer>
           <S.Title>Review Of Product</S.Title>
-          <S.TotalReview>(Tổng cộng: {totalReviews} Reviews)</S.TotalReview>
+          <S.TotalReview>(Total: {totalReviews} Reviews)</S.TotalReview>
         </S.TitleContainer>
       </S.TopContainer>
       <S.ReviewContainer>

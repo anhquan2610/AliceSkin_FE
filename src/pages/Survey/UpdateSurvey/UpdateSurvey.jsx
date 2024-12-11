@@ -64,7 +64,7 @@ export default function UpdateSurvey() {
   return (
     <S.Container>
       <S.TitleContaienr>
-        <S.Title>Cập nhật câu trả lời khảo sát của bạn</S.Title>
+        <S.Title>Update your survey</S.Title>
         <S.IconTitle>
           <i className="bi bi-emoji-heart-eyes"></i>
         </S.IconTitle>
@@ -94,7 +94,7 @@ export default function UpdateSurvey() {
       </S.QuestionContainer>
       <S.ButtonContainer>
         <S.BtnSubmit onClick={handleSubmit} disabled={isLoading}>
-          {isLoading ? "Đang gửi..." : "Cập nhật"}
+          {isLoading ? "Updating..." : "Update"}
         </S.BtnSubmit>
       </S.ButtonContainer>
     </S.Container>
