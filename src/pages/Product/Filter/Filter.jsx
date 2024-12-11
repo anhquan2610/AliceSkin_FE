@@ -14,16 +14,16 @@ import { useTheme } from "@mui/material/styles";
 
 export default function PriceFilter({ priceFilter, onPriceFilterChange }) {
   const theme = useTheme();
-  const isMobileView = useMediaQuery(theme.breakpoints.down("md")); 
+  const isMobileView = useMediaQuery(theme.breakpoints.down("md"));
 
   const labelStyle = {
-    fontSize: isMobileView ? "0.775rem" : "1rem", 
+    fontSize: isMobileView ? "0.775rem" : "1rem",
     whiteSpace: "nowrap",
-    overflow: "hidden", 
-    textOverflow: "ellipsis", 
+    overflow: "hidden",
+    // textOverflow: "ellipsis",
   };
 
-  const maxLabelWidth = "100px"; 
+  const maxLabelWidth = "100px";
 
   return (
     <FormControl component="fieldset">
@@ -41,7 +41,7 @@ export default function PriceFilter({ priceFilter, onPriceFilterChange }) {
           displayEmpty
           inputProps={{ "aria-label": "Filter by Price" }}
           sx={{
-            fontSize: "0.775rem", 
+            fontSize: "0.775rem",
             maxWidth: maxLabelWidth,
           }}
         >
@@ -65,7 +65,7 @@ export default function PriceFilter({ priceFilter, onPriceFilterChange }) {
             value="0-50000"
             control={<Radio />}
             label={
-              <Box sx={{ maxWidth: maxLabelWidth }}>
+              <Box>
                 <Typography style={labelStyle}>0 - 50,000 VND</Typography>
               </Box>
             }
@@ -74,7 +74,7 @@ export default function PriceFilter({ priceFilter, onPriceFilterChange }) {
             value="50000-100000"
             control={<Radio />}
             label={
-              <Box sx={{ maxWidth: maxLabelWidth }}>
+              <Box>
                 <Typography style={labelStyle}>50,000 - 100,000 VND</Typography>
               </Box>
             }
@@ -83,7 +83,7 @@ export default function PriceFilter({ priceFilter, onPriceFilterChange }) {
             value="100000+"
             control={<Radio />}
             label={
-              <Box sx={{ maxWidth: maxLabelWidth }}>
+              <Box>
                 <Typography style={labelStyle}>100,000 VND or more</Typography>
               </Box>
             }

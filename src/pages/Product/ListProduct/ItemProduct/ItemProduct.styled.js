@@ -21,13 +21,14 @@ export const Container = styled.div`
 
 export const ContainerImage = styled.div`
   flex: 3;
+  margin-bottom: var(--s-1);
 `;
 
 export const ImgProduct = styled.img`
   width: 100%;
-  height: 75px;
+  height: 100%;
   aspect-ratio: 1/1;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: var(--br-lg);
   @media ${DEVICES.TABLET} {
     width: 100%;

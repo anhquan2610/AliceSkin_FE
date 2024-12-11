@@ -75,7 +75,5 @@ align-items: center;
 height: 100%;
 font-weight: var(--fw-semibold);
 font-size: var(--fs-xs);
-@media ${DEVICES.TABLET} {
-    font-size: var(--fs-sm);
-}
+
 `;
