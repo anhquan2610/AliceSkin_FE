@@ -14,12 +14,12 @@ export default function Footer() {
               enim ad minim veniam
             </S.Description>
             <S.InforContact>
-              <S.InforEmail>Email : info@jstemplate.net</S.InforEmail>
+              <S.InforEmail>Email : aliceskin@gmail.com</S.InforEmail>
               <S.InforPhone>Phone : 880 123 456 789</S.InforPhone>
             </S.InforContact>
           </S.AboutContainer>
 
-          <S.QuickLinkContaier>
+          {/* <S.QuickLinkContaier>
             <S.Title>QuickLink</S.Title>
             <S.Text>Home</S.Text>
             <S.Text>Home</S.Text>
@@ -34,7 +34,7 @@ export default function Footer() {
             <S.Text>Home</S.Text>
             <S.Text>Home</S.Text>
             <S.Text>Home</S.Text>
-          </S.QuickLinkContaier>
+          </S.QuickLinkContaier> */}
           <S.Newlester>
             <S.TitleNewlester>
               <S.Title>Weekly Newsletter</S.Title>

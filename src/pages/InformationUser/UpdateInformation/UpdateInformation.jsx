@@ -59,10 +59,6 @@ export default function UpdateInformation() {
     dispatch(resetAuthState());
   }, [dispatch]);
 
-
-
-
-
   const isFormChanged = () => {
     return (
       formData.name !== user.name ||

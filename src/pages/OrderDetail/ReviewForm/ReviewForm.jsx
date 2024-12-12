@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "./ReviewForm.styled"; // Import styled components
+import * as S from "./ReviewForm.styled"; 
 
 export default function ReviewForm({
   content,

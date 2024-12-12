@@ -38,7 +38,7 @@ export default function BrandFilter({ selectedBrands, onBrandChange, brands }) {
               name={brand.name}
             />
           }
-          label={<span style={labelStyle}>{brand.name}</span>} // Áp dụng kiểu cho nhãn
+          label={<span style={labelStyle}>{brand.name}</span>} 
         />
       ))}
     </FormControl>
