@@ -58,7 +58,7 @@ export default function RegisterForm() {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Gọi hàm ngay khi component được mount để xác định trạng thái ban đầu
+    handleResize(); 
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -82,7 +82,7 @@ export default function RegisterForm() {
           <Form
             style={{
               display:  "flex",
-              flexDirection: isMobile ? "column" : "row", // Dùng state isMobile để xác định hướng
+              flexDirection: isMobile ? "column" : "row", 
               flexWrap: "wrap",
               justifyContent: isMobile ? "" : "space-between",
               marginBottom: "var(--s-5)",
