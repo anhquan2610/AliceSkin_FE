@@ -6,13 +6,18 @@ display: flex;
 
 export const ContainerImage = styled.div`
 flex: 3;
+display: flex;
+align-items: center;
+justify-content: center;  
 `;
 
 export const ImageItem = styled.img`
 aspect-ratio: 1/1;
-height: 70px;
-width: 100px;
-object-fit: contain;
+height: auto;
+width: 80px;
+object-fit: cover;
+border-radius: var(--br-md);
+
 `;
 
 export const ContainerInfo = styled.div`

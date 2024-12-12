@@ -73,7 +73,7 @@ export default function Payment() {
         });
       } else {
         navigate("/Payment_notifi");
-      } 
+      }
     });
   };
 
@@ -106,12 +106,12 @@ export default function Payment() {
   }
 
   const labelStyle = {
-    whiteSpace: "nowrap", 
-    overflow: "hidden", 
-    textOverflow: "ellipsis", 
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   };
 
-  const maxLabelWidth = {}; 
+  const maxLabelWidth = {};
 
   return (
     <S.Container>

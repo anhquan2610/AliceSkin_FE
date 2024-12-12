@@ -27,7 +27,6 @@ export const ListItem = styled.div`
     justify-content: space-between;
     row-gap: var(--s-5);
     @media ${DEVICES.PHONE_L} {
-    padding: var(--s-4) 0;
     row-gap: var(--s-8);
     display: flex;
     flex-direction: row;
