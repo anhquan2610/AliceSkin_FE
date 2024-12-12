@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlog, resetBlogState } from "../../store/blogSlice";
 import { uploadImage, resetImageState } from "../../store/imageSlice";
 import { useNavigate } from "react-router-dom";
-import { notifySuccess, notifyError } from "../../utils/Nontification.utils"; 
+import { notifySuccess, notifyError } from "../../utils/Nontification.utils";
 import { searchHastags } from "../../store/hastagsSlice";
 
 export default function CreateBlog() {
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
+  const [content, setContent] = useState("");
   const [hashtags, setHashtags] = useState([]);
   const [inputHashtag, setInputHashtag] = useState("");
-  const [content, setContent] = useState("");
   const [hashtagSuggestions, setHashtagSuggestions] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,21 +21,7 @@ export default function CreateBlog() {
   const { isLoading: isBlogLoading, isSuccess: isBlogSuccess } = useSelector(
     (state) => state.blog
   );
-
   const availableHastags = useSelector((state) => state.hastag.hastags);
-
-  useEffect(() => {
-    if (inputHashtag) {
-      const query = inputHashtag.split(",").join(" ");
-      dispatch(searchHastags(query));
-    } else {
-      setHashtagSuggestions([]);
-    }
-  }, [inputHashtag, dispatch]);
-
-  useEffect(() => {
-    setHashtagSuggestions(availableHastags);
-  }, [availableHastags]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,6 +55,19 @@ export default function CreateBlog() {
       dispatch(resetBlogState());
     }
   }, [isBlogSuccess, navigate, dispatch]);
+
+  useEffect(() => {
+    if (inputHashtag) {
+      const query = inputHashtag.split(",").join(" ");
+      dispatch(searchHastags(query));
+    } else {
+      setHashtagSuggestions([]);
+    }
+  }, [inputHashtag, dispatch]);
+
+  useEffect(() => {
+    setHashtagSuggestions(availableHastags);
+  }, [availableHastags]);
 
   const handleHashtagSelect = (hashtag) => {
     if (hashtags.includes(hashtag)) {

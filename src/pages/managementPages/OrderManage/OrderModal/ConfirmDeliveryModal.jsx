@@ -1,4 +1,3 @@
-
 import { Modal, Box, Button, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { confirmDelivery, fetchAllOrders } from "../../../../store/orderSlice";
@@ -7,16 +6,13 @@ const ConfirmDeliveryModal = ({ open, handleClose, orderId }) => {
   const dispatch = useDispatch();
 
   const handleConfirm = () => {
-    // Gọi action xác nhận giao hàng
     dispatch(confirmDelivery(orderId))
       .unwrap()
       .then(() => {
-        // Sau khi xác nhận thành công, gọi action để lấy lại danh sách đơn hàng
         dispatch(fetchAllOrders());
         handleClose();
       })
       .catch((error) => {
-        // Xử lý lỗi nếu cần
         console.error("Error confirming delivery: ", error);
       });
   };
@@ -41,10 +37,10 @@ const ConfirmDeliveryModal = ({ open, handleClose, orderId }) => {
         }}
       >
         <Typography id="confirm-delivery-modal" variant="h6" component="h2">
-          Xác nhận giao hàng
+          Delivery Confirmation
         </Typography>
         <Typography id="modal-description" sx={{ mt: 2 }}>
-          Bạn có chắc chắn muốn xác nhận giao hàng cho đơn hàng này không?
+          Are you sure you want to confirm delivery for this order?
         </Typography>
         <Button
           variant="contained"
@@ -52,7 +48,7 @@ const ConfirmDeliveryModal = ({ open, handleClose, orderId }) => {
           sx={{ mt: 3 }}
           onClick={handleConfirm}
         >
-          Xác nhận
+          Confirm
         </Button>
         <Button
           variant="outlined"
@@ -60,7 +56,7 @@ const ConfirmDeliveryModal = ({ open, handleClose, orderId }) => {
           sx={{ mt: 3, ml: 2 }}
           onClick={handleClose}
         >
-          Hủy
+          Cancel
         </Button>
       </Box>
     </Modal>

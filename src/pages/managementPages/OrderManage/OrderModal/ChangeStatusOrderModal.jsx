@@ -33,12 +33,20 @@ export default function ChangeStatusOrderModal({ open, onClose, orderId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (status) {
-      dispatch(changeOrderStatus({ order_id: orderId, status }));
-      dispatch(fetchAllOrders());
-      onClose();
+      dispatch(changeOrderStatus({ order_id: Number(orderId), status }))
+        .then((result) => {
+          if (changeOrderStatus.fulfilled.match(result)) {
+            dispatch(fetchAllOrders());
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to change order status:", error);
+        })
+        .finally(() => {
+          onClose();
+        });
     }
   };
-
   return (
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
