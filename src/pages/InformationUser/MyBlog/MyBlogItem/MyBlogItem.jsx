@@ -11,15 +11,9 @@ export default function MyBlogItem({ blog }) {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-
-    dispatch(deleteBlogByUser(blog.blog_id))
-      .then(() => {    
-        dispatch(resetBlogState());
-        dispatch(GetUserBlog());
-      })
-      .catch((error) => {
-        console.error("Failed to delete blog:", error);
-      });
+    dispatch(deleteBlogByUser(blog.blog_id)).catch((error) => {
+      console.error("Failed to delete blog:", error);
+    });
   };
 
   const isPublished = blog.status === "published";
