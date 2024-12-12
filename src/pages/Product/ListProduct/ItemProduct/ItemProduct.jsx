@@ -19,7 +19,6 @@ export default function ItemProduct({ product, navigate }) {
         </S.HashtagProduct>
         <S.ReviewContainer>
           <S.RateStar>
-        
             {[...Array(fullStars)].map((_, index) => (
               <S.Star key={index}>
                 <i className="bi bi-star-fill"></i> 

@@ -86,7 +86,7 @@ export default function ChangePassword() {
               </S.Group>
 
               <S.ButtonSave type="submit" disabled={isSubmitting || isLoading}>
-                {isLoading ? "Đang thay đổi..." : "Đổi mật khẩu"}
+                {isLoading ? "Are changing..." : "Reset Password"}
               </S.ButtonSave>
             </Form>
           )}

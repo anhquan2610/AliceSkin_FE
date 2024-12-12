@@ -276,10 +276,11 @@ const orderSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
       state.orders = state.orders.map((order) =>
-        order.order_id === action.payload.order_id
+        Number(order.order_id) === Number(action.payload.order_id)
           ? { ...order, status: action.payload.status }
           : order
       );
+   
     });
     builder.addCase(changeOrderStatus.rejected, (state, action) => {
       state.isLoading = false;
