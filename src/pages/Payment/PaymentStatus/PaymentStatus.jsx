@@ -10,7 +10,9 @@ import image2 from "../../../assets/images/faild.jpg";
 export default function PaymentStatus() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { paymentStatus, isSuccess } = useSelector((state) => state.order);
+  const { paymentStatus, isSuccess, isLoading } = useSelector(
+    (state) => state.order
+  );
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -33,6 +35,10 @@ export default function PaymentStatus() {
       notifySuccess("Payment successful!");
     }
   }, [isSuccess]);
+
+  if (isLoading) {
+    return <S.LoadingSpinner />;
+  }
 
   return (
     <S.Container>
