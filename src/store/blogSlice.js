@@ -327,7 +327,8 @@ const blogSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
       const deletedBlogId = action.meta.arg;
-  state.blogs = state.blogs.filter((blog) => blog.blog_id !== deletedBlogId);
+      state.blogs = state.blogs.filter((blog) => blog.blog_id !== deletedBlogId);
+      state.blogsUser = state.blogsUser.filter((blog) => blog.blog_id !== deletedBlogId);
     });
     builder.addCase(deleteBlogByUser.rejected, (state, action) => {
       state.isLoading = false;
